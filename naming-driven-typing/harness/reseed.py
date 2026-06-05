@@ -114,7 +114,14 @@ def validate_corpus_items(corpus: list[Any]) -> None:
 
 
 def _ingest(text: str, domain: str, hermes_url: str) -> None:
-    """Cold-start ingest one block via Hermes (retry on transient errors)."""
+    """Cold-start ingest one block via the /llm echo path (retried).
+
+    There is no standalone /ingest endpoint; the proven ingestion route
+    (the edge-embeddings harness populated this same corpus through it) is
+    POST /llm with the free deterministic ``echo`` provider: hermes still
+    runs NER + embeddings and sophia writes the resulting entities/edges,
+    while the completion itself is trivial (#18).
+    """
     # Lazy: httpx is needed only on the live path; the offline test env
     # (pyproject dependencies = []) must import this module without it.
     import httpx
@@ -123,9 +130,13 @@ def _ingest(text: str, domain: str, hermes_url: str) -> None:
     for _ in range(5):
         try:
             resp = httpx.post(
-                f"{hermes_url}/ingest",
-                json={"text": text, "metadata": {"domain": domain}},
-                timeout=60.0,
+                f"{hermes_url}/llm",
+                json={
+                    "prompt": text,
+                    "provider": "echo",
+                    "metadata": {"experiment": "naming-driven-typing", "domain": domain},
+                },
+                timeout=180.0,
             )
             resp.raise_for_status()
             return
@@ -133,6 +144,40 @@ def _ingest(text: str, domain: str, hermes_url: str) -> None:
             last_err = err
             time.sleep(2.0)
     raise RuntimeError(f"ingest failed after 5 retries: {last_err}")
+
+
+def _settle_graph(
+    client: Any,
+    *,
+    stable_polls: int = 3,
+    interval: float = 2.0,
+    cap: float = 300.0,
+) -> int:
+    """Wait until the node count stops growing; return the settled count.
+
+    /llm ingestion extracts entities in a background task AFTER the HTTP
+    response returns (#18), so the last blocks of the ingest loop are still
+    landing when the loop exits. Clustering must never read a half-settled
+    graph: poll the total node count until it is unchanged for
+    ``stable_polls`` consecutive polls, fail loudly at ``cap`` seconds.
+    """
+    deadline = time.monotonic() + cap
+    last = -1
+    stable = 0
+    while time.monotonic() < deadline:
+        rows = client._execute_query("MATCH (n:Node) RETURN count(n) AS c", {})
+        count = rows[0]["c"] if rows else 0
+        if count == last:
+            stable += 1
+            if stable >= stable_polls:
+                return count
+        else:
+            stable = 0
+            last = count
+        time.sleep(interval)
+    raise RuntimeError(
+        f"graph did not settle within {cap}s (last node count {last})"
+    )
 
 
 def reseed_and_build(
@@ -181,6 +226,8 @@ def reseed_and_build(
     validate_corpus_items(corpus)
     for item in corpus:
         _ingest(item["text"], item["domain"], hermes_url)
+    settled = _settle_graph(client)
+    print(f"[reseed] graph settled at {settled} nodes", flush=True)
 
     driver = client.driver
     node_members, _, _ = build_node_members(driver, sync, entity_filter=True, dedup=True)
