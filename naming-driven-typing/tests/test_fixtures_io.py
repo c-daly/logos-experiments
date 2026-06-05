@@ -21,7 +21,11 @@ from harness.fixtures_io import (
     validate_catalog,
     validate_clusters,
 )
-from harness.reseed import clusters_from_node_members
+from harness.reseed import (
+    ReseedInputError,
+    clusters_from_node_members,
+    validate_corpus_items,
+)
 
 
 def test_clusters_from_node_members_maps_uuid_to_id() -> None:
@@ -54,6 +58,33 @@ def test_clusters_from_node_members_maps_uuid_to_id() -> None:
     # mapper never emits a label/labels field (label-free)
     assert "label" not in out[0]
     assert "labels" not in out[0]
+
+
+def test_clusters_from_node_members_rejects_missing_label() -> None:
+    # live emergence output is an external input boundary: no coercion
+    bad = [{"members": [{"uuid": "u1", "name": "cheetah"}]}]
+    with pytest.raises(
+        ReseedInputError, match=r"node_clusters\[0\] is missing required key: label"
+    ):
+        clusters_from_node_members(bad)
+
+
+def test_clusters_from_node_members_rejects_member_missing_uuid() -> None:
+    bad = [{"label": 0, "members": [{"name": "cheetah"}]}]
+    with pytest.raises(
+        ReseedInputError,
+        match=r"node_clusters\[0\].members\[0\] is missing required key: uuid",
+    ):
+        clusters_from_node_members(bad)
+
+
+def test_clusters_from_node_members_rejects_member_missing_name() -> None:
+    bad = [{"label": 0, "members": [{"uuid": "u1"}]}]
+    with pytest.raises(
+        ReseedInputError,
+        match=r"node_clusters\[0\].members\[0\] is missing required key: name",
+    ):
+        clusters_from_node_members(bad)
 
 
 # --- cluster validation ---------------------------------------------------
@@ -136,6 +167,33 @@ def test_clusters_freeze_is_byte_deterministic(tmp_path: Path) -> None:
     assert a.read_bytes() == b.read_bytes()
 
 
+def test_clusters_freeze_member_order_is_byte_deterministic(tmp_path: Path) -> None:
+    # member ELEMENT order shuffled -- sort_keys=True alone would NOT catch
+    # this (it sorts dict keys only); the writer must sort members by id.
+    a, b = tmp_path / "a.json", tmp_path / "b.json"
+    freeze_clusters(_good_clusters(), a)
+    shuffled = _good_clusters()
+    for c in shuffled:
+        c["members"] = list(reversed(c["members"]))
+    freeze_clusters(shuffled, b)
+    assert a.read_bytes() == b.read_bytes()
+
+
+def test_load_clusters_rejects_non_object_json(tmp_path: Path) -> None:
+    # a list/scalar top level must raise the module error, not AttributeError
+    path = tmp_path / "clusters.json"
+    path.write_text(json.dumps([1, 2, 3]) + "\n", encoding="utf-8")
+    with pytest.raises(ClusterFixtureError, match="must be a JSON object"):
+        load_clusters(path)
+
+
+def test_load_clusters_rejects_scalar_json(tmp_path: Path) -> None:
+    path = tmp_path / "clusters.json"
+    path.write_text(json.dumps(42) + "\n", encoding="utf-8")
+    with pytest.raises(ClusterFixtureError, match="must be a JSON object"):
+        load_clusters(path)
+
+
 # --- catalog validation ---------------------------------------------------
 
 def _good_catalog() -> dict[str, object]:
@@ -205,12 +263,34 @@ def test_validate_catalog_rejects_non_str_uuid_in_by_norm() -> None:
         validate_catalog(bad)
 
 
+def test_validate_catalog_rejects_by_norm_uuid_absent_from_catalog() -> None:
+    bad = _good_catalog()
+    bad["by_norm"]["vehicle"] = ["t-veh1", "t-ghost"]  # t-ghost has no record
+    with pytest.raises(
+        CatalogFixtureError,
+        match=r"by_norm\[.vehicle.\] references uuid .t-ghost. absent from catalog_by_uuid",
+    ):
+        validate_catalog(bad)
+
+
 def test_catalog_freeze_load_asserts_vehicle_fragments(tmp_path: Path) -> None:
     path = tmp_path / "catalog.json"
     freeze_catalog(_good_catalog(), path)
     loaded = load_catalog(path)
     # load_catalog enforces the fragments invariant (SPEC §4.2)
     assert len(loaded["by_norm"]["vehicle"]) > 1
+
+
+def test_catalog_freeze_by_norm_order_is_byte_deterministic(tmp_path: Path) -> None:
+    # by_norm uuid-list ELEMENT order shuffled -- sort_keys=True alone would
+    # NOT catch this (it sorts dict keys only); the writer must sort the lists.
+    a, b = tmp_path / "a.json", tmp_path / "b.json"
+    freeze_catalog(_good_catalog(), a)
+    shuffled = _good_catalog()
+    for norm, uuids in shuffled["by_norm"].items():
+        shuffled["by_norm"][norm] = list(reversed(uuids))
+    freeze_catalog(shuffled, b)
+    assert a.read_bytes() == b.read_bytes()
 
 
 def test_load_catalog_raises_when_vehicle_not_fragmented(tmp_path: Path) -> None:
@@ -220,6 +300,21 @@ def test_load_catalog_raises_when_vehicle_not_fragmented(tmp_path: Path) -> None
     path = tmp_path / "catalog.json"
     freeze_catalog(cat, path)
     with pytest.raises(CatalogFixtureError, match="vehicle"):
+        load_catalog(path)
+
+
+def test_load_catalog_rejects_non_object_json(tmp_path: Path) -> None:
+    # a list/scalar top level must raise the module error, not AttributeError
+    path = tmp_path / "catalog.json"
+    path.write_text(json.dumps(["not", "a", "catalog"]) + "\n", encoding="utf-8")
+    with pytest.raises(CatalogFixtureError, match="must be a JSON object"):
+        load_catalog(path)
+
+
+def test_load_catalog_rejects_scalar_json(tmp_path: Path) -> None:
+    path = tmp_path / "catalog.json"
+    path.write_text(json.dumps("nope") + "\n", encoding="utf-8")
+    with pytest.raises(CatalogFixtureError, match="must be a JSON object"):
         load_catalog(path)
 
 
@@ -241,6 +336,33 @@ def test_corpus_jsonl_is_wellformed() -> None:
         domains.add(rec["domain"])
     # the vehicles domain must exist so the by_norm['vehicle']>1 case is seedable
     assert "vehicles" in domains
+
+
+def test_validate_corpus_items_accepts_good() -> None:
+    validate_corpus_items(
+        [{"round": 1, "domain": "animals", "text": "a cheetah sprints"}]
+    )  # no raise
+
+
+def test_validate_corpus_items_rejects_missing_text() -> None:
+    with pytest.raises(
+        ReseedInputError, match=r"corpus\[0\] is missing required key: text"
+    ):
+        validate_corpus_items([{"round": 1, "domain": "animals"}])
+
+
+def test_validate_corpus_items_rejects_missing_domain() -> None:
+    with pytest.raises(
+        ReseedInputError, match=r"corpus\[1\] is missing required key: domain"
+    ):
+        validate_corpus_items(
+            [{"domain": "animals", "text": "ok"}, {"text": "no domain"}]
+        )
+
+
+def test_validate_corpus_items_rejects_non_object_item() -> None:
+    with pytest.raises(ReseedInputError, match=r"corpus\[0\] is not an object"):
+        validate_corpus_items(["just a string"])
 
 
 @pytest.mark.skipif(

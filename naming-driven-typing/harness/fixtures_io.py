@@ -1,8 +1,8 @@
 """Frozen-fixture I/O for the naming-driven-typing experiment (label-free).
 
 Two fixtures, both written deterministically (sorted keys, sorted records,
-2-space indent, trailing newline) so a reseed produces byte-identical files and
-git diffs stay reviewable:
+canonically sorted list content, 2-space indent, trailing newline) so a reseed
+produces byte-identical files and git diffs stay reviewable:
 
   fixtures/clusters.json  -> {version, clusters:[{cluster_id, current_name,
                               members:[{id,name}], sample_coverage}]}
@@ -91,15 +91,28 @@ def validate_clusters(clusters: list[dict[str, Any]]) -> None:
 
 
 def freeze_clusters(clusters: list[dict[str, Any]], path: Path) -> None:
-    """Validate then write clusters deterministically (sorted by cluster_id)."""
+    """Validate then write clusters deterministically (sorted by cluster_id).
+
+    List content is canonicalized too: `sort_keys=True` only sorts dict KEYS,
+    so each set-like `members` list is sorted by member `id` here. Otherwise
+    live-return order would leak into the frozen bytes and a future reseed
+    could silently break byte-determinism.
+    """
     validate_clusters(clusters)
-    ordered = sorted(clusters, key=lambda c: c["cluster_id"])
+    ordered = [
+        {**c, "members": sorted(c["members"], key=lambda m: m["id"])}
+        for c in sorted(clusters, key=lambda c: c["cluster_id"])
+    ]
     _write_deterministic({"version": FIXTURE_VERSION, "clusters": ordered}, path)
 
 
 def load_clusters(path: Path) -> list[dict[str, Any]]:
     """Load + validate clusters.json, returning the clusters list."""
     raw = json.loads(Path(path).read_text(encoding="utf-8"))
+    if not isinstance(raw, dict):
+        raise ClusterFixtureError(
+            f"clusters fixture must be a JSON object (got {type(raw).__name__})"
+        )
     if raw.get("version") != FIXTURE_VERSION:
         raise ClusterFixtureError(
             f"clusters fixture version mismatch: {raw.get('version')!r}"
@@ -140,6 +153,11 @@ def validate_catalog(catalog: dict[str, Any]) -> None:
                 raise CatalogFixtureError(
                     f"by_norm[{norm!r}][{k}] must be a str uuid (got {type(u).__name__})"
                 )
+            if u not in by_uuid:
+                raise CatalogFixtureError(
+                    f"by_norm[{norm!r}] references uuid {u!r} "
+                    f"absent from catalog_by_uuid"
+                )
     # The three realm roots present by is_root name-membership (SPEC §4.3).
     root_names = {
         rec.get("name")
@@ -154,12 +172,21 @@ def validate_catalog(catalog: dict[str, Any]) -> None:
 
 
 def freeze_catalog(catalog: dict[str, Any], path: Path) -> None:
-    """Validate then write catalog deterministically (sorted keys)."""
+    """Validate then write catalog deterministically (sorted keys).
+
+    List content is canonicalized too: `by_norm` uuid lists are set-like, so
+    they are sorted before write to keep the frozen bytes independent of
+    live-return order. Record-level `chain`/`ancestors` lists are root->node
+    PATHS: their order is semantic and already deterministic given the
+    hierarchy, so they are intentionally NOT sorted.
+    """
     validate_catalog(catalog)
     envelope = {
         "version": FIXTURE_VERSION,
         "catalog_by_uuid": catalog["catalog_by_uuid"],
-        "by_norm": catalog["by_norm"],
+        "by_norm": {
+            norm: sorted(uuids) for norm, uuids in catalog["by_norm"].items()
+        },
         "roots_present_in_live_catalog": catalog["roots_present_in_live_catalog"],
     }
     _write_deterministic(envelope, path)
@@ -168,6 +195,10 @@ def freeze_catalog(catalog: dict[str, Any], path: Path) -> None:
 def load_catalog(path: Path) -> dict[str, Any]:
     """Load + validate catalog.json; enforce the vehicle-fragments invariant."""
     raw = json.loads(Path(path).read_text(encoding="utf-8"))
+    if not isinstance(raw, dict):
+        raise CatalogFixtureError(
+            f"catalog fixture must be a JSON object (got {type(raw).__name__})"
+        )
     if raw.get("version") != FIXTURE_VERSION:
         raise CatalogFixtureError(
             f"catalog fixture version mismatch: {raw.get('version')!r}"
