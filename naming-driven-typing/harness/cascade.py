@@ -45,7 +45,7 @@ PROTECTED_ROOT_NAMES: frozenset[str] = frozenset(
 
 # chain[-1] whitelist (G-CW-7). G3 emergence terminal is 'entity' only, but the
 # whitelist also admits concept/process for catalog-published roots.
-VALID_TERMINAL_ROOTS: tuple[str, ...] = ("entity", "concept", "process")
+VALID_TERMINAL_ROOTS: frozenset[str] = frozenset({"entity", "concept", "process"})
 
 
 @dataclass(frozen=True)
@@ -101,7 +101,7 @@ def _disambiguate(uuids: list[str], catalog_by_uuid: dict[str, dict]) -> str:
         # negate member_count so 'most' sorts first under ascending sort
         return (-int(rec.get("member_count", 0)), len(rec.get("ancestors", [])), u)
 
-    return sorted(uuids, key=sort_key)[0]
+    return min(uuids, key=sort_key)
 
 
 def _is_protected_root(uuid: str, catalog_by_uuid: dict[str, dict]) -> bool:
@@ -184,6 +184,7 @@ def simulate_group(
     events: list[str] = []
     assign_to = str(group.get("assign_to", "NEW"))
     name = str(group.get("name", ""))
+    cluster_id = str(group.get("cluster_id", name))
     chain = list(group.get("chain", []))
     # member_ids restricted to this request's input (closed-world).
     member_ids = [m for m in group.get("member_ids", []) if m in input_ids]
@@ -195,7 +196,7 @@ def simulate_group(
 
     def residual(extra_events: list[str]) -> PlacementRecord:
         return PlacementRecord(
-            cluster_id=str(group.get("cluster_id", name)),
+            cluster_id=cluster_id,
             branch="RESIDUAL",
             assign_to=assign_to,
             name=name,
@@ -228,7 +229,7 @@ def simulate_group(
                 # fall through to G2/G3 below
             else:
                 return PlacementRecord(
-                    cluster_id=str(group.get("cluster_id", name)),
+                    cluster_id=cluster_id,
                     branch="G1_REUSE",
                     assign_to=assign_to,
                     name=name,
@@ -272,7 +273,7 @@ def simulate_group(
     )
 
     return PlacementRecord(
-        cluster_id=str(group.get("cluster_id", name)),
+        cluster_id=cluster_id,
         branch=branch,
         assign_to=assign_to,
         name=name,
