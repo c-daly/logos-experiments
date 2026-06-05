@@ -508,6 +508,20 @@ def test_main_live_refuses_without_hermes_url(monkeypatch, capsys):
     assert "HERMES_URL" in capsys.readouterr().err
 
 
+def test_main_live_missing_password_exits_cleanly(monkeypatch, capsys):
+    """LiveGateError from build_live_readers must produce the clean gating
+    message and exit 2, not a raw traceback (PR #16 review)."""
+    from harness import run_experiment as rx
+
+    monkeypatch.setenv("LIVE_RUN", "1")
+    monkeypatch.setenv("HERMES_URL", "http://127.0.0.1:1")
+    monkeypatch.delenv("NEO4J_PASSWORD", raising=False)
+    assert rx.main(["--live", "--yes-i-will-pay"]) == 2
+    err = capsys.readouterr().err
+    assert "NEO4J_PASSWORD" in err
+    assert "[harness]" in err
+
+
 def test_main_rejects_freeze_with_replay(_no_live_env):
     from harness import run_experiment as rx
 

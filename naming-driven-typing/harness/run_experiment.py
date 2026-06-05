@@ -518,13 +518,14 @@ def _run_live(args: argparse.Namespace) -> int:
         return 2
     try:
         hermes_url = require_live_env()
+        # BEFORE state captured here; run() asserts the AFTER state ahead of
+        # snapshot persistence (the landed ordering). build_live_readers
+        # raises LiveGateError on a missing NEO4J_PASSWORD; surface it as the
+        # same clean gating message instead of a traceback (PR #16 review).
+        probe = make_live_probe(build_live_readers())
     except LiveGateError as err:
         print(f"[harness] {err}", file=sys.stderr, flush=True)
         return 2
-
-    # BEFORE state captured here; run() asserts the AFTER state ahead of
-    # snapshot persistence (the landed ordering).
-    probe = make_live_probe(build_live_readers())
     transport = CapturingTransport(
         live_llm_send(hermes_url, model=args.model),
         message_transform=arm_message_transform(args.ablation),
