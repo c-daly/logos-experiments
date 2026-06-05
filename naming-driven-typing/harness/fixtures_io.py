@@ -50,7 +50,11 @@ def validate_clusters(clusters: list[dict[str, Any]]) -> None:
         raise ClusterFixtureError("clusters must be a non-empty list")
     seen_ids: set[str] = set()
     seen_cluster_ids: set[str] = set()
-    for c in clusters:
+    for i, c in enumerate(clusters):
+        if not isinstance(c, dict):
+            raise ClusterFixtureError(
+                f"clusters[{i}] is not an object (got {type(c).__name__})"
+            )
         for forbidden in _FORBIDDEN_CLUSTER_KEYS:
             if forbidden in c:
                 raise ClusterFixtureError(
@@ -70,7 +74,12 @@ def validate_clusters(clusters: list[dict[str, Any]]) -> None:
         members = c.get("members")
         if not isinstance(members, list) or not members:
             raise ClusterFixtureError(f"cluster {cid}: members must be non-empty list")
-        for m in members:
+        for j, m in enumerate(members):
+            if not isinstance(m, dict):
+                raise ClusterFixtureError(
+                    f"cluster {cid}: members[{j}] is not an object "
+                    f"(got {type(m).__name__})"
+                )
             mid, name = m.get("id"), m.get("name")
             if not isinstance(mid, str) or not mid:
                 raise ClusterFixtureError(f"cluster {cid}: member needs non-empty id")
@@ -104,10 +113,20 @@ def load_clusters(path: Path) -> list[dict[str, Any]]:
 
 def validate_catalog(catalog: dict[str, Any]) -> None:
     """Validate the enriched catalog schema; raise CatalogFixtureError."""
+    if not isinstance(catalog, dict):
+        raise CatalogFixtureError(
+            f"catalog must be an object (got {type(catalog).__name__})"
+        )
     by_uuid = catalog.get("catalog_by_uuid")
     by_norm = catalog.get("by_norm")
     if not isinstance(by_uuid, dict) or not by_uuid:
         raise CatalogFixtureError("catalog_by_uuid must be a non-empty dict")
+    for uuid, rec in by_uuid.items():
+        if not isinstance(rec, dict):
+            raise CatalogFixtureError(
+                f"catalog_by_uuid[{uuid!r}] must be an object "
+                f"(got {type(rec).__name__})"
+            )
     if not isinstance(by_norm, dict) or not by_norm:
         raise CatalogFixtureError("by_norm must be a non-empty dict")
     if catalog.get("roots_present_in_live_catalog") is not True:
@@ -116,6 +135,11 @@ def validate_catalog(catalog: dict[str, Any]) -> None:
     for norm, uuids in by_norm.items():
         if not isinstance(uuids, list):
             raise CatalogFixtureError(f"by_norm[{norm!r}] must be a list, got {type(uuids)}")
+        for k, u in enumerate(uuids):
+            if not isinstance(u, str):
+                raise CatalogFixtureError(
+                    f"by_norm[{norm!r}][{k}] must be a str uuid (got {type(u).__name__})"
+                )
     # The three realm roots present by is_root name-membership (SPEC §4.3).
     root_names = {
         rec.get("name")

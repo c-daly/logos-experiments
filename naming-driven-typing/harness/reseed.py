@@ -114,7 +114,7 @@ def reseed_and_build(
 
     corpus = [
         json.loads(ln)
-        for ln in Path(corpus_path).read_text().splitlines()
+        for ln in Path(corpus_path).read_text(encoding="utf-8").splitlines()
         if ln.strip()
     ]
     for item in corpus:

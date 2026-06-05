@@ -103,13 +103,27 @@ def test_validate_clusters_rejects_coverage_out_of_range() -> None:
         validate_clusters(bad)
 
 
+def test_validate_clusters_rejects_non_dict_cluster() -> None:
+    bad = _good_clusters()
+    bad[1] = "not-a-cluster"  # element is not an object
+    with pytest.raises(ClusterFixtureError, match=r"clusters\[1\] is not an object"):
+        validate_clusters(bad)
+
+
+def test_validate_clusters_rejects_non_dict_member() -> None:
+    bad = _good_clusters()
+    bad[1]["members"] = ["u3"]  # member element is not an object
+    with pytest.raises(ClusterFixtureError, match=r"members\[0\] is not an object"):
+        validate_clusters(bad)
+
+
 def test_clusters_freeze_load_roundtrip(tmp_path: Path) -> None:
     path = tmp_path / "clusters.json"
     freeze_clusters(_good_clusters(), path)
     loaded = load_clusters(path)
     assert loaded == _good_clusters()
     # on-disk has the version envelope and is deterministically sorted
-    raw = json.loads(path.read_text())
+    raw = json.loads(path.read_text(encoding="utf-8"))
     assert raw["version"] == FIXTURE_VERSION
     assert [c["cluster_id"] for c in raw["clusters"]] == ["0", "1"]
 
@@ -172,6 +186,25 @@ def test_validate_catalog_rejects_scalar_by_norm() -> None:
         validate_catalog(bad)
 
 
+def test_validate_catalog_rejects_non_dict_catalog() -> None:
+    with pytest.raises(CatalogFixtureError, match="catalog must be an object"):
+        validate_catalog(["not", "a", "catalog"])
+
+
+def test_validate_catalog_rejects_non_dict_record() -> None:
+    bad = _good_catalog()
+    bad["catalog_by_uuid"]["t-veh1"] = "not-a-record"
+    with pytest.raises(CatalogFixtureError, match=r"catalog_by_uuid\[.t-veh1.\] must be an object"):
+        validate_catalog(bad)
+
+
+def test_validate_catalog_rejects_non_str_uuid_in_by_norm() -> None:
+    bad = _good_catalog()
+    bad["by_norm"]["vehicle"] = ["t-veh1", 42]
+    with pytest.raises(CatalogFixtureError, match=r"by_norm\[.vehicle.\]\[1\] must be a str uuid"):
+        validate_catalog(bad)
+
+
 def test_catalog_freeze_load_asserts_vehicle_fragments(tmp_path: Path) -> None:
     path = tmp_path / "catalog.json"
     freeze_catalog(_good_catalog(), path)
@@ -197,7 +230,7 @@ EXP_DIR = Path(__file__).resolve().parents[1]
 
 def test_corpus_jsonl_is_wellformed() -> None:
     corpus = EXP_DIR / "corpus" / "corpus.jsonl"
-    lines = [ln for ln in corpus.read_text().splitlines() if ln.strip()]
+    lines = [ln for ln in corpus.read_text(encoding="utf-8").splitlines() if ln.strip()]
     assert lines, "corpus must be non-empty"
     domains = set()
     for ln in lines:
