@@ -5,7 +5,10 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import yaml
+
 from eval.metrics import (
+    ablation_criterion_metrics,
     ablation_deltas,
     aggregate_repeats,
     compute_metrics,
@@ -54,6 +57,7 @@ def test_compute_metrics_keys_present():
     for key in (
         "graft_depth_fraction",
         "mean_graft_depth",
+        "new_floated_at_root",
         "reuse_collapses",
         "canonical_merge_collapses",
         "residual_fraction",
@@ -185,6 +189,46 @@ def test_new_floated_at_root_zero_in_fixture():
     assert m["new_floated_at_root"]["mean"] == 0.0
 
 
+def test_new_floated_at_root_counts_ungrafted_new_groups():
+    # SPEC SS7.3(d): grafted iff the resolved graft parent is NOT a root;
+    # new_floated_at_root counts NEW groups whose resolved parent IS a root
+    # (the complement: total_new - grafted).
+    snap = {
+        "repeats": 1,
+        "clusters": [
+            {
+                "cluster_id": "c_mixed",
+                "total_members": 4,
+                "sample_coverage": 1.0,
+                "repeats": [
+                    {
+                        "raw_partition_ok": True,
+                        "residual_ids": [],
+                        "groups": [
+                            {
+                                "assign_to": "NEW",
+                                "is_grafted": True,
+                                "graft_parent_uuid": "uuid-vehicle",
+                                "covering_depth": 2,
+                                "chain": ["car", "vehicle", "entity"],
+                            },
+                            {
+                                "assign_to": "NEW",
+                                "is_grafted": False,
+                                "graft_parent_uuid": None,
+                                "chain": ["widget", "entity"],
+                            },
+                        ],
+                    }
+                ],
+            }
+        ],
+    }
+    m = compute_metrics(snap)
+    assert m["new_floated_at_root"]["mean"] == 1.0
+    assert m["graft_depth_fraction"]["mean"] == 0.5
+
+
 # ----- ablation_deltas ---------------------------------------------------
 
 def test_ablation_deltas_noise_band_gate():
@@ -198,6 +242,38 @@ def test_ablation_deltas_noise_band_gate():
     rf = out["residual_fraction"]["full_vs_naive_llm"]
     assert round(rf["delta"], 4) == -0.02
     assert rf["passes"] is False
+
+
+def test_ablation_criterion_metrics_flatten_to_gateable_keys():
+    arms = _load("ablation_arms.json")
+    flat = ablation_criterion_metrics(arms)
+    # graft_depth_fraction: delta 0.60, band 0.03 => margin 0.57 > 0
+    # (A6 beats A1 beyond the noise band; gates with comparator gt 0).
+    assert round(flat["ablation_A6_beats_A1_graft_depth_fraction"], 4) == 0.57
+    assert flat["ablation_A6_beats_A1_graft_depth_fraction"] > 0
+    # residual_fraction: delta -0.02, band 0.05 => margin -0.07 (no beat).
+    assert round(flat["ablation_A6_beats_A1_residual_fraction"], 4) == -0.07
+    assert flat["ablation_A6_beats_A1_residual_fraction"] <= 0
+
+
+# ----- goal.yaml <-> emitted metrics coupling ----------------------------
+
+def test_goal_yaml_criteria_resolve_against_emitted_metrics():
+    # Kill the class of dangling criteria: every success_criteria metric name
+    # in goal.yaml must resolve against the union of compute_metrics output
+    # and the flattened ablation criterion keys, both produced from the
+    # synthetic fixtures. A criterion naming a key no code path emits (the
+    # old ablation_A6_beats_A1_graft_depth) fails here instead of being
+    # silently skipped by a name-keyed gate.
+    goal_path = Path(__file__).resolve().parent.parent / "goal.yaml"
+    goal = yaml.safe_load(goal_path.read_text(encoding="utf-8"))
+    criteria = goal["success_criteria"]
+    assert criteria, "goal.yaml defines no success_criteria"
+    produced = set(compute_metrics(_load("run_synthetic.json"))) | set(
+        ablation_criterion_metrics(_load("ablation_arms.json"))
+    )
+    missing = [c["metric"] for c in criteria if c["metric"] not in produced]
+    assert not missing, f"goal.yaml criteria with no emitted metric key: {missing}"
 
 
 # ----- emit + eyeball dump -----------------------------------------------

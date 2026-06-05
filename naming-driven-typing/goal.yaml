@@ -43,13 +43,14 @@ success_criteria:
     description: >
       No primary metric is noisier than CV 0.1 over K>=5 repeats; CV > 0.1 on any
       primary => verdict "noisy/inconclusive", not pass.
-  - metric: ablation_A6_beats_A1_graft_depth
+  - metric: ablation_A6_beats_A1_graft_depth_fraction
     threshold: 0
     comparator: gt
     primary: true
     description: >
       full-v2 (A6) beats naive-LLM (A1) on graft_depth_fraction by more than the
-      K-repeat noise band (ablation_deltas passes flag True).
+      K-repeat noise band. Emitted by eval.metrics.ablation_criterion_metrics as
+      margin = delta - noise_band; positive iff the lift clears the band.
   - metric: placement_conflict_rate
     threshold: null
     comparator: report

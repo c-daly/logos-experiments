@@ -33,6 +33,12 @@ Metrics (all aggregated mean +/- stdev over the K repeats; cv emitted):
 Scalar passthroughs (validity guards): roots_present_in_live_catalog,
 live_redis_catalog_staleness, sample_coverage_min, stability_cv_max.
 
+Ablation gating (SPEC SS7.4): ``ablation_deltas`` computes full-v2-vs-arm
+deltas with a K-repeat noise band; ``ablation_criterion_metrics`` flattens
+them into goal.yaml-gateable scalar keys
+(``ablation_A6_beats_<arm>_<metric>`` = delta - noise_band) so EVERY
+goal.yaml success criterion resolves by metric name against emitted keys.
+
 Metrics consume the snapshot dict ONLY -- no harness or hermes imports
 (reuse/merge flags are pre-computed by the harness into the snapshot).
 
@@ -103,6 +109,46 @@ def ablation_deltas(
                 "noise_band": band,
                 "passes": abs(delta) > band,
             }
+    return out
+
+
+# SPEC SS7.4 ablation arm identifiers, keyed by harness arm name. ``full`` is
+# A6 (full v2); every delta is full-vs-arm (see ``ablation_deltas``).
+_ABLATION_ARM_IDS = {
+    "clustering_baseline": "A0",
+    "naive_llm": "A1",
+    "no_reuse": "A2",
+    "no_graft": "A3",
+    "no_chain": "A4",
+    "no_gate": "A5",
+    "full": "A6",
+}
+
+
+def ablation_criterion_metrics(
+    by_arm: dict[str, dict[str, dict[str, float]]],
+) -> dict[str, float]:
+    """Flatten ``ablation_deltas`` output into goal.yaml-gateable scalar keys.
+
+    For every (metric, arm) comparison emits
+    ``ablation_A6_beats_<armId>_<metric>`` = delta - noise_band: positive iff
+    full-v2 (A6) beats that arm on that metric by MORE than the K-repeat
+    noise band (SPEC SS7.4). goal.yaml criteria (threshold 0, comparator gt)
+    reference these keys by name, so a name-keyed gate resolves them directly
+    instead of digging into the nested ``ablation_deltas`` structure. The key
+    is derived mechanically from the emitted metric name (no alias table for
+    metrics), so criterion keys cannot drift from real output.
+
+    Arm names without a SPEC id fall back to the raw arm name in the key.
+    """
+    out: dict[str, float] = {}
+    for metric, comparisons in ablation_deltas(by_arm).items():
+        for compare_key, stats in comparisons.items():
+            arm = compare_key.removeprefix("full_vs_")
+            arm_id = _ABLATION_ARM_IDS.get(arm, arm)
+            out[f"ablation_A6_beats_{arm_id}_{metric}"] = (
+                stats["delta"] - stats["noise_band"]
+            )
     return out
 
 
