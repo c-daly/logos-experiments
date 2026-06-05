@@ -66,6 +66,11 @@ def validate_clusters(clusters: list[dict[str, Any]]) -> None:
         if cid in seen_cluster_ids:
             raise ClusterFixtureError(f"duplicate cluster_id {cid!r}")
         seen_cluster_ids.add(cid)
+        cname = c.get("current_name")
+        if not isinstance(cname, str) or not cname:
+            raise ClusterFixtureError(
+                f"cluster {cid}: current_name must be a non-empty str"
+            )
         cov = c.get("sample_coverage")
         if not isinstance(cov, (int, float)) or not (0.0 < cov <= 1.0):
             raise ClusterFixtureError(

@@ -134,6 +134,21 @@ def test_validate_clusters_rejects_coverage_out_of_range() -> None:
         validate_clusters(bad)
 
 
+def test_validate_clusters_rejects_missing_current_name() -> None:
+    bad = _good_clusters()
+    del bad[0]["current_name"]  # required by the documented cluster schema
+    with pytest.raises(ClusterFixtureError, match="current_name"):
+        validate_clusters(bad)
+
+
+def test_clusters_from_node_members_rejects_missing_members() -> None:
+    node_clusters = [{"label": "mammal"}]  # no members key at all
+    with pytest.raises(
+        ReseedInputError, match=r"node_clusters\[0\] is missing required non-empty"
+    ):
+        clusters_from_node_members(node_clusters)
+
+
 def test_validate_clusters_rejects_non_dict_cluster() -> None:
     bad = _good_clusters()
     bad[1] = "not-a-cluster"  # element is not an object
