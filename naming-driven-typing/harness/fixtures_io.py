@@ -217,3 +217,75 @@ def load_catalog(path: Path) -> dict[str, Any]:
             f"by_norm['vehicle'] must have >1 uuid (fragments case), got {veh!r}"
         )
     return raw
+
+
+# ---------------------------------------------------------------------------
+# Frozen LLM-response fixtures (the replayer shape; written by --freeze)
+# ---------------------------------------------------------------------------
+
+
+class LLMResponsesFixtureError(ValueError):
+    """Raised when llm_responses*.json violates the frozen replayer shape."""
+
+
+def validate_llm_responses(responses: Any) -> None:
+    """Enforce the exact replayer shape for a frozen llm_responses fixture.
+
+    Keys are ``"<cluster_id>::<repeat>"`` (non-empty cluster id, integer
+    repeat); every value is exactly
+    ``{"choices": [{"message": {"content": <non-empty str>}}]}`` -- the
+    minimal frozen completion ``FrozenLLMReplayer`` returns. Anything else is
+    rejected so a hand-edited or partially-captured fixture can never replay
+    silently wrong.
+    """
+    if not isinstance(responses, dict):
+        raise LLMResponsesFixtureError(
+            "llm_responses fixture must be an object "
+            f"(got {type(responses).__name__})"
+        )
+    for key, value in responses.items():
+        if not isinstance(key, str) or "::" not in key:
+            raise LLMResponsesFixtureError(
+                f"llm_responses key {key!r} is not <cluster_id>::<repeat>"
+            )
+        cluster_id, _, repeat = key.rpartition("::")
+        if not cluster_id or not repeat.isdigit():
+            raise LLMResponsesFixtureError(
+                f"llm_responses key {key!r} is not <cluster_id>::<repeat>"
+            )
+        if not isinstance(value, dict) or set(value) != {"choices"}:
+            raise LLMResponsesFixtureError(
+                f"llm_responses[{key!r}] must carry exactly one key: choices"
+            )
+        choices = value["choices"]
+        if not isinstance(choices, list) or len(choices) != 1:
+            raise LLMResponsesFixtureError(
+                f"llm_responses[{key!r}].choices must be a single-element list"
+            )
+        first = choices[0]
+        if not isinstance(first, dict) or set(first) != {"message"}:
+            raise LLMResponsesFixtureError(
+                f"llm_responses[{key!r}].choices[0] must carry exactly: message"
+            )
+        message = first["message"]
+        if not isinstance(message, dict) or set(message) != {"content"}:
+            raise LLMResponsesFixtureError(
+                f"llm_responses[{key!r}].choices[0].message must carry "
+                "exactly: content"
+            )
+        content = message["content"]
+        if not isinstance(content, str) or not content:
+            raise LLMResponsesFixtureError(
+                f"llm_responses[{key!r}] content must be a non-empty string"
+            )
+
+
+def freeze_llm_responses(responses: dict[str, Any], path: Path) -> None:
+    """Validate + deterministically write a frozen llm_responses fixture.
+
+    Same writer discipline as clusters/catalog (sorted keys, 2-space indent,
+    trailing newline) so a re-freeze with identical samples is byte-identical
+    and git diffs stay reviewable.
+    """
+    validate_llm_responses(responses)
+    _write_deterministic(dict(responses), path)
