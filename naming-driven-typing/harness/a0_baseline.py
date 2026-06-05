@@ -102,8 +102,9 @@ persisted.
 Run (env-gated; refuses to run without the explicit opt-in):
     A0_LIVE=1 uv run --no-sync python harness/a0_baseline.py --out workspace/
 
-Stack defaults (overridable via env):
-    NEO4J_URI=bolt://localhost:7687  NEO4J_USER=neo4j  NEO4J_PASSWORD=logosdev
+Stack env (URI/user default; the credential is mandatory):
+    NEO4J_URI=bolt://localhost:7687  NEO4J_USER=neo4j
+    NEO4J_PASSWORD=<required -- no default credential>
 """
 
 from __future__ import annotations
