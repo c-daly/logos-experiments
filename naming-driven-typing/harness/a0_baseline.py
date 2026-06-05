@@ -783,7 +783,7 @@ def _outside_type_defs(hcg: Any, ns: str) -> dict[str, list[str]]:
     return {
         td["uuid"]: list((td.get("properties") or {}).get("ancestors") or [])
         for td in (hcg.get_all_type_definitions() or [])
-        if ns not in (td.get("uuid") or "")
+        if td.get("uuid") and ns not in td["uuid"]
     }
 
 
@@ -849,14 +849,17 @@ def _seed_graph(
         for position, member in enumerate(members):
             member_id = str(member["id"])
             live_uuid = f"{ns}-{member_id}"
+            # type_uuid is the authoritative pointer (the production retype
+            # write target); set at creation -- add_node merges properties
+            # over the standard props, so the end state is identical to the
+            # add-then-update two-step at half the roundtrips (PR #17 review).
             hcg.add_node(
                 name=str(member.get("name", member_id)),
                 node_type="entity",
                 uuid=live_uuid,
+                properties={"type": "entity", "type_uuid": seed_uuid},
                 source=source,
             )
-            # The production retype write: the authoritative pointer.
-            hcg.update_node(live_uuid, {"type": "entity", "type_uuid": seed_uuid})
             milvus.members[live_uuid] = {
                 "embedding": member_vector(plan, cid, position, len(members)),
                 "model": _EMBED_MODEL,
@@ -967,26 +970,31 @@ def _read_graph(
 
 def _teardown(hcg: Any, ns: str, created_root: bool) -> None:
     """DETACH-DELETE everything carrying the token; verify zero residue."""
-    hcg._execute_query(
-        "MATCH (n:Node) WHERE n.uuid CONTAINS $t OR n.source CONTAINS $t "
-        "OR n.target CONTAINS $t DETACH DELETE n",
-        {"t": ns},
-    )
-    rows = hcg._execute_query(
-        "MATCH (n:Node) WHERE n.uuid CONTAINS $t OR n.source CONTAINS $t "
-        "OR n.target CONTAINS $t RETURN count(n) AS c",
-        {"t": ns},
-    )
-    residue = rows[0]["c"] if rows else None
-    if residue != 0:
-        raise ZeroResidueViolation(
-            f"teardown left {residue!r} namespaced node(s) for token {ns!r}"
-        )
-    if created_root:
+    try:
         hcg._execute_query(
-            "MATCH (n:Node {uuid: $u, source: $s}) DETACH DELETE n",
-            {"u": "type_entity", "s": _ROOT_MARKER},
+            "MATCH (n:Node) WHERE n.uuid CONTAINS $t OR n.source CONTAINS $t "
+            "OR n.target CONTAINS $t DETACH DELETE n",
+            {"t": ns},
         )
+        rows = hcg._execute_query(
+            "MATCH (n:Node) WHERE n.uuid CONTAINS $t OR n.source CONTAINS $t "
+            "OR n.target CONTAINS $t RETURN count(n) AS c",
+            {"t": ns},
+        )
+        residue = rows[0]["c"] if rows else None
+        if residue != 0:
+            raise ZeroResidueViolation(
+                f"teardown left {residue!r} namespaced node(s) for token {ns!r}"
+            )
+    finally:
+        # The shared root does not carry the namespace token, so the token
+        # sweep above never removes it; guarantee its cleanup even when the
+        # residue check raises (PR #17 review).
+        if created_root:
+            hcg._execute_query(
+                "MATCH (n:Node {uuid: $u, source: $s}) DETACH DELETE n",
+                {"u": "type_entity", "s": _ROOT_MARKER},
+            )
 
 
 def run_live(out_dir: Path = WORKSPACE, fixtures_dir: Path = FIXTURES) -> Path:

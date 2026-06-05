@@ -601,3 +601,53 @@ def test_cli_refuses_without_gate(monkeypatch, capsys):
     monkeypatch.delenv("A0_LIVE", raising=False)
     assert a0.main([]) == 2
     assert "A0_LIVE=1" in capsys.readouterr().err
+
+
+class _ResidueHCG:
+    """Fake client whose residue count never reaches zero; records queries."""
+
+    def __init__(self):
+        self.queries = []
+
+    def _execute_query(self, query, params):
+        self.queries.append((query, params))
+        if "RETURN count(n) AS c" in query:
+            return [{"c": 2}]
+        return []
+
+
+def test_teardown_cleans_shared_root_even_on_residue_violation():
+    """The shared root does not carry the namespace token; its cleanup must
+    run even when the zero-residue check raises (PR #17 review)."""
+    hcg = _ResidueHCG()
+    with pytest.raises(a0.ZeroResidueViolation, match="left 2"):
+        a0._teardown(hcg, "ns-token", created_root=True)
+    root_deletes = [
+        (q, p) for q, p in hcg.queries if "uuid: $u" in q and "DETACH DELETE" in q
+    ]
+    assert len(root_deletes) == 1
+    assert root_deletes[0][1]["u"] == "type_entity"
+
+
+def test_teardown_skips_root_cleanup_when_root_preexisted():
+    hcg = _ResidueHCG()
+    with pytest.raises(a0.ZeroResidueViolation):
+        a0._teardown(hcg, "ns-token", created_root=False)
+    assert not [q for q, _ in hcg.queries if "uuid: $u" in q]
+
+
+def test_outside_type_defs_skips_uuidless_records():
+    """A malformed type-def without a uuid must be skipped consistently on
+    both the before and after capture, not crash the run (PR #17 review)."""
+
+    class _Defs:
+        def get_all_type_definitions(self):
+            return [
+                {"uuid": "keep-1", "properties": {"ancestors": ["root"]}},
+                {"properties": {"ancestors": ["root"]}},
+                {"uuid": None, "properties": {}},
+                {"uuid": "ns-token-x", "properties": {}},
+            ]
+
+    out = a0._outside_type_defs(_Defs(), "ns-token")
+    assert out == {"keep-1": ["root"]}
