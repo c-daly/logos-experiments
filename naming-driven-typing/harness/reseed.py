@@ -45,8 +45,13 @@ def clusters_from_node_members(
     for i, cluster in enumerate(node_clusters):
         if "label" not in cluster:
             raise ReseedInputError(f"node_clusters[{i}] is missing required key: label")
+        raw_members = cluster.get("members")
+        if not isinstance(raw_members, list) or not raw_members:
+            raise ReseedInputError(
+                f"node_clusters[{i}] is missing required non-empty list: members"
+            )
         members: list[dict[str, Any]] = []
-        for j, member in enumerate(cluster.get("members", [])):
+        for j, member in enumerate(raw_members):
             for key in ("uuid", "name"):
                 if key not in member:
                     raise ReseedInputError(
