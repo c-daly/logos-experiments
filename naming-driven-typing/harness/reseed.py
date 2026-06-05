@@ -450,14 +450,16 @@ def main(argv: Optional[list[str]] = None) -> int:
         )
         return 2
 
-    # Lazy: only the live path needs the stack clients.
-    from logos_hcg.client import HCGClient
+    # Lazy: only the live path needs the stack clients. Sophia's subclass,
+    # not the logos_hcg base: the catalog builder needs the full surface
+    # (list_all_edges, get_nodes_by_type_uuid -- #18, found live).
+    from sophia.hcg_client import HCGClient
     from logos_hcg.sync import HCGMilvusSync
 
     client = HCGClient(
-        uri=os.environ.get("NEO4J_URI", "bolt://localhost:7687"),
-        user=os.environ.get("NEO4J_USER", "neo4j"),
-        password=password,
+        neo4j_uri=os.environ.get("NEO4J_URI", "bolt://localhost:7687"),
+        neo4j_username=os.environ.get("NEO4J_USER", "neo4j"),
+        neo4j_password=password,
     )
     sync = HCGMilvusSync(
         milvus_host=os.environ.get("MILVUS_HOST", "localhost"),
