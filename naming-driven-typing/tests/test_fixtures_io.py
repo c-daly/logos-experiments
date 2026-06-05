@@ -6,6 +6,7 @@ reject any label/labels key. No live stack, no network — pure functions only.
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -332,8 +333,6 @@ def test_load_catalog_rejects_scalar_json(tmp_path: Path) -> None:
     with pytest.raises(CatalogFixtureError, match="must be a JSON object"):
         load_catalog(path)
 
-
-import os
 
 EXP_DIR = Path(__file__).resolve().parents[1]
 

@@ -345,3 +345,44 @@ def simulate_arm_cascade(
         enforce_ceiling=enforce_ceiling,
     )
     return _records_to_cascade(records, list(response.get("residual_ids", [])))
+
+
+# A4 no_chain prompt override appended to the v2 system message under the
+# live paths (--freeze / --live): the chain signal is removed AT THE PROMPT,
+# mirroring what the frozen no_chain fixture embodies under --replay (the
+# degenerate chain [name, root]).
+NO_CHAIN_SYSTEM_OVERRIDE = (
+    " ABLATION OVERRIDE (no-chain arm): do NOT return intermediate hypernyms. "
+    "Every chain MUST be exactly two elements: the group name followed by its "
+    "realm root."
+)
+
+
+def arm_message_transform(
+    ablation: str,
+) -> Optional[Callable[[list[dict[str, Any]]], list[dict[str, Any]]]]:
+    """Per-arm live-prompt transform (None => prompt used as built).
+
+    Only A4 ``no_chain`` rewrites the prompt: under --replay its PROMPT-side
+    difference is embodied by the frozen fixture, so the live freeze must
+    produce that fixture from a prompt that actually removes the chain
+    request. Arms whose prompt is byte-identical to the full arm (no_reuse,
+    no_gate), the arm with its own prompt path (naive_llm), and the arm whose
+    difference is the registry view (no_graft) need no message transform.
+    The input messages are never mutated (shallow-copied before shaping).
+    """
+    _require_arm(ablation)
+    if ablation != "no_chain":
+        return None
+
+    def transform(messages: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        out = [dict(message) for message in messages]
+        for message in out:
+            if message.get("role") == "system":
+                message["content"] = (
+                    str(message.get("content", "")) + NO_CHAIN_SYSTEM_OVERRIDE
+                )
+                return out
+        raise ValueError("no_chain transform: prompt has no system message")
+
+    return transform

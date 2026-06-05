@@ -160,6 +160,8 @@ def assert_non_mutation(probe: dict[str, Any]) -> None:
 
     - Neo4j type_definition count unchanged.
     - Prod Redis key ``logos:ontology:types`` unchanged.
+    - Hermes TypeRegistry count unchanged (when the probe could read one;
+      the replay probe omits the keys and the check stays dormant).
     - Prod ``HERMES_URL`` never targeted (we drive Hermes in-process only).
     Any breach is fail-closed.
     """
@@ -172,6 +174,15 @@ def assert_non_mutation(probe: dict[str, Any]) -> None:
     if probe["redis_key_before"] != probe["redis_key_after"]:
         raise NonMutationViolation(
             f"prod redis key {PROD_REDIS_KEY!r} changed (snapshot was overwritten)"
+        )
+    registry_before = probe.get("hermes_registry_count_before")
+    registry_after = probe.get("hermes_registry_count_after")
+    if (
+        registry_before is not None or registry_after is not None
+    ) and registry_before != registry_after:
+        raise NonMutationViolation(
+            f"hermes TypeRegistry count changed: {registry_before} -> "
+            f"{registry_after} (registry was mutated)"
         )
     if probe.get("prod_hermes_targeted"):
         raise NonMutationViolation(
@@ -436,7 +447,8 @@ def _build_replay_wiring(
     """Build the --replay seams: frozen LLM responses + a no-op non-mutation probe.
 
     Replay never touches Neo4j/Redis/prod-Hermes, so the probe reports an
-    unchanged, never-targeted reading. (--live wiring is a follow-up.)
+    unchanged, never-targeted reading. (--live wiring lives in _run_live and
+    harness.freeze; the real probe lives in harness.probe.)
     Only the requested arm's fixture is read -- arms with their own frozen
     file carry no hidden dependency on llm_responses.json (PR #14 review).
     """
@@ -456,6 +468,121 @@ def _build_replay_wiring(
     return responses, probe
 
 
+def _run_live(args: argparse.Namespace) -> int:
+    """--live: smoke/illustration run against the live stack (SPEC 7.6).
+
+    Frozen fixture inputs (clusters/catalog -- the clean-graph decision), the
+    in-process /type-cluster pass, the inner LLM call forwarded to the
+    deployed hermes gateway, and the REAL non-mutation probe wrapped around
+    the run: BEFORE state captured at entry, AFTER state asserted ahead of
+    snapshot persistence (a violation aborts before any snapshot lands).
+
+    PAID: prints the cost estimate and refuses without --yes-i-will-pay,
+    LIVE_RUN=1 and HERMES_URL (in that checking order; nothing is touched on
+    any refusal). The graded run stays --replay over the frozen fixtures.
+    """
+    from harness.ablations import (
+        arm_client_factory,
+        arm_message_transform,
+        arm_registry_factory,
+    )
+    from harness.fixtures_io import load_catalog
+    from harness.freeze import (
+        CapturingTransport,
+        estimate_freeze_cost,
+        format_cost_estimate,
+        live_llm_send,
+    )
+    from harness.probe import (
+        LiveGateError,
+        build_live_readers,
+        make_live_probe,
+        require_live_env,
+    )
+
+    paths = HarnessPaths.default()
+    clusters = _load_clusters(paths)
+    if args.limit is not None:
+        clusters = clusters[: args.limit]
+    catalog = load_catalog(paths.fixtures_dir / "catalog.json")
+    estimate = estimate_freeze_cost(
+        clusters, catalog, repeats=args.repeats, arms=(args.ablation,)
+    )
+    print(format_cost_estimate(estimate), flush=True)
+    if not args.yes_i_will_pay:
+        print(
+            "[harness] --live makes paid LLM calls: re-run with "
+            "--yes-i-will-pay to acknowledge the estimate above",
+            flush=True,
+        )
+        return 2
+    try:
+        hermes_url = require_live_env()
+        # BEFORE state captured here; run() asserts the AFTER state ahead of
+        # snapshot persistence (the landed ordering). build_live_readers
+        # raises LiveGateError on a missing NEO4J_PASSWORD; surface it as the
+        # same clean gating message instead of a traceback (PR #16 review).
+        probe = make_live_probe(build_live_readers())
+    except LiveGateError as err:
+        print(f"[harness] {err}", file=sys.stderr, flush=True)
+        return 2
+    transport = CapturingTransport(
+        live_llm_send(hermes_url, model=args.model),
+        message_transform=arm_message_transform(args.ablation),
+    )
+
+    import hermes.main as m
+
+    # Same save/restore discipline as run_freeze: never leave the module
+    # binding patched if run() raises (PR #16 review).
+    prev_generate = m.generate_completion
+    m.generate_completion = transport  # in-process seam -> live gateway
+    try:
+        out_path = run(
+            paths=paths,
+            catalog_loader=lambda pp: load_catalog(
+                pp.fixtures_dir / "catalog.json"
+            ),
+            cascade_fn=simulate_cascade_response,
+            llm_replayer=transport,
+            nonmutation_probe=probe,
+            ablation=args.ablation,
+            repeats=args.repeats,
+            catalog_mode=args.catalog_mode,
+            limit=args.limit,
+            model=args.model,
+            registry_factory=arm_registry_factory(args.ablation),
+            client_factory=arm_client_factory(args.ablation, transport),
+        )
+    except NonMutationViolation as err:
+        # The probe fired and the snapshot was never persisted; surface the
+        # breach as the clean operator message rather than a traceback
+        # (PR #16 review). Exit 1: operational abort, not a gating refusal.
+        print(f"[harness] live run aborted: {err}", file=sys.stderr, flush=True)
+        return 1
+    finally:
+        m.generate_completion = prev_generate
+
+    # Enrich the persisted snapshot with the model snapshot id(s) the gateway
+    # reported, and keep the raw live completions next to it -- live samples
+    # are paid and losing them would force a respend.
+    snapshot = json.loads(out_path.read_text(encoding="utf-8"))
+    snapshot["model_snapshot_ids"] = sorted(transport.model_ids)
+    snapshot["hermes_gateway"] = hermes_url
+    out_path.write_text(
+        json.dumps(snapshot, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
+    responses_path = out_path.with_name(out_path.stem + "_llm_responses.json")
+    responses_path.write_text(
+        json.dumps(transport.captured, indent=2, sort_keys=True, ensure_ascii=False)
+        + "\n",
+        encoding="utf-8",
+    )
+    print(f"[harness] snapshot -> {out_path}", flush=True)
+    print(f"[harness] live llm responses -> {responses_path}", flush=True)
+    return 0
+
+
 def main(argv: Optional[list[str]] = None) -> int:
     p = argparse.ArgumentParser(description=__doc__)
     mode = p.add_mutually_exclusive_group()
@@ -470,7 +597,30 @@ def main(argv: Optional[list[str]] = None) -> int:
         "--live",
         dest="live",
         action="store_true",
-        help="pull clusters/catalog from the live read-only stack",
+        help=(
+            "smoke/illustration run with the real non-mutation probe and the "
+            "live LLM (PAID; requires LIVE_RUN=1, HERMES_URL and "
+            "--yes-i-will-pay; the graded run stays --replay)"
+        ),
+    )
+    mode.add_argument(
+        "--freeze",
+        dest="freeze",
+        action="store_true",
+        default=False,
+        help=(
+            "freeze K live samples per cluster per arm to fixtures (PAID; "
+            "requires LIVE_RUN=1, HERMES_URL and --yes-i-will-pay)"
+        ),
+    )
+    p.add_argument(
+        "--yes-i-will-pay",
+        dest="yes_i_will_pay",
+        action="store_true",
+        help=(
+            "explicit cost acknowledgement required before any live LLM call "
+            "(--live / --freeze print an estimate and refuse without it)"
+        ),
     )
     p.add_argument(
         "--catalog-mode",
@@ -483,8 +633,19 @@ def main(argv: Optional[list[str]] = None) -> int:
     p.add_argument("--model", default="gpt-4.1")
     args = p.parse_args(argv)
 
+    if args.freeze:
+        from harness.freeze import freeze_command  # deferred: live path only
+
+        return freeze_command(
+            paths=HarnessPaths.default(),
+            repeats=args.repeats,
+            model=args.model,
+            limit=args.limit,
+            yes_i_will_pay=args.yes_i_will_pay,
+        )
+
     if args.live:
-        raise NotImplementedError("--live wiring is a follow-up; use --replay")
+        return _run_live(args)
 
     paths = HarnessPaths.default()
 

@@ -1,0 +1,5 @@
+# Run artifacts (label-free snapshots + live capture sidecars); the graded
+# inputs live in fixtures/ and are committed, run outputs never are.
+workspace/
+__pycache__/
+.pytest_cache/

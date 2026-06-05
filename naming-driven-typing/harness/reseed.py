@@ -9,15 +9,41 @@ fixtures (SPEC §7.6).
 `clusters_from_node_members` is a pure mapper (no graph) so it is unit-testable
 offline: it maps emergence `node_clusters` to the frozen cluster-record schema
 {cluster_id, current_name, members:[{id,name}], sample_coverage}.
+
+Driver CLI (issue #13): ``python harness/reseed.py [--graded] [--corpus NAME]``,
+gated behind RESEED_LIVE=1. The smoke default corpus is ``corpus/corpus.jsonl``
+(16 blocks); the GRADED default is the blessed ``corpus/corpus_batch3.jsonl``
+(350 blocks / 8 domains, approved 2026-06-05): run ``--graded`` for the graded
+reseed. Cold-start ingest goes through the deployed hermes (``--hermes-url`` /
+HERMES_URL) and the frozen {clusters, catalog} land via the canonical fixture
+writers (`freeze_clusters` / `freeze_catalog`). Requires the
+edge-embeddings-worth-it sibling experiment checked out next to
+naming-driven-typing (its harness supplies build_node_members).
 """
 from __future__ import annotations
 
+import argparse
 import json
+import os
+import sys
 import time
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
-from harness.fixtures_io import freeze_catalog, freeze_clusters
+# Direct-script execution (python harness/reseed.py) puts harness/ -- not the
+# experiment root -- on sys.path; shim the root in so the ``harness.*``
+# imports resolve (same role as the shim in run_experiment.py).
+_EXP_DIR = Path(__file__).resolve().parent.parent
+if str(_EXP_DIR) not in sys.path:
+    sys.path.insert(0, str(_EXP_DIR))
+
+from harness.fixtures_io import freeze_catalog, freeze_clusters  # noqa: E402
+
+# Corpus defaults (issue #13): the smoke path keeps the 16-block curated set;
+# the GRADED path uses the blessed batch3 corpus checked in byte-identical at
+# corpus/corpus_batch3.jsonl (350 blocks / 8 domains, approved 2026-06-05).
+SMOKE_CORPUS = "corpus.jsonl"
+GRADED_CORPUS = "corpus_batch3.jsonl"
 
 
 class ReseedInputError(ValueError):
@@ -116,6 +142,7 @@ def reseed_and_build(
     corpus_path: Path,
     hermes_url: str,
     min_cluster_size: int = 2,
+    fixtures_dir: Optional[Path] = None,
 ) -> dict[str, Any]:
     """Clear the graph, seed roots, cold-start ingest the corpus, cluster, build.
 
@@ -181,7 +208,11 @@ def reseed_and_build(
         ),
     }
 
-    fixtures_dir = Path(corpus_path).resolve().parents[1] / "fixtures"
+    # Default to the experiment root rather than inferring from the corpus
+    # path: an external --corpus must not silently misdirect the fixture
+    # writes to its grandparent directory (PR #16 review).
+    if fixtures_dir is None:
+        fixtures_dir = _EXP_DIR / "fixtures"
     freeze_clusters(clusters, fixtures_dir / "clusters.json")
     freeze_catalog(catalog, fixtures_dir / "catalog.json")
 
@@ -194,3 +225,128 @@ def reseed_and_build(
             "reseeded_at": int(time.time()),
         },
     }
+
+
+def resolve_corpus_path(
+    corpus: Optional[str],
+    *,
+    graded: bool,
+    corpus_dir: Path,
+) -> Path:
+    """Pick the corpus file: explicit ``--corpus`` wins, else the mode default.
+
+    The smoke default is ``corpus.jsonl`` (16 curated blocks); the GRADED
+    default is the blessed ``corpus_batch3.jsonl`` (350 blocks / 8 domains,
+    approved 2026-06-05). A relative ``--corpus`` resolves under the corpus
+    dir first, then as given. A missing file raises ReseedInputError: corpus
+    selection must never fall back silently.
+    """
+    if corpus:
+        candidate = Path(corpus)
+        if not candidate.is_absolute():
+            in_dir = corpus_dir / corpus
+            if in_dir.exists():
+                return in_dir
+        if candidate.exists():
+            return candidate
+        raise ReseedInputError(f"corpus file not found: {corpus}")
+    default_name = GRADED_CORPUS if graded else SMOKE_CORPUS
+    path = corpus_dir / default_name
+    if not path.exists():
+        raise ReseedInputError(f"default corpus missing: {path}")
+    return path
+
+
+def main(argv: Optional[list[str]] = None) -> int:
+    """Reseed driver (gated behind RESEED_LIVE=1; see the module docstring).
+
+    The graded entry point is ``--graded``: it defaults the corpus to the
+    blessed batch3 set and otherwise runs the same clear -> seed roots ->
+    cold-start ingest -> emergence -> freeze pipeline through the canonical
+    fixture writers.
+    """
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--corpus",
+        default=None,
+        help=(
+            "corpus file name (under corpus/) or path; overrides the "
+            "per-mode default"
+        ),
+    )
+    parser.add_argument(
+        "--graded",
+        action="store_true",
+        help=(
+            "graded reseed: default corpus is the blessed corpus_batch3.jsonl "
+            "(350 blocks / 8 domains)"
+        ),
+    )
+    parser.add_argument("--min-cluster-size", type=int, default=2)
+    parser.add_argument(
+        "--hermes-url",
+        default=os.environ.get("HERMES_URL", "http://localhost:17000"),
+        help="deployed hermes used for the cold-start ingest",
+    )
+    args = parser.parse_args(argv)
+
+    if os.environ.get("RESEED_LIVE") != "1":
+        print(
+            "[reseed] live reseed is gated: set RESEED_LIVE=1 to clear and "
+            "reseed the DISPOSABLE stack (this is a destructive write path)",
+            file=sys.stderr,
+        )
+        return 2
+
+    corpus_path = resolve_corpus_path(
+        args.corpus, graded=args.graded, corpus_dir=_EXP_DIR / "corpus"
+    )
+    fixtures_dir = _EXP_DIR / "fixtures"
+    print(f"[reseed] corpus -> {corpus_path}", flush=True)
+    print(f"[reseed] fixtures -> {fixtures_dir}", flush=True)
+
+    # Fail loudly on a missing credential -- this is the DESTRUCTIVE path;
+    # never fall back to a default password (PR #16 review, same finding as
+    # probe.build_live_readers).
+    password = os.environ.get("NEO4J_PASSWORD")
+    if not password:
+        print(
+            "[reseed] NEO4J_PASSWORD must be set explicitly for the live "
+            "reseed (refusing a default credential)",
+            file=sys.stderr,
+        )
+        return 2
+
+    # Lazy: only the live path needs the stack clients.
+    from logos_hcg.client import HCGClient
+    from logos_hcg.sync import HCGMilvusSync
+
+    client = HCGClient(
+        uri=os.environ.get("NEO4J_URI", "bolt://localhost:7687"),
+        user=os.environ.get("NEO4J_USER", "neo4j"),
+        password=password,
+    )
+    sync = HCGMilvusSync(
+        milvus_host=os.environ.get("MILVUS_HOST", "localhost"),
+        milvus_port=os.environ.get("MILVUS_PORT", "19530"),
+    )
+    result = reseed_and_build(
+        client,
+        sync,
+        corpus_path=corpus_path,
+        hermes_url=args.hermes_url,
+        min_cluster_size=args.min_cluster_size,
+        fixtures_dir=fixtures_dir,
+    )
+    meta = result["meta"]
+    print(
+        "[reseed] frozen {n} clusters from {b} corpus blocks".format(
+            n=meta["n_clusters"], b=meta["n_corpus_blocks"]
+        ),
+        flush=True,
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
