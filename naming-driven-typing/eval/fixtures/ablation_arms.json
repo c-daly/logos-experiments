@@ -1,0 +1,10 @@
+{
+  "naive_llm": {
+    "graft_depth_fraction": {"mean": 0.10, "stdev": 0.02, "cv": 0.2, "n": 5, "ci_lo": 0.08, "ci_hi": 0.12},
+    "residual_fraction":   {"mean": 0.30, "stdev": 0.05, "cv": 0.166, "n": 5, "ci_lo": 0.25, "ci_hi": 0.35}
+  },
+  "full": {
+    "graft_depth_fraction": {"mean": 0.70, "stdev": 0.03, "cv": 0.042, "n": 5, "ci_lo": 0.67, "ci_hi": 0.73},
+    "residual_fraction":   {"mean": 0.28, "stdev": 0.04, "cv": 0.142, "n": 5, "ci_lo": 0.24, "ci_hi": 0.32}
+  }
+}

@@ -1,21 +1,112 @@
 # naming-driven-typing
 
-**Question:** Does ONE catalog-aware LLM naming pass per candidate cluster beat the
-embedding wall (flat 3072-dim distance band → over-fragmented, entity-flat typing) —
-and which mechanism (reuse, graft, chain) carries the lift?
+**Question:** Does a catalog-aware naming pass type a coarse cluster better than
+the current tier-2/rollup pipeline? Embeddings POINT (cheap coarse clustering);
+the graph ASSERTS (one LLM call per cluster returns a covering hypernym, an IS_A
+chain to a root, a reuse-or-mint decision, and a graft target). We validate this
+OFFLINE on frozen clusters with a SIMULATED placement cascade \u2014 no production
+mutation.
 
-**Thesis:** embeddings POINT, the graph ASSERTS. Coarse embedding clustering proposes
-candidates (recall); the naming pass does the semantic typing — reuse/mint decision,
-covering hypernym, IS_A chain, graft target.
-
-**Status:** planned — workspace not yet built.
+**Status:** eval layer built and tested (T7) \u2014 `eval/metrics.py`, `goal.yaml`,
+and the committed synthetic snapshot fixture landed. The snapshot schema in
+`eval/fixtures/run_synthetic.json` IS the contract the cascade simulator (T5)
+and the K-repeat harness (T6) must satisfy; those are not wired yet. Verdict
+narratives are vault-side, post-run.
 
 - **Spec + plan (read first):** vault `10-projects/LOGOS/sophia/plans/naming-driven-typing/`
-  (SPEC.md §0 decisions, PLAN.md T1–T7).
+  (SPEC.md \u00a70 decisions, PLAN.md T1\u2013T7).
 - **Epic:** c-daly/logos#553. Hermes contract work: c-daly/hermes#120 (canonicalize),
   c-daly/hermes#121 (/type-cluster v2). Experiment tasks T2/T3/T5/T6/T7 are tracked
   as tickets in THIS repo.
-- **Eval:** label-free — structural metrics + eyeball + ablations A0–A6, K-repeat
-  CI-lower-bound gating (`goal.yaml` when T7 lands).
 - **Gates:** experiment verdict, then the R1 production-integration test. The offline
   run is necessary but not sufficient; no production wiring until both pass.
+
+## Eval is label-free (Chris 2026-06-05)
+
+No per-cluster coherence labels, no root ground-truth, no external hypernymy
+oracle, no label-derived precision/recall/accuracy. Eval is:
+
+1. **Intrinsic STRUCTURAL metrics** read off the cascade output
+   (`eval/metrics.py`): `graft_depth_fraction`, semantic `reuse_collapses`
+   (string `canonical_merge_collapses` reported separately), `residual_fraction`,
+   `raw_partition_violation_rate`, `hallucinated_target_rate`,
+   `placement_conflict_rate`, descriptive `root_distribution`, `mean_graft_depth`,
+   `new_floated_at_root`.
+2. **Eyeballing** the per-cluster decision dump (`eval/metrics.py --eyeball`).
+3. **Ablations A0\u2013A6** \u2014 full-v2 (A6) must beat naive-LLM (A1) by more than the
+   K-repeat noise band (A0 is the MEASURED tier-2/rollup baseline, not asserted).
+
+All metrics are reported `mean \u00b1 stdev` over K\u22655 repeats; `stability_cv` is
+emitted; a criterion passes only at the CI LOWER bound; a comparison "passes"
+only if its delta clears the noise band.
+
+## Layout
+
+```
+naming-driven-typing/
+  goal.yaml                  label-free success criteria + objective
+  pyproject.toml             per-experiment env (uv); pytest-only for the eval layer
+  harness/run_experiment.py  K-repeat runner (in-process stub registry; read-only) \u2014 T6, pending
+  harness/catalog.py         uuid-keyed enriched catalog + by_norm (read-only) \u2014 T2, pending
+  eval/metrics.py            structural metrics -> [METRIC] lines + ablation deltas + eyeball dump
+  eval/fixtures/             committed snapshot fixtures (label-free; schema contract for T5/T6)
+  tests/                     unit tests for the eval layer
+  workspace/run_<ts>.json    per-run snapshots (all K repeats; written by harness)
+```
+
+Run journals and verdict narratives live in the vault
+(`10-projects/LOGOS/`), not in this repo.
+
+## Run
+
+The eval layer is self-contained (uv, no service deps):
+
+```bash
+cd naming-driven-typing
+uv sync
+
+# Tests:
+uv run pytest tests/ -v
+
+# Score a snapshot (default = newest workspace/run_*.json); --eyeball appends
+# the human-readable per-cluster decision dump:
+uv run python eval/metrics.py eval/fixtures/run_synthetic.json --eyeball
+```
+
+The harness (T5/T6, pending) runs in an env where `logos_hcg`, `logos_config`,
+`pymilvus`, `neo4j` AND `hermes` import (path-A drives the hermes handler
+in-process; the hermes poetry env carries the rest via its foundry pin \u2014
+re-verify at execution). Default is `--replay` from frozen fixtures
+($0, deterministic).
+
+### Stack (smoke / `--live` only \u2014 never the graded run)
+
+| service | default |
+|---------|---------|
+| Neo4j   | `bolt://localhost:7687` (neo4j / logosdev) |
+| Milvus  | `localhost:19530` |
+| Hermes  | `http://localhost:17000` (throwaway only; prod URL is asserted untouched) |
+
+## Metrics
+
+`eval/metrics.py` emits `[METRIC] key=value` lines (aggregate metrics emit
+`.mean` / `.stdev` / `.cv`):
+
+| metric | meaning | reading |
+|--------|---------|---------|
+| `reuse_collapses` | semantic reuse merges into a published type | `> 0` (primary) |
+| `graft_depth_fraction` | NEW types grafting under a non-root parent | `>= 0.5` (primary) |
+| `raw_partition_violation_rate` | RAW LLM id loss/dup before reconciliation | `<= 0.1` (primary) |
+| `residual_fraction` | members parked to residual / total | `<= 0.3` (`residual_bloat` flags > 0.4) |
+| `stability_cv_max` | worst CV across aggregate metrics | `<= 0.1` (primary) |
+| `placement_conflict_rate` | v2 vs rollup parent disagreement | reported go/no-go |
+
+## Results land in
+
+`workspace/run_<ts>.json` \u2014 one snapshot per run, holding all K repeats for
+every cluster (groups with branch/parent/depth/reuse/graft flags, residual ids,
+evicted ids, `raw_partition_ok`), plus the enriched-catalog assertions
+(`roots_present_in_live_catalog`, `live_redis_catalog_staleness`). The offline
+run is **necessary-but-not-sufficient**: cycle / idempotency / dedup /
+residual-durability live in unrun write paths, gated by the blocking R1
+production integration test.
