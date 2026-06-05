@@ -180,6 +180,7 @@ def simulate_group(
     by_norm: dict[str, list[str]],
     min_depth: int = MIN_DEPTH,
     minted_names_this_pass: Optional[set[str]] = None,
+    enforce_ceiling: bool = True,
 ) -> PlacementRecord:
     """Place one group; record-only, no graph writes (SPEC §5.1)."""
     events: list[str] = []
@@ -193,7 +194,9 @@ def simulate_group(
     covering_depth = max(len(chain) - 1, 0)
 
     f_ok = floor_ok(chain, min_depth=min_depth)
-    c_ok = not ceiling_violation(name)
+    # A5/no-gate seam: CEILING off => c_ok is vacuously True (FLOOR is
+    # disabled by min_depth=0, since covering_depth >= 0 always holds).
+    c_ok = not ceiling_violation(name) if enforce_ceiling else True
 
     def residual(extra_events: list[str]) -> PlacementRecord:
         return PlacementRecord(
@@ -300,6 +303,7 @@ def simulate_cascade(
     by_norm: dict[str, list[str]],
     minted_names_this_pass: Optional[set[str]] = None,
     min_depth: int = MIN_DEPTH,
+    enforce_ceiling: bool = True,
 ) -> list[PlacementRecord]:
     """Run the cascade over a full /type-cluster response (SPEC §5.1, §5.12).
 
@@ -324,7 +328,7 @@ def simulate_cascade(
             # graft targets (SPEC 5.12).
             if not floor_ok(list(g.get("chain", [])), min_depth=min_depth):
                 continue
-            if ceiling_violation(str(g.get("name", ""))):
+            if enforce_ceiling and ceiling_violation(str(g.get("name", ""))):
                 continue
             at = str(g.get("assign_to", "NEW"))
             mints = at == "NEW" or at not in catalog_by_uuid
@@ -343,6 +347,7 @@ def simulate_cascade(
                 by_norm,
                 min_depth=min_depth,
                 minted_names_this_pass=minted,
+                enforce_ceiling=enforce_ceiling,
             )
         )
     return records

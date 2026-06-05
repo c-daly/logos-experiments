@@ -372,3 +372,74 @@ def test_placement_record_is_frozen(catalog_by_uuid, by_norm):
     assert isinstance(rec.evicted_ids, tuple)
     assert isinstance(rec.residual_ids, tuple)
     assert isinstance(rec.events, tuple)
+# ---- gate toggles (A5/no-gate ablation seam) -----------------------------
+
+def test_ceiling_toggle_off_mints_instead_of_residual(catalog_by_uuid, by_norm):
+    # Ceiling-violating name (whole-word conjunction) over a floor-passing
+    # chain: gated under defaults, minted when enforce_ceiling=False.
+    group = {
+        "cluster_id": "cg-ceil",
+        "assign_to": "NEW",
+        "name": "gadget and gizmo",
+        "chain": ["gadget and gizmo", "car", "vehicle", "entity"],
+        "member_ids": ["m1"],
+    }
+    gated = simulate_cascade([group], catalog_by_uuid, by_norm)[0]
+    assert gated.branch == "RESIDUAL"
+    assert "CEILING_VIOLATION_SPLIT_DEFERRED" in gated.events
+
+    ungated = simulate_cascade(
+        [group], catalog_by_uuid, by_norm, enforce_ceiling=False
+    )[0]
+    assert ungated.branch == "G2_GRAFT"  # chain resolves through car
+    assert ungated.ceiling_ok is True  # vacuous: toggle off
+    assert not any("VIOLATION" in e for e in ungated.events)
+
+
+def test_floor_disabled_via_min_depth_zero(catalog_by_uuid, by_norm):
+    # covering_depth >= 0 always holds, so min_depth=0 IS the floor-off seam.
+    group = {
+        "cluster_id": "cg-floor",
+        "assign_to": "NEW",
+        "name": "widget",
+        "chain": ["widget", "entity"],
+        "member_ids": ["m1"],
+    }
+    gated = simulate_cascade([group], catalog_by_uuid, by_norm)[0]
+    assert gated.branch == "RESIDUAL"
+    assert "FLOOR_VIOLATION" in gated.events
+
+    ungated = simulate_cascade([group], catalog_by_uuid, by_norm, min_depth=0)[0]
+    assert ungated.branch == "G3_ROOT"
+    assert ungated.floor_ok is True
+    assert not any("VIOLATION" in e for e in ungated.events)
+
+
+def test_minted_set_respects_ceiling_toggle(catalog_by_uuid, by_norm):
+    # With the ceiling ON the gated group never mints, so a sibling chain
+    # naming it is NOT freeze-skipped; with the ceiling OFF it mints and the
+    # freeze-snapshot guard (SPEC 5.12) kicks in for the sibling.
+    gated_group = {
+        "cluster_id": "cg-a",
+        "assign_to": "NEW",
+        "name": "gadget and gizmo",
+        "chain": ["gadget and gizmo", "car", "vehicle", "entity"],
+        "member_ids": ["m1"],
+    }
+    sibling = {
+        "cluster_id": "cg-b",
+        "assign_to": "NEW",
+        "name": "widget",
+        "chain": ["widget", "gadget and gizmo", "entity"],
+        "member_ids": ["m2"],
+    }
+    on = simulate_cascade([gated_group, sibling], catalog_by_uuid, by_norm)
+    assert on[0].branch == "RESIDUAL"
+    assert not any(e.startswith("FREEZE_SKIP") for e in on[1].events)
+
+    off = simulate_cascade(
+        [gated_group, sibling], catalog_by_uuid, by_norm, enforce_ceiling=False
+    )
+    assert off[0].branch == "G2_GRAFT"
+    assert any(e.startswith("FREEZE_SKIP") for e in off[1].events)
+    assert off[1].branch == "G3_ROOT"  # minted name is not a graft target
