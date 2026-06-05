@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.uv/
+
+# Experiment run outputs — keep snapshots small; large artifacts stay local
+*/workspace/*.tmp
+*/workspace/*.log
+
+# Tooling noise
+.serena/
+.idea/
+.vscode/
+.DS_Store
