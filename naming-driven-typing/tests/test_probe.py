@@ -212,3 +212,12 @@ def test_require_live_env_returns_explicit_url():
         {"LIVE_RUN": "1", "HERMES_URL": "http://disposable:17000"}
     )
     assert url == "http://disposable:17000"
+
+
+def test_build_live_readers_requires_explicit_password(monkeypatch):
+    """A missing NEO4J_PASSWORD must fail loudly, never default-credential."""
+    from harness.probe import LiveGateError, build_live_readers
+
+    monkeypatch.delenv("NEO4J_PASSWORD", raising=False)
+    with pytest.raises(LiveGateError, match="NEO4J_PASSWORD"):
+        build_live_readers()

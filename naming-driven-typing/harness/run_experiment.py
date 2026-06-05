@@ -532,22 +532,29 @@ def _run_live(args: argparse.Namespace) -> int:
 
     import hermes.main as m
 
+    # Same save/restore discipline as run_freeze: never leave the module
+    # binding patched if run() raises (PR #16 review).
+    prev_generate = m.generate_completion
     m.generate_completion = transport  # in-process seam -> live gateway
-
-    out_path = run(
-        paths=paths,
-        catalog_loader=lambda pp: load_catalog(pp.fixtures_dir / "catalog.json"),
-        cascade_fn=simulate_cascade_response,
-        llm_replayer=transport,
-        nonmutation_probe=probe,
-        ablation=args.ablation,
-        repeats=args.repeats,
-        catalog_mode=args.catalog_mode,
-        limit=args.limit,
-        model=args.model,
-        registry_factory=arm_registry_factory(args.ablation),
-        client_factory=arm_client_factory(args.ablation, transport),
-    )
+    try:
+        out_path = run(
+            paths=paths,
+            catalog_loader=lambda pp: load_catalog(
+                pp.fixtures_dir / "catalog.json"
+            ),
+            cascade_fn=simulate_cascade_response,
+            llm_replayer=transport,
+            nonmutation_probe=probe,
+            ablation=args.ablation,
+            repeats=args.repeats,
+            catalog_mode=args.catalog_mode,
+            limit=args.limit,
+            model=args.model,
+            registry_factory=arm_registry_factory(args.ablation),
+            client_factory=arm_client_factory(args.ablation, transport),
+        )
+    finally:
+        m.generate_completion = prev_generate
 
     # Enrich the persisted snapshot with the model snapshot id(s) the gateway
     # reported, and keep the raw live completions next to it -- live samples

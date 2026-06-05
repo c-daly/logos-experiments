@@ -392,11 +392,23 @@ def run_freeze(
                     )
         except Exception as err:
             partial_path = fixtures_dir / (responses_file + ".partial.json")
+            # Guard the partial dump: if the write itself fails, the
+            # operator-facing FreezeError below must still surface with an
+            # accurate note rather than being swallowed (PR #16 review).
+            partial_note = "no samples captured before the failure"
             if transport.captured:
-                freeze_llm_responses(transport.captured, partial_path)
+                try:
+                    freeze_llm_responses(transport.captured, partial_path)
+                    partial_note = (
+                        f"captured-so-far written to {partial_path.name}"
+                    )
+                except Exception as write_err:
+                    partial_note = (
+                        f"partial write to {partial_path.name} also failed: "
+                        f"{write_err}"
+                    )
             raise FreezeError(
-                f"freeze aborted in arm {arm!r}: {err} "
-                f"(captured-so-far written to {partial_path.name})"
+                f"freeze aborted in arm {arm!r}: {err} ({partial_note})"
             ) from err
         finally:
             m._type_registry = prev_registry

@@ -513,3 +513,33 @@ def test_main_rejects_freeze_with_replay(_no_live_env):
 
     with pytest.raises(SystemExit):
         rx.main(["--replay", "--freeze"])
+
+
+def test_run_freeze_partial_write_failure_preserves_freeze_error(
+    tmp_path, monkeypatch
+):
+    """If the partial dump itself fails, the FreezeError must still surface
+    with an accurate note instead of being swallowed (PR #16 review)."""
+    calls = {"n": 0}
+
+    def flaky_send(messages, *, temperature, max_tokens, metadata):
+        calls["n"] += 1
+        if calls["n"] > 1:
+            raise RuntimeError("gateway 502")
+        return _completion(_groups_content(["u1", "u2"]))
+
+    def _boom(captured, path):
+        raise OSError("disk full")
+
+    monkeypatch.setattr(fz, "freeze_llm_responses", _boom)
+    with pytest.raises(
+        fz.FreezeError, match=r"aborted in arm .*also failed: disk full"
+    ):
+        fz.run_freeze(
+            clusters=_clusters(),
+            catalog=_catalog(),
+            send=flaky_send,
+            fixtures_dir=tmp_path,
+            repeats=2,
+            arms=("full",),
+        )

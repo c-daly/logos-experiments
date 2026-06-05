@@ -142,6 +142,7 @@ def reseed_and_build(
     corpus_path: Path,
     hermes_url: str,
     min_cluster_size: int = 2,
+    fixtures_dir: Optional[Path] = None,
 ) -> dict[str, Any]:
     """Clear the graph, seed roots, cold-start ingest the corpus, cluster, build.
 
@@ -207,7 +208,11 @@ def reseed_and_build(
         ),
     }
 
-    fixtures_dir = Path(corpus_path).resolve().parents[1] / "fixtures"
+    # Default to the experiment root rather than inferring from the corpus
+    # path: an external --corpus must not silently misdirect the fixture
+    # writes to its grandparent directory (PR #16 review).
+    if fixtures_dir is None:
+        fixtures_dir = _EXP_DIR / "fixtures"
     freeze_clusters(clusters, fixtures_dir / "clusters.json")
     freeze_catalog(catalog, fixtures_dir / "catalog.json")
 
@@ -296,9 +301,21 @@ def main(argv: Optional[list[str]] = None) -> int:
     corpus_path = resolve_corpus_path(
         args.corpus, graded=args.graded, corpus_dir=_EXP_DIR / "corpus"
     )
-    fixtures_dir = corpus_path.resolve().parents[1] / "fixtures"
+    fixtures_dir = _EXP_DIR / "fixtures"
     print(f"[reseed] corpus -> {corpus_path}", flush=True)
     print(f"[reseed] fixtures -> {fixtures_dir}", flush=True)
+
+    # Fail loudly on a missing credential -- this is the DESTRUCTIVE path;
+    # never fall back to a default password (PR #16 review, same finding as
+    # probe.build_live_readers).
+    password = os.environ.get("NEO4J_PASSWORD")
+    if not password:
+        print(
+            "[reseed] NEO4J_PASSWORD must be set explicitly for the live "
+            "reseed (refusing a default credential)",
+            file=sys.stderr,
+        )
+        return 2
 
     # Lazy: only the live path needs the stack clients.
     from logos_hcg.client import HCGClient
@@ -307,7 +324,7 @@ def main(argv: Optional[list[str]] = None) -> int:
     client = HCGClient(
         uri=os.environ.get("NEO4J_URI", "bolt://localhost:7687"),
         user=os.environ.get("NEO4J_USER", "neo4j"),
-        password=os.environ.get("NEO4J_PASSWORD", "logosdev"),
+        password=password,
     )
     sync = HCGMilvusSync(
         milvus_host=os.environ.get("MILVUS_HOST", "localhost"),
@@ -319,6 +336,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         corpus_path=corpus_path,
         hermes_url=args.hermes_url,
         min_cluster_size=args.min_cluster_size,
+        fixtures_dir=fixtures_dir,
     )
     meta = result["meta"]
     print(

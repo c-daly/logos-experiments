@@ -164,12 +164,21 @@ def build_live_readers(
     reports ``None`` and the Redis key hash carries the invariant).
     """
     if neo4j_client is None:
+        # Fail loudly on a missing credential (consistent with
+        # require_live_env on HERMES_URL): a misconfigured environment must
+        # not silently connect with a default password (PR #16 review).
+        password = os.environ.get("NEO4J_PASSWORD")
+        if not password:
+            raise LiveGateError(
+                "NEO4J_PASSWORD must be set explicitly for the live probe "
+                "(refusing a default credential)"
+            )
         from logos_hcg.client import HCGClient  # live path only
 
         neo4j_client = HCGClient(
             uri=os.environ.get("NEO4J_URI", "bolt://localhost:7687"),
             user=os.environ.get("NEO4J_USER", "neo4j"),
-            password=os.environ.get("NEO4J_PASSWORD", "logosdev"),
+            password=password,
         )
     if redis_client is None:
         import redis  # live path only
