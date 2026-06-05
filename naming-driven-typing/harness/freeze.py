@@ -49,6 +49,7 @@ Operator notes (the agent never runs the paid step)
 
 from __future__ import annotations
 
+import asyncio
 import json
 import sys
 import time
@@ -158,7 +159,10 @@ class CapturingTransport:
         sent_messages = list(messages)
         if self._transform is not None:
             sent_messages = self._transform(sent_messages)
-        completion = self._send(
+        # _send is synchronous (httpx.post on the live path); hop to a worker
+        # thread so a slow LLM call never blocks the event loop (PR #16 review).
+        completion = await asyncio.to_thread(
+            self._send,
             sent_messages,
             temperature=pinned_temperature,
             max_tokens=max_tokens,

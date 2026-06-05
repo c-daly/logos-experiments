@@ -81,7 +81,7 @@ def hash_key_content(value: Optional[Any]) -> str:
         return ABSENT_KEY
     if isinstance(value, str):
         value = value.encode("utf-8")
-    return hashlib.sha256(bytes(value)).hexdigest()
+    return hashlib.sha256(value).hexdigest()
 
 
 def snapshot_stack_state(readers: StackReaders) -> dict[str, Any]:
