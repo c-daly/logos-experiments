@@ -87,6 +87,36 @@ re-verify at execution). Default is `--replay` from frozen fixtures
 | Milvus  | `localhost:19530` |
 | Hermes  | `http://localhost:17000` (throwaway only; prod URL is asserted untouched) |
 
+### Graded pipeline (issue #13)
+
+Three steps, in order; only step 2 spends money:
+
+```bash
+# 1. Clean reseed of the DISPOSABLE stack (graded corpus = the blessed
+#    corpus/corpus_batch3.jsonl, 350 blocks / 8 domains, approved 2026-06-05;
+#    omit --graded for the 16-block smoke corpus). Freezes clusters+catalog
+#    through the canonical fixture writers.
+RESEED_LIVE=1 uv run --no-sync python harness/reseed.py --graded
+
+# 2. K-sample freeze (the ONE paid step): K repeats per cluster per
+#    prompt-distinct arm (full, naive_llm, no_graft, no_chain; no_reuse and
+#    no_gate share the full fixture), pinned temperature=0.0, raw completions
+#    frozen in the replayer shape + model snapshot id in fixtures/freeze_meta.json.
+#    Prints a cost estimate and refuses without the explicit acknowledgement.
+LIVE_RUN=1 HERMES_URL=http://localhost:17000 \
+  uv run --no-sync python harness/run_experiment.py --freeze --repeats 5 --yes-i-will-pay
+
+# 3. Graded runs: $0, deterministic, per arm.
+uv run --no-sync python harness/run_experiment.py --replay --repeats 5 --ablation full
+```
+
+`--live` is a PAID smoke/illustration run only (never the graded one, SPEC
+7.6): frozen fixture inputs, the live LLM through the deployed hermes
+gateway, and the REAL non-mutation probe (Neo4j type-def count, prod Redis
+key `logos:ontology:types` content hash, hermes TypeRegistry count) asserted
+before the snapshot persists. Same gates as the freeze: `LIVE_RUN=1`,
+`HERMES_URL`, `--yes-i-will-pay`.
+
 ## Metrics
 
 `eval/metrics.py` emits `[METRIC] key=value` lines (aggregate metrics emit
