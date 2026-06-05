@@ -136,6 +136,18 @@ def test_clusters_freeze_is_byte_deterministic(tmp_path: Path) -> None:
     assert a.read_bytes() == b.read_bytes()
 
 
+def test_clusters_freeze_member_order_is_byte_deterministic(tmp_path: Path) -> None:
+    # member ELEMENT order shuffled -- sort_keys=True alone would NOT catch
+    # this (it sorts dict keys only); the writer must sort members by id.
+    a, b = tmp_path / "a.json", tmp_path / "b.json"
+    freeze_clusters(_good_clusters(), a)
+    shuffled = _good_clusters()
+    for c in shuffled:
+        c["members"] = list(reversed(c["members"]))
+    freeze_clusters(shuffled, b)
+    assert a.read_bytes() == b.read_bytes()
+
+
 # --- catalog validation ---------------------------------------------------
 
 def _good_catalog() -> dict[str, object]:
@@ -211,6 +223,18 @@ def test_catalog_freeze_load_asserts_vehicle_fragments(tmp_path: Path) -> None:
     loaded = load_catalog(path)
     # load_catalog enforces the fragments invariant (SPEC §4.2)
     assert len(loaded["by_norm"]["vehicle"]) > 1
+
+
+def test_catalog_freeze_by_norm_order_is_byte_deterministic(tmp_path: Path) -> None:
+    # by_norm uuid-list ELEMENT order shuffled -- sort_keys=True alone would
+    # NOT catch this (it sorts dict keys only); the writer must sort the lists.
+    a, b = tmp_path / "a.json", tmp_path / "b.json"
+    freeze_catalog(_good_catalog(), a)
+    shuffled = _good_catalog()
+    for norm, uuids in shuffled["by_norm"].items():
+        shuffled["by_norm"][norm] = list(reversed(uuids))
+    freeze_catalog(shuffled, b)
+    assert a.read_bytes() == b.read_bytes()
 
 
 def test_load_catalog_raises_when_vehicle_not_fragmented(tmp_path: Path) -> None:
