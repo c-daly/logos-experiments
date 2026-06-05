@@ -74,3 +74,44 @@ def test_settle_graph_fails_loudly_at_cap(monkeypatch):
     client = _CountingClient(range(1000))  # never stabilizes
     with pytest.raises(RuntimeError, match="did not settle"):
         reseed._settle_graph(client, stable_polls=3, interval=0, cap=10.0)
+
+
+class _GrowthClient:
+    """Counts: returned in sequence to both _node_count pollers."""
+
+    def __init__(self, counts):
+        self._counts = list(counts)
+        self.queries = 0
+
+    def _execute_query(self, query, params):
+        self.queries += 1
+        c = self._counts.pop(0) if self._counts else self._last
+        self._last = c
+        return [{"c": c}]
+
+
+def test_ingest_corpus_polls_for_growth_between_blocks(monkeypatch):
+    posted = []
+    monkeypatch.setattr(reseed, "_ingest", lambda t, d, u: posted.append(t))
+    monkeypatch.setattr(reseed.time, "sleep", lambda s: None)
+    # baseline 10; block1 grows on second poll (10 -> 15); block2 grows
+    # immediately (15 -> 22).
+    client = _GrowthClient([10, 10, 15, 22])
+    corpus = [
+        {"text": "a", "domain": "d"},
+        {"text": "b", "domain": "d"},
+    ]
+    reseed._ingest_corpus(client, corpus, "http://h:17000")
+    assert posted == ["a", "b"]
+
+
+def test_check_yield_fails_below_floor():
+    client = _GrowthClient([20])  # 20 entities from 350 blocks < 10%
+    with pytest.raises(RuntimeError, match="implausibly low"):
+        reseed._check_yield(client, n_blocks=350)
+
+
+def test_check_yield_passes_above_floor(capsys):
+    client = _GrowthClient([200])
+    reseed._check_yield(client, n_blocks=350)
+    assert "200 entities" in capsys.readouterr().out

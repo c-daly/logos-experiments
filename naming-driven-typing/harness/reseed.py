@@ -180,6 +180,65 @@ def _settle_graph(
     )
 
 
+def _node_count(client: Any) -> int:
+    rows = client._execute_query("MATCH (n:Node) RETURN count(n) AS c", {})
+    return rows[0]["c"] if rows else 0
+
+
+def _ingest_corpus(client: Any, corpus: list[dict], hermes_url: str) -> None:
+    """Ingest with per-block flow control (the proven edge-harness shape).
+
+    /llm extraction runs in a background task per block; firing all blocks
+    without waiting piles those tasks up until they fail quietly (observed
+    live: 350 blocks -> ~58 entities). After each POST, poll briefly for
+    graph growth before sending the next block. A block may legitimately
+    yield nothing (full dedup), so the poll gives up quickly and moves on.
+    """
+    prev = _node_count(client)
+    for i, item in enumerate(corpus):
+        _ingest(item["text"], item["domain"], hermes_url)
+        for _ in range(12):
+            now = _node_count(client)
+            if now > prev:
+                prev = now
+                break
+            time.sleep(0.5)
+        else:
+            prev = _node_count(client)
+        if (i + 1) % 25 == 0:
+            print(
+                f"[reseed] ingested {i + 1}/{len(corpus)} blocks "
+                f"({prev} nodes)",
+                flush=True,
+            )
+
+
+def _check_yield(client: Any, *, n_blocks: int) -> None:
+    """Fail loudly when ingestion yield is implausibly low (#18).
+
+    A silent low yield poisons everything downstream (clusters built from a
+    sliver of the corpus). Floor: 10% of blocks must have produced entities;
+    below 50% warns.
+    """
+    rows = client._execute_query(
+        "MATCH (n:Node {type: $t}) RETURN count(n) AS c", {"t": "entity"}
+    )
+    entities = rows[0]["c"] if rows else 0
+    print(f"[reseed] ingestion yield: {entities} entities from {n_blocks} blocks", flush=True)
+    if entities < n_blocks * 0.1:
+        raise RuntimeError(
+            f"ingestion yield implausibly low: {entities} entities from "
+            f"{n_blocks} blocks (floor 10%); check hermes extraction "
+            "(rate limits / NER availability) before trusting fixtures"
+        )
+    if entities < n_blocks * 0.5:
+        print(
+            f"[reseed] WARNING: yield below 50% ({entities}/{n_blocks}); "
+            "dedup may explain this, but eyeball the graph",
+            flush=True,
+        )
+
+
 def reseed_and_build(
     client: Any,
     sync: Any,
@@ -224,14 +283,21 @@ def reseed_and_build(
         if ln.strip()
     ]
     validate_corpus_items(corpus)
-    for item in corpus:
-        _ingest(item["text"], item["domain"], hermes_url)
+    _ingest_corpus(client, corpus, hermes_url)
     settled = _settle_graph(client)
     print(f"[reseed] graph settled at {settled} nodes", flush=True)
+    _check_yield(client, n_blocks=len(corpus))
 
     driver = client.driver
     node_members, _, _ = build_node_members(driver, sync, entity_filter=True, dedup=True)
-    raw_clusters = find_emergent_clusters(node_members, min_cluster_size=min_cluster_size)
+    # variance_threshold=0.0 disables the junk-drawer cohesion pre-filter,
+    # mirroring the edge-embeddings harness invocation this pipeline is
+    # derived from (#18: sophia main made the kwarg required).
+    raw_clusters = find_emergent_clusters(
+        node_members,
+        min_cluster_size=min_cluster_size,
+        variance_threshold=0.0,
+    )
 
     # find_emergent_clusters returns objects with .label/.members[{uuid,name}];
     # normalize to dicts the pure mapper expects.
