@@ -25,6 +25,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import sys
 import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -34,6 +35,12 @@ HERE = Path(__file__).resolve().parent
 EXP = HERE.parent
 FIXTURES = EXP / "fixtures"
 WORKSPACE = EXP / "workspace"
+
+# Direct-script execution (python harness/run_experiment.py) puts harness/ --
+# not the experiment root -- on sys.path; shim the root in so the deferred
+# ``harness.*`` imports in main() resolve (same role as tests/conftest.py).
+if str(EXP) not in sys.path:
+    sys.path.insert(0, str(EXP))
 
 # Prod stack identifiers -- recorded so the non-mutation probe can assert the
 # harness never targeted them. The harness drives Hermes IN-PROCESS, so this
