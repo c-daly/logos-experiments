@@ -1,0 +1,97 @@
+{
+  "request_id": "synthetic-1",
+  "model": "gpt-4.1-2025-04-14",
+  "ablation": "full",
+  "repeats": 2,
+  "roots_present_in_live_catalog": true,
+  "live_redis_catalog_staleness": 3,
+  "MIN_DEPTH": 2,
+  "MAX_WORDS": 3,
+  "EVICT_N": 2,
+  "clusters": [
+    {
+      "cluster_id": "c_boat",
+      "current_name": "watercraft",
+      "total_members": 4,
+      "sample_coverage": 1.0,
+      "repeats": [
+        {
+          "raw_partition_ok": true,
+          "residual_ids": [],
+          "evicted_ids": [],
+          "groups": [
+            {"assign_to": "uuid-vehicle", "name": "vehicle", "chain": ["vehicle", "entity"],
+             "member_ids": ["b1", "b2", "b3", "b4"], "over_specified": false,
+             "branch": "G1_reuse", "graft_parent_uuid": null, "graft_parent_name": null,
+             "covering_depth": 1, "is_grafted": false, "is_reuse": true,
+             "reuse_target_uuid": "uuid-vehicle", "canonical_merged_into": null}
+          ]
+        },
+        {
+          "raw_partition_ok": true,
+          "residual_ids": [],
+          "evicted_ids": [],
+          "groups": [
+            {"assign_to": "uuid-vehicle", "name": "vehicle", "chain": ["vehicle", "entity"],
+             "member_ids": ["b1", "b2", "b3", "b4"], "over_specified": false,
+             "branch": "G1_reuse", "graft_parent_uuid": null, "graft_parent_name": null,
+             "covering_depth": 1, "is_grafted": false, "is_reuse": true,
+             "reuse_target_uuid": "uuid-vehicle", "canonical_merged_into": null}
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": "c_aircraft",
+      "current_name": "flying machine",
+      "total_members": 3,
+      "sample_coverage": 1.0,
+      "repeats": [
+        {
+          "raw_partition_ok": true,
+          "residual_ids": [],
+          "evicted_ids": ["a3"],
+          "groups": [
+            {"assign_to": "NEW", "name": "aircraft", "chain": ["aircraft", "vehicle", "entity"],
+             "member_ids": ["a1", "a2"], "over_specified": false,
+             "branch": "G2_graft", "graft_parent_uuid": "uuid-vehicle", "graft_parent_name": "vehicle",
+             "covering_depth": 2, "is_grafted": true, "is_reuse": false,
+             "reuse_target_uuid": null, "canonical_merged_into": null}
+          ]
+        },
+        {
+          "raw_partition_ok": false,
+          "residual_ids": ["a3"],
+          "evicted_ids": [],
+          "groups": [
+            {"assign_to": "NEW", "name": "aircraft", "chain": ["aircraft", "vehicle", "entity"],
+             "member_ids": ["a1", "a2"], "over_specified": false,
+             "branch": "G2_graft", "graft_parent_uuid": "uuid-vehicle", "graft_parent_name": "vehicle",
+             "covering_depth": 2, "is_grafted": true, "is_reuse": false,
+             "reuse_target_uuid": null, "canonical_merged_into": null}
+          ]
+        }
+      ]
+    },
+    {
+      "cluster_id": "c_shallow",
+      "current_name": "thing",
+      "total_members": 2,
+      "sample_coverage": 1.0,
+      "repeats": [
+        {
+          "raw_partition_ok": true,
+          "residual_ids": ["s1", "s2"],
+          "evicted_ids": [],
+          "groups": []
+        },
+        {
+          "raw_partition_ok": true,
+          "residual_ids": ["s1", "s2"],
+          "evicted_ids": [],
+          "groups": []
+        }
+      ]
+    }
+  ]
+}
