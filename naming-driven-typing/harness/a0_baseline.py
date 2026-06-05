@@ -631,6 +631,30 @@ def as_metrics_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
     return out
 
 
+def deltas_arm_entry(
+    snapshot: dict[str, Any],
+) -> tuple[str, dict[str, dict[str, float]]]:
+    """(arm_name, {metric -> aggregate}) entry for the ``ablation_deltas`` input.
+
+    Bridges the snapshot to the metrics dialect, computes the label-free
+    structural metrics, and keeps only the aggregate-shaped entries (dicts
+    carrying a ``mean``) -- the shape ``ablation_deltas`` consumes per arm.
+    Scalar passthroughs and the descriptive ``root_distribution`` are not
+    delta-comparable and are dropped. Works identically for the A0 baseline
+    snapshot and any v2 arm snapshot, so the by-arm input assembles as
+    ``dict(deltas_arm_entry(s) for s in snapshots)``.
+    """
+    from eval.metrics import compute_metrics  # deferred: path shim above
+
+    metrics = compute_metrics(as_metrics_snapshot(snapshot))
+    aggregates = {
+        name: agg
+        for name, agg in metrics.items()
+        if isinstance(agg, dict) and "mean" in agg
+    }
+    return str(snapshot.get("ablation", "")), aggregates
+
+
 # ----------------------------------------------------------------- live half
 # Everything below talks to the live stack; sophia imports stay deferred so
 # the pure half above is importable without the live environment.
@@ -761,14 +785,6 @@ def _outside_type_defs(hcg: Any, ns: str) -> dict[str, list[str]]:
         for td in (hcg.get_all_type_definitions() or [])
         if ns not in (td.get("uuid") or "")
     }
-
-
-def _load_clusters(path: Path) -> list[dict]:
-    data = json.loads(Path(path).read_text(encoding="utf-8"))
-    if isinstance(data, dict):
-        # T3 freeze envelope: {"version": ..., "clusters": [...]}
-        data = data.get("clusters", [])
-    return list(data)
 
 
 def _seed_graph(
@@ -987,10 +1003,10 @@ def run_live(out_dir: Path = WORKSPACE, fixtures_dir: Path = FIXTURES) -> Path:
             "disposable namespaced subgraph on the live Neo4j "
             "(NEO4J_URI / NEO4J_USER / NEO4J_PASSWORD)."
         )
-    from harness.fixtures_io import load_catalog  # deferred (path shim)
+    from harness.fixtures_io import load_catalog, load_clusters  # path shim
     from harness.run_experiment import NonMutationViolation
 
-    clusters = _load_clusters(Path(fixtures_dir) / "clusters.json")
+    clusters = load_clusters(Path(fixtures_dir) / "clusters.json")
     catalog = load_catalog(Path(fixtures_dir) / "catalog.json")
     plan = geometry_plan(clusters, catalog)
     ns = f"a0b{uuid4().hex[:8]}"
