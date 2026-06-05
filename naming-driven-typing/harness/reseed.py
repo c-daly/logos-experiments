@@ -12,7 +12,16 @@ offline: it maps emergence `node_clusters` to the frozen cluster-record schema
 """
 from __future__ import annotations
 
+import json
+import time
+from pathlib import Path
 from typing import Any
+
+from harness.fixtures_io import freeze_catalog, freeze_clusters
+
+
+class ReseedInputError(ValueError):
+    """Raised when live input (emergence clusters, corpus items) is malformed."""
 
 
 def clusters_from_node_members(
@@ -27,13 +36,24 @@ def clusters_from_node_members(
     We send the WHOLE cluster (no down-sampling, SPEC §6.1) so sample_coverage
     is always 1.0 here; the live harness overrides it only if it must truncate.
     No `label`/`labels` field is ever emitted — eval is label-free.
+
+    Raises ReseedInputError when a cluster lacks ``label`` or a member lacks
+    ``uuid``/``name`` — live emergence output is an external input boundary
+    and is never coerced.
     """
     records: list[dict[str, Any]] = []
-    for cluster in node_clusters:
-        members = [
-            {"id": m["uuid"], "name": m["name"]}
-            for m in cluster.get("members", [])
-        ]
+    for i, cluster in enumerate(node_clusters):
+        if "label" not in cluster:
+            raise ReseedInputError(f"node_clusters[{i}] is missing required key: label")
+        members: list[dict[str, Any]] = []
+        for j, member in enumerate(cluster.get("members", [])):
+            for key in ("uuid", "name"):
+                if key not in member:
+                    raise ReseedInputError(
+                        f"node_clusters[{i}].members[{j}] is missing "
+                        f"required key: {key}"
+                    )
+            members.append({"id": member["uuid"], "name": member["name"]})
         records.append(
             {
                 "cluster_id": str(cluster["label"]),
@@ -45,12 +65,21 @@ def clusters_from_node_members(
     return records
 
 
-import json
-import os
-import time
-from pathlib import Path
+def validate_corpus_items(corpus: list[Any]) -> None:
+    """Check every corpus item is an object carrying text and domain.
 
-from harness.fixtures_io import freeze_catalog, freeze_clusters
+    The corpus file is an external input boundary: a malformed line must
+    raise a precise error BEFORE any ingest call, not surface as a KeyError
+    mid-ingest against a half-seeded graph.
+    """
+    for i, item in enumerate(corpus):
+        if not isinstance(item, dict):
+            raise ReseedInputError(
+                f"corpus[{i}] is not an object (got {type(item).__name__})"
+            )
+        for key in ("text", "domain"):
+            if key not in item:
+                raise ReseedInputError(f"corpus[{i}] is missing required key: {key}")
 
 
 def _ingest(text: str, domain: str, hermes_url: str) -> None:
@@ -106,7 +135,7 @@ def reseed_and_build(
     from run_experiment import build_node_members  # type: ignore[import-not-found]
     from sophia.maintenance.emergence_clustering import find_emergent_clusters
 
-    from harness.catalog import build_enriched_catalog  # T2
+    from harness.catalog import build_catalog_from_client  # T2
 
     seeder = HCGSeeder(client)
     seeder.clear()
@@ -117,6 +146,7 @@ def reseed_and_build(
         for ln in Path(corpus_path).read_text(encoding="utf-8").splitlines()
         if ln.strip()
     ]
+    validate_corpus_items(corpus)
     for item in corpus:
         _ingest(item["text"], item["domain"], hermes_url)
 
@@ -135,7 +165,16 @@ def reseed_and_build(
         for c in raw_clusters
     ]
     clusters = clusters_from_node_members(node_cluster_dicts)
-    catalog = build_enriched_catalog(client)
+    # build_catalog_from_client returns a CatalogResult dataclass; the freeze
+    # writers and the replay loader consume the plain-dict envelope.
+    catalog_result = build_catalog_from_client(client)
+    catalog = {
+        "catalog_by_uuid": catalog_result.catalog_by_uuid,
+        "by_norm": catalog_result.by_norm,
+        "roots_present_in_live_catalog": (
+            catalog_result.roots_present_in_live_catalog
+        ),
+    }
 
     fixtures_dir = Path(corpus_path).resolve().parents[1] / "fixtures"
     freeze_clusters(clusters, fixtures_dir / "clusters.json")

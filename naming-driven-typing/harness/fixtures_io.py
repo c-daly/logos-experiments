@@ -109,6 +109,10 @@ def freeze_clusters(clusters: list[dict[str, Any]], path: Path) -> None:
 def load_clusters(path: Path) -> list[dict[str, Any]]:
     """Load + validate clusters.json, returning the clusters list."""
     raw = json.loads(Path(path).read_text(encoding="utf-8"))
+    if not isinstance(raw, dict):
+        raise ClusterFixtureError(
+            f"clusters fixture must be a JSON object (got {type(raw).__name__})"
+        )
     if raw.get("version") != FIXTURE_VERSION:
         raise ClusterFixtureError(
             f"clusters fixture version mismatch: {raw.get('version')!r}"
@@ -191,6 +195,10 @@ def freeze_catalog(catalog: dict[str, Any], path: Path) -> None:
 def load_catalog(path: Path) -> dict[str, Any]:
     """Load + validate catalog.json; enforce the vehicle-fragments invariant."""
     raw = json.loads(Path(path).read_text(encoding="utf-8"))
+    if not isinstance(raw, dict):
+        raise CatalogFixtureError(
+            f"catalog fixture must be a JSON object (got {type(raw).__name__})"
+        )
     if raw.get("version") != FIXTURE_VERSION:
         raise CatalogFixtureError(
             f"catalog fixture version mismatch: {raw.get('version')!r}"
