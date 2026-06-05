@@ -170,3 +170,322 @@ def assert_non_mutation(probe: dict[str, Any]) -> None:
         raise NonMutationViolation(
             f"prod Hermes was targeted ({PROD_HERMES_URL}); harness must run in-process"
         )
+
+
+class StubTypeRegistry:
+    """In-process duck-typed stand-in for hermes' Redis-backed TypeRegistry.
+
+    Built from the frozen enriched catalog (T2/T3 shape: ``catalog_by_uuid``
+    keyed by uuid with root-first ``chain``). Read-only; exposes exactly the
+    ``get_type_names()`` / ``get_type(name)`` surface ``hermes.main`` reads,
+    so the /type-cluster catalog block is served fully in-process -- never
+    from the prod Redis key.
+    """
+
+    def __init__(self, types: dict[str, dict[str, Any]]) -> None:
+        self._types = types
+
+    @classmethod
+    def from_catalog(cls, catalog: dict[str, Any]) -> "StubTypeRegistry":
+        types: dict[str, dict[str, Any]] = {}
+        for type_uuid, rec in catalog.get("catalog_by_uuid", {}).items():
+            name = rec.get("name")
+            if not isinstance(name, str) or not name:
+                continue
+            chain = rec.get("chain")
+            if not isinstance(chain, list):
+                chain = []
+            types[name] = {
+                "uuid": rec.get("uuid", type_uuid),
+                "root": chain[0] if chain else "",
+                "chain": list(chain),
+                "is_root": bool(rec.get("is_root", False)),
+            }
+        return cls(types)
+
+    def get_type_names(self) -> list[str]:
+        return sorted(self._types)
+
+    def get_type(self, name: str) -> Optional[dict[str, Any]]:
+        info = self._types.get(name)
+        return dict(info) if info is not None else None
+
+
+def call_type_cluster(
+    client: Any,
+    members: list[dict[str, Any]],
+    *,
+    request_id: Optional[str] = None,
+) -> dict[str, Any]:
+    """POST the WHOLE member list to the in-process /type-cluster endpoint.
+
+    No down-sampling (SPEC 6.1 / R-integration-3): the v2 partition contract is
+    over the full cluster. Non-200 is fail-closed -> HarnessEndpointError.
+    """
+    payload: dict[str, Any] = {"members": members}
+    if request_id is not None:
+        payload["request_id"] = request_id
+    resp = client.post("/type-cluster", json=payload)
+    if resp.status_code != 200:
+        raise HarnessEndpointError(f"/type-cluster -> {resp.status_code}: {resp.text}")
+    body: dict[str, Any] = resp.json()
+    return body
+
+
+def run_cluster_repeats(
+    cluster: dict[str, Any],
+    catalog: dict[str, Any],
+    *,
+    client: Any,
+    replayer: FrozenLLMReplayer,
+    cascade_fn: Callable[..., dict[str, Any]],
+    repeats: int,
+    ablation: str = "full",
+) -> list[dict[str, Any]]:
+    """K repeats for ONE cluster (no down-sampling, whole cluster every time).
+
+    Each repeat: bind the replayer -> POST whole cluster -> parse -> simulate
+    cascade (T5). ``sample_coverage = sent/total`` is recorded (==1.0 because we
+    never down-sample) so a clean partition is never misread as "all typed".
+    """
+    cluster_id = cluster["cluster_id"]
+    members = cluster["members"]
+    total = len(members)
+    replayer.for_cluster(cluster_id)
+    out: list[dict[str, Any]] = []
+    for k in range(repeats):
+        replayer.set_repeat(k)
+        request_id = ReplayKey(cluster_id, k).token()
+        body = call_type_cluster(client, members, request_id=request_id)
+        cascade = cascade_fn(body, catalog, ablation=ablation)
+        out.append(
+            {
+                "repeat": k,
+                "request_id": request_id,
+                "response": body,
+                "raw_partition_ok": bool(body.get("raw_partition_ok", False)),
+                "sample_coverage": (len(members) / total) if total else 0.0,
+                "cascade": cascade,
+            }
+        )
+    return out
+
+
+def simulate_cascade_response(
+    response: dict[str, Any],
+    catalog: dict[str, Any],
+    *,
+    ablation: str = "full",
+) -> dict[str, Any]:
+    """Adapt T5's simulate_cascade to the harness ``cascade_fn`` seam.
+
+    T5 landed as ``simulate_cascade(groups, catalog_by_uuid, by_norm, ...) ->
+    list[PlacementRecord]`` while the harness seam is ``(response, catalog, *,
+    ablation) -> dict`` -- per the PLAN T6 integration note the harness is the
+    consumer, so the adaptation lives here. Only the 'full' arm is wired to
+    the real simulator; the other ablation arms are a follow-up (kept honest,
+    mirroring --live).
+    """
+    if ablation != "full":
+        raise NotImplementedError(
+            f"ablation arm {ablation!r} is not wired to the T5 simulator yet; "
+            "only 'full' runs through the real cascade"
+        )
+    from harness.cascade import simulate_cascade  # T5 (deferred import)
+
+    records = simulate_cascade(
+        list(response.get("groups", [])),
+        catalog.get("catalog_by_uuid", {}),
+        catalog.get("by_norm", {}),
+    )
+    branches = [
+        {k: (list(v) if isinstance(v, tuple) else v) for k, v in asdict(rec).items()}
+        for rec in records
+    ]
+    return {
+        "branches": branches,
+        "residual_ids": list(response.get("residual_ids", [])),
+    }
+
+
+def _load_clusters(paths: HarnessPaths) -> list[dict[str, Any]]:
+    raw = (paths.fixtures_dir / "clusters.json").read_text(encoding="utf-8")
+    data = json.loads(raw)
+    if isinstance(data, dict):
+        # T3 freeze envelope: {"version": ..., "clusters": [...]}
+        data = data.get("clusters", [])
+    return list(data)
+
+
+def run(
+    *,
+    paths: HarnessPaths,
+    catalog_loader: Callable[[HarnessPaths], dict[str, Any]],
+    cascade_fn: Callable[..., dict[str, Any]],
+    llm_replayer: FrozenLLMReplayer,
+    nonmutation_probe: Callable[[], dict[str, Any]],
+    ablation: str = "full",
+    repeats: int = 5,
+    catalog_mode: str = "in_process",
+    limit: Optional[int] = None,
+    model: str = "gpt-4.1",
+    run_ts: Optional[str] = None,
+) -> Path:
+    """Top-level orchestration (replay path). Returns the snapshot path.
+
+    In-process only: the v2 endpoint is driven via FastAPI TestClient with
+    ``generate_completion`` already monkeypatched to ``llm_replayer`` by the
+    caller, and the catalog served by a StubTypeRegistry built from the frozen
+    catalog (installed for the duration of the run, then restored). No
+    graph/redis/hermes writes -- verified by ``assert_non_mutation``.
+    """
+    import hermes.main as m
+    from fastapi.testclient import TestClient
+
+    run_ts = run_ts or time.strftime("%Y%m%dT%H%M%SZ", time.gmtime())
+    paths.workspace_dir.mkdir(parents=True, exist_ok=True)
+
+    clusters = _load_clusters(paths)
+    if limit is not None:
+        clusters = clusters[:limit]
+    catalog = catalog_loader(paths)
+    roots_present = bool(
+        catalog.get(
+            "roots_present", catalog.get("roots_present_in_live_catalog", False)
+        )
+    )
+
+    client = TestClient(m.app)
+
+    # In-process stub registry built from the frozen catalog -- /type-cluster's
+    # catalog block never touches the prod Redis key. Restored afterwards.
+    stub_registry = StubTypeRegistry.from_catalog(catalog)
+    prev_registry = m._type_registry
+    m._type_registry = stub_registry
+    try:
+        cluster_results: list[dict[str, Any]] = []
+        for cluster in clusters:
+            repeats_out = run_cluster_repeats(
+                cluster,
+                catalog,
+                client=client,
+                replayer=llm_replayer,
+                cascade_fn=cascade_fn,
+                repeats=repeats,
+                ablation=ablation,
+            )
+            cluster_results.append(
+                {
+                    "cluster_id": cluster["cluster_id"],
+                    "current_name": cluster.get("current_name", ""),
+                    "member_count": len(cluster["members"]),
+                    "repeats": repeats_out,
+                }
+            )
+    finally:
+        m._type_registry = prev_registry
+
+    snapshot = build_snapshot(
+        cluster_results=cluster_results,
+        catalog=catalog,
+        ablation=ablation,
+        model=model,
+        repeats=repeats,
+        catalog_mode=catalog_mode,
+        roots_present=roots_present,
+        run_ts=run_ts,
+    )
+
+    out_path = paths.workspace_dir / f"run_{run_ts}.json"
+    out_path.write_text(
+        json.dumps(snapshot, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
+
+    assert_non_mutation(nonmutation_probe())
+    return out_path
+
+
+def _build_replay_wiring(
+    paths: HarnessPaths, model: str
+) -> tuple[dict[str, Any], Callable[[], dict[str, Any]]]:
+    """Build the --replay seams: frozen LLM responses + a no-op non-mutation probe.
+
+    Replay never touches Neo4j/Redis/prod-Hermes, so the probe reports an
+    unchanged, never-targeted reading. (--live wiring is a follow-up.)
+    """
+    responses = json.loads(
+        (paths.fixtures_dir / "llm_responses.json").read_text(encoding="utf-8")
+    )
+
+    def probe() -> dict[str, Any]:
+        return {
+            "type_def_count_before": 0,
+            "type_def_count_after": 0,
+            "redis_key_before": "",
+            "redis_key_after": "",
+            "prod_hermes_targeted": False,
+        }
+
+    return responses, probe
+
+
+def main(argv: Optional[list[str]] = None) -> int:
+    p = argparse.ArgumentParser(description=__doc__)
+    mode = p.add_mutually_exclusive_group()
+    mode.add_argument(
+        "--replay",
+        dest="live",
+        action="store_false",
+        default=False,
+        help="replay frozen fixtures (default, $0, reproducible)",
+    )
+    mode.add_argument(
+        "--live",
+        dest="live",
+        action="store_true",
+        help="pull clusters/catalog from the live read-only stack",
+    )
+    p.add_argument(
+        "--catalog-mode",
+        choices=("in_process", "throwaway_hermes"),
+        default="in_process",
+    )
+    p.add_argument("--repeats", type=int, default=5)
+    p.add_argument("--ablation", choices=ABLATIONS, default="full")
+    p.add_argument("--limit", type=int, default=None)
+    p.add_argument("--model", default="gpt-4.1")
+    args = p.parse_args(argv)
+
+    if args.live:
+        raise NotImplementedError("--live wiring is a follow-up; use --replay")
+
+    paths = HarnessPaths.default()
+    responses, probe = _build_replay_wiring(paths, args.model)
+    replayer = FrozenLLMReplayer(responses)
+
+    import hermes.main as m
+
+    m.generate_completion = replayer  # in-process replay seam
+
+    # T3 frozen-fixture loader (the PLAN named harness.catalog, but T2 landed
+    # load_catalog in harness.fixtures_io -- the harness consumes what landed).
+    from harness.fixtures_io import load_catalog
+
+    out_path = run(
+        paths=paths,
+        catalog_loader=lambda pp: load_catalog(pp.fixtures_dir / "catalog.json"),
+        cascade_fn=simulate_cascade_response,
+        llm_replayer=replayer,
+        nonmutation_probe=probe,
+        ablation=args.ablation,
+        repeats=args.repeats,
+        catalog_mode=args.catalog_mode,
+        limit=args.limit,
+        model=args.model,
+    )
+    print(f"[harness] snapshot -> {out_path}", flush=True)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
