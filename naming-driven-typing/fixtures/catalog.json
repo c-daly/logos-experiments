@@ -1,0 +1,92 @@
+{
+  "by_norm": {
+    "concept": [
+      "r-con"
+    ],
+    "entity": [
+      "r-ent"
+    ],
+    "process": [
+      "r-pro"
+    ],
+    "vehicle": [
+      "t-veh1",
+      "t-veh2"
+    ]
+  },
+  "catalog_by_uuid": {
+    "r-con": {
+      "ancestors": [],
+      "chain": [
+        "concept"
+      ],
+      "depth": 1,
+      "is_root": true,
+      "member_count": 0,
+      "name": "concept",
+      "norm_name": "concept",
+      "parent_uuid": null,
+      "uuid": "r-con"
+    },
+    "r-ent": {
+      "ancestors": [],
+      "chain": [
+        "entity"
+      ],
+      "depth": 1,
+      "is_root": true,
+      "member_count": 0,
+      "name": "entity",
+      "norm_name": "entity",
+      "parent_uuid": null,
+      "uuid": "r-ent"
+    },
+    "r-pro": {
+      "ancestors": [],
+      "chain": [
+        "process"
+      ],
+      "depth": 1,
+      "is_root": true,
+      "member_count": 0,
+      "name": "process",
+      "norm_name": "process",
+      "parent_uuid": null,
+      "uuid": "r-pro"
+    },
+    "t-veh1": {
+      "ancestors": [
+        "entity"
+      ],
+      "chain": [
+        "entity",
+        "vehicle"
+      ],
+      "depth": 2,
+      "is_root": false,
+      "member_count": 3,
+      "name": "vehicle",
+      "norm_name": "vehicle",
+      "parent_uuid": "r-ent",
+      "uuid": "t-veh1"
+    },
+    "t-veh2": {
+      "ancestors": [
+        "entity"
+      ],
+      "chain": [
+        "entity",
+        "vehicle"
+      ],
+      "depth": 2,
+      "is_root": false,
+      "member_count": 2,
+      "name": "Vehicles",
+      "norm_name": "vehicle",
+      "parent_uuid": "r-ent",
+      "uuid": "t-veh2"
+    }
+  },
+  "roots_present_in_live_catalog": true,
+  "version": "1"
+}
