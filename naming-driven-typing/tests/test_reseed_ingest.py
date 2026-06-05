@@ -106,7 +106,7 @@ def test_ingest_corpus_polls_for_growth_between_blocks(monkeypatch):
 
 
 def test_check_yield_fails_below_floor():
-    client = _GrowthClient([20])  # 20 entities from 350 blocks < 10%
+    client = _GrowthClient([20])  # 20 entity-kind nodes from 350 blocks < 10%
     with pytest.raises(RuntimeError, match="implausibly low"):
         reseed._check_yield(client, n_blocks=350)
 
@@ -115,3 +115,17 @@ def test_check_yield_passes_above_floor(capsys):
     client = _GrowthClient([200])
     reseed._check_yield(client, n_blocks=350)
     assert "200 entities" in capsys.readouterr().out
+
+
+def test_check_yield_counts_entity_kind_not_literal_entity():
+    """The query must exclude structural types, not require type='entity':
+    live ingestion mints a type per mention group (#18)."""
+
+    class _QueryCapture:
+        def _execute_query(self, query, params):
+            assert "NOT n.type IN" in query
+            assert "type_definition" in params["structural"]
+            assert "edge" in params["structural"]
+            return [{"c": 440}]
+
+    reseed._check_yield(_QueryCapture(), n_blocks=350)

@@ -220,8 +220,12 @@ def _check_yield(client: Any, *, n_blocks: int) -> None:
     sliver of the corpus). Floor: 10% of blocks must have produced entities;
     below 50% warns.
     """
+    # Live ingestion MINTS a type per mention group (production behavior),
+    # so members do not carry type='entity'; entity-kind = everything that
+    # is not graph structure. Matches build_node_members' input universe.
     rows = client._execute_query(
-        "MATCH (n:Node {type: $t}) RETURN count(n) AS c", {"t": "entity"}
+        "MATCH (n:Node) WHERE NOT n.type IN $structural RETURN count(n) AS c",
+        {"structural": ["type_definition", "edge", "edge_type"]},
     )
     entities = rows[0]["c"] if rows else 0
     print(f"[reseed] ingestion yield: {entities} entities from {n_blocks} blocks", flush=True)
@@ -247,6 +251,7 @@ def reseed_and_build(
     hermes_url: str,
     min_cluster_size: int = 2,
     fixtures_dir: Optional[Path] = None,
+    resume: bool = False,
 ) -> dict[str, Any]:
     """Clear the graph, seed roots, cold-start ingest the corpus, cluster, build.
 
@@ -273,19 +278,26 @@ def reseed_and_build(
 
     from harness.catalog import build_catalog_from_client  # T2
 
-    seeder = HCGSeeder(client)
-    seeder.clear()
-    seeder.seed_type_definitions()
-
     corpus = [
         json.loads(ln)
         for ln in Path(corpus_path).read_text(encoding="utf-8").splitlines()
         if ln.strip()
     ]
     validate_corpus_items(corpus)
-    _ingest_corpus(client, corpus, hermes_url)
-    settled = _settle_graph(client)
-    print(f"[reseed] graph settled at {settled} nodes", flush=True)
+    if resume:
+        # Crash recovery (#18): the destructive prefix already ran and the
+        # graph is settled; rebuild clusters/catalog/fixtures from it
+        # without re-paying the ingest.
+        print("[reseed] --resume: skipping clear/seed/ingest", flush=True)
+        settled = _settle_graph(client)
+        print(f"[reseed] graph settled at {settled} nodes", flush=True)
+    else:
+        seeder = HCGSeeder(client)
+        seeder.clear()
+        seeder.seed_type_definitions()
+        _ingest_corpus(client, corpus, hermes_url)
+        settled = _settle_graph(client)
+        print(f"[reseed] graph settled at {settled} nodes", flush=True)
     _check_yield(client, n_blocks=len(corpus))
 
     driver = client.driver
@@ -395,6 +407,14 @@ def main(argv: Optional[list[str]] = None) -> int:
             "(350 blocks / 8 domains)"
         ),
     )
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help=(
+            "skip clear/seed/ingest and build fixtures from the "
+            "already-settled graph (crash recovery)"
+        ),
+    )
     parser.add_argument("--min-cluster-size", type=int, default=2)
     parser.add_argument(
         "--hermes-url",
@@ -450,6 +470,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         hermes_url=args.hermes_url,
         min_cluster_size=args.min_cluster_size,
         fixtures_dir=fixtures_dir,
+        resume=args.resume,
     )
     meta = result["meta"]
     print(
