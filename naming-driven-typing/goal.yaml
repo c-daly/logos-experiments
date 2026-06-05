@@ -1,0 +1,70 @@
+objective: |
+  Decide whether a v2 catalog-aware naming pass (one LLM call per coarse cluster,
+  covering hypernym + IS_A chain to a root + reuse/mint + graft target) carves the
+  type space better than the current tier-2/rollup pipeline. Embeddings POINT
+  (cheap coarse clustering); the graph ASSERTS (semantic typing via Hermes
+  /type-cluster). Validated OFFLINE on frozen clusters with a simulated placement
+  cascade. Eval is LABEL-FREE (Chris 2026-06-05): intrinsic STRUCTURAL metrics read
+  off the cascade output + eyeballing + ablations A0-A6. No coherence labels, no
+  root ground-truth, no external hypernymy oracle, no label-derived
+  precision/recall/accuracy.
+success_criteria:
+  - metric: reuse_collapses
+    threshold: 0
+    comparator: gt
+    primary: true
+    description: >
+      SEMANTIC reuse merges fragments into a published type (e.g. watercraft/boat
+      -> vehicle). Mean over K repeats > 0. canonical_merge_collapses (string) is
+      reported SEPARATELY and does NOT count.
+  - metric: graft_depth_fraction
+    threshold: 0.5
+    comparator: ge
+    primary: true
+    description: >
+      Majority of NEW types graft under a real (non-root) parent rather than
+      floating flat under entity. CI lower bound clears 0.5.
+  - metric: raw_partition_violation_rate
+    threshold: 0.1
+    comparator: le
+    primary: true
+    description: >
+      The RAW LLM rarely loses/duplicates ids before reconciliation
+      (post-reconciliation == 0 is a safety assert, not a win).
+  - metric: residual_fraction
+    threshold: 0.3
+    comparator: le
+    primary: false
+    description: Sane backlog, not a dumping ground (residual_bloat flags > 0.4).
+  - metric: stability_cv_max
+    threshold: 0.1
+    comparator: le
+    primary: true
+    description: >
+      No primary metric is noisier than CV 0.1 over K>=5 repeats; CV > 0.1 on any
+      primary => verdict "noisy/inconclusive", not pass.
+  - metric: ablation_A6_beats_A1_graft_depth
+    threshold: 0
+    comparator: gt
+    primary: true
+    description: >
+      full-v2 (A6) beats naive-LLM (A1) on graft_depth_fraction by more than the
+      K-repeat noise band (ablation_deltas passes flag True).
+  - metric: placement_conflict_rate
+    threshold: null
+    comparator: report
+    primary: false
+    description: >
+      v2-chosen vs rollup-chosen parent disagreement. Reported go/no-go for
+      production promotion; not a pass/fail gate in the offline run.
+eval: eval/
+context: |
+  Offline, tracked experiment; snapshot/measure only (no production wiring).
+  Precedent mirrored: ../edge-embeddings-worth-it/ (goal.yaml + harness/ + eval/ +
+  workspace/ + journal/ + README.md; compute_metrics(snapshot) -> [METRIC] k=v).
+  Catalog injected via in-process stub TypeRegistry (path A, default); never prod
+  Hermes, never prod Redis key. Default --replay from frozen fixtures ($0).
+  Stack (smoke/--live only): Sophia :47000, Hermes :17000, Neo4j :7687,
+  Milvus :19530. The offline run is NECESSARY-BUT-NOT-SUFFICIENT: cycle /
+  idempotency / dedup / residual-durability live in unrun write paths and are
+  gated by the BLOCKING R1 production integration test before promotion.
