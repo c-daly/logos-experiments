@@ -236,6 +236,14 @@ class NaiveLLMClient:
             raise ValueError(
                 f"naive_llm replay: unparseable frozen content: {content!r}"
             ) from exc
+        if not isinstance(data, dict):
+            # The LLM-response parse is an external input boundary in live
+            # mode: a non-object completion fails closed with a clear error,
+            # mirroring the /type-cluster 502 convention (SPEC 3.4).
+            raise ValueError(
+                "naive_llm: completion parsed to "
+                f"{type(data).__name__}, expected a JSON object"
+            )
         raw_name = data.get("name")
         if not isinstance(raw_name, str) or not raw_name.strip():
             raise ValueError("naive_llm replay: frozen response has no name")

@@ -222,6 +222,22 @@ def test_naive_llm_client_fails_closed():
     with pytest.raises(KeyError):
         client.post("/type-cluster", json={"members": [{"id": "u1", "name": "x"}]})
 
+
+def test_naive_llm_client_rejects_non_object_completion():
+    """A completion that parses to a non-object fails closed with a clear
+    error (the arm's analog of the /type-cluster 502 convention, SPEC 3.4)."""
+    content = json.dumps(["not", "an", "object"])
+    frozen = {"c1::0": {"choices": [{"message": {"content": content}}]}}
+    replayer = rx.FrozenLLMReplayer(frozen)
+    replayer.for_cluster("c1")
+    replayer.set_repeat(0)
+    client = ab.NaiveLLMClient(replayer)
+    with pytest.raises(ValueError, match="expected a JSON object"):
+        client.post(
+            "/type-cluster",
+            json={"members": [{"id": "u1", "name": "x"}], "request_id": "c1::0"},
+        )
+
     content = json.dumps({"root": "entity"})  # name missing
     frozen = {"c2::0": {"choices": [{"message": {"content": content}}]}}
     replayer2 = rx.FrozenLLMReplayer(frozen)
