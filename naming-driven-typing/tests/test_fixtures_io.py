@@ -217,6 +217,16 @@ def test_validate_catalog_rejects_non_str_uuid_in_by_norm() -> None:
         validate_catalog(bad)
 
 
+def test_validate_catalog_rejects_by_norm_uuid_absent_from_catalog() -> None:
+    bad = _good_catalog()
+    bad["by_norm"]["vehicle"] = ["t-veh1", "t-ghost"]  # t-ghost has no record
+    with pytest.raises(
+        CatalogFixtureError,
+        match=r"by_norm\[.vehicle.\] references uuid .t-ghost. absent from catalog_by_uuid",
+    ):
+        validate_catalog(bad)
+
+
 def test_catalog_freeze_load_asserts_vehicle_fragments(tmp_path: Path) -> None:
     path = tmp_path / "catalog.json"
     freeze_catalog(_good_catalog(), path)

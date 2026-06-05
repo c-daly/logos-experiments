@@ -149,6 +149,11 @@ def validate_catalog(catalog: dict[str, Any]) -> None:
                 raise CatalogFixtureError(
                     f"by_norm[{norm!r}][{k}] must be a str uuid (got {type(u).__name__})"
                 )
+            if u not in by_uuid:
+                raise CatalogFixtureError(
+                    f"by_norm[{norm!r}] references uuid {u!r} "
+                    f"absent from catalog_by_uuid"
+                )
     # The three realm roots present by is_root name-membership (SPEC §4.3).
     root_names = {
         rec.get("name")
