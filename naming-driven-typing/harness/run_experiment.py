@@ -109,3 +109,64 @@ class FrozenLLMReplayer:
         if key not in self._responses:
             raise KeyError(f"no frozen LLM response for {key!r}")
         return self._responses[key]
+
+
+def build_snapshot(
+    *,
+    cluster_results: list[dict[str, Any]],
+    catalog: dict[str, Any],
+    ablation: str,
+    model: str,
+    repeats: int,
+    catalog_mode: str,
+    roots_present: bool,
+    run_ts: str,
+) -> dict[str, Any]:
+    """Assemble the workspace/run_<ts>.json snapshot (input to T7 compute_metrics).
+
+    Label-free: no coherence labels, no root ground-truth -- only the raw output
+    and structural records. Any cluster with a repeat below full coverage is
+    named in ``coverage_flags`` so a clean partition rate is never misread.
+    """
+    coverage_flags = [
+        c["cluster_id"]
+        for c in cluster_results
+        if any(r.get("sample_coverage", 1.0) < 1.0 for r in c.get("repeats", []))
+    ]
+    return {
+        "experiment": "naming-driven-typing",
+        "label_free": True,
+        "run_ts": run_ts,
+        "model": model,
+        "ablation": ablation,
+        "repeats": repeats,
+        "catalog_mode": catalog_mode,
+        "roots_present": roots_present,
+        "catalog_size": len(catalog.get("catalog_by_uuid", {})),
+        "coverage_flags": coverage_flags,
+        "clusters": cluster_results,
+    }
+
+
+def assert_non_mutation(probe: dict[str, Any]) -> None:
+    """Post-run invariant (SPEC 6, non-mutation): the harness measured, not mutated.
+
+    - Neo4j type_definition count unchanged.
+    - Prod Redis key ``logos:ontology:types`` unchanged.
+    - Prod ``HERMES_URL`` never targeted (we drive Hermes in-process only).
+    Any breach is fail-closed.
+    """
+    before = probe["type_def_count_before"]
+    after = probe["type_def_count_after"]
+    if before != after:
+        raise NonMutationViolation(
+            f"type-def count changed: {before} -> {after} (graph was mutated)"
+        )
+    if probe["redis_key_before"] != probe["redis_key_after"]:
+        raise NonMutationViolation(
+            f"prod redis key {PROD_REDIS_KEY!r} changed (snapshot was overwritten)"
+        )
+    if probe.get("prod_hermes_targeted"):
+        raise NonMutationViolation(
+            f"prod Hermes was targeted ({PROD_HERMES_URL}); harness must run in-process"
+        )
