@@ -554,6 +554,12 @@ def _run_live(args: argparse.Namespace) -> int:
             registry_factory=arm_registry_factory(args.ablation),
             client_factory=arm_client_factory(args.ablation, transport),
         )
+    except NonMutationViolation as err:
+        # The probe fired and the snapshot was never persisted; surface the
+        # breach as the clean operator message rather than a traceback
+        # (PR #16 review). Exit 1: operational abort, not a gating refusal.
+        print(f"[harness] live run aborted: {err}", file=sys.stderr, flush=True)
+        return 1
     finally:
         m.generate_completion = prev_generate
 

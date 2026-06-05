@@ -474,14 +474,22 @@ def freeze_command(
     except LiveGateError as err:
         print(f"[freeze] {err}", file=sys.stderr, flush=True)
         return 2
-    meta = run_freeze(
-        clusters=clusters,
-        catalog=catalog,
-        send=live_llm_send(hermes_url, model=model),
-        fixtures_dir=Path(paths.fixtures_dir),
-        repeats=repeats,
-        hermes_gateway=hermes_url,
-    )
+    try:
+        meta = run_freeze(
+            clusters=clusters,
+            catalog=catalog,
+            send=live_llm_send(hermes_url, model=model),
+            fixtures_dir=Path(paths.fixtures_dir),
+            repeats=repeats,
+            hermes_gateway=hermes_url,
+        )
+    except FreezeError as err:
+        # Operational abort (gateway failure, schema rejection, ...): the
+        # partial dump is already on disk; surface the same clean operator
+        # message style as the gating paths (PR #16 review). Exit 1 keeps
+        # it distinct from the gating refusals (exit 2).
+        print(f"[freeze] {err}", file=sys.stderr, flush=True)
+        return 1
     snapshot_ids = ", ".join(meta["model_snapshot_ids"]) or "<none reported>"
     print(
         "[freeze] froze {calls} completions across {arms} arms; "

@@ -522,6 +522,43 @@ def test_main_live_missing_password_exits_cleanly(monkeypatch, capsys):
     assert "[harness]" in err
 
 
+def test_main_freeze_error_exits_cleanly(monkeypatch, capsys):
+    """A mid-freeze FreezeError must print the clean operator message and
+    exit 1, not escape as a traceback (PR #16 review)."""
+    from harness import run_experiment as rx
+
+    monkeypatch.setenv("LIVE_RUN", "1")
+    monkeypatch.setenv("HERMES_URL", "http://127.0.0.1:1")
+    monkeypatch.setattr(fz, "run_freeze", lambda **kw: (_ for _ in ()).throw(
+        fz.FreezeError("freeze aborted in arm 'full': gateway 502")
+    ))
+    assert rx.main(["--freeze", "--yes-i-will-pay"]) == 1
+    err = capsys.readouterr().err
+    assert "[freeze]" in err and "aborted in arm" in err
+
+
+def test_main_live_nonmutation_violation_exits_cleanly(monkeypatch, capsys):
+    """A probe breach must print the clean operator message and exit 1
+    (PR #16 review)."""
+    from harness import run_experiment as rx
+
+    monkeypatch.setenv("LIVE_RUN", "1")
+    monkeypatch.setenv("HERMES_URL", "http://127.0.0.1:1")
+    monkeypatch.setenv("NEO4J_PASSWORD", "x")
+    # _run_live imports these from harness.probe at call time; patch the
+    # source module so the lazy import resolves to the fakes.
+    import harness.probe as probe_mod
+
+    monkeypatch.setattr(probe_mod, "build_live_readers", lambda: object())
+    monkeypatch.setattr(probe_mod, "make_live_probe", lambda readers: lambda: {})
+    monkeypatch.setattr(rx, "run", lambda **kw: (_ for _ in ()).throw(
+        rx.NonMutationViolation("prod Redis key hash changed during the pass")
+    ))
+    assert rx.main(["--live", "--yes-i-will-pay"]) == 1
+    err = capsys.readouterr().err
+    assert "[harness] live run aborted" in err and "Redis key hash" in err
+
+
 def test_main_rejects_freeze_with_replay(_no_live_env):
     from harness import run_experiment as rx
 
