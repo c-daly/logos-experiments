@@ -208,6 +208,7 @@ def test_build_is_deterministic_twice_run():
     r2 = build_catalog(TYPE_DEFS, _counter, IS_A_EDGES, canonicalize=_fake_canonicalize)
     assert r1.catalog_by_uuid == r2.catalog_by_uuid
     assert r1.by_norm == r2.by_norm
+    assert r1.root_uuids == r2.root_uuids
 
 
 class _FakeClient:

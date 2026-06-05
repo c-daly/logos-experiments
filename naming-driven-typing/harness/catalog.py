@@ -131,10 +131,15 @@ def build_catalog(
         by_norm[norm] = sorted(by_norm[norm])
 
     # Roots present by name-membership, regardless of flags (\u00a74.3).
+    # Deterministic: smallest uuid wins same-name root ties — the same
+    # smallest-uuid rule by_norm disambiguation uses (sorted uuids,
+    # smallest first).
     root_uuids: dict[str, str] = {}
     for entry in catalog_by_uuid.values():
-        if entry["is_root"] and entry["name"] not in root_uuids:
-            root_uuids[entry["name"]] = entry["uuid"]
+        if entry["is_root"]:
+            current = root_uuids.get(entry["name"])
+            if current is None or entry["uuid"] < current:
+                root_uuids[entry["name"]] = entry["uuid"]
     missing = sorted(REALM_ROOTS - set(root_uuids))
     if missing:
         raise RootMissingError(
@@ -178,7 +183,7 @@ def build_catalog_from_client(
 
         canonicalize = _canonicalize
 
-    type_defs = client.get_all_type_definitions()
+    type_defs = client.get_all_type_definitions() or []
     name_by_uuid = {row["uuid"]: row["name"] for row in type_defs}
     is_a_edges = client.list_all_edges(relation_type="IS_A") or []
 
@@ -189,7 +194,7 @@ def build_catalog_from_client(
         if name_by_uuid.get(uuid) == "entity":
             return len(client.list_all_nodes(node_type="entity") or [])
         rows = client.get_nodes_by_type_uuid(uuid) or []
-        return len([n for n in rows if n and "uuid" in n])
+        return sum(1 for n in rows if n and "uuid" in n)
 
     return build_catalog(
         type_defs, member_counter, is_a_edges, canonicalize=canonicalize
