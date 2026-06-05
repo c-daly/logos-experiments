@@ -289,15 +289,16 @@ def simulate_cascade_response(
     T5 landed as ``simulate_cascade(groups, catalog_by_uuid, by_norm, ...) ->
     list[PlacementRecord]`` while the harness seam is ``(response, catalog, *,
     ablation) -> dict`` -- per the PLAN T6 integration note the harness is the
-    consumer, so the adaptation lives here. Only the 'full' arm is wired to
-    the real simulator; the other ablation arms are a follow-up (kept honest,
-    mirroring --live).
+    consumer, so the adaptation lives here. The full arm (A6) runs the T5
+    simulator directly; arms A1-A5 dispatch to
+    ``harness.ablations.simulate_arm_cascade`` (same seam shape, same
+    snapshot contract -- see the harness/ablations.py docstring for the
+    arm -> seam mapping).
     """
     if ablation != "full":
-        raise NotImplementedError(
-            f"ablation arm {ablation!r} is not wired to the T5 simulator yet; "
-            "only 'full' runs through the real cascade"
-        )
+        from harness.ablations import simulate_arm_cascade  # deferred import
+
+        return simulate_arm_cascade(response, catalog, ablation=ablation)
     from harness.cascade import simulate_cascade  # T5 (deferred import)
 
     records = simulate_cascade(
@@ -337,6 +338,8 @@ def run(
     limit: Optional[int] = None,
     model: str = "gpt-4.1",
     run_ts: Optional[str] = None,
+    registry_factory: Optional[Callable[[dict[str, Any]], Any]] = None,
+    client_factory: Optional[Callable[[Any], Any]] = None,
 ) -> Path:
     """Top-level orchestration (replay path). Returns the snapshot path.
 
@@ -345,6 +348,12 @@ def run(
     caller, and the catalog served by a StubTypeRegistry built from the frozen
     catalog (installed for the duration of the run, then restored). No
     graph/redis/hermes writes -- verified by ``assert_non_mutation``.
+
+    Ablation seams (SPEC 7.4): ``registry_factory`` swaps the stub registry
+    view served to /type-cluster (e.g. roots-only for no_graft) and
+    ``client_factory`` swaps the endpoint client itself (e.g. the
+    naive_llm prompt path that bypasses /type-cluster). Both default to the
+    full-arm wiring.
     """
     import hermes.main as m
     from fastapi.testclient import TestClient
@@ -362,11 +371,16 @@ def run(
         )
     )
 
-    client = TestClient(m.app)
+    client = (
+        client_factory(m.app) if client_factory is not None else TestClient(m.app)
+    )
 
     # In-process stub registry built from the frozen catalog -- /type-cluster's
     # catalog block never touches the prod Redis key. Restored afterwards.
-    stub_registry = StubTypeRegistry.from_catalog(catalog)
+    # An arm may narrow the served view (never the fixture) via
+    # ``registry_factory``.
+    make_registry = registry_factory or StubTypeRegistry.from_catalog
+    stub_registry = make_registry(catalog)
     prev_registry = m._type_registry
     m._type_registry = stub_registry
     try:
@@ -417,14 +431,17 @@ def run(
 def _build_replay_wiring(
     paths: HarnessPaths,
     model: str,  # reserved for --live wiring; part of the planned T6 signature
+    responses_file: str = "llm_responses.json",
 ) -> tuple[dict[str, Any], Callable[[], dict[str, Any]]]:
     """Build the --replay seams: frozen LLM responses + a no-op non-mutation probe.
 
     Replay never touches Neo4j/Redis/prod-Hermes, so the probe reports an
     unchanged, never-targeted reading. (--live wiring is a follow-up.)
+    Only the requested arm's fixture is read -- arms with their own frozen
+    file carry no hidden dependency on llm_responses.json (PR #14 review).
     """
     responses = json.loads(
-        (paths.fixtures_dir / "llm_responses.json").read_text(encoding="utf-8")
+        (paths.fixtures_dir / responses_file).read_text(encoding="utf-8")
     )
 
     def probe() -> dict[str, Any]:
@@ -470,7 +487,17 @@ def main(argv: Optional[list[str]] = None) -> int:
         raise NotImplementedError("--live wiring is a follow-up; use --replay")
 
     paths = HarnessPaths.default()
-    responses, probe = _build_replay_wiring(paths, args.model)
+
+    # Per-arm wiring (SPEC 7.4): frozen-response file, registry view, client.
+    from harness.ablations import (
+        arm_client_factory,
+        arm_registry_factory,
+        responses_filename,
+    )
+
+    responses, probe = _build_replay_wiring(
+        paths, args.model, responses_file=responses_filename(args.ablation)
+    )
     replayer = FrozenLLMReplayer(responses)
 
     import hermes.main as m
@@ -492,6 +519,8 @@ def main(argv: Optional[list[str]] = None) -> int:
         catalog_mode=args.catalog_mode,
         limit=args.limit,
         model=args.model,
+        registry_factory=arm_registry_factory(args.ablation),
+        client_factory=arm_client_factory(args.ablation, replayer),
     )
     print(f"[harness] snapshot -> {out_path}", flush=True)
     return 0
