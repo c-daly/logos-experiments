@@ -763,14 +763,57 @@ def _maintenance_config() -> Any:
 
 
 def _connect() -> Any:
+    # Fail loudly on a missing credential (same rule as the live probe and
+    # reseed entry points on c-daly/logos-experiments#13): never fall back
+    # to a default password on a live-graph writer.
+    password = os.environ.get("NEO4J_PASSWORD")
+    if not password:
+        raise A0LiveGateError(
+            "NEO4J_PASSWORD must be set explicitly for the A0 live driver "
+            "(refusing a default credential)"
+        )
     from sophia.hcg_client import HCGClient
 
     uri = os.environ.get("NEO4J_URI", "bolt://localhost:7687")
     user = os.environ.get("NEO4J_USER", "neo4j")
-    password = os.environ.get("NEO4J_PASSWORD", "logosdev")
     client = HCGClient(neo4j_uri=uri, neo4j_username=user, neo4j_password=password)
     client._execute_query("RETURN 1 AS ok", {})  # connectivity probe
     return client
+
+
+def _ensure_root(hcg: Any) -> bool:
+    """Create the shared realm root if absent; True when this run created it.
+
+    Hoisted OUT of _seed_graph so run_live learns the flag before any
+    seeding write can fail: a mid-seed exception must still tear the root
+    down in the finally (PR #17 review, P1).
+    """
+    if hcg.get_node("type_entity") is not None:
+        return False
+    hcg.add_node(
+        name="entity",
+        node_type="type_definition",
+        uuid="type_entity",
+        properties={"ancestors": ["root", "node"]},
+        source=_ROOT_MARKER,
+    )
+    return True
+
+
+def _close_quietly(hcg: Any) -> None:
+    """Close the client without masking an in-flight teardown signal.
+
+    A close() failure must never replace ZeroResidueViolation (or any other
+    teardown diagnostic) as the propagating exception (PR #17 review).
+    """
+    try:
+        hcg.close()
+    except Exception as err:
+        print(
+            f"[a0] hcg.close() failed during cleanup: {err}",
+            file=sys.stderr,
+            flush=True,
+        )
 
 
 def _outside_type_defs(hcg: Any, ns: str) -> dict[str, list[str]]:
@@ -797,16 +840,6 @@ def _seed_graph(
 ) -> dict[str, Any]:
     """Seed the disposable namespaced inputs (module docstring, Seams)."""
     source = f"a0-{ns}"
-
-    created_root = hcg.get_node("type_entity") is None
-    if created_root:
-        hcg.add_node(
-            name="entity",
-            node_type="type_definition",
-            uuid="type_entity",
-            properties={"ancestors": ["root", "node"]},
-            source=_ROOT_MARKER,
-        )
 
     published: dict[str, dict] = {}
     for row in published_rows(catalog, ns):
@@ -868,7 +901,6 @@ def _seed_graph(
     return {
         "seed_uuid": seed_uuid,
         "published": published,
-        "created_root": created_root,
     }
 
 
@@ -906,7 +938,11 @@ def _run_pipeline(
         """
 
         def _load_type_layer(self) -> list[dict]:
-            return [r for r in super()._load_type_layer() if ns in r["uuid"]]
+            return [
+                r
+                for r in super()._load_type_layer()
+                if ns in (r.get("uuid") or "")
+            ]
 
     rollup = NamespacedRollup(
         config=config,
@@ -1021,10 +1057,12 @@ def run_live(out_dir: Path = WORKSPACE, fixtures_dir: Path = FIXTURES) -> Path:
     milvus = FakeMilvus()
     hcg = _connect()
     snapshot: Optional[dict[str, Any]] = None
-    created_root = False
+    # Learn the flag before any seeding write can fail: _seed_graph used to
+    # create the root internally, which orphaned type_entity when a later
+    # seeding write raised (PR #17 review, P1).
+    created_root = _ensure_root(hcg)
     try:
         seeded = _seed_graph(hcg, milvus, ns, clusters, catalog, plan)
-        created_root = bool(seeded["created_root"])
         outside_before = _outside_type_defs(hcg, ns)
         namer = make_axis_namer(axis_labels(plan, ns))
         _run_pipeline(hcg, milvus, ns, seeded["seed_uuid"], namer)
@@ -1050,7 +1088,7 @@ def run_live(out_dir: Path = WORKSPACE, fixtures_dir: Path = FIXTURES) -> Path:
         try:
             _teardown(hcg, ns, created_root)
         finally:
-            hcg.close()
+            _close_quietly(hcg)
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     run_ts_value = str(snapshot["run_ts"])
@@ -1076,8 +1114,8 @@ def main(argv: Optional[list[str]] = None) -> int:
         print(
             "[a0] refusing to run: set A0_LIVE=1 explicitly. The A0 baseline "
             "seeds and tears down a DISPOSABLE namespaced subgraph on the "
-            "live Neo4j (NEO4J_URI / NEO4J_USER / NEO4J_PASSWORD; defaults "
-            "bolt://localhost:7687 / neo4j / logosdev).",
+            "live Neo4j (NEO4J_URI / NEO4J_USER default bolt://localhost:7687 "
+            "/ neo4j; NEO4J_PASSWORD must be set explicitly).",
             file=sys.stderr,
         )
         return 2

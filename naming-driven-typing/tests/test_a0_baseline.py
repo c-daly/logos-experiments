@@ -651,3 +651,45 @@ def test_outside_type_defs_skips_uuidless_records():
 
     out = a0._outside_type_defs(_Defs(), "ns-token")
     assert out == {"keep-1": ["root"]}
+
+
+class _RootProbeHCG:
+    def __init__(self, existing):
+        self._existing = existing
+        self.added = []
+
+    def get_node(self, uuid):
+        return self._existing
+
+    def add_node(self, **kwargs):
+        self.added.append(kwargs)
+        return kwargs.get("uuid")
+
+
+def test_ensure_root_creates_when_missing():
+    hcg = _RootProbeHCG(existing=None)
+    assert a0._ensure_root(hcg) is True
+    assert [n["uuid"] for n in hcg.added] == ["type_entity"]
+
+
+def test_ensure_root_noops_when_present():
+    hcg = _RootProbeHCG(existing={"uuid": "type_entity"})
+    assert a0._ensure_root(hcg) is False
+    assert hcg.added == []
+
+
+def test_close_quietly_suppresses_close_errors(capsys):
+    """A close() failure must not mask the teardown diagnostic (PR #17)."""
+
+    class _BadClose:
+        def close(self):
+            raise ConnectionError("socket gone")
+
+    a0._close_quietly(_BadClose())
+    assert "close() failed" in capsys.readouterr().err
+
+
+def test_connect_requires_explicit_password(monkeypatch):
+    monkeypatch.delenv("NEO4J_PASSWORD", raising=False)
+    with pytest.raises(a0.A0LiveGateError, match="NEO4J_PASSWORD"):
+        a0._connect()
