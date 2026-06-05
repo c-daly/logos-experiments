@@ -109,9 +109,45 @@ def test_residual_fraction_and_bloat():
 def test_raw_partition_violation_rate():
     snap = _load("run_synthetic.json")
     m = compute_metrics(snap)
-    # 6 repeats total across 3 clusters; raw_partition_ok false in exactly 1
-    # (c_aircraft repeat 1) => violation rate 1/6.
+    # Per repeat over 3 clusters: repeat 0 => 0/3 violations, repeat 1 => 1/3
+    # (c_aircraft) => rates [0, 1/3], mean 1/6. Matches the old globally
+    # pooled value because every repeat has the same cell count.
     assert round(m["raw_partition_violation_rate"]["mean"], 4) == round(1 / 6, 4)
+
+
+def test_raw_partition_violation_rate_aggregated_per_repeat():
+    # Regression: this PRIMARY metric used to be pooled globally, reaching
+    # aggregate_repeats as a single value (n=1, stdev=0) and defeating the
+    # K-repeat CI-lower-bound gate. Differing per-repeat rates must surface
+    # as n == K with real variance.
+    snap = {
+        "repeats": 2,
+        "clusters": [
+            {
+                "cluster_id": "c_a",
+                "total_members": 2,
+                "sample_coverage": 1.0,
+                "repeats": [
+                    {"raw_partition_ok": True, "residual_ids": [], "groups": []},
+                    {"raw_partition_ok": False, "residual_ids": [], "groups": []},
+                ],
+            },
+            {
+                "cluster_id": "c_b",
+                "total_members": 2,
+                "sample_coverage": 1.0,
+                "repeats": [
+                    {"raw_partition_ok": True, "residual_ids": [], "groups": []},
+                    {"raw_partition_ok": True, "residual_ids": [], "groups": []},
+                ],
+            },
+        ],
+    }
+    agg = compute_metrics(snap)["raw_partition_violation_rate"]
+    # repeat 0: 0/2 violations => 0.0; repeat 1: 1/2 => 0.5.
+    assert agg["n"] == 2
+    assert agg["mean"] == 0.25
+    assert agg["stdev"] == 0.25  # pstdev([0.0, 0.5]) -- real variance, not 0
 
 
 def test_root_distribution_descriptive():

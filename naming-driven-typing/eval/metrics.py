@@ -20,8 +20,8 @@ Metrics (all aggregated mean +/- stdev over the K repeats; cv emitted):
                                  (canonical_merged_into set). Reported SEPARATELY,
                                  NOT a semantic claim.
   residual_fraction           -- residual member ids / total members.
-  raw_partition_violation_rate-- fraction of (cluster, repeat) with raw_partition_ok False.
-                                 The RAW LLM fidelity signal.
+  raw_partition_violation_rate-- per repeat, fraction of clusters with
+                                 raw_partition_ok False. The RAW LLM fidelity signal.
   hallucinated_target_rate    -- fraction of reuse/graft groups whose claimed target
                                  uuid is null/unresolved.
   placement_conflict_rate     -- fraction of grafted groups whose v2 parent differs
@@ -134,8 +134,9 @@ def compute_metrics(snapshot: dict[str, Any]) -> dict[str, Any]:
     conflict_per_r: list[float] = []
     root_counts_per_r: list[Counter] = []
 
-    # raw-partition violations are counted over (cluster, repeat) cells.
-    raw_ok_cells: list[bool] = []
+    # raw-partition violations are collected per repeat so the violation rate
+    # aggregates over the K repeats like every other metric.
+    raw_ok_cells: list[list[bool]] = [[] for _ in range(repeats_k)]
     sample_coverages: list[float] = [
         float(c.get("sample_coverage", 1.0)) for c in clusters
     ]
@@ -158,7 +159,7 @@ def compute_metrics(snapshot: dict[str, Any]) -> dict[str, Any]:
             if r >= len(rep_list):
                 continue
             rep = rep_list[r]
-            raw_ok_cells.append(bool(rep.get("raw_partition_ok", True)))
+            raw_ok_cells[r].append(bool(rep.get("raw_partition_ok", True)))
             residual_ids.update(rep.get("residual_ids", []))
 
             for g in rep.get("groups", []):
@@ -199,11 +200,10 @@ def compute_metrics(snapshot: dict[str, Any]) -> dict[str, Any]:
         )
         root_counts_per_r.append(roots)
 
-    raw_violation_per_r = [0.0]
-    if raw_ok_cells:
-        raw_violation_per_r = [
-            sum(1 for ok in raw_ok_cells if not ok) / len(raw_ok_cells)
-        ]
+    raw_violation_per_r = [
+        sum(1 for ok in cells if not ok) / len(cells) if cells else 0.0
+        for cells in raw_ok_cells
+    ]
 
     # Descriptive root distribution: mean count per terminal root over repeats.
     root_sums: dict[str, float] = defaultdict(float)
