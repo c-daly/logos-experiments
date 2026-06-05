@@ -593,12 +593,20 @@ def test_cascade_adapter_wraps_t5_simulator():
     json.dumps(out)  # snapshot-serializable
 
 
-def test_cascade_adapter_unwired_ablation_raises():
-    with pytest.raises(NotImplementedError, match="no_gate"):
+def test_cascade_adapter_dispatches_ablation_arms():
+    # A1-A5 are wired (issue #11): the seam dispatches to
+    # harness.ablations.simulate_arm_cascade instead of raising.
+    out = rx.simulate_cascade_response(
+        {"groups": [], "residual_ids": ["u9"]},
+        {"catalog_by_uuid": {}, "by_norm": {}},
+        ablation="no_gate",
+    )
+    assert out == {"branches": [], "residual_ids": ["u9"]}
+    with pytest.raises(ValueError, match="unknown ablation arm"):
         rx.simulate_cascade_response(
             {"groups": []},
             {"catalog_by_uuid": {}, "by_norm": {}},
-            ablation="no_gate",
+            ablation="bogus",
         )
 
 
