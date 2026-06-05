@@ -504,7 +504,10 @@ def test_main_cli_defaults_and_invokes_run(monkeypatch, tmp_path):
     monkeypatch.setattr(
         rx,
         "_build_replay_wiring",
-        lambda paths, model: ({}, lambda: {"prod_hermes_targeted": False}),
+        lambda paths, model, responses_file="llm_responses.json": (
+            {},
+            lambda: {"prod_hermes_targeted": False},
+        ),
     )
 
     rc = rx.main(["--replay", "--repeats", "5", "--ablation", "full", "--limit", "2"])

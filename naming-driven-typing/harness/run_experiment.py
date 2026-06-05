@@ -431,14 +431,17 @@ def run(
 def _build_replay_wiring(
     paths: HarnessPaths,
     model: str,  # reserved for --live wiring; part of the planned T6 signature
+    responses_file: str = "llm_responses.json",
 ) -> tuple[dict[str, Any], Callable[[], dict[str, Any]]]:
     """Build the --replay seams: frozen LLM responses + a no-op non-mutation probe.
 
     Replay never touches Neo4j/Redis/prod-Hermes, so the probe reports an
     unchanged, never-targeted reading. (--live wiring is a follow-up.)
+    Only the requested arm's fixture is read -- arms with their own frozen
+    file carry no hidden dependency on llm_responses.json (PR #14 review).
     """
     responses = json.loads(
-        (paths.fixtures_dir / "llm_responses.json").read_text(encoding="utf-8")
+        (paths.fixtures_dir / responses_file).read_text(encoding="utf-8")
     )
 
     def probe() -> dict[str, Any]:
@@ -484,7 +487,6 @@ def main(argv: Optional[list[str]] = None) -> int:
         raise NotImplementedError("--live wiring is a follow-up; use --replay")
 
     paths = HarnessPaths.default()
-    responses, probe = _build_replay_wiring(paths, args.model)
 
     # Per-arm wiring (SPEC 7.4): frozen-response file, registry view, client.
     from harness.ablations import (
@@ -493,11 +495,9 @@ def main(argv: Optional[list[str]] = None) -> int:
         responses_filename,
     )
 
-    arm_file = responses_filename(args.ablation)
-    if arm_file != "llm_responses.json":
-        responses = json.loads(
-            (paths.fixtures_dir / arm_file).read_text(encoding="utf-8")
-        )
+    responses, probe = _build_replay_wiring(
+        paths, args.model, responses_file=responses_filename(args.ablation)
+    )
     replayer = FrozenLLMReplayer(responses)
 
     import hermes.main as m

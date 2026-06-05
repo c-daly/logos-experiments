@@ -219,6 +219,10 @@ class NaiveLLMClient:
         ]
 
     def post(self, path: str, json: Any = None) -> _NaiveResponse:
+        if path != "/type-cluster":
+            # Duck-typing the TestClient surface must stay fail-closed: a
+            # mistyped path gets a loud error, not a naive-LLM response.
+            raise ValueError(f"NaiveLLMClient only serves /type-cluster, got {path!r}")
         payload: dict[str, Any] = json or {}
         members = list(payload.get("members", []))
         completion = asyncio.run(

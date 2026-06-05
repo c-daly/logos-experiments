@@ -223,6 +223,14 @@ def test_naive_llm_client_fails_closed():
         client.post("/type-cluster", json={"members": [{"id": "u1", "name": "x"}]})
 
 
+def test_naive_llm_client_rejects_unknown_path():
+    """Duck-typing the TestClient surface stays fail-closed on a typo path."""
+    replayer = rx.FrozenLLMReplayer({})
+    client = ab.NaiveLLMClient(replayer)
+    with pytest.raises(ValueError, match="only serves /type-cluster"):
+        client.post("/type_cluster", json={"members": []})
+
+
 def test_naive_llm_client_rejects_non_object_completion():
     """A completion that parses to a non-object fails closed with a clear
     error (the arm's analog of the /type-cluster 502 convention, SPEC 3.4)."""
