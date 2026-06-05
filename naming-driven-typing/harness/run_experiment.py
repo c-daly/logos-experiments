@@ -403,17 +403,20 @@ def run(
         run_ts=run_ts,
     )
 
+    # Non-mutation gate fires BEFORE persistence: a NonMutationViolation must
+    # never leave a poisoned run_<ts>.json on disk for T7 consumers.
+    assert_non_mutation(nonmutation_probe())
+
     out_path = paths.workspace_dir / f"run_{run_ts}.json"
     out_path.write_text(
         json.dumps(snapshot, indent=2, ensure_ascii=False), encoding="utf-8"
     )
-
-    assert_non_mutation(nonmutation_probe())
     return out_path
 
 
 def _build_replay_wiring(
-    paths: HarnessPaths, model: str
+    paths: HarnessPaths,
+    model: str,  # reserved for --live wiring; part of the planned T6 signature
 ) -> tuple[dict[str, Any], Callable[[], dict[str, Any]]]:
     """Build the --replay seams: frozen LLM responses + a no-op non-mutation probe.
 

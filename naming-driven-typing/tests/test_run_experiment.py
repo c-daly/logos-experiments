@@ -349,6 +349,86 @@ def test_run_end_to_end_replay_writes_snapshot(tmp_path, monkeypatch):
     assert snap["coverage_flags"] == []  # whole cluster sent every repeat
 
 
+def test_run_violation_leaves_no_snapshot_on_disk(tmp_path, monkeypatch):
+    """NonMutationViolation fires BEFORE persistence: no run_*.json on disk."""
+    import hermes.main as m
+
+    fixtures = tmp_path / "fixtures"
+    workspace = tmp_path / "workspace"
+    fixtures.mkdir()
+    clusters = [
+        {
+            "cluster_id": "cX",
+            "current_name": "vehicle",
+            "members": [{"id": "m1", "name": "boat"}, {"id": "m2", "name": "car"}],
+        },
+    ]
+    (fixtures / "clusters.json").write_text(json.dumps(clusters), encoding="utf-8")
+    (fixtures / "catalog.json").write_text(
+        json.dumps(
+            {
+                "catalog_by_uuid": {"u1": {"name": "vehicle"}},
+                "by_norm": {"vehicle": ["u1"]},
+                "roots_present": True,
+            }
+        ),
+        encoding="utf-8",
+    )
+    llm = {
+        "cX::0": _content(
+            {
+                "groups": [
+                    {
+                        "assign_to": "NEW",
+                        "name": "vehicle",
+                        "chain": ["vehicle", "entity"],
+                        "member_ids": ["m1", "m2"],
+                    }
+                ],
+                "residual_ids": [],
+            }
+        ),
+    }
+    (fixtures / "llm_responses.json").write_text(json.dumps(llm), encoding="utf-8")
+
+    paths = rx.HarnessPaths(fixtures_dir=fixtures, workspace_dir=workspace)
+
+    def catalog_loader(p):
+        return json.loads(
+            (p.fixtures_dir / "catalog.json").read_text(encoding="utf-8")
+        )
+
+    # Probe reports a graph mutation -- the run must fail loudly.
+    def tripping_probe():
+        return {
+            "type_def_count_before": 7,
+            "type_def_count_after": 8,
+            "redis_key_before": "x",
+            "redis_key_after": "x",
+            "prod_hermes_targeted": False,
+        }
+
+    replayer = rx.FrozenLLMReplayer(llm)
+    monkeypatch.setattr(m, "generate_completion", replayer)
+
+    with pytest.raises(rx.NonMutationViolation, match="type-def count"):
+        rx.run(
+            paths=paths,
+            catalog_loader=catalog_loader,
+            cascade_fn=_fake_cascade,
+            llm_replayer=replayer,
+            nonmutation_probe=tripping_probe,
+            ablation="full",
+            repeats=1,
+            catalog_mode="in_process",
+            model="gpt-4.1",
+            run_ts="20260605T020202Z",
+        )
+
+    # The violation fired before the write: no poisoned snapshot for T7.
+    assert not list(workspace.glob("run_*.json"))
+
+
 def test_run_limit_truncates_clusters(tmp_path, monkeypatch):
     import hermes.main as m
 
