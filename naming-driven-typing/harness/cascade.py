@@ -14,7 +14,7 @@ can assert a twice-run identical proxy (SPEC §5.11).
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Optional
 
 # Shared canonicalize() from hermes.canonical (T1). Fall back to a minimal
@@ -50,23 +50,24 @@ VALID_TERMINAL_ROOTS: frozenset[str] = frozenset({"entity", "concept", "process"
 
 @dataclass(frozen=True)
 class PlacementRecord:
-    """One group's simulated placement. Frozen for determinism comparisons."""
+    """One group's simulated placement. Frozen, with tuple
+    collection fields, so records are deeply immutable (determinism)."""
 
     cluster_id: str
     branch: str  # G1_REUSE | G2_GRAFT | G3_ROOT | RESIDUAL
     assign_to: str
     name: str
-    chain: list[str]
-    member_ids: list[str]
+    chain: tuple[str, ...]
+    member_ids: tuple[str, ...]
     resolved_parent_uuid: Optional[str]
     resolved_parent_name: Optional[str]
     covering_depth: int
     floor_ok: bool
     ceiling_ok: bool
     over_specified: bool
-    evicted_ids: list[str] = field(default_factory=list)
-    residual_ids: list[str] = field(default_factory=list)
-    events: list[str] = field(default_factory=list)
+    evicted_ids: tuple[str, ...] = ()
+    residual_ids: tuple[str, ...] = ()
+    events: tuple[str, ...] = ()
     self_reported: bool = True
 
 
@@ -200,17 +201,17 @@ def simulate_group(
             branch="RESIDUAL",
             assign_to=assign_to,
             name=name,
-            chain=chain,
-            member_ids=member_ids,
+            chain=tuple(chain),
+            member_ids=tuple(member_ids),
             resolved_parent_uuid=None,
             resolved_parent_name=None,
             covering_depth=covering_depth,
             floor_ok=f_ok,
             ceiling_ok=c_ok,
             over_specified=over_specified,
-            evicted_ids=[],
-            residual_ids=list(member_ids),
-            events=events + extra_events,
+            evicted_ids=(),
+            residual_ids=tuple(member_ids),
+            events=tuple(events + extra_events),
         )
 
     # FLOOR / CEILING gates first: a gated group never mints (§5.5).
@@ -233,17 +234,17 @@ def simulate_group(
                     branch="G1_REUSE",
                     assign_to=assign_to,
                     name=name,
-                    chain=chain,
-                    member_ids=member_ids,
+                    chain=tuple(chain),
+                    member_ids=tuple(member_ids),
                     resolved_parent_uuid=assign_to,
                     resolved_parent_name=catalog_by_uuid[assign_to]["name"],
                     covering_depth=covering_depth,
                     floor_ok=f_ok,
                     ceiling_ok=c_ok,
                     over_specified=over_specified,
-                    evicted_ids=[],
-                    residual_ids=[],
-                    events=events,
+                    evicted_ids=(),
+                    residual_ids=(),
+                    events=tuple(events),
                 )
         else:
             events.append(f"UNRESOLVED_ASSIGN_TO:{assign_to}")
@@ -277,17 +278,17 @@ def simulate_group(
         branch=branch,
         assign_to=assign_to,
         name=name,
-        chain=chain,
-        member_ids=kept,
+        chain=tuple(chain),
+        member_ids=tuple(kept),
         resolved_parent_uuid=parent_uuid,
         resolved_parent_name=parent_name,
         covering_depth=covering_depth,
         floor_ok=f_ok,
         ceiling_ok=c_ok,
         over_specified=over_specified,
-        evicted_ids=evicted,
-        residual_ids=evicted,
-        events=events,
+        evicted_ids=tuple(evicted),
+        residual_ids=tuple(evicted),
+        events=tuple(events),
     )
 
 
@@ -303,9 +304,11 @@ def simulate_cascade(
     """Run the cascade over a full /type-cluster response (SPEC §5.1, §5.12).
 
     Freeze-snapshot guard: a type minted during this pass is NOT a graft target
-    in the same pass. We derive the set of names minted this pass from the
-    groups that mint (assign_to == NEW or unresolvable), so G2 resolution never
-    grafts onto a sibling minted in the same run. Deterministic: pure function
+    in the same pass. Two-pass derivation: FLOOR/CEILING verdicts depend only
+    on (chain, name), never on the minted set, so gates are evaluated first and
+    minted is built ONLY from groups that pass them AND mint (assign_to == NEW
+    or unresolvable). A gated-out group never mints (SPEC 5.5, 5.12), so its
+    name cannot block sibling graft targets. Deterministic: pure function
     of (groups, catalog), so a twice-run proxy is identical (§5.11).
     """
     input_ids = {
@@ -316,6 +319,13 @@ def simulate_cascade(
     if minted_names_this_pass is None:
         minted: set[str] = set()
         for g in groups:
+            # Gates first (SPEC 5.5): a FLOOR/CEILING-gated group routes to
+            # RESIDUAL and never mints, so its name must not block sibling
+            # graft targets (SPEC 5.12).
+            if not floor_ok(list(g.get("chain", [])), min_depth=min_depth):
+                continue
+            if ceiling_violation(str(g.get("name", ""))):
+                continue
             at = str(g.get("assign_to", "NEW"))
             mints = at == "NEW" or at not in catalog_by_uuid
             if mints:

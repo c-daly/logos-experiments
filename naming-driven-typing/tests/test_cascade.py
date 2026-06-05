@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+import dataclasses
+
+import pytest
+
 from harness.cascade import (
     EVICT_LEVEL_DROP,
     MAX_WORDS,
@@ -100,7 +104,7 @@ def test_g1_reuse_published_uuid(catalog_by_uuid, by_norm):
     rec = simulate_group(group, {"m1", "m2"}, catalog_by_uuid, by_norm)
     assert rec.branch == "G1_REUSE"
     assert rec.resolved_parent_uuid == "u-car"
-    assert rec.residual_ids == []
+    assert rec.residual_ids == ()
 
 
 def test_g1_assign_to_protected_root_coerced_to_graft(catalog_by_uuid, by_norm):
@@ -236,6 +240,37 @@ def test_minted_this_pass_not_a_graft_target(catalog_by_uuid, by_norm):
     assert b.resolved_parent_uuid == "u-car"
 
 
+def test_gated_out_group_does_not_block_sibling_graft_target(
+    catalog_by_uuid, by_norm
+):
+    # SPEC 5.12 regression: a FLOOR-gated group never mints, so its name must
+    # NOT enter the minted-this-pass set and freeze-skip the PUBLISHED graft
+    # target of a sibling. Group A (FLOOR violation -> RESIDUAL) is named
+    # "car" -- also a published catalog node (u-car). Group B grafts under
+    # "car"; gated-out A must leave the resolution of B unaffected.
+    groups = [
+        {
+            "assign_to": "NEW",
+            "name": "car",
+            "chain": ["car", "entity"],  # covering_depth 1 < MIN_DEPTH
+            "member_ids": ["a1"],
+        },
+        {
+            "assign_to": "NEW",
+            "name": "sedan",
+            "chain": ["sedan", "car", "vehicle", "entity"],
+            "member_ids": ["b1"],
+        },
+    ]
+    records = simulate_cascade(groups, catalog_by_uuid, by_norm)
+    a = next(r for r in records if r.name == "car")
+    b = next(r for r in records if r.name == "sedan")
+    assert a.branch == "RESIDUAL"
+    assert b.branch == "G2_GRAFT"
+    assert b.resolved_parent_uuid == "u-car"
+    assert not any(e.startswith("FREEZE_SKIP:car") for e in b.events)
+
+
 # ---- eviction proxy (§5.14) --------------------------------------------
 
 def test_eviction_proxy_conservative_keeps_all(catalog_by_uuid, by_norm):
@@ -248,7 +283,7 @@ def test_eviction_proxy_conservative_keeps_all(catalog_by_uuid, by_norm):
         "member_ids": ["m1", "m2", "m3"],
     }
     rec = simulate_group(group, {"m1", "m2", "m3"}, catalog_by_uuid, by_norm)
-    assert rec.evicted_ids == []
+    assert rec.evicted_ids == ()
 
 
 # ---- total partition ----------------------------------------------------
@@ -311,10 +346,12 @@ def test_determinism_proxy_twice_run_identical(catalog_by_uuid, by_norm):
     ]
     run1 = simulate_cascade(groups, catalog_by_uuid, by_norm)
     run2 = simulate_cascade(groups, catalog_by_uuid, by_norm)
-    key = lambda recs: [
-        (r.cluster_id, r.branch, r.resolved_parent_uuid, tuple(r.residual_ids))
-        for r in recs
-    ]
+    def key(recs):
+        return [
+            (r.cluster_id, r.branch, r.resolved_parent_uuid, tuple(r.residual_ids))
+            for r in recs
+        ]
+
     assert key(run1) == key(run2)
 
 
@@ -327,5 +364,11 @@ def test_placement_record_is_frozen(catalog_by_uuid, by_norm):
     }
     rec = simulate_group(group, {"m1"}, catalog_by_uuid, by_norm)
     assert isinstance(rec, PlacementRecord)
-    import dataclasses
-    assert dataclasses.is_dataclass(rec)
+    with pytest.raises(dataclasses.FrozenInstanceError):
+        rec.branch = "G3_ROOT"  # type: ignore[misc]
+    # deep immutability: collection fields are tuples, not lists
+    assert isinstance(rec.chain, tuple)
+    assert isinstance(rec.member_ids, tuple)
+    assert isinstance(rec.evicted_ids, tuple)
+    assert isinstance(rec.residual_ids, tuple)
+    assert isinstance(rec.events, tuple)
