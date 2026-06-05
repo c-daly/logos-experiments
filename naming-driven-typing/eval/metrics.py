@@ -115,7 +115,10 @@ def ablation_deltas(
 # SPEC SS7.4 ablation arm identifiers, keyed by harness arm name. ``full`` is
 # A6 (full v2); every delta is full-vs-arm (see ``ablation_deltas``).
 _ABLATION_ARM_IDS = {
-    "clustering_baseline": "A0",
+    # A0 is the measured rollup baseline (harness/a0_baseline.py, #12); the
+    # snapshot ablation field is the arm key, so the criterion keys read
+    # ablation_A6_beats_A0_<metric>.
+    "rollup_baseline": "A0",
     "naive_llm": "A1",
     "no_reuse": "A2",
     "no_graft": "A3",
