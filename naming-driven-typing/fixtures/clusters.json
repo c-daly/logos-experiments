@@ -1,0 +1,58 @@
+{
+  "clusters": [
+    {
+      "cluster_id": "0",
+      "current_name": "entity",
+      "members": [
+        {
+          "id": "u1",
+          "name": "cheetah"
+        },
+        {
+          "id": "u2",
+          "name": "narwhal"
+        },
+        {
+          "id": "u3",
+          "name": "grizzly bear"
+        }
+      ],
+      "sample_coverage": 1.0
+    },
+    {
+      "cluster_id": "1",
+      "current_name": "entity",
+      "members": [
+        {
+          "id": "u4",
+          "name": "sedan"
+        },
+        {
+          "id": "u5",
+          "name": "hatchback"
+        },
+        {
+          "id": "u6",
+          "name": "motorcycle"
+        }
+      ],
+      "sample_coverage": 1.0
+    },
+    {
+      "cluster_id": "2",
+      "current_name": "entity",
+      "members": [
+        {
+          "id": "u7",
+          "name": "violin"
+        },
+        {
+          "id": "u8",
+          "name": "trumpet"
+        }
+      ],
+      "sample_coverage": 1.0
+    }
+  ],
+  "version": "1"
+}
