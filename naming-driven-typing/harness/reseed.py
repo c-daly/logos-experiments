@@ -311,15 +311,15 @@ def reseed_and_build(
         variance_threshold=0.0,
     )
 
-    # find_emergent_clusters returns objects with .label/.members[{uuid,name}];
-    # normalize to dicts the pure mapper expects.
+    # EmergentCluster carries only .members; the label is positional (the
+    # edge harness does the same enumerate -- #18, found live).
     node_cluster_dicts = [
         {
-            "label": c.label,
+            "label": i,
             "current_name": "entity",
             "members": [{"uuid": m.uuid, "name": m.name} for m in c.members],
         }
-        for c in raw_clusters
+        for i, c in enumerate(raw_clusters)
     ]
     clusters = clusters_from_node_members(node_cluster_dicts)
     # build_catalog_from_client returns a CatalogResult dataclass; the freeze
