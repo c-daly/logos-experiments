@@ -1,0 +1,74 @@
+{
+  "0::0": {
+    "choices": [
+      {
+        "message": {
+          "content": "{\n  \"groups\": [\n    {\n      \"assign_to\": \"t_0012\",\n      \"name\": \"process\",\n      \"chain\": [\"dynamic process\", \"process\", \"entity\"],\n      \"member_ids\": [\"1fada0e2-ef91-4a99-89af-46cb3de1757c\"],\n      \"confidence\": 0.95,\n      \"description\": \"A process characterized by change or activity over time.\"\n    },\n    {\n      \"assign_to\": \"t_0012\",\n      \"name\": \"process\",\n      \"chain\": [\"new and complex function\", \"process\", \"entity\"],\n      \"member_ids\": [\"53d5c48f-fe44-43dc-bf8a-16594b1e5419\"],\n      \"confidence\": 0.8,\n      \"description\": \"A process involving novel and intricate operations or roles.\"\n    }\n  ],\n  \"residual_ids\": []\n}"
+        }
+      }
+    ]
+  },
+  "0::1": {
+    "choices": [
+      {
+        "message": {
+          "content": "{\n  \"groups\": [\n    {\n      \"assign_to\": \"t_0012\",\n      \"name\": \"process\",\n      \"chain\": [\"dynamic process\", \"process\", \"entity\"],\n      \"member_ids\": [\"1fada0e2-ef91-4a99-89af-46cb3de1757c\"],\n      \"confidence\": 0.9,\n      \"description\": \"A process characterized by change or activity over time.\"\n    },\n    {\n      \"assign_to\": \"t_0012\",\n      \"name\": \"process\",\n      \"chain\": [\"new and complex function\", \"process\", \"entity\"],\n      \"member_ids\": [\"53d5c48f-fe44-43dc-bf8a-16594b1e5419\"],\n      \"confidence\": 0.7,\n      \"description\": \"A process involving novel and intricate operations or roles.\"\n    }\n  ],\n  \"residual_ids\": []\n}"
+        }
+      }
+    ]
+  },
+  "0::2": {
+    "choices": [
+      {
+        "message": {
+          "content": "{\n  \"groups\": [\n    {\n      \"assign_to\": \"t_0012\",\n      \"name\": \"process\",\n      \"chain\": [\"dynamic process\", \"process\", \"entity\"],\n      \"member_ids\": [\"1fada0e2-ef91-4a99-89af-46cb3de1757c\"],\n      \"confidence\": 0.9,\n      \"description\": \"A process characterized by change or activity over time.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"function\",\n      \"chain\": [\"new and complex function\", \"function\", \"concept\"],\n      \"member_ids\": [\"53d5c48f-fe44-43dc-bf8a-16594b1e5419\"],\n      \"confidence\": 0.7,\n      \"description\": \"A novel and intricate function, likely referring to a conceptual or mathematical operation.\"\n    }\n  ],\n  \"residual_ids\": []\n}"
+        }
+      }
+    ]
+  },
+  "0::3": {
+    "choices": [
+      {
+        "message": {
+          "content": "{\n  \"groups\": [\n    {\n      \"assign_to\": \"t_0012\",\n      \"name\": \"process\",\n      \"chain\": [\"dynamic process\", \"process\", \"entity\"],\n      \"member_ids\": [\"1fada0e2-ef91-4a99-89af-46cb3de1757c\"],\n      \"confidence\": 0.9,\n      \"description\": \"A process characterized by change or activity over time.\"\n    },\n    {\n      \"assign_to\": \"t_0012\",\n      \"name\": \"process\",\n      \"chain\": [\"new and complex function\", \"process\", \"entity\"],\n      \"member_ids\": [\"53d5c48f-fe44-43dc-bf8a-16594b1e5419\"],\n      \"confidence\": 0.7,\n      \"description\": \"A process involving novel and intricate operations or roles.\"\n    }\n  ],\n  \"residual_ids\": []\n}"
+        }
+      }
+    ]
+  },
+  "0::4": {
+    "choices": [
+      {
+        "message": {
+          "content": "{\n  \"groups\": [\n    {\n      \"assign_to\": \"t_0012\",\n      \"name\": \"process\",\n      \"chain\": [\"dynamic process\", \"process\", \"entity\"],\n      \"member_ids\": [\"1fada0e2-ef91-4a99-89af-46cb3de1757c\"],\n      \"confidence\": 0.9,\n      \"description\": \"A process characterized by change or activity over time.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"function\",\n      \"chain\": [\"new and complex function\", \"function\", \"concept\"],\n      \"member_ids\": [\"53d5c48f-fe44-43dc-bf8a-16594b1e5419\"],\n      \"confidence\": 0.7,\n      \"description\": \"A novel and intricate function or role, considered as an abstract concept.\"\n    }\n  ],\n  \"residual_ids\": []\n}"
+        }
+      }
+    ]
+  },
+  "1::0": {
+    "choices": [
+      {
+        "message": {
+          "content": "{\n  \"groups\": [\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"economy\",\n      \"chain\": [\"command economy\", \"economy\", \"entity\"],\n      \"member_ids\": [\"021345b5-ebc0-4ad3-8365-4d9c63e3d87b\", \"26a31b4a-a939-46e3-bdce-4b06dbdf865a\", \"59160bc7-b07c-489c-8ab4-78e821b966e7\", \"59d7b872-c869-463c-bf3e-b2c26c3bd3d7\", \"8f76e17d-a79d-4c8d-9a2f-cf032bb2e0bd\"],\n      \"confidence\": 0.95,\n      \"description\": \"Types or instances of economic systems or economies at various scales or forms.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"economic doctrine\",\n      \"chain\": [\"economic doctrine\", \"concept\"],\n      \"member_ids\": [\"05755c72-ef38-45b7-934d-697eb6cfd9d4\"],\n      \"confidence\": 0.9,\n      \"description\": \"A set of principles or beliefs about how economies should be structured or function.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"economic principle\",\n      \"chain\": [\"principle of economic textbook\", \"economic principle\", \"concept\"],\n      \"member_ids\": [\"d602c6ae-af06-4718-9d8d-aa7bd8d65a71\"],\n      \"confidence\": 0.85,\n      \"description\": \"A foundational rule or guideline found in economic textbooks.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"economic aspect\",\n      \"chain\": [\"economic of operation\", \"economic aspect\", \"concept\"],\n      \"member_ids\": [\"c3bc8875-48be-400b-a555-b44ab98e0444\"],\n      \"confidence\": 0.7,\n      \"description\": \"A specific aspect or consideration of economics related to operations.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"economic subfield\",\n      \"chain\": [\"microeconomic\", \"economic subfield\", \"concept\"],\n      \"member_ids\": [\"6c18f539-a8d8-4ec4-952f-0bf6b4b78b7f\"],\n      \"confidence\": 0.8,\n      \"description\": \"A subfield or branch of economics, such as microeconomics.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"word\",\n      \"chain\": [\"the word \\\"economy\\\"\", \"word\", \"entity\"],\n      \"member_ids\": [\"fc2d6254-f26c-4fbc-adea-6bda928027c9\"],\n      \"confidence\": 0.9,\n      \"description\": \"The lexical item or term 'economy' itself.\"\n    }\n  ],\n  \"residual_ids\": []\n}"
+        }
+      }
+    ]
+  },
+  "1::1": {
+    "choices": [
+      {
+        "message": {
+          "content": "{\n  \"groups\": [\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"economy\",\n      \"chain\": [\"command economy\", \"economy\", \"entity\"],\n      \"member_ids\": [\"021345b5-ebc0-4ad3-8365-4d9c63e3d87b\", \"26a31b4a-a939-46e3-bdce-4b06dbdf865a\", \"59160bc7-b07c-489c-8ab4-78e821b966e7\", \"59d7b872-c869-463c-bf3e-b2c26c3bd3d7\", \"8f76e17d-a79d-4c8d-9a2f-cf032bb2e0bd\"],\n      \"confidence\": 0.95,\n      \"description\": \"Types and instances of economic systems or economies at various scales and forms.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"economic doctrine\",\n      \"chain\": [\"economic doctrine\", \"concept\"],\n      \"member_ids\": [\"05755c72-ef38-45b7-934d-697eb6cfd9d4\"],\n      \"confidence\": 0.9,\n      \"description\": \"A set of principles or beliefs about how economies should be organized or function.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"economic principle\",\n      \"chain\": [\"principle of economic textbook\", \"economic principle\", \"concept\"],\n      \"member_ids\": [\"d602c6ae-af06-4718-9d8d-aa7bd8d65a71\"],\n      \"confidence\": 0.85,\n      \"description\": \"A foundational rule or guideline found in economic textbooks.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"economic aspect\",\n      \"chain\": [\"economic of operation\", \"economic aspect\", \"concept\"],\n      \"member_ids\": [\"c3bc8875-48be-400b-a555-b44ab98e0444\"],\n      \"confidence\": 0.7,\n      \"description\": \"A specific aspect or consideration of economics related to operations.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"economic field\",\n      \"chain\": [\"microeconomic\", \"economic field\", \"concept\"],\n      \"member_ids\": [\"6c18f539-a8d8-4ec4-952f-0bf6b4b78b7f\"],\n      \"confidence\": 0.7,\n      \"description\": \"A branch or field of economics, such as microeconomics.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"word\",\n      \"chain\": [\"the word \\\"economy\\\"\", \"word\", \"entity\"],\n      \"member_ids\": [\"fc2d6254-f26c-4fbc-adea-6bda928027c9\"],\n      \"confidence\": 0.8,\n      \"description\": \"The lexical item 'economy' as a word.\"\n    }\n  ],\n  \"residual_ids\": []\n}"
+        }
+      }
+    ]
+  },
+  "1::2": {
+    "choices": [
+      {
+        "message": {
+          "content": "{\n  \"groups\": [\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"economy\",\n      \"chain\": [\"command economy\", \"economy\", \"entity\"],\n      \"member_ids\": [\"021345b5-ebc0-4ad3-8365-4d9c63e3d87b\"],\n      \"confidence\": 0.95,\n      \"description\": \"A specific type of economic system where production and distribution are controlled by the government.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"economy\",\n      \"chain\": [\"global economy\", \"economy\", \"entity\"],\n      \"member_ids\": [\"26a31b4a-a939-46e3-bdce-4b06dbdf865a\"],\n      \"confidence\": 0.95,\n      \"description\": \"The worldwide economic system comprising all national economies.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"economy\",\n      \"chain\": [\"national economy\", \"economy\", \"entity\"],\n      \"member_ids\": [\"8f76e17d-a79d-4c8d-9a2f-cf032bb2e0bd\"],\n      \"confidence\": 0.95,\n      \"description\": \"The economic system of a specific nation.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"economy\",\n      \"chain\": [\"transaction cost economy\", \"economy\", \"entity\"],\n      \"member_ids\": [\"59d7b872-c869-463c-bf3e-b2c26c3bd3d7\"],\n      \"confidence\": 0.9,\n      \"description\": \"An economic system or theory focusing on transaction costs.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"economy\",\n      \"chain\": [\"economy\", \"entity\"],\n      \"member_ids\": [\"59160bc7-b07c-489c-8ab4-78e821b966e7\"],\n      \"confidence\": 1.0,\n      \"description\": \"A system of production, distribution, and consumption of goods and services.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"economic doctrine\",\n      \"chain\": [\"economic doctrine\", \"concept\"],\n      \"member_ids\": [\"05755c72-ef38-45b7-934d-697eb6cfd9d4\"],\n      \"confidence\": 0.95,\n      \"description\": \"A set of principles or beliefs about how economies should be organized or function.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"economic principle\",\n      \"chain\": [\"principle of economic textbook\", \"economic principle\", \"concept\"],\n      \"member_ids\": [\"d602c6ae-af06-4718-9d8d-aa7bd8d65a71\"],\n      \"confidence\": 0.9,\n      \"description\": \"A foundational rule or guideline found in economic textbooks.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \"economic field\",\n      \"chain\": [\"microeconomic\", \"economic field\", \"concept\"],\n      \"member_ids\": [\"6c18f539-a8d8-4ec4-952f-0bf6b4b78b7f\"],\n      \"confidence\": 0.85,\n      \"description\": \"A branch of economics dealing with individual and business decisions.\"\n    },\n    {\n      \"assign_to\": \"NEW\",\n      \"name\": \""
+        }
+      }
+    ]
+  }
+}

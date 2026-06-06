@@ -365,6 +365,7 @@ def run_freeze(
     model_ids: set[str] = set()
     usage_totals = {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
     arm_files: dict[str, str] = {}
+    parked_by_arm: dict[str, list[str]] = {}
     total_calls = 0
 
     for arm in arms:
@@ -380,16 +381,45 @@ def run_freeze(
         prev_generate = m.generate_completion
         m._type_registry = make_registry(catalog)
         m.generate_completion = transport
+        parked: list[str] = []
         try:
             for cluster in clusters:
                 cluster_id = cluster["cluster_id"]
                 members = cluster["members"]
                 transport.for_cluster(cluster_id)
-                for repeat in range(repeats):
-                    transport.set_repeat(repeat)
-                    call_type_cluster(
-                        client, members, request_id=f"{cluster_id}::{repeat}"
+                try:
+                    for repeat in range(repeats):
+                        transport.set_repeat(repeat)
+                        call_type_cluster(
+                            client, members, request_id=f"{cluster_id}::{repeat}"
+                        )
+                except Exception as cluster_err:
+                    # Park-and-continue safety net (#18): one bad cluster must
+                    # not torch a 4100-call paid run. Discard any partial
+                    # capture for this cluster (all repeats) so the replay
+                    # treats it as a residual rather than replaying truncated
+                    # JSON, record it, and move on. The hermes budget fix
+                    # (#126) makes this rare; this guards the tail. NOTE: at
+                    # temperature 0 a parked cluster is a DETERMINISTIC drop --
+                    # surfaced loudly in freeze_meta so a budget artifact can
+                    # never masquerade as a real residual.
+                    for k in [
+                        key for key in transport.captured
+                        if key.startswith(f"{cluster_id}::")
+                    ]:
+                        del transport.captured[k]
+                    parked.append(str(cluster_id))
+                    print(
+                        f"[freeze] PARKED cluster {cluster_id} in arm {arm!r}: "
+                        f"{cluster_err}",
+                        flush=True,
                     )
+            if parked:
+                print(
+                    f"[freeze] arm {arm!r}: parked {len(parked)} cluster(s) "
+                    f"as residuals: {parked}",
+                    flush=True,
+                )
         except Exception as err:
             partial_path = fixtures_dir / (responses_file + ".partial.json")
             # Guard the partial dump: if the write itself fails, the
@@ -413,8 +443,33 @@ def run_freeze(
         finally:
             m._type_registry = prev_registry
             m.generate_completion = prev_generate
-        freeze_llm_responses(transport.captured, fixtures_dir / responses_file)
+        # Final per-arm write guarded the same way: a write failure here must
+        # surface as a FreezeError with the partial note, not a raw IOError
+        # (PR #16 review; survives the park-and-continue refactor #18).
+        try:
+            freeze_llm_responses(
+                transport.captured, fixtures_dir / responses_file
+            )
+        except Exception as err:
+            partial_path = fixtures_dir / (responses_file + ".partial.json")
+            partial_note = "no samples captured before the failure"
+            if transport.captured:
+                try:
+                    freeze_llm_responses(transport.captured, partial_path)
+                    partial_note = (
+                        f"captured-so-far written to {partial_path.name}"
+                    )
+                except Exception as write_err:
+                    partial_note = (
+                        f"partial write to {partial_path.name} also failed: "
+                        f"{write_err}"
+                    )
+            raise FreezeError(
+                f"freeze aborted in arm {arm!r}: {err} ({partial_note})"
+            ) from err
         arm_files[arm] = responses_file
+        if parked:
+            parked_by_arm[arm] = parked
         model_ids.update(transport.model_ids)
         for field in usage_totals:
             usage_totals[field] += transport.usage_totals[field]
@@ -437,6 +492,10 @@ def run_freeze(
         },
         "usage_totals": usage_totals,
         "hermes_gateway": hermes_gateway,
+        # Deterministic drops (temp 0): a non-empty value here means a budget
+        # / parse artifact, NOT a real residual -- eval must subtract these
+        # from the residual_fraction denominator, never count them as signal.
+        "parked_clusters": parked_by_arm,
     }
     _write_meta(meta, fixtures_dir / FREEZE_META_FILENAME)
     return meta

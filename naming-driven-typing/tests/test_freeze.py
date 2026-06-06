@@ -411,29 +411,34 @@ def test_run_freeze_replays_byte_stable(tmp_path):
     assert replayed == frozen["c1::0"]
 
 
-def test_run_freeze_failure_dumps_partial_and_fails_closed(tmp_path):
+def test_run_freeze_parks_failed_cluster_and_continues(tmp_path):
+    """A per-cluster failure parks that cluster (deterministic temp-0 drop)
+    and the arm completes; the parked cluster is recorded in freeze_meta and
+    its truncated content is NOT written to the fixtures (#18 park-and-
+    continue; one bad cluster must not torch a paid run)."""
     calls = {"n": 0}
 
     def flaky_send(messages, *, temperature, max_tokens, metadata):
         calls["n"] += 1
-        if calls["n"] > 1:
+        # c1 fully succeeds (calls 1,2 over 2 repeats); every c2 call raises.
+        if calls["n"] > 2:
             raise RuntimeError("gateway 502")
         return _completion(_groups_content(["u1", "u2"]))
 
-    with pytest.raises(fz.FreezeError, match="aborted in arm"):
-        fz.run_freeze(
-            clusters=_clusters(),
-            catalog=_catalog(),
-            send=flaky_send,
-            fixtures_dir=tmp_path,
-            repeats=2,
-            arms=("full",),
-        )
-    partial = tmp_path / "llm_responses.json.partial.json"
-    assert partial.exists()
-    assert set(json.loads(partial.read_text("utf-8"))) == {"c1::0"}
-    assert not (tmp_path / "llm_responses.json").exists()
-    assert not (tmp_path / fz.FREEZE_META_FILENAME).exists()
+    meta = fz.run_freeze(
+        clusters=_clusters(),
+        catalog=_catalog(),
+        send=flaky_send,
+        fixtures_dir=tmp_path,
+        repeats=2,
+        arms=("full",),
+    )
+    # Arm completed: fixtures + meta written, no FreezeError raised.
+    frozen = json.loads((tmp_path / "llm_responses.json").read_text("utf-8"))
+    assert set(frozen) == {"c1::0", "c1::1"}  # c1 captured, c2 discarded
+    assert "c2::0" not in frozen
+    assert meta["parked_clusters"] == {"full": ["c2"]}
+    assert (tmp_path / fz.FREEZE_META_FILENAME).exists()
 
 
 def test_run_freeze_restores_hermes_seams(tmp_path):
@@ -569,14 +574,13 @@ def test_main_rejects_freeze_with_replay(_no_live_env):
 def test_run_freeze_partial_write_failure_preserves_freeze_error(
     tmp_path, monkeypatch
 ):
-    """If the partial dump itself fails, the FreezeError must still surface
-    with an accurate note instead of being swallowed (PR #16 review)."""
-    calls = {"n": 0}
+    """If the final per-arm write fails AND the partial dump also fails, the
+    FreezeError must still surface with an accurate note instead of being
+    swallowed (PR #16 review; survives the #18 park-and-continue refactor --
+    here every cluster SUCCEEDS so the captured set is non-empty and the
+    failure is purely on the write path)."""
 
-    def flaky_send(messages, *, temperature, max_tokens, metadata):
-        calls["n"] += 1
-        if calls["n"] > 1:
-            raise RuntimeError("gateway 502")
+    def all_ok_send(messages, *, temperature, max_tokens, metadata):
         return _completion(_groups_content(["u1", "u2"]))
 
     def _boom(captured, path):
@@ -589,7 +593,7 @@ def test_run_freeze_partial_write_failure_preserves_freeze_error(
         fz.run_freeze(
             clusters=_clusters(),
             catalog=_catalog(),
-            send=flaky_send,
+            send=all_ok_send,
             fixtures_dir=tmp_path,
             repeats=2,
             arms=("full",),
