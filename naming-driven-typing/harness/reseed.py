@@ -316,26 +316,28 @@ def _check_embedding_coverage(client: Any, sync: Any) -> None:
         )
 
 
-def _clear_milvus_hcg() -> None:
-    """Purge hcg_* Milvus collections alongside the Neo4j clear (#18).
+def _clear_milvus_hcg(sync: Any) -> None:
+    """DROP and recreate the hcg_* Milvus collections (#18).
 
-    seeder.clear() wipes Neo4j only. Stale type centroids from prior runs
-    otherwise RESURRECT dead types through the ingest classifier (679 ghost
-    centroids observed live: centroid matches -> type-def missing on the
-    cleared graph -> name falls back to the hash-suffixed uuid -> ghost
-    type-def MERGE-created). Delete-all keeps the collections (the live
-    sophia holds handles); flush forces the deletes visible before ingest.
+    seeder.clear() wipes Neo4j only; stale type centroids otherwise
+    RESURRECT dead types through the ingest classifier. Delete-all proved
+    insufficient: tombstoned deletes are not crash-safe, and an unclean
+    Milvus restart brought 604 ghost centroids back mid-run. Dropping
+    removes the sealed segments outright; recreation uses the canonical
+    schema at LOGOS_EMBEDDING_DIM. The live sophia must be restarted
+    after this so its collection handles rebind.
     """
-    from pymilvus import Collection, utility
+    from logos_config import get_embedding_dim_override
+    from pymilvus import utility
 
-    for cname in utility.list_collections():
-        if not cname.startswith("hcg_"):
-            continue
-        col = Collection(cname)
-        col.load()
-        col.delete('uuid != ""')
-        col.flush()
-        print(f"[reseed] cleared milvus {cname}", flush=True)
+    dim = get_embedding_dim_override() or 3072
+    for cname in list(utility.list_collections()):
+        if cname.startswith("hcg_"):
+            utility.drop_collection(cname)
+            print(f"[reseed] dropped milvus {cname}", flush=True)
+    for node_type in ("Entity", "Concept", "State", "Process", "Edge", "TypeCentroid"):
+        sync.ensure_collection(node_type, dim)
+    print(f"[reseed] recreated hcg_* collections at dim {dim}", flush=True)
 
 
 def reseed_and_build(
@@ -397,7 +399,7 @@ def reseed_and_build(
         else:
             seeder = HCGSeeder(client)
             seeder.clear()
-            _clear_milvus_hcg()
+            _clear_milvus_hcg(sync)
             seeder.seed_type_definitions()
         _ingest_corpus(client, corpus, hermes_url)
         settled = _settle_graph(client)
