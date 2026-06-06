@@ -43,16 +43,8 @@ A3 ``no_graft`` -- catalog hidden; only roots offered. Seam: registry-stub
     Fixture ``fixtures/llm_responses_no_graft.json`` (full chains, all NEW
     -- the catalog was hidden from the namer).
 
-A4 ``no_chain`` -- name + root only, no IS_A chain. Seam: response shaping
-    through the REAL ``/type-cluster`` with the FULL registry (reuse stays
-    available -- A4 ablates ONLY the chain). Fixture
-    ``fixtures/llm_responses_no_chain.json`` carries the degenerate chain
-    ``[name, root]`` (no intermediate hypernyms). Cascade seam: real T5 over
-    the full catalog with the FLOOR disabled (``min_depth=0``), because the
-    floor gates ON chain depth -- the very signal this arm removes (keeping
-    it on would residual-ize every group and conflate A4 with gating); the
-    CEILING (name-based) stays on. ``chain[1:] == [root]`` means minted
-    groups land at roots.
+(A4 ``no_chain`` RETIRED 2026-06-06 -- the contract has no LLM-supplied
+chain to ablate; placement chain is the graph's, derived from the parent.)
 
 A5 ``no_gate`` -- FLOOR/CEILING disabled. Seam: cascade parameters only.
     Prompt, registry and fixtures are identical to the full arm (shares
@@ -68,7 +60,7 @@ import json as _jsonlib
 from dataclasses import asdict
 from typing import Any, Callable, Optional
 
-from harness.cascade import MIN_DEPTH, VALID_TERMINAL_ROOTS, simulate_cascade
+from harness.cascade import VALID_TERMINAL_ROOTS, simulate_cluster_placement
 
 # Shared canonicalize() from hermes.canonical (T1), with the same standalone
 # shim as harness.cascade so the module stays importable without hermes.
@@ -89,7 +81,6 @@ ARM_RESPONSE_FILES: dict[str, str] = {
     "naive_llm": "llm_responses_naive_llm.json",
     "no_reuse": "llm_responses.json",
     "no_graft": "llm_responses_no_graft.json",
-    "no_chain": "llm_responses_no_chain.json",
     "no_gate": "llm_responses.json",
 }
 
@@ -263,19 +254,14 @@ class NaiveLLMClient:
         member_ids = [
             str(member.get("id")) for member in members if member.get("id")
         ]
+        # 2026-06-06 contract: no catalog shown -> the naive arm can only
+        # place under a realm root. {name, parent=root, no outliers}.
+        _ = (confidence, member_ids)  # parsed/ignored: placement keys off name
         body: dict[str, Any] = {
             "request_id": payload.get("request_id"),
-            "groups": [
-                {
-                    "assign_to": "NEW",  # no catalog: nothing to reuse
-                    "name": name,
-                    "chain": [name, root],  # name+root only -- no chain
-                    "member_ids": member_ids,
-                    "confidence": confidence,
-                    "description": "",
-                    "over_specified": False,  # gate machinery is ablated in A1
-                }
-            ],
+            "name": name,
+            "parent": root,
+            "over_specified": False,
             "residual_ids": [],
             # the single whole-cluster group covers every input id by
             # construction, so the raw partition is trivially valid
@@ -299,63 +285,65 @@ def simulate_arm_cascade(
     response: dict[str, Any],
     catalog: dict[str, Any],
     *,
+    cluster_id: str = "cluster",
+    member_ids: Optional[list[str]] = None,
     ablation: str,
 ) -> dict[str, Any]:
-    """Arm-shaped T5 cascade (the ``cascade_fn`` seam shape for A1-A5).
+    """Arm-shaped placement (the cascade_fn seam for A1/A2/A3/A5).
 
-    The ``full`` arm stays in ``run_experiment.simulate_cascade_response``;
-    this dispatch owns the five ablation arms only. The input response is
-    never mutated (groups are shallow-copied before any arm shaping).
+    2026-06-06 contract: one cluster -> one placement. The full arm runs in
+    run_experiment.simulate_cascade_response; this owns the ablations, each a
+    parent-choice / catalog-view coercion on {name, parent, residual_ids}.
+    The chain arm (A4) is retired -- there is no LLM chain to ablate.
+
+    Coercions (the measurement semantics -- review here):
+      A2 no_reuse  : a would-be reuse (parent is None) is coerced to mint
+                     `name` under the entity root; real grafts (parent set)
+                     are untouched. Isolates reuse's lift vs mint-at-root.
+      A3 no_graft  : parent forced to the entity root AND a roots-only catalog
+                     view -> every placement lands G3_ROOT (no graft under a
+                     non-root, no reuse). Isolates graft/parent-specificity.
+      A5 no_gate   : CEILING off (FLOOR is always-legal under the re-parent
+                     model, so the only gate left to disable is the ceiling).
+      A1 naive_llm : the naive client already emits parent=root; roots-only
+                     view + ceiling off -> a pure name+root baseline.
     """
     _require_arm(ablation)
     if ablation == "full":
         raise ValueError(
-            "simulate_arm_cascade handles A1-A5 only; the full arm runs in "
-            "run_experiment.simulate_cascade_response"
+            "simulate_arm_cascade handles the ablation arms only; the full "
+            "arm runs in run_experiment.simulate_cascade_response"
         )
-    groups = [dict(g) for g in response.get("groups", [])]
+    members = list(member_ids or [])
+    name = str(response.get("name", ""))
+    parent = response.get("parent")
+    residual_ids = list(response.get("residual_ids", []))
     view = catalog
-    min_depth = MIN_DEPTH
     enforce_ceiling = True
+
     if ablation == "no_reuse":
-        # A2: reuse off; graft + gates stay on (full catalog).
-        for group in groups:
-            group["assign_to"] = "NEW"
+        if parent is None:
+            parent = "entity"
     elif ablation == "no_graft":
-        # A3: only roots are resolvable; gates stay on.
+        parent = "entity"
         view = roots_only_catalog(catalog)
-    elif ablation == "no_chain":
-        # A4: the floor gates ON chain depth -- the ablated signal -- so it
-        # is disabled; the (name-based) ceiling stays on; reuse stays on.
-        min_depth = 0
     elif ablation == "no_gate":
-        # A5: FLOOR off (min_depth=0) + CEILING off.
-        min_depth = 0
         enforce_ceiling = False
-    else:  # naive_llm
-        # A1: no catalog (roots-only view), no gates; groups arrive NEW.
+    elif ablation == "naive_llm":
         view = roots_only_catalog(catalog)
-        min_depth = 0
         enforce_ceiling = False
-    records = simulate_cascade(
-        groups,
-        view.get("catalog_by_uuid", {}),
-        view.get("by_norm", {}),
-        min_depth=min_depth,
+
+    rec = simulate_cluster_placement(
+        cluster_id=cluster_id,
+        member_ids=members,
+        name=name,
+        parent=parent,
+        residual_ids=residual_ids,
+        catalog_by_uuid=view.get("catalog_by_uuid", {}),
+        by_norm=view.get("by_norm", {}),
         enforce_ceiling=enforce_ceiling,
     )
-    return _records_to_cascade(records, list(response.get("residual_ids", [])))
-
-
-# A4 no_chain prompt override appended to the v2 system message under the
-# live paths (--freeze / --live): the chain signal is removed AT THE PROMPT,
-# mirroring what the frozen no_chain fixture embodies under --replay (the
-# degenerate chain [name, root]).
-NO_CHAIN_SYSTEM_OVERRIDE = (
-    " ABLATION OVERRIDE (no-chain arm): do NOT return intermediate hypernyms. "
-    "Every chain MUST be exactly two elements: the group name followed by its "
-    "realm root."
-)
+    return _records_to_cascade([rec], list(rec.residual_ids))
 
 
 def arm_message_transform(
@@ -363,26 +351,11 @@ def arm_message_transform(
 ) -> Optional[Callable[[list[dict[str, Any]]], list[dict[str, Any]]]]:
     """Per-arm live-prompt transform (None => prompt used as built).
 
-    Only A4 ``no_chain`` rewrites the prompt: under --replay its PROMPT-side
-    difference is embodied by the frozen fixture, so the live freeze must
-    produce that fixture from a prompt that actually removes the chain
-    request. Arms whose prompt is byte-identical to the full arm (no_reuse,
-    no_gate), the arm with its own prompt path (naive_llm), and the arm whose
-    difference is the registry view (no_graft) need no message transform.
-    The input messages are never mutated (shallow-copied before shaping).
+    2026-06-06 contract: no arm rewrites the prompt anymore. The chain arm
+    (A4) is retired (no LLM chain to suppress); the remaining arms differ by
+    catalog view (no_graft / naive_llm) or response-side parent coercion
+    (no_reuse), never by prompt text. Kept as a stable seam so the freeze
+    driver can call it uniformly.
     """
     _require_arm(ablation)
-    if ablation != "no_chain":
-        return None
-
-    def transform(messages: list[dict[str, Any]]) -> list[dict[str, Any]]:
-        out = [dict(message) for message in messages]
-        for message in out:
-            if message.get("role") == "system":
-                message["content"] = (
-                    str(message.get("content", "")) + NO_CHAIN_SYSTEM_OVERRIDE
-                )
-                return out
-        raise ValueError("no_chain transform: prompt has no system message")
-
-    return transform
+    return None

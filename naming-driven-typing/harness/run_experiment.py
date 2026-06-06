@@ -48,7 +48,7 @@ if str(EXP) not in sys.path:
 PROD_HERMES_URL = os.environ.get("HERMES_URL", "http://localhost:17000")
 PROD_REDIS_KEY = "logos:ontology:types"
 
-ABLATIONS = ("full", "naive_llm", "no_reuse", "no_graft", "no_chain", "no_gate")
+ABLATIONS = ("full", "naive_llm", "no_reuse", "no_graft", "no_gate")  # A4 no_chain retired (#127: no LLM chain to ablate)
 
 
 class HarnessEndpointError(RuntimeError):
@@ -275,7 +275,11 @@ def run_cluster_repeats(
         replayer.set_repeat(k)
         request_id = ReplayKey(cluster_id, k).token()
         body = call_type_cluster(client, members, request_id=request_id)
-        cascade = cascade_fn(body, catalog, ablation=ablation)
+        member_ids = [str(m["id"]) for m in members]
+        cascade = cascade_fn(
+            body, catalog, cluster_id=cluster_id, member_ids=member_ids,
+            ablation=ablation,
+        )
         out.append(
             {
                 "repeat": k,
@@ -293,6 +297,8 @@ def simulate_cascade_response(
     response: dict[str, Any],
     catalog: dict[str, Any],
     *,
+    cluster_id: str = "cluster",
+    member_ids: Optional[list[str]] = None,
     ablation: str = "full",
 ) -> dict[str, Any]:
     """Adapt T5's simulate_cascade to the harness ``cascade_fn`` seam.
@@ -306,24 +312,35 @@ def simulate_cascade_response(
     snapshot contract -- see the harness/ablations.py docstring for the
     arm -> seam mapping).
     """
+    members = list(member_ids or [])
     if ablation != "full":
         from harness.ablations import simulate_arm_cascade  # deferred import
 
-        return simulate_arm_cascade(response, catalog, ablation=ablation)
-    from harness.cascade import simulate_cascade  # T5 (deferred import)
+        return simulate_arm_cascade(
+            response, catalog, cluster_id=cluster_id, member_ids=members,
+            ablation=ablation,
+        )
+    from harness.cascade import simulate_cluster_placement  # deferred import
 
-    records = simulate_cascade(
-        list(response.get("groups", [])),
-        catalog.get("catalog_by_uuid", {}),
-        catalog.get("by_norm", {}),
+    # 2026-06-06 contract: one named cluster -> one placement record. The
+    # namer returned {name, parent, residual_ids}; the cascade re-parents the
+    # kept subgraph (reuse under an existing type, or mint under an existing
+    # parent). No groups, no chain.
+    rec = simulate_cluster_placement(
+        cluster_id=cluster_id,
+        member_ids=members,
+        name=str(response.get("name", "")),
+        parent=response.get("parent"),
+        residual_ids=list(response.get("residual_ids", [])),
+        catalog_by_uuid=catalog.get("catalog_by_uuid", {}),
+        by_norm=catalog.get("by_norm", {}),
     )
-    branches = [
-        {k: (list(v) if isinstance(v, tuple) else v) for k, v in asdict(rec).items()}
-        for rec in records
-    ]
+    branch = {
+        k: (list(v) if isinstance(v, tuple) else v) for k, v in asdict(rec).items()
+    }
     return {
-        "branches": branches,
-        "residual_ids": list(response.get("residual_ids", [])),
+        "branches": [branch],
+        "residual_ids": list(rec.residual_ids),
     }
 
 
