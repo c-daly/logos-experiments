@@ -468,7 +468,7 @@ def _build_replay_wiring(
     return responses, probe
 
 
-def _run_live(args: argparse.Namespace) -> int:
+def _run_live(args: argparse.Namespace, paths: "HarnessPaths") -> int:
     """--live: smoke/illustration run against the live stack (SPEC 7.6).
 
     Frozen fixture inputs (clusters/catalog -- the clean-graph decision), the
@@ -500,7 +500,6 @@ def _run_live(args: argparse.Namespace) -> int:
         require_live_env,
     )
 
-    paths = HarnessPaths.default()
     clusters = _load_clusters(paths)
     if args.limit is not None:
         clusters = clusters[: args.limit]
@@ -627,17 +626,29 @@ def main(argv: Optional[list[str]] = None) -> int:
         choices=("in_process", "throwaway_hermes"),
         default="in_process",
     )
+    p.add_argument(
+        "--fixtures-dir",
+        default=None,
+        help="fixtures directory (default: fixtures/; graded runs use fixtures/graded)",
+    )
     p.add_argument("--repeats", type=int, default=5)
     p.add_argument("--ablation", choices=ABLATIONS, default="full")
     p.add_argument("--limit", type=int, default=None)
     p.add_argument("--model", default="gpt-4.1")
     args = p.parse_args(argv)
+    paths = (
+        HarnessPaths(
+            fixtures_dir=Path(args.fixtures_dir), workspace_dir=WORKSPACE
+        )
+        if args.fixtures_dir
+        else HarnessPaths.default()
+    )
 
     if args.freeze:
         from harness.freeze import freeze_command  # deferred: live path only
 
         return freeze_command(
-            paths=HarnessPaths.default(),
+            paths=paths,
             repeats=args.repeats,
             model=args.model,
             limit=args.limit,
@@ -645,9 +656,8 @@ def main(argv: Optional[list[str]] = None) -> int:
         )
 
     if args.live:
-        return _run_live(args)
+        return _run_live(args, paths)
 
-    paths = HarnessPaths.default()
 
     # Per-arm wiring (SPEC 7.4): frozen-response file, registry view, client.
     from harness.ablations import (
