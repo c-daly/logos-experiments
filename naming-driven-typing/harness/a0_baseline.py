@@ -147,8 +147,28 @@ _REALM_ROOT_UUIDS = {
 # per-axis tie-break epsilons never produce equal inter-group distances
 # (equal distances would let agglomeration tie-break on graph read order,
 # the one ordering seam a live graph does not pin down).
-_SIDON = (0, 1, 3, 7, 12, 20, 30, 44, 65, 80, 96)
-_EPS_SCALE = 0.01
+# Greedy Mian-Chowla (B2/Sidon) sequence, extended on demand: all pairwise
+# differences distinct, which keeps the epsilon tie-breaks collision-free.
+# The first 11 terms are the original hand-rolled table; the graded corpus
+# (142 clusters + ~220 published norms) blew past it (#18).
+_SIDON = [0, 1, 3, 7, 12, 20, 30, 44, 65, 80, 96]
+_EPS_CEILING = 0.96  # max epsilon: keep tie-breaks well under the unit axis
+
+
+def _extend_sidon(upto: int) -> None:
+    """Grow _SIDON greedily until it has at least ``upto + 1`` terms."""
+    s = _SIDON
+    sums = {a + b for i, a in enumerate(s) for b in s[i:]}
+    while len(s) <= upto:
+        cand = s[-1] + 1
+        while True:
+            new_sums = {cand + a for a in s}
+            new_sums.add(2 * cand)
+            if len(new_sums) == len(s) + 1 and sums.isdisjoint(new_sums):
+                break
+            cand += 1
+        s.append(cand)
+        sums |= new_sums
 _MEMBER_JITTER = 0.01
 _PUBLISHED_OFFSET = 0.05
 
@@ -175,11 +195,16 @@ def _branch_keys() -> frozenset[str]:
 # ------------------------------------------------------------------ geometry
 
 
-def sidon_epsilon(index: int) -> float:
-    """Tie-break epsilon for main axis ``index`` (distinct pairwise gaps)."""
-    if index >= len(_SIDON):
-        raise ValueError(f"geometry supports at most {len(_SIDON)} main axes")
-    return _SIDON[index] * _EPS_SCALE
+def sidon_epsilon(index: int, *, scale: float) -> float:
+    """Tie-break epsilon for main axis ``index`` (distinct pairwise gaps).
+
+    ``scale`` comes from the plan: raw B2 terms grow ~quadratically (term
+    365 is ~6.6e4), so a fixed multiplier would swamp the unit main axis at
+    graded scale; the plan normalizes its LARGEST term to _EPS_CEILING and
+    common scaling preserves gap distinctness.
+    """
+    _extend_sidon(index)
+    return _SIDON[index] * scale
 
 
 def _norm_key(name: str) -> str:
@@ -205,6 +230,8 @@ def geometry_plan(clusters: list[dict], catalog: dict) -> dict[str, Any]:
     )
     publish_axis = {n: len(cluster_axis) + i for i, n in enumerate(norms)}
     n_main = len(cluster_axis) + len(publish_axis)
+    _extend_sidon(max(n_main - 1, 0))
+    eps_scale = _EPS_CEILING / max(_SIDON[max(n_main - 1, 0)], 1)
     return {
         "cluster_axis": cluster_axis,
         "publish_axis": publish_axis,
@@ -212,6 +239,7 @@ def geometry_plan(clusters: list[dict], catalog: dict) -> dict[str, Any]:
         "jitter_axis": n_main + 1,
         "eps_axis": n_main + 2,
         "dim": n_main + 3,
+        "eps_scale": eps_scale,
     }
 
 
@@ -225,7 +253,7 @@ def axis_vector(
     """Unit vector on a main axis + its epsilon/jitter/offset components."""
     vec = [0.0] * plan["dim"]
     vec[axis] = 1.0
-    vec[plan["eps_axis"]] = sidon_epsilon(axis)
+    vec[plan["eps_axis"]] = sidon_epsilon(axis, scale=plan["eps_scale"])
     vec[plan["jitter_axis"]] = jitter
     vec[plan["off_axis"]] = off
     return vec

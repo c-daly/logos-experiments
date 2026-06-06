@@ -71,14 +71,33 @@ def _outcome_kwargs(**overrides):
 
 
 def test_sidon_pairwise_differences_distinct():
-    eps = [a0.sidon_epsilon(i) for i in range(len(a0._SIDON))]
+    eps = [a0.sidon_epsilon(i, scale=0.01) for i in range(11)]
     gaps = [abs(x - y) for x, y in itertools.combinations(eps, 2)]
     assert len(gaps) == len(set(gaps))
 
 
-def test_sidon_axis_budget_fails_closed():
-    with pytest.raises(ValueError, match="main axes"):
-        a0.sidon_epsilon(len(a0._SIDON))
+def test_sidon_extends_on_demand_at_graded_scale():
+    """142 clusters + ~220 published norms need ~365 axes (#18)."""
+    eps = [a0.sidon_epsilon(i, scale=1.0) for i in range(400)]
+    gaps = {round(abs(x - y), 9) for x, y in itertools.combinations(eps, 2)}
+    assert len(gaps) == 400 * 399 // 2  # all pairwise differences distinct
+
+
+def test_geometry_plan_eps_stay_below_unit_axis_at_graded_scale():
+    clusters = [
+        {"cluster_id": str(i), "members": [{"id": f"m{i}", "name": f"m{i}"}]}
+        for i in range(142)
+    ]
+    catalog = {
+        "catalog_by_uuid": {
+            f"t{i}": {"name": f"type {i}", "is_root": False} for i in range(220)
+        }
+    }
+    plan = a0.geometry_plan(clusters, catalog)
+    n_main = len(plan["cluster_axis"]) + len(plan["publish_axis"])
+    eps = [a0.sidon_epsilon(i, scale=plan["eps_scale"]) for i in range(n_main)]
+    assert max(eps) <= a0._EPS_CEILING
+    assert len(set(eps)) == n_main
 
 
 def test_geometry_plan_axes(plan):
