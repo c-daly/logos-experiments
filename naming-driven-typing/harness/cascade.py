@@ -320,6 +320,25 @@ def _depth_via_catalog(uuid: Optional[str], catalog_by_uuid: dict[str, dict]) ->
     return depth
 
 
+def _realm_root_name(
+    uuid: Optional[str], catalog_by_uuid: dict[str, dict]
+) -> str:
+    """Walk `uuid`'s ancestry to the first is_root node; default 'entity'.
+
+    A READ of existing structure (the catalog's parent_uuid spine) -- the new
+    type inherits its parent's realm. Never a reconstructed chain.
+    """
+    seen: set[str] = set()
+    cur = uuid
+    while cur and cur in catalog_by_uuid and cur not in seen:
+        rec = catalog_by_uuid[cur]
+        if rec.get("is_root"):
+            return str(rec.get("name") or "entity")
+        seen.add(cur)
+        cur = rec.get("parent_uuid")
+    return "entity"
+
+
 def _root_target(
     by_norm: dict[str, list[str]], catalog_by_uuid: dict[str, dict], realm: str = "entity"
 ) -> tuple[Optional[str], str]:

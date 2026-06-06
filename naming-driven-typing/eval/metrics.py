@@ -122,7 +122,6 @@ _ABLATION_ARM_IDS = {
     "naive_llm": "A1",
     "no_reuse": "A2",
     "no_graft": "A3",
-    "no_chain": "A4",
     "no_gate": "A5",
     "full": "A6",
 }
@@ -212,7 +211,7 @@ def compute_metrics(snapshot: dict[str, Any]) -> dict[str, Any]:
             residual_ids.update(rep.get("residual_ids", []))
 
             for g in rep.get("groups", []):
-                roots[_root_of(g.get("chain", []))] += 1
+                roots[g.get("root") or _root_of(g.get("chain", []))] += 1
 
                 if g.get("canonical_merged_into"):
                     canon_count += 1

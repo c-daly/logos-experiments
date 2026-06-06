@@ -578,8 +578,20 @@ def build_a0_snapshot(
 # ------------------------------------------------- metrics dialect bridge
 
 
-def _branch_to_group(branch: dict[str, Any]) -> dict[str, Any]:
+def _branch_to_group(
+    branch: dict[str, Any], catalog_by_uuid: Optional[dict[str, dict]] = None
+) -> dict[str, Any]:
+    from harness.cascade import _realm_root_name  # READ helper (no stored root)
+
     kind = branch.get("branch")
+    # root is a READ off the one parent edge -- walk resolved_parent_uuid to
+    # its realm root in the existing structure (2026-06-06: never stored on
+    # the placement). Falls back to the parent name / entity without a catalog.
+    parent_uuid_for_root = branch.get("resolved_parent_uuid")
+    if catalog_by_uuid:
+        root = _realm_root_name(parent_uuid_for_root, catalog_by_uuid)
+    else:
+        root = branch.get("resolved_parent_name") or "entity"
     is_reuse = kind == "G1_REUSE"
     is_grafted = kind == "G2_GRAFT"
     parent_uuid = branch.get("resolved_parent_uuid")
@@ -599,10 +611,13 @@ def _branch_to_group(branch: dict[str, Any]) -> dict[str, Any]:
         "graft_parent_name": parent_name if is_grafted else None,
         "canonical_merged_into": None,
         "placement_conflict": False,
+        "root": root,
     }
 
 
-def as_metrics_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
+def as_metrics_snapshot(
+    snapshot: dict[str, Any], catalog: Optional[dict[str, Any]] = None
+) -> dict[str, Any]:
     """Bridge a T6 harness snapshot to the eval/metrics consumption shape.
 
     ``compute_metrics`` reads per-repeat ``groups`` / ``residual_ids`` and
@@ -613,6 +628,7 @@ def as_metrics_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
     RESIDUAL branches contribute their members to ``residual_ids`` and
     emit no group (matching the metrics residual semantics).
     """
+    catalog_by_uuid = (catalog or {}).get("catalog_by_uuid", {})
     out = {k: v for k, v in snapshot.items() if k != "clusters"}
     out.setdefault(
         "roots_present_in_live_catalog", bool(snapshot.get("roots_present", False))
@@ -626,7 +642,7 @@ def as_metrics_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
             cascade = rep.get("cascade") or {}
             branches = list(cascade.get("branches") or [])
             groups = [
-                _branch_to_group(b)
+                _branch_to_group(b, catalog_by_uuid)
                 for b in branches
                 if b.get("branch") != "RESIDUAL"
             ]
@@ -662,6 +678,7 @@ def as_metrics_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
 
 def deltas_arm_entry(
     snapshot: dict[str, Any],
+    catalog: Optional[dict[str, Any]] = None,
 ) -> tuple[str, dict[str, dict[str, float]]]:
     """(arm_name, {metric -> aggregate}) entry for the ``ablation_deltas`` input.
 
@@ -675,7 +692,7 @@ def deltas_arm_entry(
     """
     from eval.metrics import compute_metrics  # deferred: path shim above
 
-    metrics = compute_metrics(as_metrics_snapshot(snapshot))
+    metrics = compute_metrics(as_metrics_snapshot(snapshot, catalog))
     aggregates = {
         name: agg
         for name, agg in metrics.items()
