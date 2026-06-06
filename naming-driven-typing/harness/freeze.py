@@ -72,7 +72,7 @@ from harness.run_experiment import (
 
 # The prompt-distinct arms the freeze must sample. no_reuse and no_gate are
 # prompt-identical to full and replay llm_responses.json (see ablations.py).
-FREEZE_ARMS: tuple[str, ...] = ("full", "naive_llm", "no_graft", "no_chain")
+FREEZE_ARMS: tuple[str, ...] = ("full", "naive_llm", "no_graft")  # no_chain retired (#127)
 
 FREEZE_META_FILENAME = "freeze_meta.json"
 

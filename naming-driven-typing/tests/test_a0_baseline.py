@@ -405,7 +405,7 @@ def test_compute_metrics_consumes_bridged_a0_snapshot(
     snap = a0.build_a0_snapshot(
         clusters, scenario_a, catalog, run_ts="20260101T000000Z"
     )
-    metrics = compute_metrics(a0.as_metrics_snapshot(snap))
+    metrics = compute_metrics(a0.as_metrics_snapshot(snap, catalog))
     # Two NEW groups (G3 + G2), one grafted at depth 2; one reuse; one
     # residual member of eight; K = 1 aggregates cleanly (n == 1).
     assert metrics["graft_depth_fraction"]["mean"] == 0.5

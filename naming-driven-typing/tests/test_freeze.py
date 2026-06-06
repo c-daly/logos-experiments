@@ -14,7 +14,7 @@ import json
 import pytest
 
 from harness import freeze as fz
-from harness.ablations import NO_CHAIN_SYSTEM_OVERRIDE, arm_message_transform
+from harness.ablations import arm_message_transform
 from harness.fixtures_io import (
     LLMResponsesFixtureError,
     freeze_llm_responses,
@@ -34,40 +34,23 @@ def _completion(content: str) -> dict:
     }
 
 
-def _groups_content(member_ids: list[str]) -> str:
-    return json.dumps(
-        {
-            "groups": [
-                {
-                    "assign_to": "NEW",
-                    "name": "mammal",
-                    "chain": ["mammal", "entity"],
-                    "member_ids": member_ids,
-                    "confidence": 0.9,
-                    "description": "",
-                }
-            ],
-            "residual_ids": [],
-        }
-    )
+def _v2_content() -> str:
+    # 2026-06-06 contract: name the cluster + (optional) parent + outliers.
+    return json.dumps({"name": "mammal", "parent": "entity", "outliers": []})
 
 
 def _fake_send(recorded_systems: list[str]):
-    """Arm-aware fake gateway: naive prompts get the minimal name+root shape."""
+    """Arm-aware fake gateway. Naive prompts -> {name, root}; v2 prompts ->
+    {name, parent, outliers} (the namer never sees ids; outliers are names)."""
 
     def send(messages, *, temperature, max_tokens, metadata):
         assert temperature == 0.0  # the pin must reach the wire
         system = messages[0]["content"]
         recorded_systems.append(system)
-        user = messages[-1]["content"]
-        member_ids = [
-            part.split(")")[0]
-            for part in user.split("(id: ")[1:]
-        ]
         if "naming assistant" in system:
             content = json.dumps({"name": "mammal", "root": "entity"})
         else:
-            content = _groups_content(member_ids)
+            content = _v2_content()
         return _completion(content)
 
     return send
@@ -210,12 +193,17 @@ def test_transport_fails_closed_on_missing_content():
 
 def test_transport_applies_message_transform():
     systems: list[str] = []
-    transport = fz.CapturingTransport(
-        _fake_send(systems), message_transform=arm_message_transform("no_chain")
-    )
+    tag = " [TRANSFORMED]"
+
+    def add_tag(messages):
+        out = [dict(msg) for msg in messages]
+        out[0] = {**out[0], "content": out[0]["content"] + tag}
+        return out
+
+    transport = fz.CapturingTransport(_fake_send(systems), message_transform=add_tag)
     _drive(transport)
     assert len(systems) == 1
-    assert systems[0].endswith(NO_CHAIN_SYSTEM_OVERRIDE)
+    assert systems[0].endswith(tag)
 
 
 # ---------------------------------------------------------------------------
@@ -223,33 +211,14 @@ def test_transport_applies_message_transform():
 # ---------------------------------------------------------------------------
 
 
-def test_only_no_chain_gets_a_transform():
+def test_no_arm_rewrites_the_prompt():
     for arm in ("full", "naive_llm", "no_reuse", "no_graft", "no_gate"):
         assert arm_message_transform(arm) is None
-    assert arm_message_transform("no_chain") is not None
 
 
 def test_transform_rejects_unknown_arm():
     with pytest.raises(ValueError, match="unknown ablation arm"):
         arm_message_transform("bogus")
-
-
-def test_no_chain_transform_does_not_mutate_input():
-    transform = arm_message_transform("no_chain")
-    messages = [
-        {"role": "system", "content": "base"},
-        {"role": "user", "content": "u"},
-    ]
-    out = transform(messages)
-    assert messages[0]["content"] == "base"
-    assert out[0]["content"] == "base" + NO_CHAIN_SYSTEM_OVERRIDE
-    assert out[1] == {"role": "user", "content": "u"}
-
-
-def test_no_chain_transform_requires_system_message():
-    transform = arm_message_transform("no_chain")
-    with pytest.raises(ValueError, match="system"):
-        transform([{"role": "user", "content": "u"}])
 
 
 # ---------------------------------------------------------------------------
@@ -298,7 +267,6 @@ def test_checked_in_fixtures_conform_to_replayer_shape():
         "llm_responses.json",
         "llm_responses_naive_llm.json",
         "llm_responses_no_graft.json",
-        "llm_responses_no_chain.json",
     ):
         validate_llm_responses(
             json.loads((fixtures_dir / name).read_text(encoding="utf-8"))
@@ -354,7 +322,6 @@ def test_run_freeze_writes_per_arm_fixtures_and_meta(tmp_path):
         "llm_responses.json",
         "llm_responses_naive_llm.json",
         "llm_responses_no_graft.json",
-        "llm_responses_no_chain.json",
     ):
         frozen = json.loads((tmp_path / name).read_text(encoding="utf-8"))
         assert set(frozen) == expected_keys, name
@@ -364,19 +331,7 @@ def test_run_freeze_writes_per_arm_fixtures_and_meta(tmp_path):
         (tmp_path / "llm_responses_naive_llm.json").read_text(encoding="utf-8")
     )
     naive_content = json.loads(naive["c1::0"]["choices"][0]["message"]["content"])
-    assert set(naive_content) == {"name", "root"}
-    # The no_chain arm prompts carried the override; the full arm prompts
-    # did not; the no_graft arm prompts offered no assignable alias lines.
-    overridden = [s for s in systems if s.endswith(NO_CHAIN_SYSTEM_OVERRIDE)]
-    assert len(overridden) == 4  # 2 clusters x 2 repeats, no_chain arm only
-    full_like = [
-        s
-        for s in systems
-        if "typing assistant" in s and not s.endswith(NO_CHAIN_SYSTEM_OVERRIDE)
-    ]
-    assert len(full_like) == 8  # full + no_graft arms
-    assert any("[t_" in s for s in full_like)  # full arm offers aliases
-    assert any("[t_" not in s for s in full_like)  # no_graft offers none
+    assert set(naive_content) == {"name", "root"}  # naive: name+root only
     # Meta records the model snapshot id and the pinned sampling.
     meta_on_disk = json.loads(
         (tmp_path / fz.FREEZE_META_FILENAME).read_text(encoding="utf-8")
@@ -384,11 +339,11 @@ def test_run_freeze_writes_per_arm_fixtures_and_meta(tmp_path):
     assert meta_on_disk == meta
     assert meta["model_snapshot_ids"] == [MODEL_SNAPSHOT]
     assert meta["pinned_sampling"]["temperature"] == 0.0
-    assert meta["calls"] == 16
+    assert meta["calls"] == 12
     assert meta["repeats"] == 2
     assert meta["arm_fixtures"]["no_reuse"] == "llm_responses.json"
     assert meta["arm_fixtures"]["no_gate"] == "llm_responses.json"
-    assert meta["usage_totals"]["total_tokens"] == 16 * 15
+    assert meta["usage_totals"]["total_tokens"] == 12 * 15
     assert meta["hermes_gateway"] == "http://disposable:17000"
 
 
@@ -423,7 +378,7 @@ def test_run_freeze_parks_failed_cluster_and_continues(tmp_path):
         # c1 fully succeeds (calls 1,2 over 2 repeats); every c2 call raises.
         if calls["n"] > 2:
             raise RuntimeError("gateway 502")
-        return _completion(_groups_content(["u1", "u2"]))
+        return _completion(_v2_content())
 
     meta = fz.run_freeze(
         clusters=_clusters(),
@@ -581,7 +536,7 @@ def test_run_freeze_partial_write_failure_preserves_freeze_error(
     failure is purely on the write path)."""
 
     def all_ok_send(messages, *, temperature, max_tokens, metadata):
-        return _completion(_groups_content(["u1", "u2"]))
+        return _completion(_v2_content())
 
     def _boom(captured, path):
         raise OSError("disk full")

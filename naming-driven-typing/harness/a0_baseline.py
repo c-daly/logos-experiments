@@ -409,6 +409,11 @@ def _branch_record(**values: Any) -> dict[str, Any]:
         "residual_ids": [],
         "events": [],
         "self_reported": False,
+        # A0 measures the production rollup, which mints types; it never
+        # records the dropped old edge (re-parent bookkeeping is the v2
+        # write-path's, #18).
+        "minted": True,
+        "removed_parent_uuid": None,
     }
     record.update(values)
     expected = _branch_keys()
