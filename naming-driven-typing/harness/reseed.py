@@ -221,10 +221,22 @@ def _ingest_corpus(client: Any, corpus: list[dict], hermes_url: str) -> None:
     """
     max_queue_depth = 4
     for i, item in enumerate(corpus):
+        pre_depth = _pending_proposals() or 0
+        pre_count = _node_count(client)
         _ingest(item["text"], item["domain"], hermes_url)
-        # Bound the producer to the worker: any-growth pacing let 317/350
-        # blocks pile up unprocessed (#18). Cap 180s per block, then move
-        # on (the settle barrier is the final guarantee).
+        # Phase 1 -- wait for EVIDENCE this block's extraction completed
+        # (proposal published, or already consumed into the graph). Queue
+        # depth alone is blind to hermes-side in-flight extraction: an
+        # unthrottled burst piled 250 concurrent extraction tasks into
+        # hermes and wedged its event loop while the queue read 0 (#18).
+        for _ in range(240):
+            depth = _pending_proposals()
+            if depth is None:
+                break
+            if depth > pre_depth or _node_count(client) > pre_count:
+                break
+            time.sleep(0.5)
+        # Phase 2 -- bound the producer to the worker (#18).
         for _ in range(360):
             depth = _pending_proposals()
             if depth is None or depth <= max_queue_depth:

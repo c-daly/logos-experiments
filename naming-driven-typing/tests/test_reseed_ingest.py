@@ -103,15 +103,16 @@ class _GrowthClient:
         return [{"c": c}]
 
 
-def test_ingest_corpus_waits_for_queue_depth(monkeypatch):
+def test_ingest_corpus_waits_for_extraction_evidence_then_depth(monkeypatch):
     posted = []
     monkeypatch.setattr(reseed, "_ingest", lambda t, d, u: posted.append(t))
     monkeypatch.setattr(reseed.time, "sleep", lambda s: None)
-    # block1: queue deep (10) for two polls, then drains under the bound;
-    # block2: immediately under the bound.
-    depths = iter([10, 10, 2, 1])
-    monkeypatch.setattr(reseed, "_pending_proposals", lambda: next(depths, 0))
-    client = _GrowthClient([5, 9])
+    # block1: pre-depth 0 -> two polls of no evidence -> queue grows to 1
+    # (extraction done) -> depth 1 <= 4 proceeds. block2: pre-depth 1 ->
+    # node count grows instead (proposal consumed) -> depth fine.
+    depths = iter([0, 0, 0, 1, 1, 1, 1, 1])
+    monkeypatch.setattr(reseed, "_pending_proposals", lambda: next(depths, 1))
+    client = _GrowthClient([50, 50, 50, 50, 50, 51, 51])
     corpus = [
         {"text": "a", "domain": "d"},
         {"text": "b", "domain": "d"},
