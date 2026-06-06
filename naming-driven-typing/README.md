@@ -1,5 +1,22 @@
 # naming-driven-typing
 
+> ## ⚠️ EXPERIMENT RETIRED — RESULTS INVALID (2026-06-06)
+>
+> **This offline experiment is retired. Do not trust the verdict, the per-arm
+> metrics, or the fixture catalog as findings about the mechanism.** The
+> apparatus drifted from the design: `fixtures/graded/catalog.json` fabricated a
+> `parent_uuid`/`is_root` hierarchy that existed in neither Redis nor Neo4j, and
+> the non-mutating single-pass harness froze the catalog for the whole run, so
+> minted types were never fed back. The graft/reuse numbers and the
+> `NOISY/INCONCLUSIVE` goal verdict are artifacts of the wrong frame.
+>
+> The intended model stands: **typing is the graph's reified `IS_A` edge
+> structure** ("embeddings POINT, the graph ASSERTS"); the catalog is a *read*
+> of the graph. Validation of the mechanism moved to the **production write
+> path**, gated by the R1 integration test (sophia#174). Correction plan +
+> root-cause: vault `10-projects/LOGOS/sophia/plans/naming-driven-typing/`
+> (`CORRECTION-PLAN.md`, `SPEC.md` top banner).
+
 **Question:** Does a catalog-aware naming pass type a coarse cluster better than
 the current tier-2/rollup pipeline? Embeddings POINT (cheap coarse clustering);
 the graph ASSERTS (one LLM call per cluster returns a covering hypernym, an IS_A
