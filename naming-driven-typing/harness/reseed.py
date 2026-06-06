@@ -151,7 +151,7 @@ def _settle_graph(
     *,
     stable_polls: int = 3,
     interval: float = 2.0,
-    cap: float = 300.0,
+    cap: float = 900.0,
 ) -> int:
     """Wait until the node count stops growing; return the settled count.
 
@@ -167,7 +167,9 @@ def _settle_graph(
     while time.monotonic() < deadline:
         rows = client._execute_query("MATCH (n:Node) RETURN count(n) AS c", {})
         count = rows[0]["c"] if rows else 0
-        if count == last:
+        depth = _pending_proposals()
+        queue_quiet = depth == 0 or depth is None
+        if count == last and queue_quiet:
             stable += 1
             if stable >= stable_polls:
                 return count
@@ -176,8 +178,31 @@ def _settle_graph(
             last = count
         time.sleep(interval)
     raise RuntimeError(
-        f"graph did not settle within {cap}s (last node count {last})"
+        f"graph did not settle within {cap}s "
+        f"(last node count {last}, queue {_pending_proposals()})"
     )
+
+
+_PROPOSAL_QUEUE_KEY = "sophia:proposals:pending"
+
+
+def _pending_proposals() -> Optional[int]:
+    """Depth of sophia's proposal queue; None when redis is unreachable.
+
+    Ingestion is asynchronous end-to-end: /llm returns immediately, hermes
+    publishes a proposal, and sophia's worker drains the queue at its own
+    pace (~3-4/min). Producer pacing and the settle barrier must watch the
+    QUEUE, not just the graph -- count-quiet with a deep queue froze
+    fixtures from 33/350 blocks (#18, found live).
+    """
+    try:
+        import redis
+
+        from logos_config import RedisConfig
+
+        return int(redis.from_url(RedisConfig().url).llen(_PROPOSAL_QUEUE_KEY))
+    except Exception:
+        return None
 
 
 def _node_count(client: Any) -> int:
@@ -194,21 +219,21 @@ def _ingest_corpus(client: Any, corpus: list[dict], hermes_url: str) -> None:
     graph growth before sending the next block. A block may legitimately
     yield nothing (full dedup), so the poll gives up quickly and moves on.
     """
-    prev = _node_count(client)
+    max_queue_depth = 4
     for i, item in enumerate(corpus):
         _ingest(item["text"], item["domain"], hermes_url)
-        for _ in range(12):
-            now = _node_count(client)
-            if now > prev:
-                prev = now
+        # Bound the producer to the worker: any-growth pacing let 317/350
+        # blocks pile up unprocessed (#18). Cap 180s per block, then move
+        # on (the settle barrier is the final guarantee).
+        for _ in range(360):
+            depth = _pending_proposals()
+            if depth is None or depth <= max_queue_depth:
                 break
             time.sleep(0.5)
-        else:
-            prev = _node_count(client)
         if (i + 1) % 25 == 0:
             print(
                 f"[reseed] ingested {i + 1}/{len(corpus)} blocks "
-                f"({prev} nodes)",
+                f"({_node_count(client)} nodes, queue {_pending_proposals()})",
                 flush=True,
             )
 
@@ -240,6 +265,42 @@ def _check_yield(client: Any, *, n_blocks: int) -> None:
             f"[reseed] WARNING: yield below 50% ({entities}/{n_blocks}); "
             "dedup may explain this, but eyeball the graph",
             flush=True,
+        )
+
+
+def _check_embedding_coverage(client: Any, sync: Any) -> None:
+    """Fail loudly when entity-kind nodes are missing Milvus embeddings.
+
+    A Milvus write-deny window (memory quota) lets the worker create graph
+    nodes whose embedding upsert failed; those members silently vanish from
+    the clustering population (#18, found live). Floor: 95% coverage.
+    """
+    rows = client._execute_query(
+        "MATCH (n:Node) WHERE NOT n.type IN $structural RETURN n.uuid AS u",
+        {"structural": ["type_definition", "edge", "edge_type"]},
+    )
+    uuids = [r["u"] for r in rows]
+    if not uuids:
+        return
+    missing = 0
+    for u in uuids:
+        try:
+            rec = sync.get_embedding("Entity", u)
+        except Exception:
+            rec = None
+        if not rec or not rec.get("embedding"):
+            missing += 1
+    frac = missing / len(uuids)
+    print(
+        f"[reseed] embedding coverage: {len(uuids) - missing}/{len(uuids)} "
+        f"entity-kind nodes",
+        flush=True,
+    )
+    if frac > 0.05:
+        raise RuntimeError(
+            f"embedding coverage too low: {missing}/{len(uuids)} entity-kind "
+            "nodes have no Milvus embedding (write-deny window? check Milvus "
+            "memory quota) -- clustering would silently drop them"
         )
 
 
@@ -299,6 +360,7 @@ def reseed_and_build(
         settled = _settle_graph(client)
         print(f"[reseed] graph settled at {settled} nodes", flush=True)
     _check_yield(client, n_blocks=len(corpus))
+    _check_embedding_coverage(client, sync)
 
     driver = client.driver
     node_members, _, _ = build_node_members(driver, sync, entity_filter=True, dedup=True)
