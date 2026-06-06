@@ -209,12 +209,20 @@ def load_catalog(path: Path) -> dict[str, Any]:
             f"catalog fixture version mismatch: {raw.get('version')!r}"
         )
     validate_catalog(raw)
-    # SPEC §4.2: the known fragments case MUST be exercised, else eval
-    # criterion (c) is silently un-exercised.
-    veh = raw["by_norm"].get("vehicle", [])
-    if len(veh) <= 1:
-        raise CatalogFixtureError(
-            f"by_norm['vehicle'] must have >1 uuid (fragments case), got {veh!r}"
+    # SPEC §4.2 wants a fragments case (same norm, >1 uuid) so eval
+    # criterion (c) is exercised. The smoke corpus plants one ('vehicle');
+    # a graded catalog of live-minted types cannot collide -- sophia
+    # hash-suffixes every minted name -- so absence is annotated loudly
+    # rather than fatal, and eval must report (c) as un-exercisable (#18).
+    fragment_norms = {
+        norm: uuids for norm, uuids in raw["by_norm"].items() if len(uuids) > 1
+    }
+    raw["fragments_case_present"] = bool(fragment_norms)
+    if not fragment_norms:
+        print(
+            "[fixtures] WARNING: catalog has no fragments case (no norm with "
+            ">1 uuid); eval criterion (c) is un-exercisable on this corpus",
+            flush=True,
         )
     return raw
 

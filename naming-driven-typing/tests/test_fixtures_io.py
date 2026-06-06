@@ -309,14 +309,27 @@ def test_catalog_freeze_by_norm_order_is_byte_deterministic(tmp_path: Path) -> N
     assert a.read_bytes() == b.read_bytes()
 
 
-def test_load_catalog_raises_when_vehicle_not_fragmented(tmp_path: Path) -> None:
+def test_load_catalog_annotates_missing_fragments_case(
+    tmp_path: Path, capsys
+) -> None:
+    """No norm with >1 uuid => loud warning + fragments_case_present=False
+    (a graded catalog of hash-suffixed minted names cannot collide; the
+    smoke corpus plants one -- #18)."""
     cat = _good_catalog()
     del cat["catalog_by_uuid"]["t-veh2"]
-    cat["by_norm"]["vehicle"] = ["t-veh1"]  # only one => invariant broken
+    cat["by_norm"]["vehicle"] = ["t-veh1"]  # no fragments case anywhere
     path = tmp_path / "catalog.json"
     freeze_catalog(cat, path)
-    with pytest.raises(CatalogFixtureError, match="vehicle"):
-        load_catalog(path)
+    loaded = load_catalog(path)
+    assert loaded["fragments_case_present"] is False
+    assert "un-exercisable" in capsys.readouterr().out
+
+
+def test_load_catalog_flags_fragments_case_when_present(tmp_path: Path) -> None:
+    cat = _good_catalog()
+    path = tmp_path / "catalog.json"
+    freeze_catalog(cat, path)
+    assert load_catalog(path)["fragments_case_present"] is True
 
 
 def test_load_catalog_rejects_non_object_json(tmp_path: Path) -> None:

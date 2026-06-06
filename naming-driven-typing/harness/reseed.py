@@ -434,7 +434,10 @@ def main(argv: Optional[list[str]] = None) -> int:
     corpus_path = resolve_corpus_path(
         args.corpus, graded=args.graded, corpus_dir=_EXP_DIR / "corpus"
     )
-    fixtures_dir = _EXP_DIR / "fixtures"
+    # Graded fixtures get their own home: fixtures/ holds the COMMITTED
+    # smoke set the offline suite validates; overwriting it broke the
+    # suite (#18, found live).
+    fixtures_dir = _EXP_DIR / "fixtures" / ("graded" if args.graded else "")
     print(f"[reseed] corpus -> {corpus_path}", flush=True)
     print(f"[reseed] fixtures -> {fixtures_dir}", flush=True)
 
