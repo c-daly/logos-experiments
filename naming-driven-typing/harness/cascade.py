@@ -69,6 +69,13 @@ class PlacementRecord:
     residual_ids: tuple[str, ...] = ()
     events: tuple[str, ...] = ()
     self_reported: bool = True
+    # Re-parent bookkeeping (2026-06-06 contract): placement is a re-parent --
+    # the kept subgraph drops its existing IS_A edge and gains one to the chosen
+    # parent. `minted` is True when a NEW type node was created (mint), False
+    # when the subgraph attaches under an existing type (reuse). `chain` is
+    # always () now -- the IS_A structure lives in the graph, never rebuilt.
+    minted: bool = False
+    removed_parent_uuid: Optional[str] = None
 
 
 # ---- gates --------------------------------------------------------------
@@ -296,6 +303,116 @@ def simulate_group(
 
 
 # ---- full pass ----------------------------------------------------------
+
+def _depth_via_catalog(uuid: Optional[str], catalog_by_uuid: dict[str, dict]) -> int:
+    """Number of IS_A hops from `uuid` to the top of the existing structure.
+
+    A READ of structure that already exists in the catalog (mirrors the graph's
+    parent_uuid spine) -- never a reconstructed/stored chain (2026-06-06).
+    """
+    depth = 0
+    seen: set[str] = set()
+    cur = uuid
+    while cur and cur in catalog_by_uuid and cur not in seen:
+        seen.add(cur)
+        cur = catalog_by_uuid[cur].get("parent_uuid")
+        depth += 1
+    return depth
+
+
+def _root_target(
+    by_norm: dict[str, list[str]], catalog_by_uuid: dict[str, dict], realm: str = "entity"
+) -> tuple[Optional[str], str]:
+    uuids = by_norm.get(realm)
+    if uuids:
+        chosen = _disambiguate(list(uuids), catalog_by_uuid)
+        return chosen, catalog_by_uuid[chosen]["name"]
+    return None, realm
+
+
+def simulate_cluster_placement(
+    *,
+    cluster_id: str,
+    member_ids: list[str],
+    name: str,
+    parent: Optional[str],
+    residual_ids: list[str],
+    catalog_by_uuid: dict[str, dict],
+    by_norm: dict[str, list[str]],
+    current_parent_uuid: Optional[str] = None,
+    enforce_ceiling: bool = True,
+) -> PlacementRecord:
+    """Place ONE named cluster (2026-06-06 contract). Record-only, no writes.
+
+    The namer returns {name, parent, outliers}; placement is a RE-PARENT of the
+    kept subgraph (members - outliers): drop its existing IS_A edge
+    (`removed_parent_uuid`), add one to the chosen parent (`resolved_parent_uuid`).
+    parent=None => REUSE `name` as an existing type (attach under it, no new
+    node). parent set => MINT `name` under that existing parent (new node).
+    Attaching/minting under a domain root is always legal. No chain is built --
+    ancestry already exists in the graph; depth is a catalog read.
+    """
+    events: list[str] = []
+    canon = canonicalize(name)
+    over_specified = ceiling_violation(name)
+    residual_set = {m for m in residual_ids if m in set(member_ids)}
+    kept = [m for m in member_ids if m not in residual_set]
+
+    if not kept:
+        return PlacementRecord(
+            cluster_id=cluster_id, branch="RESIDUAL", assign_to="NEW", name=canon,
+            chain=(), member_ids=(), resolved_parent_uuid=None,
+            resolved_parent_name=None, covering_depth=0, floor_ok=True,
+            ceiling_ok=not over_specified, over_specified=over_specified,
+            residual_ids=tuple(sorted(residual_set)),
+            events=tuple(events + ["ALL_MEMBERS_RESIDUAL"]),
+            minted=False, removed_parent_uuid=current_parent_uuid,
+        )
+
+    if parent is None:
+        # REUSE: `name` should match an existing type; attach the subgraph there.
+        uuids = by_norm.get(canon)
+        if uuids:
+            target = _disambiguate(list(uuids), catalog_by_uuid)
+            if _is_protected_root(target, catalog_by_uuid):
+                events.append("REUSE_ROOT_COERCE_MINT")
+                parent_uuid, parent_name = target, catalog_by_uuid[target]["name"]
+                branch, minted, assign_to, placed = "G3_ROOT", True, "NEW", canon
+            else:
+                parent_uuid = target
+                parent_name = catalog_by_uuid[target]["name"]
+                branch, minted, assign_to, placed = "G1_REUSE", False, target, parent_name
+        else:
+            events.append("REUSE_UNRESOLVED_MINT_ROOT")
+            parent_uuid, parent_name = _root_target(by_norm, catalog_by_uuid)
+            branch, minted, assign_to, placed = "G3_ROOT", True, "NEW", canon
+    else:
+        # MINT `name` under an existing parent.
+        canon_parent = canonicalize(parent)
+        puuids = by_norm.get(canon_parent)
+        if puuids:
+            parent_uuid = _disambiguate(list(puuids), catalog_by_uuid)
+            parent_name = catalog_by_uuid[parent_uuid]["name"]
+        else:
+            events.append("PARENT_UNRESOLVED:" + str(parent))
+            parent_uuid, parent_name = _root_target(by_norm, catalog_by_uuid)
+        is_root = bool(catalog_by_uuid.get(parent_uuid or "", {}).get("is_root")) or (
+            parent_uuid is not None and _is_protected_root(parent_uuid, catalog_by_uuid)
+        )
+        branch = "G3_ROOT" if is_root else "G2_GRAFT"
+        minted, assign_to, placed = True, "NEW", canon
+
+    covering_depth = _depth_via_catalog(parent_uuid, catalog_by_uuid) + 1
+    return PlacementRecord(
+        cluster_id=cluster_id, branch=branch, assign_to=assign_to, name=placed,
+        chain=(), member_ids=tuple(kept), resolved_parent_uuid=parent_uuid,
+        resolved_parent_name=parent_name, covering_depth=covering_depth,
+        floor_ok=True,  # re-parent under an existing type/root is always legal
+        ceiling_ok=(not over_specified) if enforce_ceiling else True,
+        over_specified=over_specified, residual_ids=tuple(sorted(residual_set)),
+        events=tuple(events), minted=minted, removed_parent_uuid=current_parent_uuid,
+    )
+
 
 def simulate_cascade(
     groups: list[dict],
