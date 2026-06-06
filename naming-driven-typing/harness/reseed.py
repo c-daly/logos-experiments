@@ -465,6 +465,10 @@ def main(argv: Optional[list[str]] = None) -> int:
         milvus_host=os.environ.get("MILVUS_HOST", "localhost"),
         milvus_port=os.environ.get("MILVUS_PORT", "19530"),
     )
+    # Mandatory before any read: an unconnected sync makes get_embedding
+    # raise, which build_node_members swallows per-node -- the population
+    # silently collapses to zero (#18, found live).
+    sync.connect()
     result = reseed_and_build(
         client,
         sync,
