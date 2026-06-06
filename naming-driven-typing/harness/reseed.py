@@ -347,6 +347,7 @@ def reseed_and_build(
     min_cluster_size: int = 2,
     fixtures_dir: Optional[Path] = None,
     resume: bool = False,
+    no_clear: bool = False,
 ) -> dict[str, Any]:
     """Clear the graph, seed roots, cold-start ingest the corpus, cluster, build.
 
@@ -387,10 +388,17 @@ def reseed_and_build(
         settled = _settle_graph(client)
         print(f"[reseed] graph settled at {settled} nodes", flush=True)
     else:
-        seeder = HCGSeeder(client)
-        seeder.clear()
-        _clear_milvus_hcg()
-        seeder.seed_type_definitions()
+        if no_clear:
+            # Top-up mode (#18): re-post the corpus over the EXISTING graph;
+            # ingest-side dedup (embedding sibling-match) skips what already
+            # landed, so this is safe after a partial ingest. Gates below
+            # still decide whether the result is trustworthy.
+            print("[reseed] --no-clear: top-up ingest over existing graph", flush=True)
+        else:
+            seeder = HCGSeeder(client)
+            seeder.clear()
+            _clear_milvus_hcg()
+            seeder.seed_type_definitions()
         _ingest_corpus(client, corpus, hermes_url)
         settled = _settle_graph(client)
         print(f"[reseed] graph settled at {settled} nodes", flush=True)
@@ -505,6 +513,14 @@ def main(argv: Optional[list[str]] = None) -> int:
         ),
     )
     parser.add_argument(
+        "--no-clear",
+        action="store_true",
+        help=(
+            "top-up ingest: skip clear/seed, re-post the corpus over the "
+            "existing graph (dedup skips landed blocks), then build fixtures"
+        ),
+    )
+    parser.add_argument(
         "--resume",
         action="store_true",
         help=(
@@ -577,6 +593,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         min_cluster_size=args.min_cluster_size,
         fixtures_dir=fixtures_dir,
         resume=args.resume,
+        no_clear=args.no_clear,
     )
     meta = result["meta"]
     print(
