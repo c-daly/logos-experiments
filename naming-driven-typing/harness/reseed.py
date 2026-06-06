@@ -304,6 +304,28 @@ def _check_embedding_coverage(client: Any, sync: Any) -> None:
         )
 
 
+def _clear_milvus_hcg() -> None:
+    """Purge hcg_* Milvus collections alongside the Neo4j clear (#18).
+
+    seeder.clear() wipes Neo4j only. Stale type centroids from prior runs
+    otherwise RESURRECT dead types through the ingest classifier (679 ghost
+    centroids observed live: centroid matches -> type-def missing on the
+    cleared graph -> name falls back to the hash-suffixed uuid -> ghost
+    type-def MERGE-created). Delete-all keeps the collections (the live
+    sophia holds handles); flush forces the deletes visible before ingest.
+    """
+    from pymilvus import Collection, utility
+
+    for cname in utility.list_collections():
+        if not cname.startswith("hcg_"):
+            continue
+        col = Collection(cname)
+        col.load()
+        col.delete('uuid != ""')
+        col.flush()
+        print(f"[reseed] cleared milvus {cname}", flush=True)
+
+
 def reseed_and_build(
     client: Any,
     sync: Any,
@@ -355,6 +377,7 @@ def reseed_and_build(
     else:
         seeder = HCGSeeder(client)
         seeder.clear()
+        _clear_milvus_hcg()
         seeder.seed_type_definitions()
         _ingest_corpus(client, corpus, hermes_url)
         settled = _settle_graph(client)
