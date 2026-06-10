@@ -21,7 +21,7 @@ comparison is like-for-like in *construction*, not in code lineage.
 ² The old graph's Neo4j relationship count divided by 2 directions is
 approximate; the memo recorded ~2.6 edges/node.
 
-## Gate (thresholds provisional until Chris freezes them — plan §W0.1)
+## Gate (thresholds provisional until frozen on review — plan §W0.1)
 
 - Explained variance @k=128 ≥ 3× baseline (≥ 0.171): **0.145 — NEAR MISS
   (2.5×)**. Non-typing variant (honest signature number, IS_A excluded):
