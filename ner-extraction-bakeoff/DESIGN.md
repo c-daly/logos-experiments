@@ -25,9 +25,9 @@ The OpenAI arms reuse `hermes.combined_extractor.OpenAICombinedExtractor`; `clos
 
 ## Gold set
 
-Source: `logos-experiments/naming-driven-typing/corpus/corpus.jsonl` (16 curated sentences — animals/vehicles/instruments/plants/weather, simple and unambiguous, e.g. `"A narwhal is a marine mammal whose tusk spirals out from its jaw."`).
+**40 curated sentences** — the 16 from `logos-experiments/naming-driven-typing/corpus/corpus.jsonl` plus 24 authored in the same clean, unambiguous style across animals / vehicles / instruments / plants / weather / tools / food / structures / celestial (e.g. `"A narwhal is a marine mammal whose tusk spirals out from its jaw."`). 40 was chosen over 16 so close arms can actually be ranked, not just gross effects seen (n=16 has too wide a CI).
 
-Hand-labeled into `gold.jsonl`, one record per source sentence:
+Hand-labeled into `gold.jsonl` (committed): **112 entities, 64 relations, 20 distinct gold relations, zero dangling** (every relation's source/target is in its record's entity list). The deliberately compact 20-relation gold vocabulary (`IS_A`, `PART_OF`, `LOCATED_IN`, `PRODUCES`, `USED_FOR`, `AFFECTS`, …) is the reuse target an over-generating arm must still hit. One record per sentence:
 ```json
 {
   "text": "A narwhal is a marine mammal whose tusk spirals out from its jaw.",
@@ -78,7 +78,7 @@ Runs in the **hermes venv** (to import the extractors). `metrics.py` is pure and
 - **spaCy NER ceiling:** spaCy's default model recognizes PERSON/ORG/GPE/DATE etc., not domain entities like "narwhal"/"tusk" — expect low entity recall on this corpus. That is itself a finding (the free option's ceiling), not a bug.
 - **closed_vocab prompt:** the injected vocabulary is the live `logos:ontology:relations` snapshot (or, if absent, the distinct relations from the current graph) — capped to a prompt-sized list of the most frequent; the prompt instructs "reuse an existing relation when one fits; only coin a new one if none does."
 - **Determinism:** LLM arms at temperature 0; still re-run twice to note any nondeterminism in the compactness numbers.
-- **Small n:** 16 sentences is a first read, not a statistical verdict — enough to see a large compactness effect and a recall cliff. Extend the gold set if the result is borderline.
+- **n = 40:** enough to rank moderate effects and make the verdict defensible; still small enough that a near-tie between two arms should be read as "near-tie," and the gold set extended, rather than over-claimed.
 
 ## Non-goals
 
