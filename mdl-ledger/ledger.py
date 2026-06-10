@@ -36,6 +36,7 @@ from __future__ import annotations
 import math
 from collections import Counter, defaultdict
 from dataclasses import dataclass
+from types import MappingProxyType
 
 
 @dataclass(frozen=True)
@@ -52,6 +53,15 @@ class Snapshot:
     membership: dict[str, str]
     type_parents: dict[str, str | None]
     edges: tuple[tuple[str, str, str], ...]
+
+    def __post_init__(self) -> None:
+        # frozen=True only blocks field reassignment; proxy the dicts so
+        # in-place mutation is blocked too and the ops-are-pure contract is
+        # enforceable, not just conventional (review #36).
+        object.__setattr__(self, "membership", MappingProxyType(dict(self.membership)))
+        object.__setattr__(
+            self, "type_parents", MappingProxyType(dict(self.type_parents))
+        )
 
 
 def _log2(x: float) -> float:
@@ -75,36 +85,43 @@ def compute_ledger(s: Snapshot) -> dict:
         + 16.0 * n_rels
     )
 
-    # membership term, Laplace over types
-    def node_cost(t: str) -> float:
-        return -_log2((members[t] + 1) / (n_nodes + n_types))
+    # membership term, Laplace over types -- costs precomputed once per
+    # type; sum(tgt_type_by_rel[rel].values()) == rel_counts[rel], so the
+    # per-edge denominator is an O(1) lookup (review #36 perf pass).
+    node_costs = {t: -_log2((members[t] + 1) / (n_nodes + n_types)) for t in types}
 
-    L_data_nodes = sum(node_cost(t) for t in s.membership.values())
+    L_data_nodes = sum(node_costs[t] for t in s.membership.values())
 
     # edge terms
     tgt_type_by_rel: dict[str, Counter] = defaultdict(Counter)
     for rel, _, tgt in s.edges:
         tgt_type_by_rel[rel][s.membership.get(tgt, "?")] += 1
 
+    neg_log2_p_rel = {
+        rel: -_log2((count + 1) / (n_edges + n_rels))
+        for rel, count in rel_counts.items()
+    }
+    log2_target_pick = {t: _log2(max(members[t], 1)) for t in types}
+    log2_target_pick["?"] = 0.0
+
     def edge_cost(rel: str, tgt: str) -> float:
         t_tgt = s.membership.get(tgt, "?")
-        p_rel = (rel_counts[rel] + 1) / (n_edges + n_rels) if n_edges else 1.0
-        c = tgt_type_by_rel[rel]
-        p_t = (c[t_tgt] + 1) / (sum(c.values()) + n_types)
-        return -_log2(p_rel) - _log2(p_t) + _log2(max(members[t_tgt], 1))
+        p_t = (tgt_type_by_rel[rel][t_tgt] + 1) / (rel_counts[rel] + n_types)
+        return neg_log2_p_rel[rel] - _log2(p_t) + log2_target_pick[t_tgt]
 
-    L_data_edges = sum(edge_cost(rel, tgt) for rel, _, tgt in s.edges)
-
-    # attribution for the report: node cost + its outgoing edge costs
-    per_node = {u: node_cost(t) for u, t in s.membership.items()}
+    # single pass: total + per-node attribution (node cost + outgoing edges)
+    per_node = {u: node_costs[t] for u, t in s.membership.items()}
+    L_data_edges = 0.0
     for rel, src, tgt in s.edges:
+        cost = edge_cost(rel, tgt)
+        L_data_edges += cost
         if src in per_node:
-            per_node[src] += edge_cost(rel, tgt)
+            per_node[src] += cost
     top_nodes = sorted(per_node.items(), key=lambda kv: -kv[1])[:20]
 
     per_type = defaultdict(float)
-    for u, t in s.membership.items():
-        per_type[t] += node_cost(t)
+    for t in s.membership.values():
+        per_type[t] += node_costs[t]
     top_types = sorted(per_type.items(), key=lambda kv: -kv[1])[:10]
 
     return {

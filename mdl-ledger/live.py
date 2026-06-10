@@ -60,7 +60,25 @@ def fetch_snapshot(driver) -> Snapshot:
     if dropped:
         print(f"warn: dropped {dropped} malformed edge node(s)", file=sys.stderr)
 
-    # membership: IS_A target name (lexicographic min on ties), kind fallback
+    # membership: IS_A target name (lexicographic min on ties), kind fallback.
+    # Typing is IS_A-only by design; INSTANCE_OF/SUBTYPE_OF are excluded from
+    # data edges as typing-shaped extraction artifacts (B6 territory) but are
+    # NOT membership sources. Verified on the live graph 2026-06-10 (zero
+    # such edges target a type_definition); warn if that assumption breaks.
+    shadow_typing = sum(
+        1
+        for rel, _, tgt in edges
+        if rel in ("INSTANCE_OF", "SUBTYPE_OF")
+        and (rec := nodes.get(tgt)) is not None
+        and rec[0] == "type_definition"
+    )
+    if shadow_typing:
+        print(
+            f"warn: {shadow_typing} INSTANCE_OF/SUBTYPE_OF edge(s) target a "
+            "type_definition -- membership only follows IS_A, so these are "
+            "not counted; review whether the typing model changed",
+            file=sys.stderr,
+        )
     candidates: dict[str, list[str]] = {}
     type_parent_candidates: dict[str, list[str]] = {}
     for rel, src, tgt in edges:

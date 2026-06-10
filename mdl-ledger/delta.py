@@ -16,17 +16,23 @@ Op = Callable[[Snapshot], Snapshot]
 
 
 def merge_types(loser: str, winner: str) -> Op:
-    """Retype every member of `loser` to `winner`; drop `loser`."""
+    """Retype every member of `loser` to `winner`; drop `loser`.
+
+    If `loser` was `winner`'s parent, `winner` inherits `loser`'s parent
+    rather than becoming its own parent (review #36)."""
 
     def apply(s: Snapshot) -> Snapshot:
         membership = {
             u: (winner if t == loser else t) for u, t in s.membership.items()
         }
-        type_parents = {
-            t: (winner if p == loser else p)
-            for t, p in s.type_parents.items()
-            if t != loser
-        }
+        loser_parent = s.type_parents.get(loser)
+        type_parents = {}
+        for t, p in s.type_parents.items():
+            if t == loser:
+                continue
+            if p == loser:
+                p = loser_parent if t == winner else winner
+            type_parents[t] = p
         return Snapshot(membership, type_parents, s.edges)
 
     return apply
@@ -39,6 +45,11 @@ def evict_type(t: str) -> Op:
     def apply(s: Snapshot) -> Snapshot:
         parent = s.type_parents.get(t)
         fallback = parent if parent is not None else "entity"
+        if fallback == t:
+            raise ValueError(
+                f"cannot evict root type {t!r}: members would fall back to "
+                "the evicted type itself (review #36)"
+            )
         membership = {
             u: (fallback if tt == t else tt) for u, tt in s.membership.items()
         }

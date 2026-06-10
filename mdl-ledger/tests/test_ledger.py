@@ -9,8 +9,6 @@ Encoding v1-as-built makes edge targets type-aware precisely so the second
 gate can hold at all; see ledger.py docstring.
 """
 
-import math
-
 import pytest
 
 from delta import evict_type, graft, merge_types, mint_type
@@ -93,6 +91,30 @@ class TestSanityGates:
         s2 = Snapshot(membership, tp, s.edges)
         # moving 'disease' under 'condition' keeps hierarchy-edge COUNT equal
         assert delta(s2, graft("disease", "condition")) == pytest.approx(0.0)
+
+
+class TestReviewRegressions:
+    def test_merging_parent_into_child_leaves_no_self_loop(self):
+        # review #36: loser is winner's parent -> winner must inherit
+        # loser's parent, not become its own.
+        s = _coherent_snapshot()  # disease -> entity (root)
+        merged = merge_types("entity", "disease")(s)
+        assert merged.type_parents["disease"] is None
+        assert "entity" not in merged.type_parents
+        assert all(p != "disease" or t != "disease" for t, p in merged.type_parents.items())
+
+    def test_evicting_a_root_type_raises(self):
+        # review #36: members of an evicted parentless root would fall back
+        # to the evicted type itself -- refuse loudly.
+        s = _coherent_snapshot()
+        with pytest.raises(ValueError, match="root type"):
+            evict_type("entity")(s)
+
+    def test_snapshot_dicts_are_immutable(self):
+        # review #36: frozen=True alone doesn't stop in-place mutation.
+        s = _coherent_snapshot()
+        with pytest.raises(TypeError):
+            s.membership["e0"] = "something_else"
 
 
 class TestDeltaConsistency:
