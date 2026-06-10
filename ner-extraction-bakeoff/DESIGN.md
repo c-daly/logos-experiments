@@ -18,10 +18,10 @@ Each arm runs the same extraction on the same 16 gold sentences; scored against 
 |-----|-----|-----|-----------|
 | `baseline` | OpenAI combined (NER+RE, one call), current model | — | the production default; the thing to beat |
 | `spacy` | `SpacyNERProvider` | `SpacyRelationExtractor` | free/local; RE maps verbs→~12 fixed relations (compact by construction) |
-| `closed_vocab` | OpenAI combined | + known relation vocabulary injected into the prompt with reuse-don't-mint pressure | keeps OpenAI recall, constrains relation sprawl (H2 at the prompt) |
-| `cheap_model` | OpenAI combined on a cheaper model tier | — | tests the "tone down the model" cost lever |
+| `closed_vocab` | gpt-4o-mini + open prompt + known relation vocabulary injected (reuse-don't-mint) | — | keeps OpenAI recall, constrains relation sprawl (H2 at the prompt) |
+| `big_model` | gpt-4o + open prompt (no vocab) | — | the control: does a *bigger* model over-generate less, or is sprawl model-independent? |
 
-The OpenAI arms reuse `hermes.combined_extractor.OpenAICombinedExtractor`; `closed_vocab` is built **in the harness** (a vocab-injected system prompt via `hermes.llm.generate_completion`) so production code is untouched. `spacy` uses `hermes.ner_provider.SpacyNERProvider` + `hermes.relation_extractor.SpacyRelationExtractor`.
+**Note (verified 2026-06-10):** the production extractor already runs `gpt-4o-mini` (`HERMES_LLM_MODEL` unset → default `gpt-4o-mini`), which *is* the cheap tier. So a "cheaper model" arm is moot; the useful 4th arm is the opposite control — `big_model` (gpt-4o) — which tells us whether staying on the cheap model is what's causing over-generation, or whether the lever is spaCy/closed-vocab regardless of spend. `baseline` reuses `hermes.combined_extractor.OpenAICombinedExtractor` (production path); `closed_vocab` and `big_model` are built **in the harness** via `hermes.llm.generate_completion` with a shared open prompt (model passed **per call** — the only reliable override, since `HERMES_LLM_MODEL` is read once at provider init), so production code is untouched. `spacy` uses `hermes.ner_provider.SpacyNERProvider` + `hermes.relation_extractor.SpacyRelationExtractor`.
 
 ## Gold set
 

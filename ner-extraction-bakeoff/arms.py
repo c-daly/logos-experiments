@@ -47,11 +47,6 @@ async def baseline(text: str):
     return await _combined(text, model=None)
 
 
-async def cheap_model(text: str):
-    model = os.environ.get("BAKEOFF_CHEAP_MODEL", "gpt-4o-mini")
-    return await _combined(text, model=model)
-
-
 async def spacy(text: str):
     from hermes.ner_provider import SpacyNERProvider
     from hermes.relation_extractor import SpacyRelationExtractor
@@ -63,14 +58,46 @@ async def spacy(text: str):
     return _norm_entities(entities), _norm_relations(relations)
 
 
-_CLOSED_SYSTEM = (
+# Shared open NER+RE prompt. closed_vocab appends the reuse-vocab clause;
+# big_model uses it unchanged on a larger model. Keeping one base prompt
+# means closed_vocab vs the LLM arms differ only by the vocab clause / model.
+_BASE_SYSTEM = (
     "You extract entities and relations from text for a knowledge graph.\n"
     "Return ONLY JSON: {\"entities\":[{\"name\":..,\"type\":..}],"
     "\"relations\":[{\"source\":..,\"relation\":..,\"target\":..}]}.\n"
-    "For each relation, REUSE a relation from this known vocabulary when one "
-    "fits; only coin a NEW relation label if none of these fit:\n{vocab}\n"
     "source and target must be names from your entities list."
 )
+_VOCAB_CLAUSE = (
+    "\nFor each relation, REUSE a relation from this known vocabulary when one "
+    "fits; only coin a NEW relation label if none of these fit:\n{vocab}"
+)
+
+
+async def _llm_extract(text: str, system: str, model: str | None):
+    """Run an open-prompt NER+RE extraction via generate_completion. The
+    model is passed PER CALL (the only reliable override -- HERMES_LLM_MODEL
+    is read at provider init, which is cached)."""
+    from hermes.llm import generate_completion
+
+    result = await generate_completion(
+        messages=[
+            {"role": "system", "content": system},
+            {"role": "user", "content": text},
+        ],
+        model=model,
+        temperature=0.0,
+        max_tokens=1024,
+        metadata={"scenario": "bakeoff"},
+    )
+    content = result.get("choices", [{}])[0].get("message", {}).get("content", "")
+    try:
+        data = json.loads(content)
+    except json.JSONDecodeError:
+        import re as _re
+
+        m = _re.search(r"```(?:json)?\s*(.*?)```", content, _re.DOTALL)
+        data = json.loads(m.group(1)) if m else {"entities": [], "relations": []}
+    return _norm_entities(data.get("entities")), _norm_relations(data.get("relations"))
 
 
 def relation_vocabulary(limit: int = 120) -> list[str]:
@@ -92,32 +119,23 @@ def relation_vocabulary(limit: int = 120) -> list[str]:
 
 
 async def closed_vocab(text: str):
-    from hermes.llm import generate_completion
-
+    """Same model as baseline (gpt-4o-mini), but the prompt injects the known
+    relation vocabulary with reuse-don't-mint pressure."""
     vocab = ", ".join(relation_vocabulary())
-    result = await generate_completion(
-        messages=[
-            {"role": "system", "content": _CLOSED_SYSTEM.format(vocab=vocab)},
-            {"role": "user", "content": text},
-        ],
-        temperature=0.0,
-        max_tokens=1024,
-        metadata={"scenario": "bakeoff_closed_vocab"},
-    )
-    content = result.get("choices", [{}])[0].get("message", {}).get("content", "")
-    try:
-        data = json.loads(content)
-    except json.JSONDecodeError:
-        import re as _re
+    system = _BASE_SYSTEM + _VOCAB_CLAUSE.format(vocab=vocab)
+    return await _llm_extract(text, system, model=None)
 
-        m = _re.search(r"```(?:json)?\s*(.*?)```", content, _re.DOTALL)
-        data = json.loads(m.group(1)) if m else {"entities": [], "relations": []}
-    return _norm_entities(data.get("entities")), _norm_relations(data.get("relations"))
+
+async def big_model(text: str):
+    """Open prompt (no vocab constraint) on a larger model -- does a bigger
+    model over-generate LESS, or is over-generation model-independent?"""
+    model = os.environ.get("BAKEOFF_BIG_MODEL", "gpt-4o")
+    return await _llm_extract(text, _BASE_SYSTEM, model=model)
 
 
 ARMS = {
     "baseline": baseline,
     "spacy": spacy,
     "closed_vocab": closed_vocab,
-    "cheap_model": cheap_model,
+    "big_model": big_model,
 }
