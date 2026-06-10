@@ -27,7 +27,7 @@ COLS = ["predicate", "df", "proposed_target", "tier", "evidence", "review"]
 
 def load_rows(path: Path) -> list[Row]:
     rows = []
-    for d in csv.DictReader(path.open()):
+    for d in csv.DictReader(path.open(encoding="utf-8")):
         rows.append(
             Row(
                 d["predicate"], int(d["df"]), d["proposed_target"],
@@ -38,7 +38,7 @@ def load_rows(path: Path) -> list[Row]:
 
 
 def write_rows(rows: list[Row], path: Path) -> None:
-    with path.open("w", newline="") as f:
+    with path.open("w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(COLS)
         for r in rows:
@@ -52,7 +52,7 @@ def main() -> None:
     args = ap.parse_args()
 
     rows = load_rows(Path(args.mapping))
-    snapshot = json.loads(Path(args.snapshot).read_text())
+    snapshot = json.loads(Path(args.snapshot).read_text(encoding="utf-8"))
     one_offs = [r.predicate for r in rows]
     # Targets are genuine survivors only -- never a predicate that is itself in
     # the consolidation set (the committed table's df and the live snapshot's

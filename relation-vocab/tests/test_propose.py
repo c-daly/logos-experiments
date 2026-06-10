@@ -188,6 +188,12 @@ class TestNearestSurvivors:
         out = nearest_survivors(["DUP"], {"DUP", "OTHER"}, vectors)
         assert out["DUP"][0] == "OTHER"
 
+    def test_lone_self_survivor_yields_no_entry(self):
+        # if the ONLY survivor is the predicate itself, there is no target:
+        # it must not self-map at sim -1.0 (the masked-argmax edge case)
+        out = nearest_survivors(["DUP"], {"DUP"}, {"DUP": [1.0, 0.0]})
+        assert "DUP" not in out
+
     def test_one_off_without_vector_is_skipped(self):
         out = nearest_survivors(["NOVEC"], {"CAUSES"}, {"CAUSES": [1.0, 0.0]})
         assert "NOVEC" not in out

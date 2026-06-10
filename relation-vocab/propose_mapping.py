@@ -114,7 +114,7 @@ def main() -> None:
         print(f"embedding evidence pass skipped: {exc}", file=sys.stderr)
 
     out = Path(__file__).parent / "mapping.csv"
-    with out.open("w", newline="") as f:
+    with out.open("w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["predicate", "df", "proposed_target", "tier", "evidence", "review"])
         for r in rows:

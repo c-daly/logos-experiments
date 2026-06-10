@@ -30,12 +30,18 @@ def load_vectors(
     hit the API; the cache is keyed by surface and re-used across runs."""
     vectors: dict[str, list[float]] = {}
     if cache.exists():
-        vectors = json.loads(cache.read_text())
+        vectors = json.loads(cache.read_text(encoding="utf-8"))
     missing = [p for p in preds if p not in vectors]
     if missing:
         import httpx
 
-        key = os.environ["OPENAI_API_KEY"]
+        key = os.environ.get("OPENAI_API_KEY")
+        if not key:
+            raise RuntimeError(
+                f"{len(missing)} predicate(s) are not in the cache and "
+                "OPENAI_API_KEY is not set, so they cannot be embedded. Set the "
+                f"key, or provide a populated cache at {cache}."
+            )
         for i in range(0, len(missing), chunk):
             batch = missing[i : i + chunk]
             resp = httpx.post(
@@ -48,7 +54,7 @@ def load_vectors(
             for item in sorted(resp.json()["data"], key=lambda x: x["index"]):
                 vectors[batch[item["index"]]] = item["embedding"]
         cache.parent.mkdir(parents=True, exist_ok=True)
-        cache.write_text(json.dumps(vectors))
+        cache.write_text(json.dumps(vectors), encoding="utf-8")
     return vectors
 
 
@@ -68,6 +74,7 @@ def nearest_survivors(
     mat = np.asarray([vectors[s] for s in surv], dtype="float32")
     mat = mat / np.linalg.norm(mat, axis=1, keepdims=True).clip(min=1e-9)
 
+    surv_idx = {s: idx for idx, s in enumerate(surv)}
     out: dict[str, tuple[str, float]] = {}
     for p in one_offs:
         v = vectors.get(p)
@@ -78,9 +85,10 @@ def nearest_survivors(
         if norm == 0.0:
             continue
         sims = mat @ (vec / norm)
+        if p in surv_idx:  # a predicate is never its own consolidation target
+            if len(surv) == 1:
+                continue  # the lone survivor is p itself -> no target
+            sims[surv_idx[p]] = -1.0
         i = int(sims.argmax())
-        if surv[i] == p:  # a predicate is never its own consolidation target
-            sims[i] = -1.0
-            i = int(sims.argmax())
         out[p] = (surv[i], float(sims[i]))
     return out
