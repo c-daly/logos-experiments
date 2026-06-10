@@ -1,0 +1,47 @@
+[
+  {
+    "dim": 3072,
+    "knn_acc": 0.502,
+    "silhouette": -0.009
+  },
+  {
+    "dim": 2048,
+    "knn_acc": 0.499,
+    "silhouette": -0.011
+  },
+  {
+    "dim": 1536,
+    "knn_acc": 0.5,
+    "silhouette": -0.011
+  },
+  {
+    "dim": 1024,
+    "knn_acc": 0.498,
+    "silhouette": -0.013
+  },
+  {
+    "dim": 768,
+    "knn_acc": 0.496,
+    "silhouette": -0.014
+  },
+  {
+    "dim": 512,
+    "knn_acc": 0.482,
+    "silhouette": -0.016
+  },
+  {
+    "dim": 256,
+    "knn_acc": 0.468,
+    "silhouette": -0.022
+  },
+  {
+    "dim": 128,
+    "knn_acc": 0.442,
+    "silhouette": -0.038
+  },
+  {
+    "dim": 64,
+    "knn_acc": 0.374,
+    "silhouette": -0.076
+  }
+]

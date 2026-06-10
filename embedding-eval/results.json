@@ -1,0 +1,57 @@
+[
+  {
+    "model": "openai-3-large",
+    "dim": 3072,
+    "eff_rank": 1772.0,
+    "dims_95pct_var": 1020,
+    "anisotropy": 0.164,
+    "silhouette": -0.009,
+    "knn_acc_raw": 0.502,
+    "knn_acc_whitened": 0.313,
+    "cost": "API $0.13/Mtok"
+  },
+  {
+    "model": "openai-3-small",
+    "dim": 1536,
+    "eff_rank": 1011.1,
+    "dims_95pct_var": 644,
+    "anisotropy": 0.176,
+    "silhouette": -0.025,
+    "knn_acc_raw": 0.439,
+    "knn_acc_whitened": 0.372,
+    "cost": "API $0.02/Mtok"
+  },
+  {
+    "model": "st-minilm-l6",
+    "dim": 384,
+    "eff_rank": 310.8,
+    "dims_95pct_var": 239,
+    "anisotropy": 0.111,
+    "silhouette": -0.055,
+    "knn_acc_raw": 0.38,
+    "knn_acc_whitened": 0.361,
+    "cost": "local/free"
+  },
+  {
+    "model": "st-mpnet-base",
+    "dim": 768,
+    "eff_rank": 519.3,
+    "dims_95pct_var": 322,
+    "anisotropy": 0.105,
+    "silhouette": -0.05,
+    "knn_acc_raw": 0.397,
+    "knn_acc_whitened": 0.388,
+    "cost": "local/free"
+  },
+  {
+    "model": "st-bge-base",
+    "dim": 768,
+    "eff_rank": 534.2,
+    "dims_95pct_var": 356,
+    "anisotropy": 0.476,
+    "silhouette": -0.05,
+    "knn_acc_raw": 0.4,
+    "knn_acc_whitened": 0.362,
+    "cost": "local/free"
+  }
+]
