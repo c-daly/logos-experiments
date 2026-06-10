@@ -8,8 +8,11 @@ it must be deterministic and never fold guarded forms (short tokens, -SS).
 
 import pytest
 
+from embed_evidence import nearest_survivors
 from propose import (
     Edge,
+    Row,
+    apply_embed_fallback,
     canon,
     content_tokens,
     fold_token,
@@ -127,3 +130,70 @@ class TestProposals:
             for r in propose_mappings(list(reversed(_edges())))
         ]
         assert a == b
+
+
+class TestEmbedFallback:
+    """The complementary name-embedding pass only touches evidence-less keeps."""
+
+    def _keep(self, p):
+        return Row(p, 1, "", "keep", "")
+
+    def test_high_sim_keep_becomes_embed_proposal(self):
+        rows = [self._keep("AFFILIATED_WITH")]
+        apply_embed_fallback(rows, {"AFFILIATED_WITH": ("ASSOCIATED_WITH", 0.87)})
+        r = rows[0]
+        assert r.tier == "embed"
+        assert r.target == "ASSOCIATED_WITH"
+        assert "0.87" in r.evidence
+
+    def test_low_sim_keep_stays_keep_but_records_neighbour(self):
+        rows = [self._keep("ACCOMPANIED_BY")]
+        apply_embed_fallback(rows, {"ACCOMPANIED_BY": ("ASSOCIATED_WITH", 0.59)})
+        r = rows[0]
+        assert r.tier == "keep"
+        assert r.target == ""  # not a proposal, just evidence
+        assert "nearest (kept)" in r.evidence and "0.59" in r.evidence
+
+    def test_existing_evidence_is_untouched(self):
+        # polarity keeps carry their own evidence and must not be overwritten
+        rows = [Row("DOES_NOT_REFER_TO", 1, "", "keep", "polarity marker -- review")]
+        apply_embed_fallback(rows, {"DOES_NOT_REFER_TO": ("REFERS_TO", 0.99)})
+        assert rows[0].tier == "keep" and "polarity" in rows[0].evidence
+
+    def test_fired_tier_is_untouched(self):
+        rows = [Row("LOCATES_IN", 1, "LOCATED_IN", "high", "canon collision: LOCATE_IN")]
+        apply_embed_fallback(rows, {"LOCATES_IN": ("SOMETHING_ELSE", 0.99)})
+        assert rows[0].tier == "high" and rows[0].target == "LOCATED_IN"
+
+    def test_keep_without_neighbour_stays_bare(self):
+        rows = [self._keep("UTTERLY_UNIQUE")]
+        apply_embed_fallback(rows, {})
+        assert rows[0].tier == "keep" and rows[0].evidence == ""
+
+
+class TestNearestSurvivors:
+    def test_picks_highest_cosine_survivor(self):
+        vectors = {
+            "CAUSES": [1.0, 0.0],
+            "TRIGGERS": [0.99, 0.14],  # closest to CAUSES
+            "UNRELATED": [0.0, 1.0],
+        }
+        out = nearest_survivors(["TRIGGERS"], {"CAUSES", "UNRELATED"}, vectors)
+        nn, sim = out["TRIGGERS"]
+        assert nn == "CAUSES" and sim > 0.95
+
+    def test_never_maps_a_predicate_to_itself(self):
+        # a one-off that also (erroneously) appears among survivors
+        vectors = {"DUP": [1.0, 0.0], "OTHER": [0.6, 0.8]}
+        out = nearest_survivors(["DUP"], {"DUP", "OTHER"}, vectors)
+        assert out["DUP"][0] == "OTHER"
+
+    def test_lone_self_survivor_yields_no_entry(self):
+        # if the ONLY survivor is the predicate itself, there is no target:
+        # it must not self-map at sim -1.0 (the masked-argmax edge case)
+        out = nearest_survivors(["DUP"], {"DUP"}, {"DUP": [1.0, 0.0]})
+        assert "DUP" not in out
+
+    def test_one_off_without_vector_is_skipped(self):
+        out = nearest_survivors(["NOVEC"], {"CAUSES"}, {"CAUSES": [1.0, 0.0]})
+        assert "NOVEC" not in out

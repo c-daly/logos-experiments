@@ -97,22 +97,43 @@ def main() -> None:
         driver.close()
 
     rows = propose_mappings(edges)
+
+    # Complementary name-embedding evidence pass (fail-soft: the proposer still
+    # works without it, e.g. with no OPENAI_API_KEY). Gives evidence-less keep
+    # rows a nearest neighbour and promotes no-shared-token synonyms to `embed`.
+    try:
+        from embed_evidence import load_vectors, nearest_survivors
+        from propose import apply_embed_fallback
+
+        df = Counter(e.relation for e in edges)
+        one_offs = [r.predicate for r in rows]
+        survivors = {r for r, c in df.items() if c > 1} - set(one_offs)
+        vectors = load_vectors(sorted(survivors | set(one_offs)))
+        rows = apply_embed_fallback(rows, nearest_survivors(one_offs, survivors, vectors))
+    except Exception as exc:  # noqa: BLE001
+        print(f"embedding evidence pass skipped: {exc}", file=sys.stderr)
+
     out = Path(__file__).parent / "mapping.csv"
-    with out.open("w", newline="") as f:
+    with out.open("w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["predicate", "df", "proposed_target", "tier", "evidence", "review"])
         for r in rows:
             w.writerow([r.predicate, r.df, r.target, r.tier, r.evidence, r.review])
 
     tiers = Counter(r.tier for r in rows)
-    covered = sum(1 for r in rows if r.tier != "keep")
+    proposals = sum(1 for r in rows if r.tier != "keep")  # rows with a fold target
+    annotated = sum(1 for r in rows if r.evidence)  # incl. keep nearest-neighbour
     total = len(rows)
     print(f"relation-vocab proposer -- {datetime.now(timezone.utc).date().isoformat()}")
     print(f"semantic edges: {len(edges)}  df=1 predicates: {total}")
     print(f"tiers: {dict(tiers)}")
     print(
-        f"coverage (proposal with evidence): {covered}/{total} "
-        f"= {covered / total:.1%}  (ticket gate: >=80%)"
+        f"proposal coverage (a fold target): {proposals}/{total} "
+        f"= {proposals / total:.1%}  (ticket gate: >=80%)"
+    )
+    print(
+        f"rows annotated with evidence (incl. keep nearest-neighbour): "
+        f"{annotated}/{total} = {annotated / total:.1%}  (review aid, not the gate)"
     )
     print(f"written: {out}")
 

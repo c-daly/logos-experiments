@@ -179,3 +179,50 @@ def propose_mappings(edges: list[Edge]) -> list[Row]:
     tier_order = {"high": 0, "medium": 1, "low": 2, "keep": 3}
     rows.sort(key=lambda r: (tier_order[r.tier], r.predicate))
     return rows
+
+
+# Above this cosine, a name-embedding nearest neighbour is treated as a
+# mappable synonym (a fold the token pass missed, e.g. no shared tokens);
+# below it the predicate stays `keep` but the neighbour is recorded so the
+# row is no longer evidence-less.
+EMBED_MAP_THRESHOLD = 0.85
+
+TIER_ORDER = {"high": 0, "medium": 1, "low": 2, "embed": 3, "keep": 4}
+
+
+def apply_embed_fallback(
+    rows: list[Row],
+    embed_nn: dict[str, tuple[str, float]],
+    threshold: float = EMBED_MAP_THRESHOLD,
+) -> list[Row]:
+    """Complementary name-embedding evidence pass (logos-experiments#34).
+
+    Enriches only the rows the canon/token/signature passes left as a bare
+    ``keep`` (empty evidence). Each gets its nearest surviving predicate by
+    embedding cosine:
+
+    - ``cos >= threshold`` -> tier ``embed``, target = NN. A real proposal:
+      a synonym with no shared tokens (``AFFILIATED_WITH``/``ASSOCIATED_WITH``)
+      that the token pass cannot see.
+    - ``cos <  threshold``  -> stays ``keep``, but the NN is recorded as
+      evidence, so the row counts toward the >=80%-with-evidence gate.
+
+    Rows that already fired a tier -- including polarity ``keep`` rows, which
+    carry their own evidence -- are left untouched. ``embed_nn`` maps each
+    df=1 predicate to ``(nearest_survivor, cosine)``. Mutates and returns
+    ``rows`` (re-sorted by tier).
+    """
+    for r in rows:
+        if r.tier != "keep" or r.evidence:
+            continue
+        hit = embed_nn.get(r.predicate)
+        if hit is None:
+            continue
+        nn, cos = hit
+        if cos >= threshold:
+            r.tier, r.target = "embed", nn
+            r.evidence = f"embed nn cos={cos:.2f} -> {nn}"
+        else:
+            r.evidence = f"nearest (kept): {nn} cos={cos:.2f}"
+    rows.sort(key=lambda r: (TIER_ORDER.get(r.tier, 9), r.predicate))
+    return rows
