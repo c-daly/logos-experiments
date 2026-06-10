@@ -20,14 +20,14 @@ def _snap(**counts):
 
 
 class TestSelectFolds:
-    def test_default_tiers_only(self):
+    def test_default_scope_is_high_embed_exact_medium(self):
         rows = [
             _row("A", "X", "high"),
             _row("B", "Y", "embed"),
-            _row("C", "Z", "medium"),  # not in default tiers
-            _row("D", "", "keep"),  # no target
+            _row("C", "Z", "medium"),  # exact (non-lossy) -> in default scope now
+            _row("D", "", "keep"),  # no target -> excluded
         ]
-        assert select_folds(rows) == [("A", "X"), ("B", "Y")]
+        assert select_folds(rows) == [("A", "X"), ("B", "Y"), ("C", "Z")]
 
     def test_review_accept_overrides_tier(self):
         rows = [_row("C", "Z", "medium", review="accept")]
