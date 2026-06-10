@@ -80,14 +80,30 @@ def select_folds(
             if is_lossy(r) and not include_lossy:
                 continue
             folds.append((r["predicate"], target))
-    return folds
+    # de-dup by source: a predicate folds to exactly one target (first wins);
+    # a duplicate-predicate row would otherwise double the rollback/SET work.
+    seen, deduped = set(), []
+    for src, tgt in folds:
+        if src not in seen:
+            seen.add(src)
+            deduped.append((src, tgt))
+    return deduped
 
 
 def _resolve(target: str, fold_map: dict[str, str]) -> str:
-    """Follow a chain of folds to its ultimate target (A->B, B->C => A->C)."""
+    """Follow a chain of folds to its ultimate target (A->B, B->C => A->C).
+
+    Raises ValueError on a cycle (A->B, B->A) rather than silently returning a
+    wrong target -- a cyclic mapping is a data error the operator must fix.
+    """
+    path = [target]
     seen = {target}
-    while target in fold_map and fold_map[target] not in seen:
-        target = fold_map[target]
+    while target in fold_map:
+        nxt = fold_map[target]
+        if nxt in seen:
+            raise ValueError("cyclic mapping: " + " -> ".join(path + [nxt]))
+        target = nxt
+        path.append(target)
         seen.add(target)
     return target
 
@@ -158,13 +174,14 @@ def graph_counts(driver, srcs: list[str]) -> dict[str, int]:
         return s.execute_read(work)
 
 
-def apply_folds(driver, folds: list[tuple[str, str]]) -> tuple[int, list[dict]]:
-    """Rename relation on edge nodes, in one transaction. Returns (edges
-    changed, rollback rows) where each rollback row is {uuid, old, new}."""
+def capture_rollback(driver, folds: list[tuple[str, str]]) -> list[dict]:
+    """Read-only: (uuid, old, new) for every edge a fold would rename. Captured
+    BEFORE mutating so the rollback file can be persisted to disk first -- if
+    the file write fails, nothing has changed yet."""
     payload = [{"src": s, "tgt": t} for s, t in folds]
 
     def work(tx):
-        rollback = [
+        return [
             {"uuid": r["uuid"], "old": r["old"], "new": r["new"]}
             for r in tx.run(
                 "UNWIND $folds AS f "
@@ -173,13 +190,23 @@ def apply_folds(driver, folds: list[tuple[str, str]]) -> tuple[int, list[dict]]:
                 folds=payload,
             )
         ]
-        changed = tx.run(
+
+    with driver.session() as s:
+        return s.execute_read(work)
+
+
+def apply_folds(driver, folds: list[tuple[str, str]]) -> int:
+    """Rename relation on the edge nodes in one write transaction; returns the
+    number of edges changed. Run only after the rollback file is on disk."""
+    payload = [{"src": s, "tgt": t} for s, t in folds]
+
+    def work(tx):
+        return tx.run(
             "UNWIND $folds AS f "
             "MATCH (e:Node {type:'edge'}) WHERE e.relation = f.src "
             "SET e.relation = f.tgt RETURN count(e) AS n",
             folds=payload,
         ).single()["n"]
-        return changed, rollback
 
     with driver.session() as s:
         return s.execute_write(work)
@@ -262,6 +289,10 @@ def main() -> None:
         f"{proj['distinct_after']}  | edges moved ~{proj['edges_moved']}"
     )
 
+    if not folds and (args.apply or args.graph_check):
+        print("\nNo folds selected -- nothing to do.")
+        return
+
     if args.graph_check:
         driver = _driver()
         try:
@@ -280,14 +311,17 @@ def main() -> None:
 
     driver = _driver()
     try:
-        changed, rollback = apply_folds(driver, folds)
+        # Two-phase: capture rollback (read), persist it to disk, THEN mutate.
+        # If the file write fails, the graph is still untouched.
+        rollback = capture_rollback(driver, folds)
+        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        rollback_path = HERE / f"rollback_{stamp}.json"
+        rollback_path.write_text(json.dumps(rollback, indent=2), encoding="utf-8")
+        changed = apply_folds(driver, folds)
     finally:
         driver.close()
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    rollback_path = HERE / f"rollback_{stamp}.json"
-    rollback_path.write_text(json.dumps(rollback, indent=2), encoding="utf-8")
     print(f"\nAPPLIED: {changed} edges renamed across {len(folds)} folds.")
-    print(f"rollback written: {rollback_path} ({len(rollback)} edges)")
+    print(f"rollback written first: {rollback_path} ({len(rollback)} edges)")
 
 
 if __name__ == "__main__":

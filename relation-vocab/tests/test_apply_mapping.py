@@ -89,3 +89,18 @@ class TestProjectAfterFolds:
         # B and A both gone; C absorbs both
         assert proj["distinct_after"] == 1
         assert proj["df1_after"] == 0.0
+
+    def test_cyclic_folds_raise(self):
+        import pytest
+
+        with pytest.raises(ValueError, match="cyclic mapping"):
+            project_after_folds([("A", "B"), ("B", "A")], _snap(A=1, B=1))
+
+
+class TestDedup:
+    def test_duplicate_predicate_folds_once(self):
+        rows = [
+            _row("A", "X", "high"),
+            _row("A", "Y", "high"),  # dup predicate, different target -> first wins
+        ]
+        assert select_folds(rows) == [("A", "X")]
