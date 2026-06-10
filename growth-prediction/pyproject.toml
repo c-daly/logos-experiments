@@ -1,0 +1,17 @@
+[project]
+name = "growth-prediction"
+version = "0.1.0"
+description = "W2 growth-prediction harness: predict the next ingest block's edges from graph shape (logos-experiments#27, epic logos#557)"
+requires-python = ">=3.12"
+dependencies = [
+    "neo4j>=5.20.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
