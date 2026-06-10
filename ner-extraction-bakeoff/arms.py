@@ -244,12 +244,13 @@ async def big_model_clean(text: str):
     return await _llm_extract(text, system, model=model)
 
 
+# NB: contains literal JSON braces, so it must NOT be .format()'d directly --
+# only _VOCAB_CLAUSE (which has the {vocab} field) is formatted, then appended.
 _REL_ONLY_SYSTEM = (
     "You are given a text and a list of entities. Extract the relations "
     "BETWEEN those entities. Return ONLY JSON: "
     "{\"relations\":[{\"source\":..,\"relation\":..,\"target\":..}]}. "
     "source and target MUST be exact names from the given entities list."
-    + _VOCAB_CLAUSE
 )
 
 
@@ -263,7 +264,7 @@ async def hybrid_clean(text: str):
     if len(entities) < 2:
         return _norm_entities(entities), []
     names = [e["name"] for e in entities]
-    system = _REL_ONLY_SYSTEM.format(vocab=", ".join(_CLEAN_VOCAB))
+    system = _REL_ONLY_SYSTEM + _VOCAB_CLAUSE.format(vocab=", ".join(_CLEAN_VOCAB))
     result = await generate_completion(
         messages=[
             {"role": "system", "content": system},
