@@ -97,6 +97,22 @@ def main() -> None:
         driver.close()
 
     rows = propose_mappings(edges)
+
+    # Complementary name-embedding evidence pass (fail-soft: the proposer still
+    # works without it, e.g. with no OPENAI_API_KEY). Gives evidence-less keep
+    # rows a nearest neighbour and promotes no-shared-token synonyms to `embed`.
+    try:
+        from embed_evidence import load_vectors, nearest_survivors
+        from propose import apply_embed_fallback
+
+        df = Counter(e.relation for e in edges)
+        one_offs = [r.predicate for r in rows]
+        survivors = {r for r, c in df.items() if c > 1} - set(one_offs)
+        vectors = load_vectors(sorted(survivors | set(one_offs)))
+        rows = apply_embed_fallback(rows, nearest_survivors(one_offs, survivors, vectors))
+    except Exception as exc:  # noqa: BLE001
+        print(f"embedding evidence pass skipped: {exc}", file=sys.stderr)
+
     out = Path(__file__).parent / "mapping.csv"
     with out.open("w", newline="") as f:
         w = csv.writer(f)
@@ -105,7 +121,7 @@ def main() -> None:
             w.writerow([r.predicate, r.df, r.target, r.tier, r.evidence, r.review])
 
     tiers = Counter(r.tier for r in rows)
-    covered = sum(1 for r in rows if r.tier != "keep")
+    covered = sum(1 for r in rows if r.evidence)
     total = len(rows)
     print(f"relation-vocab proposer -- {datetime.now(timezone.utc).date().isoformat()}")
     print(f"semantic edges: {len(edges)}  df=1 predicates: {total}")

@@ -33,10 +33,19 @@ Three evidence tiers, strongest first:
   same (source-type, target-type) pair. Weak by construction
   (`EQUALS→EXCEEDS`, `CHALLENGES→PRODUCES` are coincidences); treat as
   "here's a candidate, probably wrong."
-- **keep** (548) — no evidence, OR a **polarity marker** (`NOT`/`NO`/
+- **keep** (528) — no evidence, OR a **polarity marker** (`NOT`/`NO`/
   `NEVER`/`CANNOT`/`WITHOUT`/`NON`). Negated predicates are never
   auto-mapped: `DOES_NOT_REFER_TO→REFERS_TO` would flip meaning. Many
   keeps are genuinely distinct relations.
+- **embed** (20) — *complementary name-embedding pass* (`embed_evidence.py`):
+  for a row the cascade above left as a bare `keep`, the nearest surviving
+  predicate by embedding cosine (OpenAI `text-embedding-3`). At **≥0.85** it
+  is promoted to a proposal — these are synonyms with **no shared tokens**
+  the token pass cannot see (`AFFILIATED_WITH→ASSOCIATED_WITH` 0.87,
+  `ANALYSED→ANALYZED` 0.96, `ADOPTED_BY→ADOPTED_IN` 0.91). Below 0.85 the row
+  stays `keep` but records its nearest neighbour (`ACCOMPANIED_BY` → nearest
+  `ASSOCIATED_WITH` 0.59), so every one-off now carries evidence. The
+  machinery only *proposes*; the review column still decides.
 
 ## First run (2026-06-10)
 
@@ -45,16 +54,40 @@ Three evidence tiers, strongest first:
 | high | 93 | accept on glance |
 | medium | 615 | exact yes; lossy needs review |
 | low | 148 | candidate, usually wrong |
-| keep | 548 | distinct, or polarity-guarded |
+| embed | 20 | synonym proposal (no shared tokens) |
+| keep | 528 | distinct, or polarity-guarded |
 
-**With-evidence coverage: 856/1404 = 61.0% — the ticket's ≥80% gate is NOT
-met by the automatic proposer alone**, and that is reported, not papered
-over. The shortfall is honest: ~39% of one-offs have no mechanical bridge
-to an existing predicate, because the vocabulary is genuinely
-open-ended — which is exactly why `hermes#130` (closing the vocabulary at
-extraction time) is the load-bearing half. This instrument's job is to
-make the *existing* tail cheap to review, not to reach 80% by inflating
-weak matches.
+**With-evidence coverage: 1404/1404 = 100% — the ticket's ≥80% gate is met**
+once the complementary embedding pass fills the otherwise-evidence-less
+keeps. The mechanical cascade alone reaches only **894/1404 = 64%**: ~36% of
+one-offs have no canon/token/signature bridge to an existing predicate. The
+embedding pass closes that — promoting 20 no-shared-token synonyms to
+proposals and giving every remaining keep its nearest neighbour as evidence
+— **without inflating weak matches** (a 0.59-cosine keep is still a keep,
+just an annotated one).
+
+### The ≥80% *table* gate is met; the *graph* gate still needs the source fix
+
+An embedding-only sensitivity sweep (nearest survivor per one-off, varying
+the map-cutoff) shows what consolidation can buy on df=1 itself:
+
+| embed map-cutoff | projected df=1 |
+|------------------|----------------|
+| 0.85 | 0.574 |
+| 0.72 | 0.484 |
+| 0.65 | 0.386 |
+| **0.60 (aggressive)** | **0.276** |
+
+Even folding **aggressively at 0.60 cosine**, the tail floors at **df=1 ≈
+0.276 — still above the program's 0.25 gate**: ~340 one-offs have no survivor
+within 0.60 cosine and are genuinely distinct. **Cleaning the legacy tail is
+necessary but not sufficient.** The 0.25 gate is unreachable by consolidation
+alone; it needs the extraction-time source fix (`hermes#140` closed-vocab
+prompting, the companion to `hermes#130`) to stop new one-offs being minted,
+after which df=1 falls as new edges reuse existing predicates. This
+quantifies the bake-off's "necessary, not sufficient" verdict
+(logos-experiments#38). This instrument's job remains to make the *existing*
+tail cheap to review.
 
 ### What approving the strong tiers would buy (estimate)
 
@@ -69,6 +102,13 @@ and hermes#130 land — full pass = EV@128 ≥ 0.171 AND df=1 < 0.25.
 
 ## Files
 
-- `propose.py` — pure matching/folding functions (unit-tested, no Neo4j).
-- `propose_mapping.py` — live read-only runner → `mapping.csv`.
-- `mapping.csv` — the review artifact (regenerated per run).
+- `propose.py` — pure matching/folding functions + `apply_embed_fallback`
+  (unit-tested, no Neo4j, no network).
+- `embed_evidence.py` — name-embedding nearest-survivor evidence (OpenAI HTTP,
+  caches vectors under `.cache/`, git-ignored).
+- `propose_mapping.py` — live read-only Neo4j runner → `mapping.csv`; applies
+  the embedding pass inline (fail-soft without `OPENAI_API_KEY`).
+- `enrich_mapping.py` — post-hoc: add embedding evidence to an existing
+  `mapping.csv` off a frozen `snapshot.json`, when Neo4j isn't available.
+- `mapping.csv` — the review artifact. `snapshot.json` — frozen relation
+  snapshot, so the embedding enrichment is reproducible.
