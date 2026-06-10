@@ -35,3 +35,35 @@ def test_score_entities_type_accuracy_independent_of_name_f1():
     out = score_entities(pred, gold)
     assert out["f1"] == 1.0
     assert out["type_accuracy"] == 0.0
+
+
+from metrics import score_relation_labels, score_relation_links
+
+
+def test_relation_links_ignore_label():
+    pred = [{"source": "tusk", "relation": "GROWS_FROM", "target": "narwhal"}]
+    gold = [{"source": "tusk", "relation": "PART_OF", "target": "narwhal"}]
+    out = score_relation_links(pred, gold)
+    assert out["recall"] == 1.0
+    assert out["f1"] == 1.0
+
+
+def test_relation_links_directional():
+    pred = [{"source": "narwhal", "relation": "PART_OF", "target": "tusk"}]
+    gold = [{"source": "tusk", "relation": "PART_OF", "target": "narwhal"}]
+    out = score_relation_links(pred, gold)
+    assert out["recall"] == 0.0
+
+
+def test_relation_labels_require_canonical_relation_match():
+    pred = [{"source": "tusk", "relation": "GROWS_FROM", "target": "narwhal"}]
+    gold = [{"source": "tusk", "relation": "PART_OF", "target": "narwhal"}]
+    out = score_relation_labels(pred, gold)
+    assert out["f1"] == 0.0
+
+
+def test_relation_labels_match_on_canonical_predicate():
+    pred = [{"source": "tusk", "relation": "parts of", "target": "narwhal"}]
+    gold = [{"source": "tusk", "relation": "PART_OF", "target": "narwhal"}]
+    out = score_relation_labels(pred, gold)
+    assert out["recall"] == 1.0

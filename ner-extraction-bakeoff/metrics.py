@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from hermes.canonical import (
     canonicalize,
-    canonicalize_predicate,  # noqa: F401 — staged for relation scoring (next task)
+    canonicalize_predicate,
 )
 
 
@@ -52,3 +52,27 @@ def score_entities(pred: list[dict], gold: list[dict]) -> dict:
         "pred_count": len(pred_names),
         "gold_count": len(gold_names),
     }
+
+
+def _link(rel: dict) -> tuple[str, str]:
+    return (_cname(rel.get("source", "")), _cname(rel.get("target", "")))
+
+
+def _triple(rel: dict) -> tuple[str, str, str]:
+    return (
+        _cname(rel.get("source", "")),
+        canonicalize_predicate(rel.get("relation", "")),
+        _cname(rel.get("target", "")),
+    )
+
+
+def score_relation_links(pred: list[dict], gold: list[dict]) -> dict:
+    """P/R/F1 over directional (source, target) pairs, ignoring the label."""
+    p, r, f = prf(pred={_link(x) for x in pred}, gold={_link(x) for x in gold})
+    return {"precision": p, "recall": r, "f1": f}
+
+
+def score_relation_labels(pred: list[dict], gold: list[dict]) -> dict:
+    """P/R/F1 over (source, canonical-relation, target) triples."""
+    p, r, f = prf(pred={_triple(x) for x in pred}, gold={_triple(x) for x in gold})
+    return {"precision": p, "recall": r, "f1": f}
