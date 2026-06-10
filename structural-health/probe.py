@@ -65,6 +65,7 @@ def asserted_type_map(
     """
     by_uuid = {n.uuid: n for n in nodes}
     out = {n.uuid: n.kind for n in nodes}
+    candidates: dict[str, list[str]] = {}
     for e in edges:
         if e.relation != "IS_A":
             continue
@@ -72,8 +73,13 @@ def asserted_type_map(
         tgt = by_uuid.get(e.target)
         if src is None or tgt is None or src.kind in NON_DATA_KINDS:
             continue
-        if tgt.kind == "type_definition":
-            out[e.source] = tgt.name
+        if tgt.kind == "type_definition" and tgt.name:
+            candidates.setdefault(e.source, []).append(tgt.name)
+    # A node can carry multiple IS_A edges; Neo4j returns them in internal
+    # order, so pick deterministically (lexicographic min) to keep runs
+    # reproducible.
+    for uuid, names in candidates.items():
+        out[uuid] = min(names)
     return out
 
 
@@ -143,10 +149,10 @@ def variance_curve(mat: csr_matrix, ks: tuple[int, ...] = (16, 64, 128)) -> dict
     from sklearn.decomposition import TruncatedSVD
     from sklearn.feature_extraction.text import TfidfTransformer
 
+    if min(mat.shape) <= 1:
+        return {k: 0.0 for k in ks}
     tfidf = TfidfTransformer().fit_transform(mat)
     max_rank = min(tfidf.shape) - 1
-    if max_rank < 1:
-        return {k: 0.0 for k in ks}
     k_fit = min(max(ks), max_rank)
     svd = TruncatedSVD(n_components=k_fit, random_state=0)
     svd.fit(tfidf)
@@ -172,22 +178,35 @@ def _driver():
 
 
 def fetch_graph(driver) -> tuple[list[NodeRecord], list[SemanticEdge]]:
-    with driver.session() as s:
+    def work(tx):
         nodes = [
             NodeRecord(r["uuid"], r["kind"], r["name"] or "")
-            for r in s.run(
+            for r in tx.run(
                 "MATCH (n:Node) WHERE n.type <> 'edge' "
                 "RETURN n.uuid AS uuid, n.type AS kind, n.name AS name"
             )
+            if r["uuid"] and r["kind"]
         ]
-        edges = [
-            SemanticEdge(r["rel"], r["src"], r["tgt"])
-            for r in s.run(
+        raw_edges = [
+            (r["rel"], r["src"], r["tgt"])
+            for r in tx.run(
                 "MATCH (e:Node {type:'edge'}) "
                 "RETURN e.relation AS rel, e.source AS src, e.target AS tgt"
             )
-            if r["rel"] and r["src"] and r["tgt"]
         ]
+        return nodes, raw_edges
+
+    with driver.session() as s:
+        nodes, raw_edges = s.execute_read(work)
+    edges = [SemanticEdge(*t) for t in raw_edges if all(t)]
+    dropped = len(raw_edges) - len(edges)
+    if dropped:
+        # Malformed edges are themselves a data-quality signal for this probe.
+        print(
+            f"warn: dropped {dropped} edge node(s) with missing "
+            "relation/source/target",
+            file=sys.stderr,
+        )
     return nodes, edges
 
 
@@ -206,12 +225,18 @@ def report(nodes: list[NodeRecord], edges: list[SemanticEdge]) -> str:
         for n in nodes
         if n.kind not in NON_DATA_KINDS and typed[n.uuid] != n.kind
     )
+    is_a_targets: dict[str, set[str]] = {}
+    for e in edges:
+        if e.relation == "IS_A":
+            is_a_targets.setdefault(e.source, set()).add(e.target)
+    n_multi = sum(1 for tgts in is_a_targets.values() if len(tgts) > 1)
 
     lines = [
         f"structural-health probe -- {datetime.now(timezone.utc).date().isoformat()}",
         "",
         f"nodes (non-edge): {sum(kinds.values())}  by kind: {dict(kinds)}",
-        f"data nodes: {stats['data_nodes']}  (IS_A-typed: {n_typed})",
+        f"data nodes: {stats['data_nodes']}  (IS_A-typed: {n_typed},"
+        f" multi-IS_A: {n_multi})",
         f"semantic edges: {stats['semantic_edges']}"
         f"  edges/data-node: {stats['edges_per_data_node']:.2f}",
         f"distinct relations: {stats['distinct_relations']}"

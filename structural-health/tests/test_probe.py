@@ -52,6 +52,22 @@ class TestAssertedTypeMap:
         m = asserted_type_map(_nodes(), _edges())
         assert m["t1"] == "type_definition"
 
+    def test_multiple_is_a_edges_break_ties_deterministically(self):
+        # review #33 (greptile): Neo4j returns edges in internal order, so a
+        # multi-IS_A node must resolve identically regardless of edge order.
+        nodes = _nodes() + [NodeRecord("t3", "type_definition", "arctic animal")]
+        extra = SemanticEdge("IS_A", "n1", "t3")
+        forward = asserted_type_map(nodes, _edges() + [extra])
+        backward = asserted_type_map(nodes, [extra] + _edges())
+        assert forward["n1"] == backward["n1"] == "arctic animal"  # lexicographic min
+
+    def test_empty_type_name_keeps_realm_fallback(self):
+        # review #33 (gemini): an unnamed type_definition must not overwrite
+        # the realm fallback with "".
+        nodes = _nodes() + [NodeRecord("t4", "type_definition", "")]
+        m = asserted_type_map(nodes, [SemanticEdge("IS_A", "n3", "t4")])
+        assert m["n3"] == "entity"
+
 
 class TestBuildMatrix:
     def test_rows_are_data_nodes_only(self):
@@ -124,3 +140,11 @@ class TestVarianceCurve:
         curve = variance_curve(mat, ks=(16,))
         # k clamps to matrix rank limit instead of raising
         assert 16 in curve
+
+    def test_degenerate_matrix_returns_zeros_without_fitting(self):
+        # review #33 (gemini): 0/1-row matrices must early-return, not hit
+        # the TF-IDF transformer.
+        from scipy.sparse import csr_matrix
+
+        mat = csr_matrix(np.ones((1, 5)))
+        assert variance_curve(mat, ks=(16, 128)) == {16: 0.0, 128: 0.0}

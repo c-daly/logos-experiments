@@ -10,7 +10,7 @@ Run with: `NEO4J_PASSWORD=... uv run python probe.py`
 | date | data nodes | sem. edges | edges/node | distinct rels | df=1 frac | EV all k=16/128 | EV non-typing k=16/128 |
 |------|-----------|------------|------------|---------------|-----------|------------------|------------------------|
 | 2026-06-04 (pre-reset)¹ | 11992 | ~13.1k² | 2.6 | (one-off junk dominant) | — | 0.012 / 0.057 | — |
-| 2026-06-10 | 5469 | 13115 | 2.40 | 2244 | 0.626 | 0.066 / 0.148 | 0.025 / 0.110 |
+| 2026-06-10 | 5469 | 13115 | 2.40 | 2244 | 0.626 | 0.065 / 0.145 | 0.024 / 0.108 |
 
 ¹ Pre-reset row from the 2026-06-04 probe (vault memo
 `all-correction-signals-fail-on-current-graph`): matrix 11992 × 24695,
@@ -23,9 +23,11 @@ approximate; the memo recorded ~2.6 edges/node.
 
 ## Gate (thresholds provisional until Chris freezes them — plan §W0.1)
 
-- Explained variance @k=128 ≥ 3× baseline (≥ 0.171): **0.148 — NEAR MISS
-  (2.6×)**. Non-typing variant (honest signature number, IS_A excluded):
-  0.110.
+- Explained variance @k=128 ≥ 3× baseline (≥ 0.171): **0.145 — NEAR MISS
+  (2.5×)**. Non-typing variant (honest signature number, IS_A excluded):
+  0.108. (Numbers are from the deterministic multi-IS_A tie-break added in
+  review — 104 data nodes carry multiple IS_A edges; the pre-review run's
+  0.148 was order-dependent.)
 - df=1 predicate fraction < 0.25: **0.626 — CLEAR FAIL.** 2,244 distinct
   relations on 13,115 edges; ~1,400 appear exactly once (`CONCEIVED_OF`,
   `SENT_BY`, `READ_TO`, `ANNOUNCED`, `OCCURRED_ON` …). The open relation
@@ -34,7 +36,7 @@ approximate; the memo recorded ~2.6 edges/node.
 
 ## Verdict (2026-06-10 run)
 
-**Mixed — latent structure has improved materially (2.6×–5.5× by k), but
+**Mixed — latent structure has improved materially (2.5×–5.4× by k), but
 the relation vocabulary is still source-noise.** Per the plan's fail
 branch, structural engines (Phase 2) should not build on a 62.6% one-off
 predicate vocabulary; the routed work is relation-vocabulary quality at
