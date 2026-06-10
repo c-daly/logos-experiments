@@ -185,6 +185,20 @@ def apply_folds(driver, folds: list[tuple[str, str]]) -> tuple[int, list[dict]]:
         return s.execute_write(work)
 
 
+def reverse_apply(driver, rollback: list[dict]) -> int:
+    """Undo an apply: restore each touched edge's original relation by uuid."""
+
+    def work(tx):
+        return tx.run(
+            "UNWIND $rb AS r MATCH (e:Node {type:'edge', uuid: r.uuid}) "
+            "SET e.relation = r.old RETURN count(e) AS n",
+            rb=rollback,
+        ).single()["n"]
+
+    with driver.session() as s:
+        return s.execute_write(work)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--mapping", default=str(HERE / "mapping.csv"))
@@ -200,7 +214,18 @@ def main() -> None:
     )
     ap.add_argument("--graph-check", action="store_true", help="read-only live counts")
     ap.add_argument("--apply", action="store_true", help="MUTATE the live graph")
+    ap.add_argument("--rollback", help="path to a rollback_*.json to undo an apply")
     args = ap.parse_args()
+
+    if args.rollback:
+        rb = json.loads(Path(args.rollback).read_text(encoding="utf-8"))
+        driver = _driver()
+        try:
+            n = reverse_apply(driver, rb)
+        finally:
+            driver.close()
+        print(f"rolled back {n} edges from {args.rollback}")
+        return
 
     rows = load_rows(Path(args.mapping))
     tiers = tuple(t.strip() for t in args.tiers.split(",") if t.strip())
