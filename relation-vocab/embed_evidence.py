@@ -42,6 +42,7 @@ def load_vectors(
                 "OPENAI_API_KEY is not set, so they cannot be embedded. Set the "
                 f"key, or provide a populated cache at {cache}."
             )
+        cache.parent.mkdir(parents=True, exist_ok=True)
         for i in range(0, len(missing), chunk):
             batch = missing[i : i + chunk]
             resp = httpx.post(
@@ -53,8 +54,9 @@ def load_vectors(
             resp.raise_for_status()
             for item in sorted(resp.json()["data"], key=lambda x: x["index"]):
                 vectors[batch[item["index"]]] = item["embedding"]
-        cache.parent.mkdir(parents=True, exist_ok=True)
-        cache.write_text(json.dumps(vectors), encoding="utf-8")
+            # Persist after each batch: a later batch failing on a multi-chunk
+            # run must not discard vectors already paid for.
+            cache.write_text(json.dumps(vectors), encoding="utf-8")
     return vectors
 
 
