@@ -8,9 +8,9 @@ Can we tone down or replace the OpenAI extractor — with spaCy (free/local), a 
 
 Established empirically (2026-06-10): vocabulary *cleanup* (canonicalize + match-before-mint + the full synonym rollup) folds ~13% but moves df=1 only 0.611 → 0.586 — the long tail is genuinely-distinct one-off predicates the LLM RE over-generates. So the binding constraint is the **source**: generate fewer distinct predicates at extraction. This experiment evaluates the source-side levers.
 
-## Method: offline 4-arm bake-off on a hand-labeled gold set
+## Method: offline multi-arm bake-off on a hand-labeled gold set
 
-Each arm runs the same extraction on the same 16 gold sentences; scored against hand labels for entities and relations, plus relation-vocabulary compactness. **Offline** — the harness calls the Hermes extractors directly on the text, no graph ingest, no mutation. Deterministic per arm (temperature 0 for the LLM arms).
+Each arm runs the same extraction on the same 40 gold sentences; scored against hand labels for entities and relations, plus relation-vocabulary compactness. **Offline** — the harness calls the Hermes extractors directly on the text, no graph ingest, no mutation. Deterministic per arm (temperature 0 for the LLM arms).
 
 ### Arms
 

@@ -11,6 +11,8 @@ from __future__ import annotations
 
 import json
 import os
+import sys
+from functools import lru_cache
 
 
 def _norm_entities(raw: list[dict]) -> list[dict]:
@@ -33,18 +35,20 @@ def _norm_relations(raw: list[dict]) -> list[dict]:
     return out
 
 
-async def _combined(text: str, model: str | None) -> tuple[list[dict], list[dict]]:
+async def _combined(text: str) -> tuple[list[dict], list[dict]]:
+    """Baseline: the production combined extractor exactly as it ships.
+    HERMES_LLM_MODEL is baked into the cached llm provider at first use, so a
+    per-call model override would not take effect here -- baseline is the
+    as-shipped extractor (default model) by design."""
     from hermes.combined_extractor import OpenAICombinedExtractor
 
     ex = OpenAICombinedExtractor()
-    if model:
-        os.environ["HERMES_LLM_MODEL"] = model
     entities, relations = await ex.extract_entities_and_relations(text)
     return _norm_entities(entities), _norm_relations(relations)
 
 
 async def baseline(text: str):
-    return await _combined(text, model=None)
+    return await _combined(text)
 
 
 async def spacy(text: str):
@@ -178,26 +182,47 @@ async def _llm_extract(text: str, system: str, model: str | None):
         import re as _re
 
         m = _re.search(r"```(?:json)?\s*(.*?)```", content, _re.DOTALL)
-        data = json.loads(m.group(1)) if m else {"entities": [], "relations": []}
+        try:
+            data = json.loads(m.group(1)) if m else {}
+        except json.JSONDecodeError:
+            data = {}
     return _norm_entities(data.get("entities")), _norm_relations(data.get("relations"))
 
 
-def relation_vocabulary(limit: int = 120) -> list[str]:
+_SEED_RELATIONS: tuple[str, ...] = (
+    "IS_A", "PART_OF", "LOCATED_IN", "PRODUCES", "USED_FOR", "EATS",
+    "CATCHES", "AFFECTS", "MEMBER_OF", "PLAYS", "TOWS", "FASTER_THAN",
+)
+
+
+@lru_cache(maxsize=1)
+def relation_vocabulary(limit: int = 120) -> tuple[str, ...]:
     """Known descriptive relations to inject. Prefer the Redis snapshot
-    (logos:ontology:relations); fall back to a small seed."""
+    (logos:ontology:relations); fall back to a small seed. Cached (maxsize=1):
+    the snapshot is fetched once per process, not once per sentence. Returns a
+    tuple so the cached value stays immutable. Falling back to the seed is
+    announced on stderr -- it is a much smaller (stronger) vocab than a live
+    run, so closed_vocab metrics would otherwise differ silently."""
     try:
         import redis
 
-        raw = redis.Redis(decode_responses=True).get("logos:ontology:relations")
+        client = redis.Redis(decode_responses=True)
+        try:
+            raw = client.get("logos:ontology:relations")
+        finally:
+            client.close()
         if raw:
-            vocab = sorted(json.loads(raw).keys())
-            return vocab[:limit]
-    except Exception:
-        pass
-    return [
-        "IS_A", "PART_OF", "LOCATED_IN", "PRODUCES", "USED_FOR", "EATS",
-        "CATCHES", "AFFECTS", "MEMBER_OF", "PLAYS", "TOWS", "FASTER_THAN",
-    ]
+            return tuple(sorted(json.loads(raw).keys())[:limit])
+        reason = "snapshot key 'logos:ontology:relations' is empty/absent"
+    except Exception as exc:
+        reason = f"Redis unavailable ({exc})"
+    print(
+        f"  [relation_vocabulary] {reason}; falling back to the "
+        f"{len(_SEED_RELATIONS)}-relation seed -- closed_vocab metrics will "
+        "differ from a live-Redis run",
+        file=sys.stderr,
+    )
+    return _SEED_RELATIONS
 
 
 # A clean, compact descriptive-relation vocabulary: the 20 gold relations

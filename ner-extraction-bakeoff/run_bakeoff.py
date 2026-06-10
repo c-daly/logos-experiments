@@ -50,7 +50,10 @@ async def run_arm(name: str, fn, gold: list[dict]) -> dict:
     elapsed = time.time() - t0
 
     def agg(scorer, preds, golds, key):
-        vals = [scorer(p, g)[key] for p, g in zip(preds, golds)]
+        # Skip sentences with nothing predicted AND nothing in gold: prf()
+        # scores empty-vs-empty as a perfect 1.0, which would inflate the
+        # relation averages for silent arms on any relation-free sentence.
+        vals = [scorer(p, g)[key] for p, g in zip(preds, golds) if p or g]
         return sum(vals) / len(vals) if vals else 0.0
 
     return {
