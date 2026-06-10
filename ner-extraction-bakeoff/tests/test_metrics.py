@@ -67,3 +67,23 @@ def test_relation_labels_match_on_canonical_predicate():
     gold = [{"source": "tusk", "relation": "PART_OF", "target": "narwhal"}]
     out = score_relation_labels(pred, gold)
     assert out["recall"] == 1.0
+
+
+from metrics import compactness
+
+
+def test_compactness_counts_distinct_canonical_predicates():
+    rels = [
+        {"source": "a", "relation": "CARRIES", "target": "b"},
+        {"source": "c", "relation": "carried", "target": "d"},
+        {"source": "e", "relation": "PART_OF", "target": "f"},
+    ]
+    out = compactness(rels)
+    assert out["distinct_predicates"] == 2
+    assert out["total_relations"] == 3
+    assert out["df1_fraction"] == 0.5
+
+
+def test_compactness_empty():
+    out = compactness([])
+    assert out["distinct_predicates"] == 0 and out["df1_fraction"] == 0.0

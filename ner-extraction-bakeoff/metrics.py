@@ -6,6 +6,8 @@ surface variation (case/plural/morphology) is not penalized. No network.
 
 from __future__ import annotations
 
+from collections import Counter
+
 from hermes.canonical import (
     canonicalize,
     canonicalize_predicate,
@@ -76,3 +78,18 @@ def score_relation_labels(pred: list[dict], gold: list[dict]) -> dict:
     """P/R/F1 over (source, canonical-relation, target) triples."""
     p, r, f = prf(pred={_triple(x) for x in pred}, gold={_triple(x) for x in gold})
     return {"precision": p, "recall": r, "f1": f}
+
+
+def compactness(relations: list[dict]) -> dict:
+    """Relation-vocabulary compactness over an arm's output."""
+    keys = [canonicalize_predicate(r.get("relation", "")) for r in relations]
+    keys = [k for k in keys if k]
+    counts = Counter(keys)
+    distinct = len(counts)
+    df1 = sum(1 for c in counts.values() if c == 1)
+    return {
+        "distinct_predicates": distinct,
+        "total_relations": len(keys),
+        "predicates_per_relation": (distinct / len(keys)) if keys else 0.0,
+        "df1_fraction": (df1 / distinct) if distinct else 0.0,
+    }
