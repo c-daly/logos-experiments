@@ -95,6 +95,31 @@ tolerance is acceptable or cost/privacy dominate. The cheapest *lossless*
 storage win on the table is **Matryoshka-truncating `3-large` to ~1024**, which
 the 95%-variance number says is nearly free — and keeps the strongest model.
 
+### Matryoshka truncation — the recommended operating point (768)
+
+`text-embedding-3` is MRL-trained, so the first N dims are a valid N-dim
+embedding (≡ requesting `dimensions=N`; cosine is scale-invariant, so
+truncation needs no API call — and neither does the migration: truncate +
+L2-renormalize the vectors already in Milvus, no re-embedding). Re-scoring the
+cached 3-large vectors truncated (`truncate.py`):
+
+| 3-large @ dim | kNN acc | storage |
+|---|---|---|
+| 3072 | 0.502 | 1× |
+| 1536 | 0.500 | 2× |
+| 1024 | 0.498 | 3× |
+| **768** | **0.496** | **4×** |
+| 512 | 0.482 | 6× |
+| 256 | 0.468 | 12× |
+| 128 | 0.442 | 24× |
+
+**Recommendation: truncate 3-large to 768.** A 4× storage cut for −1.2%
+accuracy — the knee of the curve. It still beats `3-small`@1536 (0.439) and the
+free 768 models (~0.40) by 6–10 points. This is the storage win, achieved by
+*keeping the strongest model* and storing fewer of its dims, not by switching
+to a weaker one. (1024 = 3× / −0.4% if more conservative; 512 = 6× / −2% if
+storage-bound.)
+
 ### Caveats / follow-ups
 - One downstream proxy (type-classification via kNN) on **node names** (short
   text). Retrieval and emergence-clustering uses may rank models differently;
