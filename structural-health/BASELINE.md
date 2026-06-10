@@ -11,6 +11,7 @@ Run with: `NEO4J_PASSWORD=... uv run python probe.py`
 |------|-----------|------------|------------|---------------|-----------|------------------|------------------------|
 | 2026-06-04 (pre-reset)¹ | 11992 | ~13.1k² | 2.6 | (one-off junk dominant) | — | 0.012 / 0.057 | — |
 | 2026-06-10 | 5469 | 13115 | 2.40 | 2244 | 0.626 | 0.065 / 0.145 | 0.024 / 0.108 |
+| 2026-06-10 (post-consolidation)³ | 5571 | 13559 | 2.43 | 1399 | 0.424 | 0.066 / 0.150 | 0.027 / 0.113 |
 
 ¹ Pre-reset row from the 2026-06-04 probe (vault memo
 `all-correction-signals-fail-on-current-graph`): matrix 11992 × 24695,
@@ -20,6 +21,16 @@ reimplemented for the current model (see probe.py docstring), so the
 comparison is like-for-like in *construction*, not in code lineage.
 ² The old graph's Neo4j relationship count divided by 2 directions is
 approximate; the memo recorded ~2.6 edges/node.
+³ After the W0.3b consolidation was *applied* to the live graph (lx34b
+`apply_mapping.py`): safe tiers (high canon + embed synonym + exact-medium,
+345 edges) then lossy-medium (427 edges); `low`/signature held back as
+coincidental. Folded edges were re-embedded (`reembed_folded_edges.py`).
+**df=1 0.626 → 0.424; distinct relations 2244 → 1399 (−845, −38%).** MDL
+ledger: relation-vocabulary cost ~35,856 → 22,336 bits (~13.5k off `L_model`).
+Non-typing explained variance ticked up (k=128: 0.108 → 0.113) — the
+relational matrix is marginally more low-rank. Still above the 0.25 df=1 gate:
+the extraction-time source fix (`hermes#140`) is the remaining lever, else new
+ingestion re-mints one-offs.
 
 ## Gate (thresholds provisional until frozen on review — plan §W0.1)
 
