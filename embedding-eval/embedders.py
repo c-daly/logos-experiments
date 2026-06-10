@@ -7,6 +7,8 @@ free and models are only embedded once.
 
 from __future__ import annotations
 
+import hashlib
+import json
 import os
 from pathlib import Path
 
@@ -27,7 +29,9 @@ MODELS = [
 def _openai(texts: list[str], model: str, dim: int, chunk: int = 1000) -> np.ndarray:
     import httpx
 
-    key = os.environ["OPENAI_API_KEY"]
+    key = os.environ.get("OPENAI_API_KEY")
+    if not key:
+        raise SystemExit("OPENAI_API_KEY is not set (needed for the openai arms)")
     out: list[list[float]] = []
     for i in range(0, len(texts), chunk):
         batch = texts[i : i + chunk]
@@ -53,13 +57,28 @@ def _st(texts: list[str], model: str) -> np.ndarray:
     ).astype("float32")
 
 
+def _fingerprint(texts: list[str]) -> str:
+    """Content hash of the exact text list, so a regenerated sample with the
+    same node count but different nodes invalidates the cache (otherwise stale
+    vectors would be silently scored against new labels)."""
+    h = hashlib.sha1("\n".join(texts).encode("utf-8")).hexdigest()
+    return f"{len(texts)}:{h}"
+
+
 def embed(name: str, kind: str, model: str, dim: int, texts: list[str]) -> np.ndarray:
     CACHE.mkdir(exist_ok=True)
     path = CACHE / f"{name}.npy"
-    if path.exists():
-        cached = np.load(path)
-        if len(cached) == len(texts):
-            return cached
+    meta = CACHE / f"{name}.meta"
+    fp = _fingerprint(texts)
+    if path.exists() and meta.exists():
+        try:
+            if meta.read_text() == fp:
+                cached = np.load(path)
+                if cached.shape[0] == len(texts):
+                    return cached
+        except Exception:
+            pass  # corrupt/mismatched cache -> re-embed
     vecs = _openai(texts, model, dim) if kind == "openai" else _st(texts, model)
     np.save(path, vecs)
+    meta.write_text(fp)
     return vecs

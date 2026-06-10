@@ -28,7 +28,10 @@ HERE = Path(__file__).resolve().parent
 
 
 def main() -> None:
-    sample = json.loads((HERE / "sample.json").read_text())
+    sample_path = HERE / "sample.json"
+    if not sample_path.exists():
+        raise SystemExit("sample.json not found -- run `python sample.py` first")
+    sample = json.loads(sample_path.read_text())
     texts = [s["name"] for s in sample]
     labels = [s["type"] for s in sample]
     print(f"sample: {len(texts)} nodes, {len(set(labels))} types")

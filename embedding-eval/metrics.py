@@ -31,7 +31,10 @@ def variance_dims(
     """Number of principal components needed to reach each variance threshold."""
     Xc = X - X.mean(axis=0)
     s = np.linalg.svd(Xc, compute_uv=False)
-    cum = np.cumsum(s**2) / np.sum(s**2)
+    total = float(np.sum(s**2))
+    if total == 0.0:  # all vectors identical / single sample -> no variance
+        return {t: 1 for t in thresholds}
+    cum = np.cumsum(s**2) / total
     return {t: int(np.searchsorted(cum, t) + 1) for t in thresholds}
 
 
@@ -41,7 +44,10 @@ def effective_rank(X: np.ndarray) -> float:
     really in use' number (<= D)."""
     Xc = X - X.mean(axis=0)
     s = np.linalg.svd(Xc, compute_uv=False)
-    p = s / s.sum()
+    total = s.sum()
+    if total == 0.0:  # degenerate (identical / single sample)
+        return 1.0
+    p = s / total
     p = p[p > 0]
     return float(np.exp(-np.sum(p * np.log(p))))
 
@@ -51,10 +57,14 @@ def anisotropy(X: np.ndarray, n_pairs: int = 100_000, seed: int = 0) -> float:
     high (0.2-0.5) means a narrow cone -- poor discrimination."""
     Xn = _normalize(X)
     n = len(Xn)
+    if n <= 1:
+        return 0.0
     rng = np.random.default_rng(seed)
     i = rng.integers(0, n, n_pairs)
     j = rng.integers(0, n, n_pairs)
     keep = i != j
+    if not np.any(keep):
+        return 0.0
     return float(np.sum(Xn[i[keep]] * Xn[j[keep]], axis=1).mean())
 
 
@@ -70,11 +80,13 @@ def whiten(X: np.ndarray) -> np.ndarray:
 def knn_loo_accuracy(X: np.ndarray, labels, k: int = 10) -> float:
     """Leave-one-out kNN top-1 accuracy under cosine similarity: predict each
     point's type by majority vote of its k nearest *other* points."""
+    if len(X) <= 1:
+        return 0.0
     labels = np.asarray(labels)
     Xn = _normalize(X)
     sims = Xn @ Xn.T
     np.fill_diagonal(sims, -np.inf)  # exclude self
-    k = min(k, len(X) - 1)
+    k = max(1, min(k, len(X) - 1))
     nn = np.argpartition(-sims, k - 1, axis=1)[:, :k]
     correct = 0
     for idx in range(len(X)):

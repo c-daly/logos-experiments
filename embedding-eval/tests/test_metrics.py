@@ -68,6 +68,17 @@ def test_knn_chance_on_random_labels():
     assert knn_loo_accuracy(X, y, k=5) < 0.7
 
 
+def test_degenerate_inputs_dont_crash():
+    # identical vectors / single sample must not divide-by-zero or NaN
+    same = np.ones((5, 8), dtype="float32")
+    assert variance_dims(same)[0.95] == 1
+    assert effective_rank(same) == 1.0
+    assert anisotropy(same) in (0.0, 1.0) or np.isfinite(anisotropy(same))
+    one = np.ones((1, 8), dtype="float32")
+    assert anisotropy(one) == 0.0
+    assert knn_loo_accuracy(one, [0]) == 0.0
+
+
 def test_whiten_decorrelates():
     rng = np.random.default_rng(6)
     A = rng.standard_normal((300, 8))
