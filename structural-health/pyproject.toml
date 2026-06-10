@@ -1,0 +1,20 @@
+[project]
+name = "structural-health"
+version = "0.1.0"
+description = "W0.1 structural-health probe: is there low-rank relational structure in the HCG? (logos-experiments#25, epic logos#557)"
+requires-python = ">=3.12"
+dependencies = [
+    "neo4j>=5.20.0",
+    "numpy>=2.0.0",
+    "scipy>=1.13.0",
+    "scikit-learn>=1.5.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
