@@ -92,6 +92,9 @@ async def main() -> None:
         if r["source_name"] and r["target_name"] and r["rel"]
     ]
     print(f"resolved {len(items)}/{len(uuids)} edges (present + named) for re-embed")
+    if not items:
+        print("nothing to re-embed (rollback empty, or all uuids absent/unnamed)")
+        return
     for u, ph in items[:5]:
         print(f"  {u[:8]}  \"{ph}\"")
 
@@ -111,7 +114,9 @@ async def main() -> None:
     # different model than the stored vectors. `poetry run` does not load
     # hermes/.env, so get_embedding_provider() would otherwise fall back to its
     # text-embedding-3-small/1536 default and Milvus would reject the upsert.
-    dim = next(f.params["dim"] for f in col.schema.fields if f.params.get("dim"))
+    dim = next((f.params["dim"] for f in col.schema.fields if f.params.get("dim")), None)
+    if dim is None:
+        raise SystemExit(f"no vector field with 'dim' found in {COLLECTION} schema")
     probe = col.query(
         expr=f'uuid == "{items[0][0]}"', output_fields=["embedding_model"], limit=1
     )
