@@ -121,14 +121,19 @@ def main() -> None:
             w.writerow([r.predicate, r.df, r.target, r.tier, r.evidence, r.review])
 
     tiers = Counter(r.tier for r in rows)
-    covered = sum(1 for r in rows if r.evidence)
+    proposals = sum(1 for r in rows if r.tier != "keep")  # rows with a fold target
+    annotated = sum(1 for r in rows if r.evidence)  # incl. keep nearest-neighbour
     total = len(rows)
     print(f"relation-vocab proposer -- {datetime.now(timezone.utc).date().isoformat()}")
     print(f"semantic edges: {len(edges)}  df=1 predicates: {total}")
     print(f"tiers: {dict(tiers)}")
     print(
-        f"coverage (proposal with evidence): {covered}/{total} "
-        f"= {covered / total:.1%}  (ticket gate: >=80%)"
+        f"proposal coverage (a fold target): {proposals}/{total} "
+        f"= {proposals / total:.1%}  (ticket gate: >=80%)"
+    )
+    print(
+        f"rows annotated with evidence (incl. keep nearest-neighbour): "
+        f"{annotated}/{total} = {annotated / total:.1%}  (review aid, not the gate)"
     )
     print(f"written: {out}")
 

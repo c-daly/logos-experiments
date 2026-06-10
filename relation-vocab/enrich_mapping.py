@@ -61,16 +61,22 @@ def main() -> None:
         p for p, m in snapshot.items() if m.get("edge_count", 0) > 1
     } - set(one_offs)
 
-    before = sum(1 for r in rows if r.evidence)
+    before = sum(1 for r in rows if r.tier != "keep")
     vectors = load_vectors(sorted(survivors | set(one_offs)))
     rows = apply_embed_fallback(rows, nearest_survivors(one_offs, survivors, vectors))
-    after = sum(1 for r in rows if r.evidence)
+    proposals = sum(1 for r in rows if r.tier != "keep")  # rows with a fold target
+    annotated = sum(1 for r in rows if r.evidence)  # incl. keep nearest-neighbour
     write_rows(rows, Path(args.mapping))
 
+    n = len(rows)
     print("tiers:", dict(Counter(r.tier for r in rows)))
     print(
-        f"evidence coverage: {before}/{len(rows)} -> {after}/{len(rows)} "
-        f"= {after / len(rows):.1%}  (ticket gate: >=80%)"
+        f"proposal coverage (a fold target): {before} -> {proposals}/{n} "
+        f"= {proposals / n:.1%}  (ticket gate: >=80%)"
+    )
+    print(
+        f"rows annotated with evidence (incl. keep nearest-neighbour): "
+        f"{annotated}/{n} = {annotated / n:.1%}  (review aid, not the gate)"
     )
 
 

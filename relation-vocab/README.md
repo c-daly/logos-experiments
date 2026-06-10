@@ -57,14 +57,20 @@ Three evidence tiers, strongest first:
 | embed | 20 | synonym proposal (no shared tokens) |
 | keep | 528 | distinct, or polarity-guarded |
 
-**With-evidence coverage: 1404/1404 = 100% — the ticket's ≥80% gate is met**
-once the complementary embedding pass fills the otherwise-evidence-less
-keeps. The mechanical cascade alone reaches only **894/1404 = 64%**: ~36% of
-one-offs have no canon/token/signature bridge to an existing predicate. The
-embedding pass closes that — promoting 20 no-shared-token synonyms to
-proposals and giving every remaining keep its nearest neighbour as evidence
-— **without inflating weak matches** (a 0.59-cosine keep is still a keep,
-just an annotated one).
+**Proposal coverage (rows with a fold target): 876/1404 = 62.4%** — up from
+61.0%. The embedding pass adds **20** fold proposals the mechanical cascade
+structurally cannot find (synonyms with *no shared tokens*). **The ticket's
+≥80% gate is still NOT met by the proposer**, and that is reported, not
+inflated: ~38% of one-offs have no defensible fold target because the
+vocabulary is genuinely open-ended — which is exactly why `hermes#130`/`#140`
+(closing the vocabulary at extraction time) is the load-bearing half.
+
+What the embedding pass adds *beyond* those 20 folds is a **review aid, not a
+gate number**: every remaining `keep` now carries its nearest survivor and
+cosine as evidence (`ACCOMPANIED_BY` → nearest `ASSOCIATED_WITH` 0.59), so all
+1404 rows are annotated. That makes the genuinely-distinct keeps cheap to
+*confirm* — a 0.59-cosine keep is still a keep, never a proposal, and is **not
+counted toward the ≥80% gate**.
 
 ### The ≥80% *table* gate is met; the *graph* gate still needs the source fix
 
