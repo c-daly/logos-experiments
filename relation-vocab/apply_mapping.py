@@ -31,9 +31,19 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-DEFAULT_TIERS = ("high", "embed")
+# Default auto-apply scope: canonical (high), embedding synonym (embed), and
+# EXACT token matches (medium that share all content tokens). Lossy token
+# matches and signature-only (low) proposals are held back for explicit review
+# -- they collapse specific relations into vague heads or match by coincidence.
+DEFAULT_TIERS = ("high", "embed", "medium")
 ACCEPT_WORDS = {"accept", "apply", "yes", "y", "approved", "ok"}
 REJECT_WORDS = {"reject", "keep", "no", "n", "skip", "drop"}
+
+
+def is_lossy(row: dict) -> bool:
+    """A token-match proposal that dropped tokens from the one-off (the proposer
+    annotates these 'lossy'); folding them can collapse a specific relation."""
+    return "lossy" in (row.get("evidence") or "")
 
 
 # --------------------------------------------------------------------------
@@ -44,11 +54,17 @@ REJECT_WORDS = {"reject", "keep", "no", "n", "skip", "drop"}
 def select_folds(
     rows: list[dict],
     tiers: tuple[str, ...] = DEFAULT_TIERS,
+    include_lossy: bool = False,
 ) -> list[tuple[str, str]]:
-    """Pick (predicate -> target) folds to apply. A row is in if it has a
-    target and is not vetoed, and either its ``review`` is an accept word or
-    (review is blank and its tier is in ``tiers``). Reject/keep words in
-    ``review`` always veto."""
+    """Pick (predicate -> target) folds to apply.
+
+    A row is in if it has a target and is not vetoed. The ``review`` column
+    decides first: an accept word forces the fold in (overriding tier and the
+    lossy guard); a reject/keep word forces it out. For un-reviewed rows the
+    row's tier must be in ``tiers`` and -- unless ``include_lossy`` -- it must
+    not be a lossy token match. (Lossy matches and signature-only/low rows are
+    held back for explicit review; widen scope deliberately, not by accident.)
+    """
     folds = []
     for r in rows:
         target = (r.get("proposed_target") or "").strip()
@@ -57,7 +73,12 @@ def select_folds(
         review = (r.get("review") or "").strip().lower()
         if review in REJECT_WORDS:
             continue
-        if review in ACCEPT_WORDS or (review == "" and r.get("tier") in tiers):
+        if review in ACCEPT_WORDS:
+            folds.append((r["predicate"], target))
+            continue
+        if review == "" and r.get("tier") in tiers:
+            if is_lossy(r) and not include_lossy:
+                continue
             folds.append((r["predicate"], target))
     return folds
 
@@ -170,7 +191,12 @@ def main() -> None:
     ap.add_argument("--snapshot", default=str(HERE / "snapshot.json"))
     ap.add_argument(
         "--tiers", default=",".join(DEFAULT_TIERS),
-        help="comma-separated tiers to apply for un-reviewed rows",
+        help="comma-separated tiers to apply for un-reviewed rows "
+        f"(default: {','.join(DEFAULT_TIERS)}; 'low' is weak, opt in explicitly)",
+    )
+    ap.add_argument(
+        "--include-lossy", action="store_true",
+        help="also fold lossy token matches (drop-token medium); off by default",
     )
     ap.add_argument("--graph-check", action="store_true", help="read-only live counts")
     ap.add_argument("--apply", action="store_true", help="MUTATE the live graph")
@@ -178,12 +204,31 @@ def main() -> None:
 
     rows = load_rows(Path(args.mapping))
     tiers = tuple(t.strip() for t in args.tiers.split(",") if t.strip())
-    folds = select_folds(rows, tiers)
+    folds = select_folds(rows, tiers, include_lossy=args.include_lossy)
     selected = {s for s, _ in folds}
     by_tier = Counter(r["tier"] for r in rows if r["predicate"] in selected)
 
-    print(f"selected {len(folds)} folds (tiers={list(tiers)} + review overrides)")
-    print(f"  by tier: {dict(by_tier)}")
+    # Transparency: what has a target but is deliberately held back for review.
+    held = [
+        r for r in rows
+        if (r.get("proposed_target") or "").strip()
+        and r["predicate"] not in selected
+        and (r.get("review") or "").strip().lower() not in REJECT_WORDS
+    ]
+    held_lossy = sum(1 for r in held if is_lossy(r) and r.get("tier") in tiers)
+    held_oos = Counter(
+        r["tier"] for r in held if not (is_lossy(r) and r.get("tier") in tiers)
+    )
+
+    print(
+        f"selected {len(folds)} folds  "
+        f"tiers={list(tiers)} include_lossy={args.include_lossy}"
+    )
+    print(f"  included by tier: {dict(by_tier)}")
+    print(
+        f"  held back for review: {held_lossy} lossy-medium + "
+        f"{sum(held_oos.values())} out-of-scope {dict(held_oos)}"
+    )
     snapshot = json.loads(Path(args.snapshot).read_text(encoding="utf-8"))
     proj = project_after_folds(folds, snapshot)
     print(

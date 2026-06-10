@@ -37,9 +37,38 @@ class TestSelectFolds:
         rows = [_row("A", "X", "high", review="keep")]
         assert select_folds(rows) == []
 
-    def test_widening_tiers(self):
-        rows = [_row("C", "Z", "medium")]
-        assert select_folds(rows, tiers=("high", "embed", "medium")) == [("C", "Z")]
+    def test_exact_medium_in_default_scope(self):
+        rows = [_row("ACQUIRED_BY", "ACQUIRES", "medium",
+                     )]
+        rows[0]["evidence"] = "token match vs ACQUIRES, j=1.00"
+        assert select_folds(rows) == [("ACQUIRED_BY", "ACQUIRES")]
+
+    def test_lossy_medium_held_back_by_default(self):
+        rows = [{
+            "predicate": "AFTER_ENCOUNTERING", "proposed_target": "AFTER",
+            "tier": "medium", "review": "",
+            "evidence": "token match vs AFTER, j=0.50 (lossy: extra tokens dropped)",
+        }]
+        assert select_folds(rows) == []  # lossy excluded by default
+        assert select_folds(rows, include_lossy=True) == [
+            ("AFTER_ENCOUNTERING", "AFTER")
+        ]
+
+    def test_lossy_still_applies_when_review_accepts(self):
+        rows = [{
+            "predicate": "AFTER_ENCOUNTERING", "proposed_target": "AFTER",
+            "tier": "medium", "review": "accept",
+            "evidence": "token match vs AFTER, j=0.50 (lossy: extra tokens dropped)",
+        }]
+        assert select_folds(rows) == [("AFTER_ENCOUNTERING", "AFTER")]
+
+    def test_low_tier_not_in_default_scope(self):
+        rows = [_row("ABSENT_FROM", "PART_OF", "low")]
+        rows[0]["evidence"] = "signature: (a->b) seen in PART_OF x1"
+        assert select_folds(rows) == []
+        assert select_folds(rows, tiers=("high", "embed", "medium", "low")) == [
+            ("ABSENT_FROM", "PART_OF")
+        ]
 
 
 class TestProjectAfterFolds:
