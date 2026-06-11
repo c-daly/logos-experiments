@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import json
 import os
+import sys
 from pathlib import Path
 
 CACHE = Path(__file__).resolve().parent / ".cache" / "vectors.json"
@@ -30,7 +31,23 @@ def load_vectors(
     hit the API; the cache is keyed by surface and re-used across runs."""
     vectors: dict[str, list[float]] = {}
     if cache.exists():
-        vectors = json.loads(cache.read_text(encoding="utf-8"))
+        raw = json.loads(cache.read_text(encoding="utf-8"))
+        # The cache is keyed by surface only, so a model/dimension change
+        # strands vectors of the old size; mixing dimensions breaks the
+        # cosine matrix downstream (inhomogeneous numpy stack). Treat any
+        # entry whose dimension differs from DIM as a miss and re-embed it
+        # under the current config (the next batch write drops the stale
+        # entries from the file).
+        vectors = {
+            k: v for k, v in raw.items() if isinstance(v, list) and len(v) == DIM
+        }
+        stale = len(raw) - len(vectors)
+        if stale:
+            print(
+                f"  [embed_evidence] ignoring {stale} cached vector(s) with "
+                f"dim != {DIM}; re-embedding the ones this run needs",
+                file=sys.stderr,
+            )
     missing = [p for p in preds if p not in vectors]
     if missing:
         import httpx
