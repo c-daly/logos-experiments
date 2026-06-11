@@ -11,6 +11,7 @@ Run with: `NEO4J_PASSWORD=... uv run python probe.py`
 |------|-----------|------------|------------|---------------|-----------|------------------|------------------------|
 | 2026-06-04 (pre-reset)¹ | 11992 | ~13.1k² | 2.6 | (one-off junk dominant) | — | 0.012 / 0.057 | — |
 | 2026-06-10 | 5469 | 13115 | 2.40 | 2244 | 0.626 | 0.065 / 0.145 | 0.024 / 0.108 |
+| 2026-06-11³ | 4499 | 8873 | 1.97 | 951 | 0.591 | 0.202 / 0.497 | 0.173 / 0.478 |
 
 ¹ Pre-reset row from the 2026-06-04 probe (vault memo
 `all-correction-signals-fail-on-current-graph`): matrix 11992 × 24695,
@@ -20,6 +21,13 @@ reimplemented for the current model (see probe.py docstring), so the
 comparison is like-for-like in *construction*, not in code lineage.
 ² The old graph's Neo4j relationship count divided by 2 directions is
 approximate; the memo recorded ~2.6 edges/node.
+³ Fresh corpus_batch3 (350-block) ingest through hermes with the
+usage-ranked H5 window (hermes 297391a). Same-corpus comparison against
+the alphabetical-window ingest earlier that day (not in this table; df=1
+measured only): distinct non-typing predicates 1640 -> 950 (-42%), df=1
+singletons 1002 -> 562 (-44%), df=1 fraction 0.611 -> 0.592. The EV jump
+vs the 06-10 row is graph-to-graph (old accumulated graph vs fresh
+corpus ingest), not a controlled window comparison.
 
 ## Gate (thresholds provisional until frozen on review — plan §W0.1)
 
