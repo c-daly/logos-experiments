@@ -255,6 +255,79 @@ async def closed_vocab_clean(text: str):
     return await _closed_vocab(text, _CLEAN_VOCAB)
 
 
+def _ranked(snapshot: dict, limit: int) -> tuple[str, ...]:
+    """Top *limit* relation names by edge_count desc, name tiebreak -- the
+    post-fix H5 window strategy (hermes feat/hermes-h5-ranked-vocab-window),
+    vs relation_vocabulary()'s alphabetical slice."""
+
+    def count(props) -> int:
+        return props.get("edge_count", 0) if isinstance(props, dict) else 0
+
+    ranked = sorted(snapshot.items(), key=lambda kv: (-count(kv[1]), kv[0]))
+    return tuple(name for name, _ in ranked[:limit])
+
+
+@lru_cache(maxsize=1)
+def relation_vocabulary_ranked(limit: int = 120) -> tuple[str, ...]:
+    """LIVE snapshot, usage-ranked window. Same fetch/fallback contract as
+    relation_vocabulary(); differs ONLY in how the slice is chosen."""
+    try:
+        import redis
+
+        client = redis.Redis(decode_responses=True)
+        try:
+            raw = client.get("logos:ontology:relations")
+        finally:
+            client.close()
+        if raw:
+            return _ranked(json.loads(raw), limit)
+        reason = "snapshot key 'logos:ontology:relations' is empty/absent"
+    except Exception as exc:
+        reason = f"Redis unavailable ({exc})"
+    print(
+        f"  [relation_vocabulary_ranked] {reason}; falling back to the "
+        f"{len(_SEED_RELATIONS)}-relation seed",
+        file=sys.stderr,
+    )
+    return _SEED_RELATIONS
+
+
+@lru_cache(maxsize=1)
+def relation_vocabulary_curated(limit: int = 120) -> tuple[str, ...]:
+    """Usage-ranked window over the consolidation survivors
+    (relation-vocab/curated_vocab.json) -- the curated-seed + ranked-window
+    pipeline."""
+    import pathlib
+
+    path = (
+        pathlib.Path(__file__).resolve().parent.parent
+        / "relation-vocab"
+        / "curated_vocab.json"
+    )
+    try:
+        return _ranked(json.loads(path.read_text()), limit)
+    except Exception as exc:
+        print(
+            f"  [relation_vocabulary_curated] {path} unavailable ({exc}); "
+            f"falling back to the {len(_SEED_RELATIONS)}-relation seed",
+            file=sys.stderr,
+        )
+        return _SEED_RELATIONS
+
+
+async def ranked_window(text: str):
+    """gpt-4o-mini + LIVE vocab, top-120 by edge_count -- production's
+    post-fix H5 window strategy over the same sprawled snapshot that
+    closed_vocab slices alphabetically."""
+    return await _closed_vocab(text, list(relation_vocabulary_ranked()))
+
+
+async def ranked_window_curated(text: str):
+    """gpt-4o-mini + consolidation-survivor vocab, top-120 by count -- the
+    full intended pipeline (curated seed + ranked window)."""
+    return await _closed_vocab(text, list(relation_vocabulary_curated()))
+
+
 async def big_model(text: str):
     """Open prompt (no vocab constraint) on a larger model -- does a bigger
     model over-generate LESS, or is over-generation model-independent?"""
@@ -316,6 +389,8 @@ ARMS = {
     "baseline": baseline,                    # gpt-4o-mini, open prompt (production)
     "closed_vocab": closed_vocab,            # mini + live (sprawled) vocab
     "closed_vocab_clean": closed_vocab_clean,  # mini + clean compact vocab
+    "ranked_window": ranked_window,          # mini + live vocab, top-120 by edge_count (H5 post-fix)
+    "ranked_window_curated": ranked_window_curated,  # mini + curated survivors, top-120 by count
     "big_model": big_model,                  # gpt-4o, open prompt
     "big_model_clean": big_model_clean,      # gpt-4o + clean vocab
     # spaCy node extractors (free/local) + dependency RE
