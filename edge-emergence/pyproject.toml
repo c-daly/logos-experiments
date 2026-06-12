@@ -1,0 +1,18 @@
+[project]
+name = "edge-emergence"
+version = "0.1.0"
+description = "P1 relational-induction pilot (lx#46): edge-instance clusters, endpoint senses, dL adjudication"
+requires-python = ">=3.12"
+dependencies = [
+  "neo4j>=5.20.0",
+  "pymilvus>=2.3.0",
+  "numpy>=1.26.0",
+  "scikit-learn>=1.4.0",
+]
+
+[dependency-groups]
+dev = ["pytest>=8.0.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
