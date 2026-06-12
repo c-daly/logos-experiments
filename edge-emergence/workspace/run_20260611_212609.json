@@ -1,0 +1,1224 @@
+{
+  "provenance": {
+    "design": "run3 (PCA roles; role-pair-hist confirmation + converse veto; gold overlap guard)",
+    "graph": "corpus_batch3 reference v2 (BASELINE.md row 6)",
+    "pipeline": "merged main: hermes b75c3cd, sophia 6016f03",
+    "consolidation": "pre (mapping.csv is gold)",
+    "n_edges_total": 12368,
+    "n_edges_candidate": 6804,
+    "n_nodes": 5502
+  },
+  "coverage": {
+    "node": 1.0,
+    "label": 1.0
+  },
+  "n_roles": 2,
+  "n_surfaces_considered": 767,
+  "n_label_clusters": 184,
+  "funnel": {
+    "proposed": 362,
+    "confirmed": 318,
+    "accepted": 318
+  },
+  "merges": [
+    {
+      "loser": "COMPRISES",
+      "winner": "COMPOSED_OF",
+      "pair_sim": 0.997,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -74.26,
+      "accepted": true
+    },
+    {
+      "loser": "USED_BY",
+      "winner": "USED_IN",
+      "pair_sim": 0.995,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -69.83,
+      "accepted": true
+    },
+    {
+      "loser": "AFFECTED_BY",
+      "winner": "AFFECTS",
+      "pair_sim": 0.999,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -68.41,
+      "accepted": true
+    },
+    {
+      "loser": "APPLIED_IN",
+      "winner": "APPLIES_TO",
+      "pair_sim": 0.999,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -62.49,
+      "accepted": true
+    },
+    {
+      "loser": "HAS_PART",
+      "winner": "PART_OF",
+      "pair_sim": 0.998,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -60.05,
+      "accepted": true
+    },
+    {
+      "loser": "PROPERTY_OF",
+      "winner": "HAS_PROPERTY",
+      "pair_sim": 0.996,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -59.12,
+      "accepted": true
+    },
+    {
+      "loser": "GENERATES",
+      "winner": "PRODUCES",
+      "pair_sim": 0.993,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -56.39,
+      "accepted": true
+    },
+    {
+      "loser": "RESEARCHES",
+      "winner": "STUDIES",
+      "pair_sim": 0.999,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -55.24,
+      "accepted": true
+    },
+    {
+      "loser": "USED_AS",
+      "winner": "USED_IN",
+      "pair_sim": 0.832,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -53.91,
+      "accepted": true
+    },
+    {
+      "loser": "PERFORMED_BY",
+      "winner": "PERFORMED_DURING",
+      "pair_sim": 0.991,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -52.04,
+      "accepted": true
+    },
+    {
+      "loser": "INVOLVED_IN",
+      "winner": "INVOLVES",
+      "pair_sim": 0.987,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -51.87,
+      "accepted": true
+    },
+    {
+      "loser": "REFERS_TO",
+      "winner": "ALSO_KNOWN_AS",
+      "pair_sim": 0.996,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -51.47,
+      "accepted": true
+    },
+    {
+      "loser": "ACTS_AS",
+      "winner": "ACTS_ON",
+      "pair_sim": 0.992,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -49.29,
+      "accepted": true
+    },
+    {
+      "loser": "RELY_ON",
+      "winner": "DEPEND_ON",
+      "pair_sim": 0.98,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -48.93,
+      "accepted": true
+    },
+    {
+      "loser": "HAS_PRACTICAL_APPLICATION_IN",
+      "winner": "APPLIES_TO",
+      "pair_sim": 0.998,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -48.72,
+      "accepted": true
+    },
+    {
+      "loser": "OCCURRED_IN",
+      "winner": "OCCUR_IN",
+      "pair_sim": 0.999,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -48.47,
+      "accepted": true
+    },
+    {
+      "loser": "DESCRIBED_IN",
+      "winner": "DESCRIBES",
+      "pair_sim": 0.998,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -48.34,
+      "accepted": true
+    },
+    {
+      "loser": "EXEMPLIFIED_BY",
+      "winner": "EXAMPLE_OF",
+      "pair_sim": 0.998,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -48.21,
+      "accepted": true
+    },
+    {
+      "loser": "CHARACTERISTIC_OF",
+      "winner": "CHARACTERIZED_BY",
+      "pair_sim": 0.99,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -45.29,
+      "accepted": true
+    },
+    {
+      "loser": "LOCATED_BETWEEN",
+      "winner": "LOCATED_IN",
+      "pair_sim": 0.987,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -44.99,
+      "accepted": true
+    },
+    {
+      "loser": "LOCATED_ON",
+      "winner": "LOCATED_IN",
+      "pair_sim": 0.987,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -44.99,
+      "accepted": true
+    },
+    {
+      "loser": "APPLIES",
+      "winner": "APPLIES_TO",
+      "pair_sim": 0.998,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -44.96,
+      "accepted": true
+    },
+    {
+      "loser": "IN_BETWEEN",
+      "winner": "BETWEEN",
+      "pair_sim": 0.999,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -44.96,
+      "accepted": true
+    },
+    {
+      "loser": "WORKS_AT",
+      "winner": "WORKS_ON",
+      "pair_sim": 1.0,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -44.36,
+      "accepted": true
+    },
+    {
+      "loser": "KNOWN_SINCE",
+      "winner": "ALSO_KNOWN_AS",
+      "pair_sim": 0.996,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -44.3,
+      "accepted": true
+    },
+    {
+      "loser": "WITHIN",
+      "winner": "BETWEEN",
+      "pair_sim": 0.972,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -44.16,
+      "accepted": true
+    },
+    {
+      "loser": "DESCRIBED_BY",
+      "winner": "DESCRIBES",
+      "pair_sim": 0.998,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -44.01,
+      "accepted": true
+    },
+    {
+      "loser": "TRANSFORMED_INTO",
+      "winner": "CONVERTS",
+      "pair_sim": 0.994,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -43.99,
+      "accepted": true
+    },
+    {
+      "loser": "RELATES",
+      "winner": "RELATED_TO",
+      "pair_sim": 0.997,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -43.5,
+      "accepted": true
+    },
+    {
+      "loser": "PRESENT_IN",
+      "winner": "FOUND_IN",
+      "pair_sim": 0.967,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -42.66,
+      "accepted": true
+    },
+    {
+      "loser": "DOES_NOT_AFFECT",
+      "winner": "AFFECTS",
+      "pair_sim": 0.999,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -41.25,
+      "accepted": true
+    },
+    {
+      "loser": "GENERATED_BY",
+      "winner": "PRODUCES",
+      "pair_sim": 0.942,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -41.25,
+      "accepted": true
+    },
+    {
+      "loser": "OBSERVED_BY",
+      "winner": "OBSERVED_IN",
+      "pair_sim": 0.933,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -40.88,
+      "accepted": true
+    },
+    {
+      "loser": "WIDELY_USED_IN",
+      "winner": "USED_IN",
+      "pair_sim": 0.989,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -40.61,
+      "accepted": true
+    },
+    {
+      "loser": "ACROSS",
+      "winner": "CROSSES",
+      "pair_sim": 1.0,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -40.2,
+      "accepted": true
+    },
+    {
+      "loser": "REFERRED_TO_AS",
+      "winner": "ALSO_KNOWN_AS",
+      "pair_sim": 0.892,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -39.99,
+      "accepted": true
+    },
+    {
+      "loser": "INVENTED_IN",
+      "winner": "INVENTED_BY",
+      "pair_sim": 0.994,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -39.7,
+      "accepted": true
+    },
+    {
+      "loser": "LOCATED_AT",
+      "winner": "LOCATED_IN",
+      "pair_sim": 0.987,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -39.43,
+      "accepted": true
+    },
+    {
+      "loser": "RESULTS_IN",
+      "winner": "RESULTS_FROM",
+      "pair_sim": 0.987,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -38.4,
+      "accepted": true
+    },
+    {
+      "loser": "CONVERTED_INTO",
+      "winner": "CONVERTS",
+      "pair_sim": 0.964,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -37.42,
+      "accepted": true
+    },
+    {
+      "loser": "CONVERTED_TO",
+      "winner": "CONVERTS",
+      "pair_sim": 0.994,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -37.42,
+      "accepted": true
+    },
+    {
+      "loser": "MEMBER_OF",
+      "winner": "PART_OF",
+      "pair_sim": 0.998,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -37.25,
+      "accepted": true
+    },
+    {
+      "loser": "OCCURRED_DURING",
+      "winner": "OCCUR_IN",
+      "pair_sim": 0.958,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -37.12,
+      "accepted": true
+    },
+    {
+      "loser": "DEVELOPS_DURING",
+      "winner": "DEVELOPS",
+      "pair_sim": 0.991,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -36.73,
+      "accepted": true
+    },
+    {
+      "loser": "BUILT_DURING",
+      "winner": "BUILT_BY",
+      "pair_sim": 1.0,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -36.44,
+      "accepted": true
+    },
+    {
+      "loser": "MAKES",
+      "winner": "CREATES",
+      "pair_sim": 0.983,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -36.38,
+      "accepted": true
+    },
+    {
+      "loser": "MEASURE_OF",
+      "winner": "EXPRESSED_IN",
+      "pair_sim": 1.0,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -35.95,
+      "accepted": true
+    },
+    {
+      "loser": "OBSERVED",
+      "winner": "OBSERVED_IN",
+      "pair_sim": 0.933,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -35.41,
+      "accepted": true
+    },
+    {
+      "loser": "COMPRISES_PERCENTAGE_OF_MASS",
+      "winner": "CONTAINS_PERCENTAGE_OF",
+      "pair_sim": 0.992,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -35.21,
+      "accepted": true
+    },
+    {
+      "loser": "OCCURS_DURING",
+      "winner": "OCCUR_IN",
+      "pair_sim": 0.958,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -35.03,
+      "accepted": true
+    },
+    {
+      "loser": "INVENTED_DURING",
+      "winner": "INVENTED_BY",
+      "pair_sim": 0.981,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -34.59,
+      "accepted": true
+    },
+    {
+      "loser": "PROPOSED_BY",
+      "winner": "PROPOSED_IN",
+      "pair_sim": 1.0,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -34.27,
+      "accepted": true
+    },
+    {
+      "loser": "MEASURED_BY",
+      "winner": "EXPRESSED_IN",
+      "pair_sim": 0.97,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -33.78,
+      "accepted": true
+    },
+    {
+      "loser": "OCCURRED_AT",
+      "winner": "OCCUR_IN",
+      "pair_sim": 0.999,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -33.48,
+      "accepted": true
+    },
+    {
+      "loser": "EXISTS_AS",
+      "winner": "EXISTS_IN",
+      "pair_sim": 0.99,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -33.33,
+      "accepted": true
+    },
+    {
+      "loser": "PRODUCED_FROM",
+      "winner": "PRODUCED_BY",
+      "pair_sim": 0.919,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -33.21,
+      "accepted": true
+    },
+    {
+      "loser": "DESCRIBED_AS",
+      "winner": "DESCRIBES",
+      "pair_sim": 0.998,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -32.58,
+      "accepted": true
+    },
+    {
+      "loser": "CATEGORIZED_BY",
+      "winner": "CLASSIFIED_AS",
+      "pair_sim": 0.98,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -32.43,
+      "accepted": true
+    },
+    {
+      "loser": "BUILT",
+      "winner": "BUILT_BY",
+      "pair_sim": 0.97,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -32.27,
+      "accepted": true
+    },
+    {
+      "loser": "CHARACTERIZES",
+      "winner": "CHARACTERIZED_BY",
+      "pair_sim": 0.984,
+      "converse_veto": false,
+      "confirmed": true,
+      "dL": -32.06,
+      "accepted": true
+    }
+  ],
+  "splits": [
+    {
+      "surface": "ALSO_KNOWN_AS",
+      "sense_mass": 7,
+      "dL": 70.5,
+      "accepted": false
+    },
+    {
+      "surface": "PART_OF",
+      "sense_mass": 11,
+      "dL": 96.76,
+      "accepted": false
+    },
+    {
+      "surface": "INCLUDES",
+      "sense_mass": 8,
+      "dL": 68.28,
+      "accepted": false
+    },
+    {
+      "surface": "LOCATED_IN",
+      "sense_mass": 5,
+      "dL": 49.83,
+      "accepted": false
+    }
+  ],
+  "mapping_eval": {
+    "tp": 9,
+    "n_induced_pairs": 577,
+    "n_gold_pairs": 193,
+    "precision": 0.01559792027729636,
+    "recall": 0.046632124352331605,
+    "fn": [
+      [
+        "able_to_absorb",
+        "absorb"
+      ],
+      [
+        "able_to_attract",
+        "attract"
+      ],
+      [
+        "able_to_be_observed_with",
+        "observed"
+      ],
+      [
+        "able_to_catalyze",
+        "catalyze"
+      ],
+      [
+        "able_to_control",
+        "control"
+      ],
+      [
+        "able_to_form",
+        "able_to_form_from"
+      ],
+      [
+        "able_to_react_with",
+        "reacts_with"
+      ],
+      [
+        "about",
+        "contended_about"
+      ],
+      [
+        "about",
+        "knew_about"
+      ],
+      [
+        "across",
+        "delivered_across"
+      ],
+      [
+        "act_over",
+        "acts_as"
+      ],
+      [
+        "advanced",
+        "advanced_idea_of"
+      ],
+      [
+        "advanced",
+        "advanced_to"
+      ],
+      [
+        "affected",
+        "affected_in"
+      ],
+      [
+        "also_focused_on",
+        "focused_on"
+      ],
+      [
+        "also_includes",
+        "included_in"
+      ],
+      [
+        "also_occurs_alongside",
+        "occurs_in"
+      ],
+      [
+        "appear_with",
+        "appeared_in"
+      ],
+      [
+        "appeared_around",
+        "appeared_in"
+      ],
+      [
+        "appeared_in",
+        "appears_in_work_of"
+      ],
+      [
+        "appeared_in",
+        "appears_to_exist_as"
+      ],
+      [
+        "appeared_in",
+        "first_appeared_around"
+      ],
+      [
+        "applied",
+        "process_applied_to"
+      ],
+      [
+        "associated_with",
+        "avoids_costs_associated_with"
+      ],
+      [
+        "attempted_to_convert",
+        "converted_to"
+      ]
+    ],
+    "fp": [
+      [
+        "ability_of",
+        "capacity_of"
+      ],
+      [
+        "able_to_detect",
+        "detected_by"
+      ],
+      [
+        "above",
+        "greater_than"
+      ],
+      [
+        "above",
+        "higher_than"
+      ],
+      [
+        "above",
+        "larger_than"
+      ],
+      [
+        "absorbs",
+        "consumes"
+      ],
+      [
+        "accepted",
+        "inherited_from"
+      ],
+      [
+        "accepted",
+        "received"
+      ],
+      [
+        "accepted",
+        "received_genes_from"
+      ],
+      [
+        "accepted",
+        "receives_from"
+      ],
+      [
+        "accepted",
+        "recognized"
+      ],
+      [
+        "accompanied_by",
+        "aided_by"
+      ],
+      [
+        "accompanied_by",
+        "assistant_of"
+      ],
+      [
+        "accompanied_by",
+        "assisted_by"
+      ],
+      [
+        "acquired_by",
+        "acquires"
+      ],
+      [
+        "across",
+        "crosses"
+      ],
+      [
+        "across",
+        "through"
+      ],
+      [
+        "acts_as",
+        "acts_on"
+      ],
+      [
+        "adjacent_to",
+        "along"
+      ],
+      [
+        "adjacent_to",
+        "alongside"
+      ],
+      [
+        "adopted_by",
+        "adopted_during"
+      ],
+      [
+        "advanced",
+        "advanced_by"
+      ],
+      [
+        "advanced",
+        "progressed_during"
+      ],
+      [
+        "advanced_by",
+        "advanced_during"
+      ],
+      [
+        "advanced_by",
+        "progressed_during"
+      ]
+    ]
+  },
+  "gold_overlap": {
+    "gold_vocab": 296,
+    "graph_vocab": 767,
+    "shared_surfaces": 77,
+    "restricted_eval": {
+      "tp": 9,
+      "n_induced_pairs": 54,
+      "n_gold_pairs": 193,
+      "precision": 0.16666666666666666,
+      "recall": 0.046632124352331605,
+      "fn": [
+        [
+          "able_to_absorb",
+          "absorb"
+        ],
+        [
+          "able_to_attract",
+          "attract"
+        ],
+        [
+          "able_to_be_observed_with",
+          "observed"
+        ],
+        [
+          "able_to_catalyze",
+          "catalyze"
+        ],
+        [
+          "able_to_control",
+          "control"
+        ],
+        [
+          "able_to_form",
+          "able_to_form_from"
+        ],
+        [
+          "able_to_react_with",
+          "reacts_with"
+        ],
+        [
+          "about",
+          "contended_about"
+        ],
+        [
+          "about",
+          "knew_about"
+        ],
+        [
+          "across",
+          "delivered_across"
+        ]
+      ],
+      "fp": [
+        [
+          "across",
+          "crosses"
+        ],
+        [
+          "across",
+          "through"
+        ],
+        [
+          "advanced",
+          "advanced_by"
+        ],
+        [
+          "advanced",
+          "progressed_during"
+        ],
+        [
+          "advanced_by",
+          "advanced_during"
+        ],
+        [
+          "advanced_by",
+          "progressed_during"
+        ],
+        [
+          "advanced_during",
+          "progressed_during"
+        ],
+        [
+          "awarded",
+          "awarded_to"
+        ],
+        [
+          "awarded_in",
+          "awarded_to"
+        ],
+        [
+          "built",
+          "built_from"
+        ]
+      ]
+    }
+  },
+  "hand_label_request": [
+    "LASTS_FOR -> DURATION",
+    "LENGTH -> DURATION",
+    "ORBIT_IN -> ORBITS",
+    "LOSS_PERCENTAGE -> LOSES",
+    "LOST -> LOSES",
+    "SEQUENCE_OF -> SEQUENCED",
+    "HAS_CHEMICAL_SYMBOL -> HAS_ATOMIC_NUMBER",
+    "POPULAR_IN -> POPULAR_FOR",
+    "AWARDED_IN -> AWARDED",
+    "AWARDED_TO -> AWARDED",
+    "HAS_ABUNDANCE_RANK -> HAS_ABUNDANCE",
+    "HAS_DENSITY -> HAS_ABUNDANCE",
+    "HAS_NUMBER_OF -> COUNT_OF",
+    "ACROSS -> CROSSES",
+    "THROUGH -> CROSSES",
+    "MATCHES -> EQUALS",
+    "REVEALED -> SHOWED",
+    "SHOWED_PURITY_OF -> SHOWED",
+    "NAMED -> NAMED_AFTER",
+    "EXTENDED_LIST_OF -> LISTS",
+    "LISTS_FUNCTION -> LISTS",
+    "HAS_PART -> PART_OF",
+    "MEMBER_OF -> PART_OF",
+    "ARE -> IS",
+    "PROCESSES -> PROCESSED_BY",
+    "PROCESS_OF -> PROCESSED_BY",
+    "ADOPTED_DURING -> ADOPTED_BY",
+    "USES_INSTEAD_OF -> ALTERNATIVE_TO",
+    "EXERTS_FORCE_ON -> EXERTS",
+    "IMPOSES -> EXERTS",
+    "PROPELS -> EXPELS",
+    "HAVE -> HAS",
+    "BOILS_AT -> SUBLIMES_AT",
+    "MELTS_AT -> SUBLIMES_AT",
+    "CONSIDERS -> CONSIDERED_AT_LEVEL",
+    "LEVEL_OF -> CONSIDERED_AT_LEVEL",
+    "HAS_OCCUPATION -> HAS_PROFESSION",
+    "OCCUPIES -> HAS_PROFESSION",
+    "ADJACENT_TO -> ALONGSIDE",
+    "ALONG -> ALONGSIDE",
+    "NEAR -> CLOSE_TO",
+    "SELECTED_BY -> ORDERED_BY",
+    "FORMS_CONTINUOUS_PHASE_WITH -> PHASE_TRANSITION_FROM",
+    "PHASE_OF -> PHASE_TRANSITION_FROM",
+    "PHASE_TRANSITION_TO -> PHASE_TRANSITION_FROM",
+    "OF_INTEREST_TO -> INTERESTED_IN",
+    "RANGE_FROM -> RANGE_TO",
+    "CONFIRMED_BY -> ATTESTED_TO",
+    "NEEDS -> REQUIRES",
+    "PUBLISHED_ON -> PUBLISHED_IN",
+    "PREDICTS_USING -> PREDICTED",
+    "IONIZES -> IONIZED_BY",
+    "VAPORIZES -> IONIZED_BY",
+    "HAS_SAME_STRUCTURE_AS -> HAS_STRUCTURE",
+    "MOVES -> MOVED_ALONG",
+    "CONDUCTED_IN -> CONDUCTED",
+    "CONSUMES -> ABSORBS",
+    "EXCEEDS -> CANNOT_EXCEED",
+    "SUPERSEDES -> CANNOT_EXCEED",
+    "CAUSED_LOSS_OF -> CAUSED_BY",
+    "CAUSES_DROP_IN -> CAUSED_BY",
+    "CAUSES_TO_DESCRIBE -> CAUSED_BY",
+    "ADVOCATED -> ARGUED_ABOUT",
+    "ARGUED_FOR -> ARGUED_ABOUT",
+    "DISCUSSED -> ARGUED_ABOUT",
+    "PROMOTED -> ARGUED_ABOUT",
+    "CONTRIBUTED_TO_UNDERSTANDING_OF -> CONTRIBUTES_TO",
+    "STORED_BY -> STORED_IN",
+    "REPORTED_BY -> REPORTS_ON",
+    "BECOMES -> UNDERGOES",
+    "BECOMES_MORE_COMMON_IN -> BECOMES_COMMON_IN",
+    "MORE_COMMON_IN -> BECOMES_COMMON_IN",
+    "COMPRISES_PERCENTAGE_OF_MASS -> CONTAINS_PERCENTAGE_OF",
+    "CONTAINS_PERCENTAGE_OF_MASS -> CONTAINS_PERCENTAGE_OF",
+    "PERCENTAGE_OF -> CONTAINS_PERCENTAGE_OF",
+    "ENCODED_IN -> ENCODES",
+    "EXPRESSION_DEPENDS_ON -> EXPRESSED_IN",
+    "MEASURED_AT -> EXPRESSED_IN",
+    "MEASURED_BY -> EXPRESSED_IN",
+    "MEASURED_IN -> EXPRESSED_IN",
+    "MEASURES -> EXPRESSED_IN",
+    "MEASURE_OF -> EXPRESSED_IN",
+    "USED_TO_MEASURE -> EXPRESSED_IN",
+    "EMPHASIZED_IMPORTANCE_OF -> EMPHASIZED",
+    "ANALYZED_IN_TERMS_OF -> EVALUATES",
+    "ANALYZES -> EVALUATES",
+    "UNDERSTOOD_IN_TERMS_OF -> EVALUATES",
+    "INVESTIGATED -> EXAMINED",
+    "FUNDAMENTAL_TO -> UNIT_OF",
+    "FUNDAMENTAL_UNIT_OF -> UNIT_OF",
+    "ESSENTIAL_FOR -> IMPORTANT_IN",
+    "INDISPENSABLE_IN -> IMPORTANT_IN",
+    "NECESSARY_FOR -> IMPORTANT_IN",
+    "ALLOWS_DETERMINATION_OF -> DETERMINED_BY",
+    "DETERMINES -> DETERMINED_BY",
+    "DETERMINES_MOTION_OF -> DETERMINED_BY",
+    "ATTRIBUTE_OF -> EXPLAINED_ATTRIBUTES_OF",
+    "PROPERTY_OF -> HAS_PROPERTY",
+    "EMITTED_BY -> EMITS",
+    "DISTORTED_BY -> WARPED_INTO",
+    "COEXISTS_WITH -> OVERLAPS_WITH",
+    "PROVIDES_TRANSPORT_FOR -> TRANSPORTS",
+    "TRANSPORTS_TO -> TRANSPORTS",
+    "CARRIED_BY -> CARRIES",
+    "TRANSPORTED_BY -> CARRIES",
+    "ACCOMPANIED_BY -> AIDED_BY",
+    "ASSISTANT_OF -> AIDED_BY",
+    "ASSISTED_BY -> AIDED_BY",
+    "AFFECTED_BY -> AFFECTS",
+    "DOES_NOT_AFFECT -> AFFECTS",
+    "INHERITED_FROM -> ACCEPTED",
+    "RECEIVED -> ACCEPTED",
+    "RECEIVED_GENES_FROM -> ACCEPTED",
+    "RECEIVES_FROM -> ACCEPTED",
+    "RECOGNIZED -> ACCEPTED",
+    "BINDS_TO -> BINDS",
+    "ACQUIRED_BY -> ACQUIRES",
+    "BOUND_BY -> LIMITED_BY",
+    "NAME_MEANS -> CAN_MEAN",
+    "DECLARED_BY -> ANNOUNCED_IN",
+    "PREVENTS -> AVOIDS",
+    "PREVENTS_ESCAPE_OF -> AVOIDS",
+    "PROTECTS -> AVOIDS",
+    "CONNECTS -> CONNECTED_BY",
+    "INTERCONNECTED_WITH -> INTERTWINED_WITH",
+    "INTERRELATED_WITH -> INTERTWINED_WITH",
+    "RELATES -> RELATED_TO",
+    "LINKED -> LINKED_TO",
+    "INCLUDES_TYPE -> TYPE_OF",
+    "WORKS_AT -> WORKS_ON",
+    "EMPLOYED_IN -> EMPLOYS",
+    "CONVERTED_INTO -> CONVERTS",
+    "CONVERTED_TO -> CONVERTS",
+    "CONVERTIBLE_TO -> CONVERTS",
+    "TRANSFORMED_BY -> CONVERTS",
+    "TRANSFORMED_INTO -> CONVERTS",
+    "TRANSFERRED_IN -> TRANSFER_TO",
+    "TRANSFERRED_TO -> TRANSFER_TO",
+    "ABOVE -> LARGER_THAN",
+    "GREATER_THAN -> LARGER_THAN",
+    "HIGHER_THAN -> LARGER_THAN",
+    "COLLABORATES_WITH -> INTERACTS_WITH",
+    "COMBUSTS_WITH -> REACTS_WITH",
+    "IN_RESPONSE_TO -> RESPONDS_TO",
+    "EXEMPLIFIED_BY -> EXAMPLE_OF",
+    "BEFORE -> AFTER",
+    "WITHOUT -> AFTER",
+    "SPECIFIES -> SPECIFIED_BY",
+    "ROLE_IN -> PLAYS_ROLE_IN",
+    "CAPACITY_OF -> ABILITY_OF",
+    "DRIVER_OF -> DRIVEN_BY",
+    "DRIVES -> DRIVEN_BY",
+    "MOTIVATED_BY -> DRIVEN_BY",
+    "PRIMARY_DRIVER_FOR -> DRIVEN_BY",
+    "PROVIDES_POWER_TO -> DERIVES_POWER_FROM",
+    "DEFINITION_VARIES_IN -> DIFFERS_BY",
+    "VARIES_IN -> DIFFERS_BY",
+    "ACTS_AS -> ACTS_ON",
+    "EARLIEST_EVIDENCE_IN -> EARLIEST_EVIDENCE_DURING",
+    "SEPARATES -> SEPARATED_FROM",
+    "SUBDIVIDED_INTO -> CAN_BE_SUBDIVIDED_INTO",
+    "ESTABLISHED_BY -> ESTABLISHES",
+    "FOUNDED -> CO_FOUNDER_OF",
+    "FORMULATED_CONCEPT_OF -> FORMULATED_IN",
+    "INDICATED_BY -> INDICATES_ABOVE",
+    "INDICATES -> INDICATES_ABOVE",
+    "COMPARABLE_TO -> ANALOGOUS_TO",
+    "COMPARED_TO -> ANALOGOUS_TO",
+    "EQUIVALENT_TO -> ANALOGOUS_TO",
+    "RESEMBLES -> ANALOGOUS_TO",
+    "SIMILAR_TO -> ANALOGOUS_TO",
+    "DIFFERENTIATES -> DISTINGUISHES",
+    "DIFFERENT_FROM -> DISTINGUISHED_FROM",
+    "DISTINCT_FROM -> DISTINGUISHED_FROM",
+    "GROUPED_INTO -> GROUPED_WITH",
+    "DISCOVERED_BY -> DISCOVERED",
+    "DISCOVERED_ON -> DISCOVERED",
+    "KNOWN_SINCE -> ALSO_KNOWN_AS",
+    "REFERRED_TO_AS -> ALSO_KNOWN_AS",
+    "REFERS_TO -> ALSO_KNOWN_AS",
+    "MAY_BE -> CAN_BE",
+    "BASIS_OF -> CORNERSTONE_OF",
+    "FOUNDATION_OF -> CORNERSTONE_OF",
+    "FORMER_STUDENT_OF -> STUDENT_OF",
+    "ALLOW_CLASSIFICATION_BY -> CLASSIFIED_AS",
+    "ALSO_CLASSIFIED_AS -> CLASSIFIED_AS",
+    "CATEGORIZED_BY -> CLASSIFIED_AS",
+    "CLASSIFIES -> CLASSIFIED_AS",
+    "LABELLED_AS -> CLASSIFIED_AS",
+    "USED_TO_CLASSIFY_IN_TERMS_OF -> CLASSIFIED_AS",
+    "STUDIED_BY -> STUDIED_IN",
+    "STUDIED_WITH -> STUDIED_IN",
+    "STUDY_OF -> STUDIED_IN",
+    "RESEARCHES -> STUDIES",
+    "APPLIED_IN -> APPLIES_TO",
+    "APPLIES -> APPLIES_TO",
+    "HAS_PRACTICAL_APPLICATION_IN -> APPLIES_TO",
+    "MODIFIED_BY -> MODIFIES",
+    "INCORPORATES -> INCORPORATED_INTO",
+    "SUBSUMED_IN -> INCORPORATED_INTO",
+    "CHANGES_BY -> CHANGES",
+    "RESULTS_IN -> RESULTS_FROM",
+    "RESULT_OF -> RESULTS_FROM",
+    "LED_TO -> LEADS_TO",
+    "IDENTIFIED_BY -> IDENTIFIES",
+    "IDENTIFIED_IN -> IDENTIFIES",
+    "IDENTIFIES_AS -> IDENTIFIES",
+    "ADVANCED_BY -> ADVANCED",
+    "ADVANCED_DURING -> ADVANCED",
+    "PROGRESSED_DURING -> ADVANCED",
+    "INVOLVED_IN_MAINTENANCE_OF -> MAINTAINS",
+    "MAINTAINED_BY -> MAINTAINS",
+    "DEFINED_BY -> DEFINED_AS",
+    "DEPENDENT_ON -> DEPEND_ON",
+    "RELY_ON -> DEPEND_ON",
+    "INVENTED -> INVENTED_BY",
+    "INVENTED_AT -> INVENTED_BY",
+    "INVENTED_BETWEEN -> INVENTED_BY",
+    "INVENTED_DURING -> INVENTED_BY",
+    "INVENTED_IN -> INVENTED_BY",
+    "CAN_EXIST_AS -> EXISTS_IN",
+    "EXISTS_AS -> EXISTS_IN",
+    "TAKES_PLACE_WITHIN -> TAKES_PLACE_IN",
+    "PROPOSED_BY -> PROPOSED_IN",
+    "SUGGESTED -> PROPOSED_IN",
+    "PRESENT_AS -> FOUND_IN",
+    "PRESENT_IN -> FOUND_IN",
+    "ENCLOSED_IN -> ENCLOSED_BY",
+    "ENCLOSES -> ENCLOSED_BY",
+    "CONTAINED_WITHIN -> CONTAINED_IN",
+    "IN_BETWEEN -> BETWEEN",
+    "WITHIN -> BETWEEN",
+    "WITHIN_BETWEEN -> BETWEEN",
+    "LOCATED_AT -> LOCATED_IN",
+    "LOCATED_BETWEEN -> LOCATED_IN",
+    "LOCATED_ON -> LOCATED_IN",
+    "EXCHANGED_BY -> AIMS_TO_EXCHANGE",
+    "IN_FORM_OF -> FORM_OF",
+    "BLENDS_TO_FORM -> COMBINED_WITH",
+    "COMBINES -> COMBINED_WITH",
+    "MIXED_WITH -> COMBINED_WITH",
+    "MIXED_WITH_TO_FORM -> COMBINED_WITH",
+    "PERFORMED_BEFORE -> PERFORMED_DURING",
+    "PERFORMED_BY -> PERFORMED_DURING",
+    "DOES_NOT_INCLUDE -> EXCLUDES",
+    "PROVIDES_SUPPORT_FOR -> PROVIDES",
+    "BACKED_BY -> SUPPORTED_BY",
+    "SUPPORTED_ON -> SUPPORTED_BY",
+    "CHARACTERISTIC_OF -> CHARACTERIZED_BY",
+    "CHARACTERIZES -> CHARACTERIZED_BY",
+    "MAKES -> CREATES",
+    "DECREASES -> INCREASES",
+    "DECREASES_WITH -> INCREASES",
+    "INCREASES_DURING -> INCREASES",
+    "INCREASES_WITH -> INCREASES",
+    "DETECTED_BY -> ABLE_TO_DETECT",
+    "INVOLVED_IN -> INVOLVES",
+    "INVOLVED_IN_PRODUCTION_OF -> INVOLVES",
+    "AT_PRESSURE -> AT_TEMPERATURE",
+    "EXISTS_ABOVE_TEMPERATURE -> AT_TEMPERATURE",
+    "HAS_PRESSURE -> AT_TEMPERATURE",
+    "HAS_TEMPERATURE -> AT_TEMPERATURE",
+    "FORMED_AS -> FORMED_BY",
+    "FORMED_DURING -> FORMED_BY",
+    "DEVELOPED_IN -> DEVELOPED_BY",
+    "DESCRIBED_AS -> DESCRIBES",
+    "DESCRIBED_BY -> DESCRIBES",
+    "DESCRIBED_IN -> DESCRIBES",
+    "CONTAINS_OBSERVATION_OF -> OBSERVED_IN",
+    "OBSERVED -> OBSERVED_IN",
+    "OBSERVED_BY -> OBSERVED_IN",
+    "OBSERVED_DURING -> OBSERVED_IN",
+    "OBSERVED_WITH -> OBSERVED_IN",
+    "COMMONLY_USED_FOR -> USED_IN",
+    "USED_AS -> USED_IN",
+    "USED_BY -> USED_IN",
+    "USED_UNTIL -> USED_IN",
+    "USED_WITH -> USED_IN",
+    "WIDELY_USED_IN -> USED_IN",
+    "DEVELOPS_DURING -> DEVELOPS",
+    "DEVELOPS_FROM -> DEVELOPS",
+    "AIMS_TO_DESCRIBE -> AIMS_TO_EXPLAIN",
+    "AIMS_TO_ESTIMATE -> AIMS_TO_EXPLAIN",
+    "WRITTEN_BY -> WROTE",
+    "WROTE_IN -> WROTE",
+    "OCCURRED_AT -> OCCUR_IN",
+    "OCCURRED_DURING -> OCCUR_IN",
+    "OCCURRED_IN -> OCCUR_IN",
+    "OCCURS_DURING -> OCCUR_IN",
+    "APPEARS_DURING -> APPEARS_IN",
+    "FIRST_APPEARED_IN -> FIRST_APPEARED_DURING",
+    "COMES_FROM -> ORIGINATES_FROM",
+    "STEMS_FROM -> ORIGINATES_FROM",
+    "BUILT -> BUILT_BY",
+    "BUILT_DURING -> BUILT_BY",
+    "BUILT_FROM -> BUILT_BY",
+    "BUILT_USING -> BUILT_BY",
+    "CONSTRUCTED -> BUILT_BY",
+    "CONSTRUCTED_WITH -> BUILT_BY",
+    "OBTAINED_BY -> DERIVED_FROM",
+    "AIMS_TO_CAPTURE -> AIMS_TO_CATCH",
+    "AIMS_TO_DETECT -> AIMS_TO_CATCH",
+    "AIMS_TO_DEVELOP -> AIMS_TO_DESIGN",
+    "AIMS_TO_ACHIEVE -> AIMS_TO_PRODUCE",
+    "AIMS_TO_OBTAIN -> AIMS_TO_PRODUCE",
+    "AIMS_TO_SUPPORT -> AIMS_TO_ENABLE",
+    "ENABLED_BY -> ENABLES",
+    "CREATED_DURING -> CREATED_BY",
+    "CREATED_ON -> CREATED_BY",
+    "GENERATED_BY -> PRODUCES",
+    "GENERATED_FROM -> PRODUCES",
+    "GENERATES -> PRODUCES",
+    "PRODUCED_DURING -> PRODUCED_BY",
+    "PRODUCED_FROM -> PRODUCED_BY",
+    "PRODUCED_IN -> PRODUCED_BY",
+    "MADE_FROM -> MADE_OF",
+    "COMPRISES -> COMPOSED_OF",
+    "MADE_UP_OF -> COMPOSED_OF"
+  ],
+  "gate": {
+    "multi_sense_split_found": false,
+    "aggregate_dL_accepted": -9198.0,
+    "pass": false
+  },
+  "elapsed_s": 451.2
+}
