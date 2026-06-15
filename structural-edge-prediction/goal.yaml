@@ -1,0 +1,43 @@
+objective: |
+  Decide whether a type-conditioned edge SIGNATURE predicts held-out relational
+  edges better than (A0) a type-blind marginal baseline and (A2) embedding-cosine
+  kNN \u2014 and whether per-type prediction quality tracks signature sharpness
+  ("a kind is whatever predicts"). "Embeddings POINT, the graph ASSERTS." A type
+  is the reified IS_A edge; its signature is the distribution of relational edges
+  its members tend to have. If that signature ranks true missing edges above
+  corrupted fakes \u2014 no LLM, no training \u2014 structure carries predictive meaning.
+  Held-out-edge recovery is simultaneously the GENERATION test (the partial graph
+  proposing missing edges) and the ERROR-CATCHING test (ranking fakes low). Same
+  gear, one filtered AUC. Validated OFFLINE on a frozen snapshot.
+success_criteria:
+  - metric: signature_auc_minus_marginal
+    threshold: 0.0
+    comparator: gt
+    primary: true
+    description: >
+      A1_AUC - A0_AUC > 0: the type signature predicts held-out edges beyond the
+      type-blind base rates. The core claim \u2014 structure adds predictive signal.
+  - metric: signature_auc
+    threshold: 0.6
+    comparator: ge
+    primary: false
+    description: >
+      A1 filtered AUC clears a 0.6 sanity floor (a true edge beats a random
+      negative well above chance). A guard against a vacuous A1 > A0 win.
+  - metric: signature_minus_embedding_auc
+    threshold: 0.0
+    comparator: gt
+    primary: false
+    description: >
+      A1_AUC - A2_AUC > 0: the graph signature beats embedding cosine proximity.
+      Informative either way \u2014 a null (A2 >= A1) likely means embeddings already
+      carry the structure (density), not a method failure.
+  - metric: sharpness_accuracy_corr
+    threshold: 0.0
+    comparator: gt
+    primary: true
+    description: >
+      Spearman correlation across types between signature sharpness (-entropy)
+      and that type\u0027s hits@10 > 0: sharper types predict better. Support for
+      "a kind is whatever predicts" \u2014 sharpness x predictive-lift becomes a
+      label-free type-quality gate for mint/evict.
