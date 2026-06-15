@@ -3,8 +3,10 @@
 Re-runs the 2026-06-04 latent-structure probe on the current (post-reset)
 graph: build the node x (relation, direction, neighbor-type) matrix over the
 HCG's semantic edges, TF-IDF it, and measure how much variance truncated SVD
-captures. Plus the source-noise indicators the 2026-06-04 diagnosis used:
-edges per data node and the df=1 predicate fraction.
+captures. Plus the source-noise indicators the 2026-06-04 diagnosis used
+(edges per data node, df=1 predicate fraction) and the gate metrics as
+recalibrated 2026-06-11 (logos#557): edges-per-predicate and top-N predicate
+concentration — df=1 is still reported but no longer gates.
 
 Baselines to beat (2026-06-04, pre-reset graph): top-128 = 5.7% variance
 (top-16: 1.2%), ~2.6 edges/node, rarest-predicate df=1 junk dominant.
@@ -125,16 +127,25 @@ def build_matrix(
 def predicate_stats(
     nodes: list[NodeRecord], edges: list[SemanticEdge]
 ) -> dict:
-    """Source-noise indicators: relation document frequencies + density."""
+    """Source-noise indicators: relation document frequencies, density,
+    and vocabulary concentration (the 2026-06-11 gate metrics)."""
     edge_df = Counter(e.relation for e in edges)
     distinct = len(edge_df)
     df1 = sum(1 for c in edge_df.values() if c == 1)
     data_nodes = sum(1 for n in nodes if n.kind not in NON_DATA_KINDS)
+    df_desc = sorted(edge_df.values(), reverse=True)
+
+    def top_share(n: int) -> float:
+        return (sum(df_desc[:n]) / len(edges)) if edges else 0.0
+
     return {
         "distinct_relations": distinct,
         "edge_df": dict(edge_df),
         "df1_fraction": (df1 / distinct) if distinct else 0.0,
         "edges_per_data_node": (len(edges) / data_nodes) if data_nodes else 0.0,
+        "edges_per_predicate": (len(edges) / distinct) if distinct else 0.0,
+        "top10_concentration": top_share(10),
+        "top50_concentration": top_share(50),
         "data_nodes": data_nodes,
         "semantic_edges": len(edges),
     }
@@ -241,6 +252,9 @@ def report(nodes: list[NodeRecord], edges: list[SemanticEdge]) -> str:
         f"  edges/data-node: {stats['edges_per_data_node']:.2f}",
         f"distinct relations: {stats['distinct_relations']}"
         f"  df=1 fraction: {stats['df1_fraction']:.3f}",
+        f"edges/predicate: {stats['edges_per_predicate']:.2f}"
+        f"  top-10 share: {stats['top10_concentration']:.3f}"
+        f"  top-50 share: {stats['top50_concentration']:.3f}",
         f"top relations: {df_sorted[:10]}",
         f"bottom relations: {df_sorted[-5:]}",
         "",
@@ -259,7 +273,9 @@ def report(nodes: list[NodeRecord], edges: list[SemanticEdge]) -> str:
         f"| {stats['edges_per_data_node']:.2f} "
         f"| {stats['distinct_relations']} | {stats['df1_fraction']:.3f} "
         f"| {curve_all[16]:.3f} / {curve_all[128]:.3f} "
-        f"| {curve_nt[16]:.3f} / {curve_nt[128]:.3f} |",
+        f"| {curve_nt[16]:.3f} / {curve_nt[128]:.3f} "
+        f"| {stats['edges_per_predicate']:.2f} "
+        f"| {stats['top10_concentration']:.3f} / {stats['top50_concentration']:.3f} |",
     ]
     return "\n".join(lines)
 
