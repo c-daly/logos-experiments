@@ -1,0 +1,62 @@
+[
+  {
+    "arm": "spacy",
+    "failures": 0,
+    "elapsed_s": 9.2,
+    "entity_f1": 0.0,
+    "entity_recall": 0.0,
+    "type_accuracy": 0.0,
+    "link_f1": 0.0,
+    "link_recall": 0.0,
+    "label_f1": 0.0,
+    "distinct_predicates": 0,
+    "total_relations": 0,
+    "predicates_per_relation": 0.0,
+    "df1_fraction": 0.0
+  },
+  {
+    "arm": "spacy_pos",
+    "failures": 0,
+    "elapsed_s": 0.3,
+    "entity_f1": 0.662,
+    "entity_recall": 0.75,
+    "type_accuracy": 0.0,
+    "link_f1": 0.0,
+    "link_recall": 0.0,
+    "label_f1": 0.0,
+    "distinct_predicates": 0,
+    "total_relations": 0,
+    "predicates_per_relation": 0.0,
+    "df1_fraction": 0.0
+  },
+  {
+    "arm": "spacy_chunks",
+    "failures": 0,
+    "elapsed_s": 0.3,
+    "entity_f1": 0.596,
+    "entity_recall": 0.613,
+    "type_accuracy": 0.0,
+    "link_f1": 0.0,
+    "link_recall": 0.0,
+    "label_f1": 0.0,
+    "distinct_predicates": 0,
+    "total_relations": 0,
+    "predicates_per_relation": 0.0,
+    "df1_fraction": 0.0
+  },
+  {
+    "arm": "spacy_head",
+    "failures": 0,
+    "elapsed_s": 0.3,
+    "entity_f1": 0.713,
+    "entity_recall": 0.723,
+    "type_accuracy": 0.0,
+    "link_f1": 0.0,
+    "link_recall": 0.0,
+    "label_f1": 0.0,
+    "distinct_predicates": 0,
+    "total_relations": 0,
+    "predicates_per_relation": 0.0,
+    "df1_fraction": 0.0
+  }
+]

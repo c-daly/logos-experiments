@@ -5,9 +5,15 @@ __pycache__/
 .venv/
 .uv/
 
+# Test / lint caches
+.pytest_cache/
+.ruff_cache/
+
 # Experiment run outputs — keep snapshots small; large artifacts stay local
 */workspace/*.tmp
 */workspace/*.log
+# structural-edge-prediction run outputs: large/un-timestamped scratch, stay local
+structural-edge-prediction/workspace/
 
 # Tooling noise
 .serena/

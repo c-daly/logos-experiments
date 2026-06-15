@@ -1,0 +1,47 @@
+[
+  {
+    "arm": "baseline_defaults",
+    "failures": 0,
+    "elapsed_s": 111.1,
+    "entity_f1": 0.726,
+    "entity_recall": 0.748,
+    "type_accuracy": 0.11,
+    "link_f1": 0.384,
+    "link_recall": 0.438,
+    "label_f1": 0.206,
+    "distinct_predicates": 28,
+    "total_relations": 63,
+    "predicates_per_relation": 0.444,
+    "df1_fraction": 0.679
+  },
+  {
+    "arm": "baseline_livetypes",
+    "failures": 0,
+    "elapsed_s": 110.5,
+    "entity_f1": 0.777,
+    "entity_recall": 0.806,
+    "type_accuracy": 0.106,
+    "link_f1": 0.478,
+    "link_recall": 0.525,
+    "label_f1": 0.225,
+    "distinct_predicates": 30,
+    "total_relations": 72,
+    "predicates_per_relation": 0.417,
+    "df1_fraction": 0.633
+  },
+  {
+    "arm": "baseline_livetypes_normalized",
+    "failures": 0,
+    "elapsed_s": 119.9,
+    "entity_f1": 0.759,
+    "entity_recall": 0.781,
+    "type_accuracy": 0.123,
+    "link_f1": 0.424,
+    "link_recall": 0.475,
+    "label_f1": 0.196,
+    "distinct_predicates": 33,
+    "total_relations": 75,
+    "predicates_per_relation": 0.44,
+    "df1_fraction": 0.636
+  }
+]

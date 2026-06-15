@@ -1,0 +1,15 @@
+[project]
+name = "structural-edge-prediction-experiment"
+version = "0.1.0"
+description = "Offline structural edge-prediction experiment harness (type-signature link prediction)"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pyyaml>=6.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

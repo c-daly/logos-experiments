@@ -1,0 +1,97 @@
+{
+  "nodes": [
+    {"id": "beluga#1", "type": "whale", "label": "beluga"},
+    {"id": "orca#1", "type": "whale", "label": "orca"},
+    {"id": "humpback#1", "type": "whale", "label": "humpback"},
+    {"id": "narwhal#1", "type": "whale", "label": "narwhal"},
+    {"id": "minke#1", "type": "whale", "label": "minke"},
+
+    {"id": "salmon#1", "type": "fish", "label": "salmon"},
+    {"id": "tuna#1", "type": "fish", "label": "tuna"},
+    {"id": "shark#1", "type": "fish", "label": "shark"},
+    {"id": "cod#1", "type": "fish", "label": "cod"},
+    {"id": "herring#1", "type": "fish", "label": "herring"},
+
+    {"id": "blowhole#1", "type": "whale_anatomy", "label": "blowhole"},
+    {"id": "tusk#1", "type": "whale_anatomy", "label": "tusk"},
+    {"id": "gills#1", "type": "fish_anatomy", "label": "gills"},
+    {"id": "scales#1", "type": "fish_anatomy", "label": "scales"},
+    {"id": "ocean#1", "type": "habitat", "label": "ocean"},
+    {"id": "warm_blooded#1", "type": "trait", "label": "warm_blooded"},
+    {"id": "cold_blooded#1", "type": "trait", "label": "cold_blooded"}
+  ],
+  "type_parents": {
+    "animal": null,
+    "whale": "animal",
+    "fish": "animal",
+    "anatomy": null,
+    "whale_anatomy": "anatomy",
+    "fish_anatomy": "anatomy",
+    "habitat": null,
+    "trait": null
+  },
+  "edges": [
+    {"src": "beluga#1", "rel": "has", "dst": "blowhole#1"},
+    {"src": "beluga#1", "rel": "lives_in", "dst": "ocean#1"},
+    {"src": "beluga#1", "rel": "attr", "dst": "warm_blooded#1"},
+
+    {"src": "orca#1", "rel": "has", "dst": "blowhole#1"},
+    {"src": "orca#1", "rel": "lives_in", "dst": "ocean#1"},
+    {"src": "orca#1", "rel": "attr", "dst": "warm_blooded#1"},
+
+    {"src": "humpback#1", "rel": "has", "dst": "blowhole#1"},
+    {"src": "humpback#1", "rel": "lives_in", "dst": "ocean#1"},
+    {"src": "humpback#1", "rel": "attr", "dst": "warm_blooded#1"},
+
+    {"src": "narwhal#1", "rel": "has", "dst": "blowhole#1"},
+    {"src": "narwhal#1", "rel": "has", "dst": "tusk#1"},
+    {"src": "narwhal#1", "rel": "lives_in", "dst": "ocean#1"},
+    {"src": "narwhal#1", "rel": "attr", "dst": "warm_blooded#1"},
+
+    {"src": "minke#1", "rel": "has", "dst": "blowhole#1"},
+    {"src": "minke#1", "rel": "lives_in", "dst": "ocean#1"},
+    {"src": "minke#1", "rel": "attr", "dst": "warm_blooded#1"},
+
+    {"src": "salmon#1", "rel": "has", "dst": "gills#1"},
+    {"src": "salmon#1", "rel": "has", "dst": "scales#1"},
+    {"src": "salmon#1", "rel": "lives_in", "dst": "ocean#1"},
+    {"src": "salmon#1", "rel": "attr", "dst": "cold_blooded#1"},
+
+    {"src": "tuna#1", "rel": "has", "dst": "gills#1"},
+    {"src": "tuna#1", "rel": "lives_in", "dst": "ocean#1"},
+    {"src": "tuna#1", "rel": "attr", "dst": "cold_blooded#1"},
+
+    {"src": "shark#1", "rel": "has", "dst": "gills#1"},
+    {"src": "shark#1", "rel": "lives_in", "dst": "ocean#1"},
+    {"src": "shark#1", "rel": "attr", "dst": "cold_blooded#1"},
+
+    {"src": "cod#1", "rel": "has", "dst": "gills#1"},
+    {"src": "cod#1", "rel": "lives_in", "dst": "ocean#1"},
+    {"src": "cod#1", "rel": "attr", "dst": "cold_blooded#1"},
+
+    {"src": "herring#1", "rel": "has", "dst": "gills#1"},
+    {"src": "herring#1", "rel": "lives_in", "dst": "ocean#1"},
+    {"src": "herring#1", "rel": "attr", "dst": "cold_blooded#1"}
+  ],
+  "embeddings": {
+    "beluga#1":   [1.0, 0.9, 0.1, 0.0, 0.0, 0.0, 0.1, 0.0],
+    "orca#1":     [0.9, 1.0, 0.0, 0.1, 0.0, 0.0, 0.0, 0.1],
+    "humpback#1": [1.0, 0.8, 0.1, 0.0, 0.1, 0.0, 0.0, 0.0],
+    "narwhal#1":  [0.9, 1.0, 0.0, 0.0, 0.0, 0.1, 0.1, 0.0],
+    "minke#1":    [0.8, 0.9, 0.1, 0.1, 0.0, 0.0, 0.0, 0.1],
+
+    "salmon#1":   [0.0, 0.1, 1.0, 0.9, 0.0, 0.0, 0.1, 0.0],
+    "tuna#1":     [0.1, 0.0, 0.9, 1.0, 0.0, 0.1, 0.0, 0.0],
+    "shark#1":    [0.0, 0.0, 1.0, 0.8, 0.1, 0.0, 0.0, 0.1],
+    "cod#1":      [0.1, 0.0, 0.8, 0.9, 0.0, 0.0, 0.1, 0.0],
+    "herring#1":  [0.0, 0.1, 0.9, 1.0, 0.0, 0.1, 0.0, 0.0],
+
+    "blowhole#1":     [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0],
+    "tusk#1":         [0.0, 0.0, 0.0, 0.0, 0.9, 0.1, 0.0, 0.0],
+    "gills#1":        [0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+    "scales#1":       [0.0, 0.0, 0.0, 0.0, 0.1, 0.9, 0.0, 0.0],
+    "ocean#1":        [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0],
+    "warm_blooded#1": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0],
+    "cold_blooded#1": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1, 0.9]
+  }
+}

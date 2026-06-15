@@ -1,0 +1,17 @@
+[project]
+name = "mdl-ledger"
+version = "0.1.0"
+description = "W1 MDL ledger: two-part code length over the HCG, with per-operation deltas (logos-experiments#26, epic logos#557)"
+requires-python = ">=3.12"
+dependencies = [
+    "neo4j>=5.20.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

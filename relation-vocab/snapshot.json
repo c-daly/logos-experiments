@@ -1,0 +1,3290 @@
+{
+"EVOLVED_INTO": {
+"edge_count": 1
+},
+"TRADED_BY": {
+"edge_count": 2
+},
+"ISSUE": {
+"edge_count": 3
+},
+"ISSUED_TO": {
+"edge_count": 1
+},
+"REDEEMABLE_FOR": {
+"edge_count": 1
+},
+"BECAME": {
+"edge_count": 1
+},
+"USED_AS": {
+"edge_count": 4
+},
+"ALSO_KNOWN_AS": {
+"edge_count": 198
+},
+"FIRST_USED_IN": {
+"edge_count": 2
+},
+"USED_DURING": {
+"edge_count": 1
+},
+"EVOLVED_FROM": {
+"edge_count": 1
+},
+"USED_SINCE": {
+"edge_count": 1
+},
+"USED_ALONGSIDE": {
+"edge_count": 1
+},
+"BECAME_KNOWN_IN": {
+"edge_count": 1
+},
+"BECAME_KNOWN_DURING": {
+"edge_count": 1
+},
+"KNOWN_THROUGH": {
+"edge_count": 1
+},
+"IS_INSTANCE_OF": {
+"edge_count": 100
+},
+"CHAPTER_OF": {
+"edge_count": 1
+},
+"TITLED": {
+"edge_count": 1
+},
+"FIRST_ISSUED_IN": {
+"edge_count": 2
+},
+"ISSUED_BY": {
+"edge_count": 1
+},
+"HAS": {
+"edge_count": 64
+},
+"ARE": {
+"edge_count": 1
+},
+"STUDIED": {
+"edge_count": 25
+},
+"PART_OF": {
+"edge_count": 122
+},
+"ASSOCIATED_WITH": {
+"edge_count": 53
+},
+"ALSO_CLASSIFIED_AS": {
+"edge_count": 31
+},
+"CONTRASTED_WITH": {
+"edge_count": 24
+},
+"INCLUDES": {
+"edge_count": 452
+},
+"AIMED_TO_EXPLAIN": {
+"edge_count": 5
+},
+"DEFINED_AS": {
+"edge_count": 55
+},
+"ASSERTED": {
+"edge_count": 1
+},
+"GOAL_OF": {
+"edge_count": 1
+},
+"ENGAGED_IN": {
+"edge_count": 1
+},
+"MENTIONS": {
+"edge_count": 6
+},
+"ADDRESSED": {
+"edge_count": 1
+},
+"PRODUCED_BY": {
+"edge_count": 59
+},
+"THEORIZED_ABOUT": {
+"edge_count": 3
+},
+"RESULTED_FROM": {
+"edge_count": 31
+},
+"SUGGESTED": {
+"edge_count": 3
+},
+"LOCATED_IN": {
+"edge_count": 103
+},
+"INVENTED_AT": {
+"edge_count": 2
+},
+"INVENTED_BETWEEN": {
+"edge_count": 2
+},
+"HAS_PROPERTY": {
+"edge_count": 21
+},
+"REVOLUTIONIZED": {
+"edge_count": 1
+},
+"MOST_WIDELY_USED": {
+"edge_count": 1
+},
+"BASIC_ELEMENT_OF": {
+"edge_count": 1
+},
+"SUCH_AS": {
+"edge_count": 21
+},
+"DEPENDENT_ON": {
+"edge_count": 2
+},
+"INTERCONNECTED_BY": {
+"edge_count": 1
+},
+"TRAVELS_THROUGH": {
+"edge_count": 2
+},
+"INVENTED_BY": {
+"edge_count": 6
+},
+"COMPOSED_OF": {
+"edge_count": 106
+},
+"ENABLE": {
+"edge_count": 28
+},
+"OCCURRED_IN": {
+"edge_count": 35
+},
+"CONTAIN": {
+"edge_count": 43
+},
+"INVOLVED_IN": {
+"edge_count": 43
+},
+"PERMITS_LEAKAGE_OF": {
+"edge_count": 1
+},
+"LEAKS_INTO": {
+"edge_count": 1
+},
+"RESULTS_IN": {
+"edge_count": 52
+},
+"IMPORTANT_IN": {
+"edge_count": 6
+},
+"OUTSIDE_OF": {
+"edge_count": 2
+},
+"IS": {
+"edge_count": 148
+},
+"PERMEABLE_TO": {
+"edge_count": 1
+},
+"PRESENT_IN": {
+"edge_count": 55
+},
+"DIFFERENT_FROM": {
+"edge_count": 6
+},
+"OCCURS_IN": {
+"edge_count": 36
+},
+"ARGUED_ABOUT": {
+"edge_count": 3
+},
+"INCAPABLE_OF": {
+"edge_count": 1
+},
+"SHOWED_IS": {
+"edge_count": 1
+},
+"CRYSTALLIZED": {
+"edge_count": 1
+},
+"WORKED_ON": {
+"edge_count": 5
+},
+"AWARDED": {
+"edge_count": 7
+},
+"STRUCTURE_SOLVED_BY": {
+"edge_count": 1
+},
+"FOUND_IN": {
+"edge_count": 28
+},
+"DIGESTS": {
+"edge_count": 1
+},
+"SOLVED": {
+"edge_count": 1
+},
+"MARKED_BEGINNING_OF": {
+"edge_count": 1
+},
+"DERIVED_FROM": {
+"edge_count": 76
+},
+"ROOT_OF": {
+"edge_count": 1
+},
+"IN": {
+"edge_count": 11
+},
+"TRANSPORTED_BY": {
+"edge_count": 1
+},
+"CONSUMES": {
+"edge_count": 1
+},
+"PRODUCE": {
+"edge_count": 90
+},
+"EXERT": {
+"edge_count": 6
+},
+"USUALLY_IN_FORM_OF": {
+"edge_count": 1
+},
+"CONVERTS": {
+"edge_count": 9
+},
+"EXPECTED_BY": {
+"edge_count": 2
+},
+"THREATENED_WITH": {
+"edge_count": 1
+},
+"ESTIMATED_BY": {
+"edge_count": 5
+},
+"AFFECTED": {
+"edge_count": 87
+},
+"GREATER_THAN_AT_ANY_TIME_IN": {
+"edge_count": 1
+},
+"GREATER_THAN": {
+"edge_count": 6
+},
+"ESTIMATED_IN": {
+"edge_count": 1
+},
+"BUILT": {
+"edge_count": 6
+},
+"BUILT_WITH": {
+"edge_count": 1
+},
+"USED_FOR": {
+"edge_count": 131
+},
+"MIXED_WITH": {
+"edge_count": 4
+},
+"FORM": {
+"edge_count": 14
+},
+"USED_FOR_JOINING": {
+"edge_count": 2
+},
+"CROSSED": {
+"edge_count": 5
+},
+"HAS_LENGTH": {
+"edge_count": 2
+},
+"BUILT_DURING": {
+"edge_count": 1
+},
+"TYPE_OF": {
+"edge_count": 49
+},
+"USED_BY": {
+"edge_count": 8
+},
+"USED_BEFORE": {
+"edge_count": 1
+},
+"REQUIRES": {
+"edge_count": 10
+},
+"WITHIN": {
+"edge_count": 2
+},
+"VARIES_OVER": {
+"edge_count": 10
+},
+"AFFECTED_BY": {
+"edge_count": 35
+},
+"DEFINE": {
+"edge_count": 5
+},
+"FORMED_OF": {
+"edge_count": 3
+},
+"INVOLVE": {
+"edge_count": 54
+},
+"REPLACED": {
+"edge_count": 5
+},
+"CONTRIBUTES_TO_RESEARCH_ON": {
+"edge_count": 10
+},
+"PREDICTED": {
+"edge_count": 11
+},
+"BASED_ON": {
+"edge_count": 11
+},
+"PROPOSED_BY": {
+"edge_count": 16
+},
+"CHARACTERIZED_BY": {
+"edge_count": 44
+},
+"SEQUENCED": {
+"edge_count": 2
+},
+"CONSISTED_OF": {
+"edge_count": 9
+},
+"CONTRIBUTED_TO": {
+"edge_count": 28
+},
+"DISCOVERED": {
+"edge_count": 12
+},
+"AUTHORED": {
+"edge_count": 2
+},
+"CONTENDED_ABOUT": {
+"edge_count": 1
+},
+"NOT_DEPENDENT_ON": {
+"edge_count": 1
+},
+"MODIFIES": {
+"edge_count": 5
+},
+"INCORPORATES": {
+"edge_count": 2
+},
+"ACTIVE_DURING": {
+"edge_count": 29
+},
+"ALSO_OCCURS_ALONGSIDE": {
+"edge_count": 1
+},
+"ENCODED_IN": {
+"edge_count": 5
+},
+"CAUSE": {
+"edge_count": 5
+},
+"CHARACTERISTIC_OF": {
+"edge_count": 38
+},
+"ABSENT_FROM": {
+"edge_count": 10
+},
+"ACTS_ON": {
+"edge_count": 52
+},
+"INSTEAD_OF": {
+"edge_count": 1
+},
+"CAPTURED": {
+"edge_count": 2
+},
+"USES": {
+"edge_count": 27
+},
+"OPPOSITE_OF": {
+"edge_count": 1
+},
+"RELEASES": {
+"edge_count": 2
+},
+"DRIVE": {
+"edge_count": 5
+},
+"MAINTAINS": {
+"edge_count": 7
+},
+"DELIVERED_ACROSS": {
+"edge_count": 1
+},
+"INFLUENCED_BY": {
+"edge_count": 9
+},
+"AIM_TO_ADDRESS": {
+"edge_count": 1
+},
+"SUPPORTED": {
+"edge_count": 4
+},
+"IMPLICATED_IN": {
+"edge_count": 6
+},
+"HAS_PRACTICAL_APPLICATION_IN": {
+"edge_count": 6
+},
+"MAKE": {
+"edge_count": 3
+},
+"PROVIDED_TO": {
+"edge_count": 3
+},
+"DESCRIBED": {
+"edge_count": 19
+},
+"ATTACHED_TO": {
+"edge_count": 2
+},
+"JUMPED_FROM": {
+"edge_count": 1
+},
+"JUMPED_TO": {
+"edge_count": 1
+},
+"STORES": {
+"edge_count": 7
+},
+"EQUIVALENT_TO": {
+"edge_count": 5
+},
+"DEVELOPED_BY": {
+"edge_count": 6
+},
+"PHYSICALLY_IDENTICAL_TO": {
+"edge_count": 1
+},
+"EXEMPLIFIED_BY": {
+"edge_count": 8
+},
+"PARTICIPATES_IN": {
+"edge_count": 1
+},
+"NOT_AFFECTED_BY": {
+"edge_count": 1
+},
+"DISCUSSED_WITH": {
+"edge_count": 1
+},
+"FORMULATED_WITH": {
+"edge_count": 1
+},
+"PUBLISHED": {
+"edge_count": 6
+},
+"POINTS_TO": {
+"edge_count": 2
+},
+"ATTRACT": {
+"edge_count": 7
+},
+"STUDIED_BY": {
+"edge_count": 2
+},
+"WORKS_AT": {
+"edge_count": 3
+},
+"TRANSFORMED": {
+"edge_count": 19
+},
+"EXPANDS_BY": {
+"edge_count": 1
+},
+"INTRODUCED": {
+"edge_count": 11
+},
+"SHOWED": {
+"edge_count": 4
+},
+"EVIDENCED_BY": {
+"edge_count": 1
+},
+"OBSERVED_IN": {
+"edge_count": 15
+},
+"OBSERVED": {
+"edge_count": 6
+},
+"PROPOSED_IN": {
+"edge_count": 2
+},
+"PROPOSED": {
+"edge_count": 5
+},
+"EXPLAINED_BY": {
+"edge_count": 8
+},
+"ADVANCED": {
+"edge_count": 6
+},
+"SHOWS_SYMMETRY_OF": {
+"edge_count": 1
+},
+"IDENTICAL_FOR": {
+"edge_count": 1
+},
+"INVARIANT_FOR": {
+"edge_count": 1
+},
+"NOT_INCLUDED_WITH": {
+"edge_count": 1
+},
+"HAS_COMMON_CAUSE_WITH": {
+"edge_count": 1
+},
+"EXPLAINS_EFFECT_ON": {
+"edge_count": 1
+},
+"FORMED_BASIS_FOR": {
+"edge_count": 1
+},
+"LEARNED": {
+"edge_count": 1
+},
+"LOOKED_TO": {
+"edge_count": 1
+},
+"RECEIVED": {
+"edge_count": 3
+},
+"PROVED": {
+"edge_count": 1
+},
+"CALCULATED": {
+"edge_count": 1
+},
+"USED": {
+"edge_count": 3
+},
+"CONFIRMED": {
+"edge_count": 2
+},
+"COLLABORATES_WITH": {
+"edge_count": 1
+},
+"APPLIED": {
+"edge_count": 4
+},
+"APPLIED_TO": {
+"edge_count": 20
+},
+"DESCRIBED_IN": {
+"edge_count": 4
+},
+"BROUGHT_UNDER": {
+"edge_count": 2
+},
+"INFLUENCED": {
+"edge_count": 14
+},
+"VISITED": {
+"edge_count": 3
+},
+"SUPPORTED_BY": {
+"edge_count": 6
+},
+"EXISTS_ABOVE": {
+"edge_count": 2
+},
+"EXISTS_UNDER": {
+"edge_count": 1
+},
+"HIGHER_THAN": {
+"edge_count": 2
+},
+"HAS_VALUE": {
+"edge_count": 1
+},
+"CLOSE_TO": {
+"edge_count": 4
+},
+"DECREASES_WITH": {
+"edge_count": 2
+},
+"SHORTER_THAN": {
+"edge_count": 1
+},
+"TYPICALLY_LASTS": {
+"edge_count": 1
+},
+"OBSERVED_WITH": {
+"edge_count": 3
+},
+"OBSERVED_AT_FREQUENCY": {
+"edge_count": 1
+},
+"HAS_PART": {
+"edge_count": 12
+},
+"DATED_TO": {
+"edge_count": 1
+},
+"DEPICTS": {
+"edge_count": 1
+},
+"RECORDED_BY": {
+"edge_count": 2
+},
+"FAR_FROM": {
+"edge_count": 1
+},
+"COLLECTED": {
+"edge_count": 6
+},
+"FROM": {
+"edge_count": 3
+},
+"HAD": {
+"edge_count": 1
+},
+"COME_FROM": {
+"edge_count": 1
+},
+"APPEAR_WITH": {
+"edge_count": 1
+},
+"ENDOWED_WITH": {
+"edge_count": 1
+},
+"DISTINGUISHED_FROM": {
+"edge_count": 4
+},
+"PERFORMED_BY": {
+"edge_count": 3
+},
+"PERFORMED": {
+"edge_count": 4
+},
+"ESTABLISHED": {
+"edge_count": 4
+},
+"USED_TO_ILLUSTRATE": {
+"edge_count": 1
+},
+"BALANCED_ACCORDING_TO": {
+"edge_count": 1
+},
+"DETERMINED": {
+"edge_count": 10
+},
+"FUSED_BY": {
+"edge_count": 1
+},
+"ALSO_EXISTS_ALONGSIDE": {
+"edge_count": 3
+},
+"LEADS_TO": {
+"edge_count": 1
+},
+"RESTRICTED_TO": {
+"edge_count": 1
+},
+"FEATURE_OF": {
+"edge_count": 1
+},
+"INFUSED_INTO": {
+"edge_count": 2
+},
+"ADOPTED_BY": {
+"edge_count": 1
+},
+"ADOPTED_IN": {
+"edge_count": 1
+},
+"MEASURED_IN": {
+"edge_count": 9
+},
+"GROUPED_INTO": {
+"edge_count": 7
+},
+"ORDERED_BY": {
+"edge_count": 1
+},
+"STARTED_WHEN": {
+"edge_count": 1
+},
+"DETERMINED_BY": {
+"edge_count": 6
+},
+"SHOULD_BE_LIMITED_TO": {
+"edge_count": 1
+},
+"EXPANDS": {
+"edge_count": 3
+},
+"DOES_NOT_ACCOUNT_FOR": {
+"edge_count": 1
+},
+"USED_IN": {
+"edge_count": 89
+},
+"TREATED_IN": {
+"edge_count": 1
+},
+"REFLECTS": {
+"edge_count": 2
+},
+"BELIEVED_BY": {
+"edge_count": 1
+},
+"SEEK_OUT": {
+"edge_count": 1
+},
+"RESOLVES": {
+"edge_count": 1
+},
+"DISTORTS": {
+"edge_count": 1
+},
+"FOCUSED_ON": {
+"edge_count": 10
+},
+"ABLE_TO_PERFORM": {
+"edge_count": 3
+},
+"ABOUT": {
+"edge_count": 20
+},
+"FIXED_TO": {
+"edge_count": 2
+},
+"SUSPENDED": {
+"edge_count": 1
+},
+"DE_PEGGED_FROM": {
+"edge_count": 1
+},
+"BACKED_BY": {
+"edge_count": 3
+},
+"IMPOSES": {
+"edge_count": 1
+},
+"CREATE_DEMAND_FOR": {
+"edge_count": 1
+},
+"CO_OCCURS_WITH": {
+"edge_count": 3
+},
+"LISTS": {
+"edge_count": 3
+},
+"SUBSUMED_IN": {
+"edge_count": 3
+},
+"REPRESENTS": {
+"edge_count": 5
+},
+"EMPHASIZES": {
+"edge_count": 4
+},
+"CREATED": {
+"edge_count": 13
+},
+"DREW_ON": {
+"edge_count": 3
+},
+"IDENTIFIED_AS": {
+"edge_count": 1
+},
+"ANALYSED": {
+"edge_count": 8
+},
+"ADVANCED_DURING": {
+"edge_count": 1
+},
+"EMPHASIZED_AS_CENTER_OF": {
+"edge_count": 1
+},
+"CENTER_OF": {
+"edge_count": 1
+},
+"LINKED_TO": {
+"edge_count": 6
+},
+"INVESTIGATED": {
+"edge_count": 2
+},
+"MOTIVATED_BY": {
+"edge_count": 4
+},
+"PUBLISHED_IN": {
+"edge_count": 32
+},
+"CANNOT_MOTIVATE": {
+"edge_count": 1
+},
+"CANNOT_OPPOSE": {
+"edge_count": 1
+},
+"SUBJECTED_TO": {
+"edge_count": 4
+},
+"INTERRELATED_WITH": {
+"edge_count": 5
+},
+"ALSO_FOCUSED_ON": {
+"edge_count": 1
+},
+"CONNECTED_TO": {
+"edge_count": 4
+},
+"PACKAGED_AS": {
+"edge_count": 1
+},
+"CONTROL": {
+"edge_count": 5
+},
+"DIVIDED_INTO": {
+"edge_count": 1
+},
+"CLASSIFIED_BY": {
+"edge_count": 7
+},
+"INDICATES": {
+"edge_count": 1
+},
+"CATALYZE": {
+"edge_count": 5
+},
+"DEVELOPS": {
+"edge_count": 4
+},
+"SOLVED_BY": {
+"edge_count": 2
+},
+"SOLVED_IN": {
+"edge_count": 2
+},
+"ALTERNATIVE_TO": {
+"edge_count": 2
+},
+"CAUSES_LESS_DAMAGE_TO": {
+"edge_count": 1
+},
+"ENABLES_OBTAINING": {
+"edge_count": 1
+},
+"ENABLES_ANALYSIS_OF": {
+"edge_count": 1
+},
+"APPROACH": {
+"edge_count": 1
+},
+"REVIVED_IN": {
+"edge_count": 1
+},
+"PARTICULARLY_IN": {
+"edge_count": 13
+},
+"BROUGHT_EMPHASIS_ON": {
+"edge_count": 2
+},
+"WROTE": {
+"edge_count": 11
+},
+"AUTHOR_OF": {
+"edge_count": 1
+},
+"CONSTRUCTED_IN": {
+"edge_count": 2
+},
+"CONSTRUCTED_BY": {
+"edge_count": 4
+},
+"REGULATES": {
+"edge_count": 4
+},
+"INTO_AND_OUT_OF": {
+"edge_count": 1
+},
+"MEASURED_BY": {
+"edge_count": 10
+},
+"ALSO_EXPRESSED_AS": {
+"edge_count": 1
+},
+"RICH_IN": {
+"edge_count": 1
+},
+"DISCOVERED_IN": {
+"edge_count": 10
+},
+"MORE_THAN": {
+"edge_count": 1
+},
+"HELP_TO_MAKE_IMPERMEABLE": {
+"edge_count": 1
+},
+"LACK": {
+"edge_count": 21
+},
+"FORMED_BY": {
+"edge_count": 2
+},
+"FACILITATE": {
+"edge_count": 6
+},
+"STRETCHES_FROM": {
+"edge_count": 1
+},
+"STRETCHES_THROUGH": {
+"edge_count": 1
+},
+"EXTRUDES_THROUGH": {
+"edge_count": 1
+},
+"RESPONSIBLE_FOR": {
+"edge_count": 2
+},
+"ENCLOSED_IN": {
+"edge_count": 3
+},
+"IN_DIRECT_CONTACT_WITH": {
+"edge_count": 1
+},
+"CENTRAL_CONCEPT_IN": {
+"edge_count": 1
+},
+"DIMENSIONS_DEFINED_AS": {
+"edge_count": 1
+},
+"SIZE_FUNCTION_OF": {
+"edge_count": 1
+},
+"DESCRIBED_BY": {
+"edge_count": 9
+},
+"NOT_PRODUCED_BY": {
+"edge_count": 1
+},
+"GENERATED_IN": {
+"edge_count": 1
+},
+"SELECTED_FOR": {
+"edge_count": 1
+},
+"ACT_OVER": {
+"edge_count": 1
+},
+"RAISED_AWARENESS_OF": {
+"edge_count": 1
+},
+"SOURCE_OF": {
+"edge_count": 10
+},
+"CHANGES": {
+"edge_count": 6
+},
+"CONFERS": {
+"edge_count": 2
+},
+"INTRODUCED_INTO": {
+"edge_count": 1
+},
+"EVOLVE_WITHIN": {
+"edge_count": 1
+},
+"SHARE": {
+"edge_count": 2
+},
+"DESCENDED_FROM": {
+"edge_count": 4
+},
+"DRAWN_TO": {
+"edge_count": 1
+},
+"TOPIC_OF_DEBATE_IN": {
+"edge_count": 1
+},
+"NOT_UNIQUE_TO": {
+"edge_count": 2
+},
+"SHARED_POSITION_WITH": {
+"edge_count": 1
+},
+"ATTRACTED_TO": {
+"edge_count": 2
+},
+"DISPROVED": {
+"edge_count": 1
+},
+"CONTRADICTED": {
+"edge_count": 4
+},
+"REPORTED_TO": {
+"edge_count": 1
+},
+"PASSES_SIGNALS_TO": {
+"edge_count": 1
+},
+"PROVIDE": {
+"edge_count": 6
+},
+"INVENTED": {
+"edge_count": 1
+},
+"LINKED": {
+"edge_count": 3
+},
+"RELATES": {
+"edge_count": 4
+},
+"DEFINED_BY": {
+"edge_count": 8
+},
+"DISCOVERED_BY": {
+"edge_count": 4
+},
+"INDUCED_IN": {
+"edge_count": 1
+},
+"ADVANCED_TO": {
+"edge_count": 1
+},
+"SYNTHESIZE": {
+"edge_count": 6
+},
+"UNIFIES": {
+"edge_count": 3
+},
+"NOT_FULLY_COMPATIBLE_WITH": {
+"edge_count": 1
+},
+"MOTIVATED": {
+"edge_count": 1
+},
+"REQUIRES_HOLD_TRUE_IN": {
+"edge_count": 1
+},
+"INTERPRETED_AS_EFFECT_OF": {
+"edge_count": 1
+},
+"FOUND_ITS_WAY_BACK_INTO": {
+"edge_count": 1
+},
+"STARTS_FROM": {
+"edge_count": 2
+},
+"SEQUENCE_OF": {
+"edge_count": 1
+},
+"EXHIBIT": {
+"edge_count": 1
+},
+"ACCOUNTS_FOR": {
+"edge_count": 3
+},
+"AFFECTED_IN": {
+"edge_count": 1
+},
+"DECREASED_BY": {
+"edge_count": 1
+},
+"EXPERIENCING": {
+"edge_count": 2
+},
+"CANCELED_OUT_BY": {
+"edge_count": 1
+},
+"OUTSOURCED_BY": {
+"edge_count": 1
+},
+"OUTSOURCED_TO": {
+"edge_count": 1
+},
+"SUFFERS": {
+"edge_count": 1
+},
+"DEALS_WITH": {
+"edge_count": 4
+},
+"AS_IN": {
+"edge_count": 1
+},
+"SINKS_TO": {
+"edge_count": 1
+},
+"FORMS_ON": {
+"edge_count": 1
+},
+"FLOATS_ON": {
+"edge_count": 1
+},
+"INSULATES": {
+"edge_count": 1
+},
+"PREVENTS_FREEZING_OF": {
+"edge_count": 1
+},
+"PERISH_DURING": {
+"edge_count": 1
+},
+"IMPORTANT_PART_OF": {
+"edge_count": 1
+},
+"DISTRIBUTES_HEAT_AROUND": {
+"edge_count": 1
+},
+"INTERACTS_WITH": {
+"edge_count": 3
+},
+"MELTS_AT": {
+"edge_count": 1
+},
+"FREEZES_AT": {
+"edge_count": 1
+},
+"BOILS_AT": {
+"edge_count": 1
+},
+"CONDENSES_AT": {
+"edge_count": 1
+},
+"FORMED_AT": {
+"edge_count": 1
+},
+"OCCURS_AT": {
+"edge_count": 1
+},
+"KNOWN_AS": {
+"edge_count": 1
+},
+"DEPOSITED_ON": {
+"edge_count": 1
+},
+"FORM_BY_DEPOSITION_ON": {
+"edge_count": 2
+},
+"PROCESS_APPLIED_TO": {
+"edge_count": 1
+},
+"STORED_AT": {
+"edge_count": 1
+},
+"UNDERGOES": {
+"edge_count": 5
+},
+"CONFLICTS_WITH": {
+"edge_count": 1
+},
+"ALSO_INCLUDES": {
+"edge_count": 1
+},
+"ASSUME": {
+"edge_count": 2
+},
+"FOUND_SOLUTION_TO": {
+"edge_count": 1
+},
+"STUDENT_OF": {
+"edge_count": 1
+},
+"FOUNDED": {
+"edge_count": 1
+},
+"SOLUTION_TO": {
+"edge_count": 1
+},
+"BECAME_SINGULAR_AT": {
+"edge_count": 1
+},
+"CRITIQUED": {
+"edge_count": 1
+},
+"CONSIDERED_A_FLAW_IN": {
+"edge_count": 1
+},
+"ATTEMPTED_TO_PROVE_IMPOSSIBLE": {
+"edge_count": 1
+},
+"BALANCES": {
+"edge_count": 5
+},
+"NOT_COLLAPSE_BEYOND": {
+"edge_count": 1
+},
+"MORE_REACTIVE_THAN": {
+"edge_count": 1
+},
+"OXIDISED_BY": {
+"edge_count": 1
+},
+"PRESERVES": {
+"edge_count": 1
+},
+"REACTS_WITH": {
+"edge_count": 4
+},
+"COMBINED_WITH": {
+"edge_count": 5
+},
+"STABILIZED_IN": {
+"edge_count": 1
+},
+"USED_TO_ARGUE_AGAINST": {
+"edge_count": 2
+},
+"BEGAN_OBSERVING_ON": {
+"edge_count": 1
+},
+"MADE": {
+"edge_count": 1
+},
+"VISIBLE_IN": {
+"edge_count": 1
+},
+"FADED_FROM_VIEW": {
+"edge_count": 1
+},
+"DIMMED": {
+"edge_count": 1
+},
+"DETECTED_IN": {
+"edge_count": 1
+},
+"COMPARABLE_TO": {
+"edge_count": 2
+},
+"MAKES_UP": {
+"edge_count": 4
+},
+"FORMED_FROM": {
+"edge_count": 1
+},
+"VISIBLE_AT": {
+"edge_count": 1
+},
+"SURROUNDS": {
+"edge_count": 3
+},
+"REJECTS": {
+"edge_count": 3
+},
+"PREFER": {
+"edge_count": 3
+},
+"STUDY_OF": {
+"edge_count": 15
+},
+"EXCEEDED": {
+"edge_count": 2
+},
+"EXCLUDES": {
+"edge_count": 7
+},
+"LOCATED_BEYOND": {
+"edge_count": 1
+},
+"REMAIN_SOLID_BEYOND": {
+"edge_count": 1
+},
+"MAY_NOT_BE_TRANSLATED_INTO": {
+"edge_count": 1
+},
+"NOT_SUBJECT_FOR": {
+"edge_count": 1
+},
+"RARELY_TRANSLATED_INTO": {
+"edge_count": 1
+},
+"TRANSDUCED_INTO": {
+"edge_count": 1
+},
+"DEPENDS_ON": {
+"edge_count": 8
+},
+"INTERTWINED_WITH": {
+"edge_count": 6
+},
+"SEIZED_BY": {
+"edge_count": 2
+},
+"MINED_IN": {
+"edge_count": 2
+},
+"AFTER": {
+"edge_count": 5
+},
+"HELD_LOW_AND_STABLE_IN": {
+"edge_count": 1
+},
+"HELD_LOW_AND_STABLE_SINCE": {
+"edge_count": 1
+},
+"MODERATED_DURING": {
+"edge_count": 1
+},
+"VARIATION_REDUCED_DURING": {
+"edge_count": 1
+},
+"CONDUCTED": {
+"edge_count": 3
+},
+"FOLLOWED_BY": {
+"edge_count": 1
+},
+"RELATED_TO": {
+"edge_count": 17
+},
+"REISSUED_AT": {
+"edge_count": 1
+},
+"EQUALS": {
+"edge_count": 1
+},
+"CONDUCTED_UNDER": {
+"edge_count": 1
+},
+"TAKES_PLACE_WITHIN": {
+"edge_count": 2
+},
+"CAME_FROM": {
+"edge_count": 1
+},
+"OFFER": {
+"edge_count": 7
+},
+"ALLOWS": {
+"edge_count": 1
+},
+"CAN_BE": {
+"edge_count": 17
+},
+"EXISTS_AS": {
+"edge_count": 10
+},
+"RANGES_FROM": {
+"edge_count": 2
+},
+"RANGES_TO": {
+"edge_count": 2
+},
+"OUTPUTS": {
+"edge_count": 1
+},
+"TAKES_ON_CHARACTERISTICS_OF": {
+"edge_count": 1
+},
+"REVOLUTIONIZED_IN": {
+"edge_count": 1
+},
+"REVOLUTIONIZED_DURING": {
+"edge_count": 1
+},
+"REVOLUTIONIZED_BY": {
+"edge_count": 2
+},
+"FLATTER_THAN": {
+"edge_count": 1
+},
+"YIELDED": {
+"edge_count": 3
+},
+"BECAME_IMPORTANT_DURING": {
+"edge_count": 1
+},
+"COMPLETED_IN": {
+"edge_count": 1
+},
+"BUILT_IN": {
+"edge_count": 2
+},
+"VASTLY_SUPERIOR_TO": {
+"edge_count": 1
+},
+"KNOWN_IN": {
+"edge_count": 3
+},
+"KNOWN_SINCE": {
+"edge_count": 7
+},
+"INVENTED_IN": {
+"edge_count": 3
+},
+"INVENTED_DURING": {
+"edge_count": 2
+},
+"FIRST_APPEARED_IN": {
+"edge_count": 2
+},
+"FIRST_APPEARED_AROUND": {
+"edge_count": 1
+},
+"USED_TO_MOVE": {
+"edge_count": 1
+},
+"MOVED_IN": {
+"edge_count": 1
+},
+"APPEARED_IN": {
+"edge_count": 4
+},
+"APPEARED_AROUND": {
+"edge_count": 1
+},
+"EARLIEST_EVIDENCE_IN": {
+"edge_count": 2
+},
+"EARLIEST_EVIDENCE_DURING": {
+"edge_count": 3
+},
+"FIRST_APPEARED_DURING": {
+"edge_count": 2
+},
+"BUILT_USING": {
+"edge_count": 3
+},
+"ENHANCES_PRODUCTION_OF": {
+"edge_count": 1
+},
+"STUDDED_WITH": {
+"edge_count": 1
+},
+"PRODUCTION_OF": {
+"edge_count": 1
+},
+"CONTAINED_IN": {
+"edge_count": 8
+},
+"INCLUDED_IN": {
+"edge_count": 3
+},
+"CLASSIFIED_AS": {
+"edge_count": 12
+},
+"CLASSIFIED": {
+"edge_count": 2
+},
+"USED_TO_CLASSIFY": {
+"edge_count": 1
+},
+"COMBINES": {
+"edge_count": 3
+},
+"ASSIGNED_TO": {
+"edge_count": 1
+},
+"EMPLOYED": {
+"edge_count": 2
+},
+"ACTS_AS": {
+"edge_count": 4
+},
+"CONVERTED_TO": {
+"edge_count": 4
+},
+"FOLDED_INTO": {
+"edge_count": 1
+},
+"ALSO_CALLED": {
+"edge_count": 13
+},
+"BUNCHED_UP_INTO": {
+"edge_count": 1
+},
+"INCREASED": {
+"edge_count": 6
+},
+"ABSORBED_BY": {
+"edge_count": 2
+},
+"ESTIMATE": {
+"edge_count": 1
+},
+"INCREASED_BY": {
+"edge_count": 1
+},
+"RECALLS": {
+"edge_count": 1
+},
+"CHUNKED_INTO": {
+"edge_count": 1
+},
+"DISPLAYED_AS": {
+"edge_count": 1
+},
+"EXPLORES": {
+"edge_count": 1
+},
+"CHALLENGES": {
+"edge_count": 3
+},
+"ENCOMPASSES": {
+"edge_count": 9
+},
+"ESTABLISHED_BY": {
+"edge_count": 1
+},
+"DREW_INSPIRATION_FROM": {
+"edge_count": 1
+},
+"OF_INTEREST_TO": {
+"edge_count": 1
+},
+"TOOK_PLACE_ON": {
+"edge_count": 1
+},
+"IDENTIFIED_AS_SCIENCE": {
+"edge_count": 1
+},
+"ADVANCED_IDEA_OF": {
+"edge_count": 1
+},
+"IS_SUBDIVISION_OF": {
+"edge_count": 1
+},
+"NEVER_APPROACHES": {
+"edge_count": 1
+},
+"TRANSFER": {
+"edge_count": 1
+},
+"JOINS_WITH": {
+"edge_count": 1
+},
+"CATALYZE_MOVEMENT_OF": {
+"edge_count": 2
+},
+"ACROSS": {
+"edge_count": 3
+},
+"ADDS": {
+"edge_count": 1
+},
+"ADDED_TO": {
+"edge_count": 1
+},
+"POWERED_BY": {
+"edge_count": 4
+},
+"EXISTED_IN": {
+"edge_count": 1
+},
+"DUPLICATE_OF": {
+"edge_count": 2
+},
+"ACQUIRE": {
+"edge_count": 2
+},
+"GENERATE": {
+"edge_count": 4
+},
+"RECOMBINE_TO_FORM": {
+"edge_count": 1
+},
+"ASSEMBLED_FROM": {
+"edge_count": 1
+},
+"MIXED_TO_PRODUCE": {
+"edge_count": 1
+},
+"CATALYSE": {
+"edge_count": 2
+},
+"LIKE": {
+"edge_count": 1
+},
+"DECLINED_BY": {
+"edge_count": 1
+},
+"DECLINED_DURING": {
+"edge_count": 1
+},
+"MAKES_INHOSPITABLE": {
+"edge_count": 1
+},
+"ON_COURSE_FOR": {
+"edge_count": 1
+},
+"PUBLISHED_BY": {
+"edge_count": 2
+},
+"DESTROYED_AT_UNPRECEDENTED_RATE_IN": {
+"edge_count": 1
+},
+"DESTROYED_OF": {
+"edge_count": 1
+},
+"DESTROYED_DURING": {
+"edge_count": 1
+},
+"PERCENT_EXPERIENCING_POPULATION_DECLINES": {
+"edge_count": 1
+},
+"PERCENT_WITH": {
+"edge_count": 1
+},
+"BETWEEN": {
+"edge_count": 14
+},
+"EXAMPLE_OF": {
+"edge_count": 2
+},
+"CONSIDERED": {
+"edge_count": 4
+},
+"MODULATES_AVAILABILITY_OF": {
+"edge_count": 1
+},
+"INCORPORATED_INTO": {
+"edge_count": 4
+},
+"CONTINUED_IN": {
+"edge_count": 1
+},
+"PLACED_IN": {
+"edge_count": 1
+},
+"CIRCLES": {
+"edge_count": 1
+},
+"INCREASES_OR_DECREASES": {
+"edge_count": 1
+},
+"ALIGNED_OPPOSITE": {
+"edge_count": 1
+},
+"ALIGNED_PARALLEL": {
+"edge_count": 1
+},
+"IN_ACCORDANCE_WITH": {
+"edge_count": 1
+},
+"OPPOSITE_DIRECTION_TO": {
+"edge_count": 1
+},
+"FUNCTION_OF": {
+"edge_count": 1
+},
+"SEE_ALSO": {
+"edge_count": 6
+},
+"CONDUCTED_BY": {
+"edge_count": 1
+},
+"DROPPED_FROM": {
+"edge_count": 1
+},
+"FALLS_IN": {
+"edge_count": 1
+},
+"PROPORTIONAL_TO": {
+"edge_count": 2
+},
+"MEASURED": {
+"edge_count": 1
+},
+"ACQUIRED_BY": {
+"edge_count": 1
+},
+"INHERITED_BY": {
+"edge_count": 3
+},
+"ACQUIRED_DURING": {
+"edge_count": 1
+},
+"ANTAGONISTIC_TO": {
+"edge_count": 1
+},
+"ACKNOWLEDGED": {
+"edge_count": 1
+},
+"SET_OUT": {
+"edge_count": 1
+},
+"EXPLAINED": {
+"edge_count": 10
+},
+"DIFFER_BY": {
+"edge_count": 3
+},
+"FAVOURED_BY": {
+"edge_count": 4
+},
+"NOTED_FOR": {
+"edge_count": 1
+},
+"THRIVE_IN": {
+"edge_count": 5
+},
+"LARGER_THAN": {
+"edge_count": 1
+},
+"GIVES_NAME_TO": {
+"edge_count": 1
+},
+"MEANS": {
+"edge_count": 7
+},
+"CONTAINED_WITHIN": {
+"edge_count": 1
+},
+"MUST_SATISFY": {
+"edge_count": 1
+},
+"MUST_MATCH": {
+"edge_count": 1
+},
+"PROGRESS_IN": {
+"edge_count": 2
+},
+"ENERGISES": {
+"edge_count": 1
+},
+"LED_TO": {
+"edge_count": 2
+},
+"AWARDED_IN": {
+"edge_count": 1
+},
+"FOR": {
+"edge_count": 2
+},
+"LESS_DENSE_THAN": {
+"edge_count": 1
+},
+"ARRANGED_IN": {
+"edge_count": 2
+},
+"PRESENTED_AS": {
+"edge_count": 1
+},
+"MAIN_CONSTITUENT_OF": {
+"edge_count": 7
+},
+"TAKES_FORM_OF": {
+"edge_count": 1
+},
+"BONDED_IN": {
+"edge_count": 1
+},
+"JUST_LIKE": {
+"edge_count": 1
+},
+"BONDED_THROUGH": {
+"edge_count": 1
+},
+"TRIGGERED_BY": {
+"edge_count": 4
+},
+"NOT_EXPLAINED_BY": {
+"edge_count": 1
+},
+"STABLE_BELOW": {
+"edge_count": 1
+},
+"POINTED_OUT": {
+"edge_count": 1
+},
+"PREVENT_EXITING": {
+"edge_count": 1
+},
+"ARGUED_WOULD_BE_STOPPED_BY_UNKNOWN_MECHANISM": {
+"edge_count": 2
+},
+"COINED_BY": {
+"edge_count": 6
+},
+"PERFORMS_FUNCTION_AS": {
+"edge_count": 1
+},
+"USED_TO_INTERMEDIATE": {
+"edge_count": 1
+},
+"AVOIDS_INEFFICIENCIES_OF": {
+"edge_count": 1
+},
+"MAY_NOT_HAVE": {
+"edge_count": 1
+},
+"ALLEVATES_ISSUE_OF": {
+"edge_count": 1
+},
+"CAN_SPEND_TIME_ON": {
+"edge_count": 1
+},
+"CAN_USE": {
+"edge_count": 1
+},
+"SEEKS": {
+"edge_count": 1
+},
+"TYPICALLY_FROM": {
+"edge_count": 3
+},
+"TYPICALLY": {
+"edge_count": 2
+},
+"ENDOWED_BY": {
+"edge_count": 1
+},
+"MECHANISM_OF": {
+"edge_count": 1
+},
+"POPULARISED": {
+"edge_count": 1
+},
+"PARTLY_RESULTED_FROM": {
+"edge_count": 2
+},
+"DICTATED_BY": {
+"edge_count": 1
+},
+"BONDED_BY": {
+"edge_count": 1
+},
+"ADJACENT_TO": {
+"edge_count": 1
+},
+"SPECIFIES": {
+"edge_count": 3
+},
+"ACCELERATES": {
+"edge_count": 2
+},
+"LOST": {
+"edge_count": 1
+},
+"MAY_RETAIN": {
+"edge_count": 3
+},
+"INDICATED_BY": {
+"edge_count": 2
+},
+"ABLE_TO_CATALYZE": {
+"edge_count": 1
+},
+"NAMED_BY": {
+"edge_count": 3
+},
+"NAMED_IN": {
+"edge_count": 1
+},
+"POPULARIZED_BY": {
+"edge_count": 1
+},
+"POPULARIZED_IN": {
+"edge_count": 1
+},
+"CHANGES_IN": {
+"edge_count": 2
+},
+"OCCURS_WHEN": {
+"edge_count": 1
+},
+"GAVE_RISE_TO": {
+"edge_count": 3
+},
+"PRESENT_AT": {
+"edge_count": 5
+},
+"CONCEIVED_BY": {
+"edge_count": 2
+},
+"CONCEIVED_IN": {
+"edge_count": 1
+},
+"ADAPTED_TO": {
+"edge_count": 3
+},
+"SET_OUT_IN": {
+"edge_count": 1
+},
+"VARIES_AMONG": {
+"edge_count": 1
+},
+"WITH_RESPECT_TO": {
+"edge_count": 3
+},
+"PASSED_FROM": {
+"edge_count": 2
+},
+"REPLACED_BY": {
+"edge_count": 3
+},
+"TRANSFERRED_TO": {
+"edge_count": 2
+},
+"SUBJECT_OF": {
+"edge_count": 1
+},
+"STORED_BY": {
+"edge_count": 1
+},
+"STORED_IN": {
+"edge_count": 2
+},
+"CARRIED_BY": {
+"edge_count": 1
+},
+"VARIABILITY_OF": {
+"edge_count": 1
+},
+"LOCATED_ON": {
+"edge_count": 3
+},
+"DESCRIBED_AS": {
+"edge_count": 4
+},
+"CAUSED_BY": {
+"edge_count": 3
+},
+"INVERSELY_PROPORTIONAL_TO": {
+"edge_count": 2
+},
+"OVERLAPS_WITH": {
+"edge_count": 5
+},
+"BRANCH_OF": {
+"edge_count": 1
+},
+"IN_CONTEXT_OF": {
+"edge_count": 1
+},
+"WITHIN_AND_BETWEEN": {
+"edge_count": 6
+},
+"CAN_BECOME": {
+"edge_count": 1
+},
+"REPELLED_BY": {
+"edge_count": 1
+},
+"DETECTED_BY": {
+"edge_count": 1
+},
+"SUPERSEDED": {
+"edge_count": 1
+},
+"CREATED_BY": {
+"edge_count": 2
+},
+"IMPROVED": {
+"edge_count": 4
+},
+"USHERED_IN": {
+"edge_count": 1
+},
+"HELD_TOGETHER_BY": {
+"edge_count": 1
+},
+"ABLE_TO_BE": {
+"edge_count": 1
+},
+"CONNECTED_BY": {
+"edge_count": 1
+},
+"VITAL_FOR": {
+"edge_count": 1
+},
+"NOT_PROVIDE": {
+"edge_count": 2
+},
+"NOT_IS": {
+"edge_count": 4
+},
+"RELATIVE_TO": {
+"edge_count": 2
+},
+"REFERRED_TO_AS": {
+"edge_count": 1
+},
+"PRECIPITATES_AS": {
+"edge_count": 1
+},
+"ABLE_TO_FORM": {
+"edge_count": 8
+},
+"MEMBER_OF": {
+"edge_count": 2
+},
+"AMOUNT": {
+"edge_count": 11
+},
+"SERVES_AS": {
+"edge_count": 4
+},
+"DEPICTION_OF": {
+"edge_count": 1
+},
+"INCREASES_DOWN": {
+"edge_count": 1
+},
+"INCREASES_RIGHT_TO_LEFT": {
+"edge_count": 1
+},
+"INCREASES_FROM": {
+"edge_count": 2
+},
+"INCREASES_TO": {
+"edge_count": 1
+},
+"IDENTIFIED_IN": {
+"edge_count": 4
+},
+"IDENTIFIED_BY": {
+"edge_count": 2
+},
+"COLLAPSES_TO": {
+"edge_count": 2
+},
+"DESTROYED_TO_FORM": {
+"edge_count": 1
+},
+"ABLE_TO_BE_OBSERVED_WITH": {
+"edge_count": 1
+},
+"SIZE_COMPARISON_TO": {
+"edge_count": 1
+},
+"ACCOMPANIED_BY": {
+"edge_count": 1
+},
+"DESCRIBED_WITH": {
+"edge_count": 1
+},
+"SUBDISCIPLINE_OF": {
+"edge_count": 1
+},
+"EMITTED_BY": {
+"edge_count": 1
+},
+"ABLE_TO_KEEP": {
+"edge_count": 2
+},
+"LOCATED_AT": {
+"edge_count": 3
+},
+"VALUE_DETERMINED_BY": {
+"edge_count": 1
+},
+"DECLARED_BY": {
+"edge_count": 2
+},
+"VALID_WITHIN": {
+"edge_count": 1
+},
+"ABLE_TO_EVALUATE": {
+"edge_count": 1
+},
+"ABLE_TO_PRICE": {
+"edge_count": 1
+},
+"SUPPLANTS": {
+"edge_count": 1
+},
+"HELD_IN_PLACE_BY": {
+"edge_count": 2
+},
+"CORRESPONDS_TO": {
+"edge_count": 3
+},
+"SET_BY": {
+"edge_count": 1
+},
+"DISCOURAGES": {
+"edge_count": 2
+},
+"SEEKS_UNDERSTANDING_OF": {
+"edge_count": 1
+},
+"AIMS_TO_UNDERSTAND": {
+"edge_count": 2
+},
+"ATTEMPT_TO_UNDERSTAND": {
+"edge_count": 4
+},
+"ROLE_IN": {
+"edge_count": 2
+},
+"UNDERLIE": {
+"edge_count": 4
+},
+"GO_THROUGH": {
+"edge_count": 1
+},
+"STRIKES": {
+"edge_count": 1
+},
+"MEDIATED_BY": {
+"edge_count": 1
+},
+"BROUGHT_ON_BY": {
+"edge_count": 1
+},
+"RESEARCHES": {
+"edge_count": 1
+},
+"ALSO_UNDERSTOOD_AS": {
+"edge_count": 1
+},
+"ALLOWS_INFORMATION_FROM": {
+"edge_count": 1
+},
+"SENSES": {
+"edge_count": 2
+},
+"ENCODED_IN_ACCORDANCE_WITH": {
+"edge_count": 2
+},
+"RETRIEVES_INFORMATION_FROM": {
+"edge_count": 1
+},
+"THROUGH": {
+"edge_count": 3
+},
+"RESPECTS": {
+"edge_count": 4
+},
+"FOLLOWS": {
+"edge_count": 2
+},
+"SPANS": {
+"edge_count": 3
+},
+"RESTS_ON": {
+"edge_count": 1
+},
+"TRANSFERS_WEIGHT_TO": {
+"edge_count": 1
+},
+"ADVANCED_IN": {
+"edge_count": 2
+},
+"PERFECTED_IN": {
+"edge_count": 1
+},
+"ABLE_TO_MANIPULATE": {
+"edge_count": 2
+},
+"ABLE_TO_CONTROL": {
+"edge_count": 1
+},
+"ABLE_TO_AMPLIFY": {
+"edge_count": 1
+},
+"ABLE_TO_CONVERT": {
+"edge_count": 4
+},
+"RELIED_ON": {
+"edge_count": 6
+},
+"PROVIDES_ENERGY_FOR": {
+"edge_count": 1
+},
+"DEVELOPED_IN": {
+"edge_count": 3
+},
+"FUNDAMENTAL_UNIT_OF": {
+"edge_count": 2
+},
+"COORDINATED_WITH": {
+"edge_count": 1
+},
+"DEGRADED_BY": {
+"edge_count": 2
+},
+"RECYCLED_BY": {
+"edge_count": 1
+},
+"AVERAGE_LIFESPAN_IN": {
+"edge_count": 1
+},
+"MARKS_FOR_DESTRUCTION": {
+"edge_count": 1
+},
+"ESSENTIAL_PART_OF": {
+"edge_count": 1
+},
+"VITAL_TO": {
+"edge_count": 1
+},
+"NEEDS": {
+"edge_count": 2
+},
+"BREAKS_DOWN": {
+"edge_count": 4
+},
+"TURNS": {
+"edge_count": 1
+},
+"EXPELS": {
+"edge_count": 2
+},
+"OPERATES_ACCORDING_TO": {
+"edge_count": 1
+},
+"LOWERS": {
+"edge_count": 1
+},
+"DOES_NOT_AFFECT": {
+"edge_count": 2
+},
+"REGENERATED_AT_END_OF": {
+"edge_count": 1
+},
+"SENSITIVE_TO": {
+"edge_count": 2
+},
+"ENHANCED_BY": {
+"edge_count": 1
+},
+"DIMINISHED_BY": {
+"edge_count": 1
+},
+"MAY_SERVE_AS": {
+"edge_count": 2
+},
+"CATALYZES_PRODUCTION_OF": {
+"edge_count": 1
+},
+"ENHANCES": {
+"edge_count": 1
+},
+"HYDROLYZE": {
+"edge_count": 1
+},
+"INDISPENSABLE_IN": {
+"edge_count": 2
+},
+"ABLE_TO_SPLIT": {
+"edge_count": 1
+},
+"DOMINANT_IN": {
+"edge_count": 1
+},
+"ABLE_TO_ABSORB": {
+"edge_count": 4
+},
+"POWERS": {
+"edge_count": 1
+},
+"EVOLVED_ON": {
+"edge_count": 1
+},
+"PRECEDED": {
+"edge_count": 2
+},
+"PREFERRED_BY": {
+"edge_count": 1
+},
+"SELECTED_BY": {
+"edge_count": 2
+},
+"PASS_INFORMATION_TO": {
+"edge_count": 1
+},
+"LIVED_AT": {
+"edge_count": 1
+},
+"SHAPED_BY": {
+"edge_count": 4
+},
+"RECONSTRUCTED_FROM": {
+"edge_count": 1
+},
+"USED_TO_RECONSTRUCT": {
+"edge_count": 1
+},
+"DEFINED_IN": {
+"edge_count": 2
+},
+"OPERATES_TOWARDS": {
+"edge_count": 1
+},
+"MODIFIED_BY": {
+"edge_count": 2
+},
+"GIVES": {
+"edge_count": 1
+},
+"OF": {
+"edge_count": 5
+},
+"ESSENTIAL_TO": {
+"edge_count": 1
+},
+"GUIDES": {
+"edge_count": 1
+},
+"COINED_IN": {
+"edge_count": 2
+},
+"CORNERSTONE_OF": {
+"edge_count": 3
+},
+"MODERATED": {
+"edge_count": 1
+},
+"SUSTAINS": {
+"edge_count": 1
+},
+"TAKES_IN": {
+"edge_count": 1
+},
+"DRIVEN_BY": {
+"edge_count": 2
+},
+"DATES_BACK_TO": {
+"edge_count": 3
+},
+"DRIVING_FORCE_OF": {
+"edge_count": 1
+},
+"INTEGRAL_TO": {
+"edge_count": 5
+},
+"FOUNDATION_OF": {
+"edge_count": 1
+},
+"ABLE_TO_ATTRACT": {
+"edge_count": 1
+},
+"ATTRIBUTED_TO": {
+"edge_count": 2
+},
+"LIVED_FROM": {
+"edge_count": 1
+},
+"LIVED_UNTIL": {
+"edge_count": 1
+},
+"USED_TO_REMOVE": {
+"edge_count": 1
+},
+"EMBEDDED_IN": {
+"edge_count": 2
+},
+"OBTAINED_BY": {
+"edge_count": 6
+},
+"DEVELOPMENT_STARTED": {
+"edge_count": 1
+},
+"DEVELOPMENT_ENDED": {
+"edge_count": 1
+},
+"USED_FOR_FIRST_TIME": {
+"edge_count": 1
+},
+"ACCEPTED": {
+"edge_count": 1
+},
+"UNDERSTOOD_IN": {
+"edge_count": 1
+},
+"REFINED_BY": {
+"edge_count": 4
+},
+"ABLE_TO_REACT_WITH": {
+"edge_count": 1
+},
+"DISRUPTS": {
+"edge_count": 1
+},
+"COUNTERACTS": {
+"edge_count": 2
+},
+"BEGIN": {
+"edge_count": 1
+},
+"MAY_OCCUR_DURING": {
+"edge_count": 1
+},
+"ENDS_WITH": {
+"edge_count": 1
+},
+"ABLE_TO_MERGE_WITH": {
+"edge_count": 1
+},
+"ABLE_TO_FORM_FROM": {
+"edge_count": 1
+},
+"EMITS": {
+"edge_count": 5
+},
+"LOSE": {
+"edge_count": 1
+},
+"GAINS_MASS_FROM": {
+"edge_count": 1
+},
+"LOSES_MASS_VIA": {
+"edge_count": 1
+},
+"FORMULATED": {
+"edge_count": 1
+},
+"RECOGNIZED_IN": {
+"edge_count": 1
+},
+"ILLUMINATE": {
+"edge_count": 2
+},
+"REACHED_MODERN_FORM_IN": {
+"edge_count": 1
+},
+"CENTRAL_TO": {
+"edge_count": 4
+},
+"REQUIRED_TO_BREAK": {
+"edge_count": 1
+},
+"CATALYZED_BY": {
+"edge_count": 1
+},
+"BEYOND": {
+"edge_count": 1
+},
+"CONFIRMED_IN": {
+"edge_count": 1
+},
+"CONFIRMED_BY": {
+"edge_count": 2
+},
+"ILLUMINATED_BY": {
+"edge_count": 1
+},
+"CATEGORIZED": {
+"edge_count": 2
+},
+"RECORDED_IN": {
+"edge_count": 2
+},
+"DISTINCT_FROM": {
+"edge_count": 2
+},
+"MENTIONED_IN": {
+"edge_count": 4
+},
+"OBSERVED_BY": {
+"edge_count": 2
+},
+"APPLIED_IN": {
+"edge_count": 20
+},
+"BECAME_COMMON_IN": {
+"edge_count": 1
+},
+"MANAGES": {
+"edge_count": 2
+},
+"ORBIT": {
+"edge_count": 3
+},
+"REDUCES_LIKELIHOOD_OF": {
+"edge_count": 1
+},
+"ENABLES_ADJUSTMENT_OF": {
+"edge_count": 1
+},
+"REDUCES_RISK_OF": {
+"edge_count": 1
+},
+"PREVENTS": {
+"edge_count": 1
+},
+"STABILIZES": {
+"edge_count": 1
+},
+"AVOIDS_COSTS_ASSOCIATED_WITH": {
+"edge_count": 1
+},
+"SETS": {
+"edge_count": 1
+},
+"CARRIES_OUT": {
+"edge_count": 2
+},
+"ORIGINATED_FROM": {
+"edge_count": 1
+},
+"REFERS_TO": {
+"edge_count": 3
+},
+"BECOMES_MORE_EXPENSIVE_DUE_TO": {
+"edge_count": 1
+},
+"BECOMES_LESS_EXPENSIVE_DUE_TO": {
+"edge_count": 1
+},
+"LINKED_WITH": {
+"edge_count": 1
+},
+"CAUSES_FALL_IN": {
+"edge_count": 1
+},
+"CAUSES_INCREASE_IN": {
+"edge_count": 1
+},
+"OCCURS_OUTSIDE_OF": {
+"edge_count": 1
+},
+"AROSE_IN": {
+"edge_count": 1
+},
+"DESCRIBES_RELATIONSHIP_BETWEEN": {
+"edge_count": 2
+},
+"PROCESSES": {
+"edge_count": 1
+},
+"MAY_EXIST_IN": {
+"edge_count": 2
+},
+"VIEWED_AS": {
+"edge_count": 1
+},
+"DEMONSTRATED_THAT": {
+"edge_count": 2
+},
+"ATTEMPTS_TO_MAKE_SENSE_OF": {
+"edge_count": 1
+},
+"ANALOGOUS_TO": {
+"edge_count": 1
+},
+"INTERESTED_IN": {
+"edge_count": 3
+},
+"DIRECTED_TOWARDS": {
+"edge_count": 1
+},
+"AIMS_TO_BENEFIT": {
+"edge_count": 1
+},
+"PRACTICES": {
+"edge_count": 1
+},
+"EMPLOYED_IN": {
+"edge_count": 1
+},
+"STARTED_WITH": {
+"edge_count": 1
+},
+"TRANSFORMED_TO": {
+"edge_count": 1
+},
+"PROVIDED_GREATER_POWER_THAN": {
+"edge_count": 1
+},
+"RESULTED_IN_APPLICATION_TO": {
+"edge_count": 1
+},
+"DESIGNED_TO_OPERATE_OUTSIDE_OF": {
+"edge_count": 1
+},
+"SUITABLE_FOR_USE_IN": {
+"edge_count": 1
+},
+"MORE_POWERFUL_THAN": {
+"edge_count": 1
+},
+"IDENTIFIED": {
+"edge_count": 4
+},
+"INAUGURATED": {
+"edge_count": 2
+},
+"ENABLED_BY": {
+"edge_count": 2
+},
+"SIMILAR_TO": {
+"edge_count": 4
+},
+"FUSED_WITH": {
+"edge_count": 1
+},
+"PERMIT_TO_CROSS": {
+"edge_count": 5
+},
+"REACHES": {
+"edge_count": 1
+},
+"REACHED_IN": {
+"edge_count": 1
+},
+"MUST_CONNECT_TO": {
+"edge_count": 1
+},
+"MUST_PROVIDE": {
+"edge_count": 1
+},
+"MUST_TRANSPORT_SAFELY": {
+"edge_count": 1
+},
+"TYPICALLY_USE": {
+"edge_count": 2
+},
+"IMPOSED_BY": {
+"edge_count": 1
+},
+"THOUGHT_TO_FUNCTION_ONLY_WITHIN": {
+"edge_count": 1
+},
+"CORRELATED_WITH": {
+"edge_count": 1
+},
+"NOT_CORRELATED_WITH": {
+"edge_count": 1
+},
+"SIMPLER_THAN": {
+"edge_count": 1
+},
+"SECRETES": {
+"edge_count": 1
+},
+"RECOGNIZED": {
+"edge_count": 1
+},
+"ABSORB": {
+"edge_count": 1
+},
+"HELD_INSIDE": {
+"edge_count": 1
+},
+"ABUNDANT_IN": {
+"edge_count": 1
+},
+"STRIPS": {
+"edge_count": 1
+},
+"FREES": {
+"edge_count": 1
+},
+"USED_IN_CREATION_OF": {
+"edge_count": 2
+},
+"FAVOURED_FOR": {
+"edge_count": 1
+},
+"UNION_WITH": {
+"edge_count": 1
+},
+"VIEWED_FROM": {
+"edge_count": 1
+},
+"VARIABILITY_AMONG": {
+"edge_count": 1
+},
+"VARIABILITY_WITHIN_AND_BETWEEN": {
+"edge_count": 1
+},
+"IMPROVED_BY": {
+"edge_count": 1
+},
+"APPEARS_IN_WORK_OF": {
+"edge_count": 1
+},
+"THEORIZED": {
+"edge_count": 1
+},
+"DIFFERS_FROM": {
+"edge_count": 1
+},
+"MOST_SIGNIFICANT_BETWEEN": {
+"edge_count": 1
+},
+"CONSTRUCTED": {
+"edge_count": 2
+},
+"GENERATED_BY": {
+"edge_count": 1
+},
+"INHERITED_FROM": {
+"edge_count": 1
+},
+"CONTROLLED_BY": {
+"edge_count": 1
+},
+"REPORTED_BY": {
+"edge_count": 4
+},
+"ATTESTED_TO": {
+"edge_count": 2
+},
+"DELIVERED_BY": {
+"edge_count": 2
+},
+"TRAVELS_ALONG": {
+"edge_count": 1
+},
+"DIRECTED_TO_TOUCH": {
+"edge_count": 1
+},
+"KNEW_ABOUT": {
+"edge_count": 1
+},
+"RUBBED_WITH": {
+"edge_count": 1
+},
+"RENDERED": {
+"edge_count": 1
+},
+"NOT_REQUIRED": {
+"edge_count": 1
+},
+"MOST_COMMON_STATE": {
+"edge_count": 1
+},
+"ARISES_FROM": {
+"edge_count": 1
+},
+"FEATURES": {
+"edge_count": 1
+},
+"TRACED_TO": {
+"edge_count": 1
+},
+"IMAGINED": {
+"edge_count": 1
+},
+"EVOLVES_WITH": {
+"edge_count": 1
+},
+"CAN_BE_SYNTHESIZED_IN": {
+"edge_count": 1
+},
+"COMPLETES": {
+"edge_count": 1
+},
+"NEEDED_FOR": {
+"edge_count": 1
+},
+"MATCHED": {
+"edge_count": 2
+},
+"EXTEND_BEYOND": {
+"edge_count": 1
+},
+"NOT_FOLLOW_PATTERN_OF": {
+"edge_count": 1
+},
+"REPRESENTATION_OF": {
+"edge_count": 1
+},
+"SUFFIXED_FORM_OF": {
+"edge_count": 1
+},
+"COGNATE_WITH": {
+"edge_count": 3
+},
+"POOR_AT_DISSOLVING": {
+"edge_count": 1
+},
+"FALLS_TOWARD": {
+"edge_count": 1
+},
+"LOCATED_AROUND": {
+"edge_count": 1
+},
+"HEATED_BY": {
+"edge_count": 1
+},
+"PROPERTY_OF": {
+"edge_count": 2
+},
+"EXPELLED_AT_SPEED": {
+"edge_count": 1
+},
+"INTO": {
+"edge_count": 1
+},
+"SWEEPS_UP": {
+"edge_count": 1
+},
+"OBSERVED_AS": {
+"edge_count": 1
+},
+"TRIGGERS": {
+"edge_count": 1
+},
+"VISIBLE_TO": {
+"edge_count": 3
+},
+"ANALYSIS_OF": {
+"edge_count": 1
+},
+"FEWER_THAN": {
+"edge_count": 1
+},
+"OBSERVED_OVER": {
+"edge_count": 1
+},
+"TRACES": {
+"edge_count": 1
+},
+"MAJOR_TOPIC_OF": {
+"edge_count": 1
+},
+"CONCERNS": {
+"edge_count": 2
+},
+"FREE_FROM": {
+"edge_count": 1
+},
+"WHEN_NOT_EFFICIENT_RESULTS_IN": {
+"edge_count": 1
+},
+"BELIEVED_TO_HAVE_DISCOVERED": {
+"edge_count": 1
+},
+"COMPILED": {
+"edge_count": 2
+},
+"COMPILED_IN": {
+"edge_count": 1
+},
+"CATALOGED": {
+"edge_count": 1
+},
+"CATALOGED_BETWEEN": {
+"edge_count": 1
+},
+"COMPILED_BY": {
+"edge_count": 1
+},
+"INTERESTED_IN_DETECTING": {
+"edge_count": 1
+},
+"HALTED_BY": {
+"edge_count": 1
+},
+"SOURCE_FOR": {
+"edge_count": 1
+},
+"TREAT": {
+"edge_count": 2
+},
+"FIRST_LETTER_OF": {
+"edge_count": 1
+},
+"USUALLY": {
+"edge_count": 1
+},
+"REFERRED_TO": {
+"edge_count": 1
+},
+"OUTSTRIPPED": {
+"edge_count": 1
+},
+"OPERATED_ALONG": {
+"edge_count": 2
+},
+"OCCURRED_BETWEEN": {
+"edge_count": 2
+},
+"ORIGINATED_IN": {
+"edge_count": 1
+},
+"MINTED": {
+"edge_count": 1
+},
+"EXTENDED_TO": {
+"edge_count": 1
+},
+"ATTEMPTED_TO_CONVERT": {
+"edge_count": 1
+},
+"CENTRAL_GOAL_OF": {
+"edge_count": 1
+},
+"STARTED_IN": {
+"edge_count": 1
+},
+"IMPAIRS": {
+"edge_count": 1
+},
+"GIVEN_TO": {
+"edge_count": 1
+},
+"MAPS": {
+"edge_count": 1
+},
+"BEGINS_WITH": {
+"edge_count": 1
+},
+"TRANSMITS_FROM": {
+"edge_count": 2
+},
+"TRANSMITTED_TO": {
+"edge_count": 1
+},
+"MENTAL_REPRESENTATION_OF": {
+"edge_count": 1
+},
+"COMBUSTS": {
+"edge_count": 2
+},
+"ACHIEVES": {
+"edge_count": 1
+},
+"COMBUSTS_WITH": {
+"edge_count": 1
+},
+"DOES_NOT_PRODUCE": {
+"edge_count": 1
+},
+"USED_UNTIL": {
+"edge_count": 1
+},
+"MANUFACTURED_FOR": {
+"edge_count": 1
+},
+"ORDERED": {
+"edge_count": 1
+},
+"FAVORS": {
+"edge_count": 2
+},
+"DEDICATED_TO": {
+"edge_count": 2
+},
+"OCCURS_BEFORE": {
+"edge_count": 2
+},
+"ASSISTED_BY": {
+"edge_count": 1
+},
+"FUNDS": {
+"edge_count": 3
+},
+"FORECASTS": {
+"edge_count": 1
+},
+"EMERGED_IN": {
+"edge_count": 1
+},
+"FELT_BEFORE": {
+"edge_count": 3
+},
+"ENCLOSES": {
+"edge_count": 1
+},
+"HAS_THICKNESS": {
+"edge_count": 1
+},
+"TRANSPORTS": {
+"edge_count": 3
+},
+"CAN_ENTER": {
+"edge_count": 1
+},
+"BINDS_TO": {
+"edge_count": 1
+},
+"IMPORTED_THROUGH": {
+"edge_count": 1
+},
+"COVERED_BY": {
+"edge_count": 1
+},
+"GIVES_RIGIDITY_TO": {
+"edge_count": 1
+},
+"SEPARATED_FROM": {
+"edge_count": 1
+},
+"PROTECTS": {
+"edge_count": 1
+},
+"PROTECTS_FROM": {
+"edge_count": 2
+},
+"ADDITIONAL_LAYER_TO": {
+"edge_count": 1
+},
+"PREVENTS_EXPANSION_OF": {
+"edge_count": 1
+},
+"BRINGS_BACK_TO": {
+"edge_count": 1
+},
+"COMPARES": {
+"edge_count": 1
+},
+"CHANGES_BY": {
+"edge_count": 1
+},
+"PRIMARY_EXPLANATION_FOR": {
+"edge_count": 1
+},
+"APPEARS_TO_EXIST_AS": {
+"edge_count": 1
+},
+"CONSTITUTED_BY": {
+"edge_count": 1
+},
+"CRITICAL_FOR": {
+"edge_count": 1
+},
+"BUILT_OVER": {
+"edge_count": 1
+},
+"BUILT_BY": {
+"edge_count": 1
+},
+"CARRIED": {
+"edge_count": 1
+},
+"NEAR": {
+"edge_count": 1
+},
+"BELIEVED_IMPORTANT_FOR": {
+"edge_count": 1
+},
+"ISOLATED": {
+"edge_count": 1
+},
+"REVIEWED": {
+"edge_count": 1
+},
+"STUDIED_AT": {
+"edge_count": 1
+},
+"WORKED_WITH": {
+"edge_count": 1
+},
+"CONSISTENT_WITH": {
+"edge_count": 1
+},
+"OBTAINED_FROM": {
+"edge_count": 3
+},
+"PURIFIED": {
+"edge_count": 1
+},
+"BECAME_TARGET_OF": {
+"edge_count": 1
+},
+"ALSO_NEEDS": {
+"edge_count": 2
+},
+"MOST_ARE": {
+"edge_count": 1
+},
+"DOES_NOT_USE": {
+"edge_count": 1
+},
+"ACCEPTED_IN": {
+"edge_count": 1
+},
+"PASSED_VIA": {
+"edge_count": 1
+},
+"ENCODES": {
+"edge_count": 1
+},
+"SPELLS_OUT": {
+"edge_count": 1
+},
+"ALTERS": {
+"edge_count": 1
+},
+"FERMENTED_BY": {
+"edge_count": 1
+},
+"AWARDED_FOR": {
+"edge_count": 1
+},
+"NAMED_ACCORDING_TO": {
+"edge_count": 1
+},
+"IS_SAME_FOR": {
+"edge_count": 1
+},
+"INDEPENDENT_OF": {
+"edge_count": 2
+},
+"MEASURED_WITH_RESPECT_TO": {
+"edge_count": 1
+},
+"CANNOT_EXCEED": {
+"edge_count": 4
+},
+"COINED": {
+"edge_count": 1
+},
+"DISCOVERED_LINK_WITH": {
+"edge_count": 1
+},
+"FORMALIZED_BY": {
+"edge_count": 1
+},
+"AIDED": {
+"edge_count": 1
+},
+"FORMULATED_BY": {
+"edge_count": 1
+},
+"INTRODUCED_BY": {
+"edge_count": 1
+},
+"CONSEQUENCE_OF": {
+"edge_count": 1
+},
+"DO_NOT_CHANGE_OVER": {
+"edge_count": 1
+},
+"BEGINNING_OF": {
+"edge_count": 1
+},
+"STATE_OF": {
+"edge_count": 2
+},
+"DISCUSSED": {
+"edge_count": 2
+},
+"EXPERT_IN": {
+"edge_count": 1
+},
+"KNOWN_TO": {
+"edge_count": 1
+},
+"REVEALED": {
+"edge_count": 1
+},
+"DOCUMENTED_BY": {
+"edge_count": 1
+},
+"INCREASED_ESTIMATES_OF": {
+"edge_count": 1
+},
+"COLLECTED_AT": {
+"edge_count": 1
+},
+"COMPARED_TO": {
+"edge_count": 1
+},
+"SUBLIMES_AT": {
+"edge_count": 1
+},
+"RELEASED_DURING": {
+"edge_count": 1
+},
+"PROVED_FALSE_BY": {
+"edge_count": 2
+},
+"RECOGNIZED_RELATIONSHIP_BETWEEN": {
+"edge_count": 2
+},
+"PREVENTS_ESCAPE_OF": {
+"edge_count": 1
+},
+"DETECTABLE_BY": {
+"edge_count": 1
+},
+"REQUESTED_BY": {
+"edge_count": 1
+},
+"PROVIDED_BY": {
+"edge_count": 1
+},
+"FUNDAMENTAL_BUILDING_BLOCK_OF": {
+"edge_count": 1
+},
+"ACCEPTED_BY": {
+"edge_count": 1
+},
+"PASSED_TO": {
+"edge_count": 1
+},
+"FORESHADOWED": {
+"edge_count": 1
+},
+"SPECIFIES_CAPITALIZATION_OF": {
+"edge_count": 1
+},
+"BELIEVED_TO_BE": {
+"edge_count": 1
+},
+"EXAMINED": {
+"edge_count": 1
+},
+"THOUGHT_TO_BE": {
+"edge_count": 1
+},
+"ADDED_IN": {
+"edge_count": 1
+},
+"RADIATES_BY": {
+"edge_count": 1
+},
+"ALSO_ABBREVIATED_AS": {
+"edge_count": 2
+},
+"CONVEYS": {
+"edge_count": 2
+},
+"AMONG": {
+"edge_count": 1
+},
+"COORDINATED_BY": {
+"edge_count": 1
+},
+"DIRECTS": {
+"edge_count": 2
+},
+"COORDINATED_THROUGH": {
+"edge_count": 1
+},
+"NOT_CLASSIFICATORY_OF": {
+"edge_count": 1
+},
+"CENTRED_ON": {
+"edge_count": 1
+},
+"DISTRIBUTED_BY": {
+"edge_count": 1
+},
+"CONSUMED_BY": {
+"edge_count": 1
+},
+"NOT_AFFECTED": {
+"edge_count": 2
+},
+"DOMINATED_BY": {
+"edge_count": 1
+},
+"HOLDS": {
+"edge_count": 1
+},
+"DURATION": {
+"edge_count": 1
+},
+"CUES": {
+"edge_count": 1
+},
+"DEGRADES_WITHIN": {
+"edge_count": 1
+},
+"SEEN_BY": {
+"edge_count": 1
+},
+"RECONSTRUCTED_BY": {
+"edge_count": 1
+},
+"DEVISED": {
+"edge_count": 4
+}
+}

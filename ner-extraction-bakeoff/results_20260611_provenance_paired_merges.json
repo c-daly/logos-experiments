@@ -1,0 +1,3399 @@
+{
+  "method": "provenance-paired re-extraction (idempotency run, 2026-06-11; hermes#150 graph state)",
+  "multi_label_pairs": 1765,
+  "merge_candidates": 678,
+  "new_surfaces_paired": 511,
+  "new_surfaces_total": 788,
+  "candidates": [
+    {
+      "new": "ABLE_TO_PRODUCE",
+      "old": "PRODUCES",
+      "votes": 17
+    },
+    {
+      "new": "AIMS_TO_IMPROVE",
+      "old": "DESIGNS",
+      "votes": 9
+    },
+    {
+      "new": "INVOLVED_IN_RESEARCH_ON",
+      "old": "RESEARCHES",
+      "votes": 9
+    },
+    {
+      "new": "INVOLVED_IN_WORK_ON",
+      "old": "WORKS_ON",
+      "votes": 7
+    },
+    {
+      "new": "ABLE_TO_CROSS",
+      "old": "CROSSES",
+      "votes": 7
+    },
+    {
+      "new": "ABLE_TO_USE",
+      "old": "USES",
+      "votes": 7
+    },
+    {
+      "new": "ABLE_TO_BE_USED_IN",
+      "old": "USED_FOR",
+      "votes": 7
+    },
+    {
+      "new": "ABLE_TO_CREATE",
+      "old": "CREATES",
+      "votes": 6
+    },
+    {
+      "new": "ABLE_TO_CONVERT_TO",
+      "old": "PHASE_TRANSITION_FROM",
+      "votes": 6
+    },
+    {
+      "new": "ABLE_TO_FORM",
+      "old": "PHASE_TRANSITION_TO",
+      "votes": 6
+    },
+    {
+      "new": "ABLE_TO_FORM",
+      "old": "PRODUCES",
+      "votes": 6
+    },
+    {
+      "new": "ABLE_TO_EXAMINE",
+      "old": "EXAMINED",
+      "votes": 6
+    },
+    {
+      "new": "ABLE_TO_USE_FOR",
+      "old": "USES",
+      "votes": 5
+    },
+    {
+      "new": "ABLE_TO_THRIVE_IN",
+      "old": "THRIVES_IN",
+      "votes": 5
+    },
+    {
+      "new": "HAS_PIGMENT",
+      "old": "CONTAINS",
+      "votes": 5
+    },
+    {
+      "new": "ABLE_TO_BE",
+      "old": "INCLUDES",
+      "votes": 4
+    },
+    {
+      "new": "ABLE_TO_BE",
+      "old": "ALSO_KNOWN_AS",
+      "votes": 4
+    },
+    {
+      "new": "ABLE_TO_EXIST_AS",
+      "old": "EXISTS_AS",
+      "votes": 4
+    },
+    {
+      "new": "INTRODUCED_CONCEPT",
+      "old": "INTRODUCED",
+      "votes": 4
+    },
+    {
+      "new": "TRANSPORTS_THROUGH",
+      "old": "MOVED_ALONG",
+      "votes": 4
+    },
+    {
+      "new": "ARGUED_COMPOSED_OF",
+      "old": "ARGUED_FOR",
+      "votes": 4
+    },
+    {
+      "new": "ABLE_TO_REPLACE",
+      "old": "REPLACED",
+      "votes": 4
+    },
+    {
+      "new": "ABLE_TO_INTERACT_WITH",
+      "old": "INTERACTS_WITH",
+      "votes": 4
+    },
+    {
+      "new": "ABLE_TO_CATALYZE",
+      "old": "CATALYZES",
+      "votes": 3
+    },
+    {
+      "new": "ABLE_TO_BIND",
+      "old": "BINDS",
+      "votes": 3
+    },
+    {
+      "new": "MAINLY",
+      "old": "ALSO_KNOWN_AS",
+      "votes": 3
+    },
+    {
+      "new": "REDUCED_OR_TRANSFORMED",
+      "old": "TRANSFORMED_INTO",
+      "votes": 3
+    },
+    {
+      "new": "COMPLETELY_LOST",
+      "old": "LOST",
+      "votes": 3
+    },
+    {
+      "new": "WITHIN_AND_BETWEEN",
+      "old": "WITHIN_BETWEEN",
+      "votes": 3
+    },
+    {
+      "new": "ABLE_TO_FORM",
+      "old": "FORMS",
+      "votes": 3
+    },
+    {
+      "new": "ABLE_TO_EXIST_AS",
+      "old": "CAN_EXIST_AS",
+      "votes": 3
+    },
+    {
+      "new": "ABLE_TO_STORE",
+      "old": "STORES",
+      "votes": 3
+    },
+    {
+      "new": "ABLE_TO_ATTRACT",
+      "old": "ATTRACTS",
+      "votes": 3
+    },
+    {
+      "new": "SUM_OF",
+      "old": "COMPRISED_OF",
+      "votes": 3
+    },
+    {
+      "new": "ABLE_TO_CONVERT_TO",
+      "old": "CONVERTS",
+      "votes": 3
+    },
+    {
+      "new": "BUILT_ON_RESULTS_OF",
+      "old": "BUILT_ON_WORK_OF",
+      "votes": 3
+    },
+    {
+      "new": "ABLE_TO_PERFORM",
+      "old": "USED_FOR",
+      "votes": 3
+    },
+    {
+      "new": "MAY_BE_CLASSIFIED_AS",
+      "old": "CAN_BE",
+      "votes": 3
+    },
+    {
+      "new": "DESIGNS_OR_DEVELOPS",
+      "old": "AIMS_TO_DESIGN",
+      "votes": 3
+    },
+    {
+      "new": "ABLE_TO_EXERT",
+      "old": "EXERTS",
+      "votes": 3
+    },
+    {
+      "new": "OXIDIZES",
+      "old": "USES",
+      "votes": 3
+    },
+    {
+      "new": "ABLE_TO_CONVERT_TO",
+      "old": "CONVERTIBLE_TO",
+      "votes": 3
+    },
+    {
+      "new": "LISTS_AS_FUNCTION",
+      "old": "LISTS_FUNCTION",
+      "votes": 3
+    },
+    {
+      "new": "ABLE_TO_EXIST_ABOVE",
+      "old": "EXISTS_ABOVE_TEMPERATURE",
+      "votes": 3
+    },
+    {
+      "new": "PLUS",
+      "old": "GROUPED_WITH",
+      "votes": 3
+    },
+    {
+      "new": "LED_DESIGN_OF",
+      "old": "DESIGNS",
+      "votes": 3
+    },
+    {
+      "new": "DISPLAYS_PHASE",
+      "old": "SEPARATES",
+      "votes": 3
+    },
+    {
+      "new": "EQUALS_TEMPERATURE",
+      "old": "HAS_TEMPERATURE",
+      "votes": 3
+    },
+    {
+      "new": "EQUALS_PRESSURE",
+      "old": "HAS_PRESSURE",
+      "votes": 3
+    },
+    {
+      "new": "ABLE_TO_CAUSE",
+      "old": "CAUSES_TO_DESCRIBE",
+      "votes": 3
+    },
+    {
+      "new": "ABLE_TO_HAVE",
+      "old": "HAS",
+      "votes": 3
+    },
+    {
+      "new": "CONTAINS_SECTION_ON",
+      "old": "ABOUT",
+      "votes": 3
+    },
+    {
+      "new": "ABLE_TO_PERCEIVE",
+      "old": "ABOUT",
+      "votes": 3
+    },
+    {
+      "new": "ABLE_TO_BE",
+      "old": "CAN_BE",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_BE_TRANSFERRED_AS",
+      "old": "FORM_OF",
+      "votes": 2
+    },
+    {
+      "new": "ABUNDANT_IN",
+      "old": "PART_OF",
+      "votes": 2
+    },
+    {
+      "new": "ABUNDANCE",
+      "old": "HAS_ABUNDANCE",
+      "votes": 2
+    },
+    {
+      "new": "GASEOUS_STATE_IS",
+      "old": "EXISTS_AS",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_CONVERT_TO",
+      "old": "CAN_BE",
+      "votes": 2
+    },
+    {
+      "new": "ACCEPTED_IN",
+      "old": "USED_IN",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_FUNCTION_AS",
+      "old": "PERFORMS",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_FUNCTION_AS",
+      "old": "ACTS_AS",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_FUNCTION_AS",
+      "old": "HAS_FUNCTION",
+      "votes": 2
+    },
+    {
+      "new": "ORBITS_WITHIN",
+      "old": "ORBIT_IN",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_ENCODE",
+      "old": "ENCODES",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_PROVIDE_SUPPORT_FOR",
+      "old": "PROVIDES_TRANSPORT_FOR",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_STUDY",
+      "old": "STUDIES",
+      "votes": 2
+    },
+    {
+      "new": "MAINTAINS_CONTROL_OF",
+      "old": "CONTROLS",
+      "votes": 2
+    },
+    {
+      "new": "MANY_OF_WHICH_ARE",
+      "old": "SERVED_AS",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_PERFORM",
+      "old": "PERFORMS",
+      "votes": 2
+    },
+    {
+      "new": "COMBINED_POTENTIALS_FROM",
+      "old": "COMPRISED_OF",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_ABSORB",
+      "old": "ABSORBS",
+      "votes": 2
+    },
+    {
+      "new": "MANAGES",
+      "old": "AIMS_TO_MANAGE",
+      "votes": 2
+    },
+    {
+      "new": "PERFORMED_IN",
+      "old": "PERFORMED_DURING",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_FORM",
+      "old": "CAN_BE",
+      "votes": 2
+    },
+    {
+      "new": "EMANATES_FROM",
+      "old": "TRANSMITS_INFORMATION_FROM",
+      "votes": 2
+    },
+    {
+      "new": "DEDICATED_TO",
+      "old": "AIMS_TO_SUPPORT",
+      "votes": 2
+    },
+    {
+      "new": "DESIGNS_OR_DEVELOPS",
+      "old": "AIMS_TO_DEVELOP",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_INCREASE",
+      "old": "INCREASES",
+      "votes": 2
+    },
+    {
+      "new": "USES_AS_CARBON_SOURCE",
+      "old": "USES",
+      "votes": 2
+    },
+    {
+      "new": "SUGGESTED_AS_LOCATION_OF",
+      "old": "ASSOCIATED_WITH",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_JOIN",
+      "old": "USED_TO_JOIN",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_INTRODUCE_VARIATION_TO",
+      "old": "BETWEEN",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_INTRODUCE_VARIATION_TO",
+      "old": "AFFECTS",
+      "votes": 2
+    },
+    {
+      "new": "BELIEVED_TO_ATTRACT",
+      "old": "ATTRACTS",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_DETERMINE",
+      "old": "ALLOWS_DETERMINATION_OF",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_REDUCE",
+      "old": "REDUCES",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_GENERATE",
+      "old": "GENERATES",
+      "votes": 2
+    },
+    {
+      "new": "CARDINALITY",
+      "old": "COUNT_OF",
+      "votes": 2
+    },
+    {
+      "new": "CAPTURED_ATMOSPHERE_OF",
+      "old": "CAPTURES",
+      "votes": 2
+    },
+    {
+      "new": "USES_FOR_SIGNAL_PROCESSING",
+      "old": "USES",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_CATALYZE_MOVEMENT_OF",
+      "old": "MOVES",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_BE",
+      "old": "TRANSFORMED_BY",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_BE_INTERPRETED_AS",
+      "old": "ALSO_KNOWN_AS",
+      "votes": 2
+    },
+    {
+      "new": "EFFECT_OVERWHELMED_BY",
+      "old": "OVERWHELMS",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_CONTAIN",
+      "old": "HAS_PART",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_CONTAIN",
+      "old": "CONTAINS",
+      "votes": 2
+    },
+    {
+      "new": "EFFECT_CAUSED_BY",
+      "old": "HAS_PART",
+      "votes": 2
+    },
+    {
+      "new": "EFFECT_CAUSED_BY",
+      "old": "CONTAINS",
+      "votes": 2
+    },
+    {
+      "new": "SHARES_STRUCTURE_WITH",
+      "old": "HAS_SAME_STRUCTURE_AS",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_BE",
+      "old": "HAS_OCCUPATION",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_RECALL_FOR",
+      "old": "ENABLES_RECALL_OF",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_EVALUATE",
+      "old": "EVALUATES",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_COMMUNICATE",
+      "old": "COMMUNICATES",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_ENABLE",
+      "old": "USED_IN",
+      "votes": 2
+    },
+    {
+      "new": "CARRIES_CHARGE_OF",
+      "old": "HAS_CHARGE",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_MIX_WITH",
+      "old": "MIXED_WITH",
+      "votes": 2
+    },
+    {
+      "new": "ALLOWED_TO_BE_RELATED_TO",
+      "old": "ALLOWS_RELATION_TO",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_MEASURE",
+      "old": "MEASURE_OF",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_BE_EXPRESSED_IN",
+      "old": "INCLUDES",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_DESCRIBE",
+      "old": "ABOUT",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_VAPORIZE",
+      "old": "VAPORIZES",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_RENDER_UNINHABITABLE",
+      "old": "RENDERS_UNINHABITABLE",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_CHANGE_BY_INCREASING",
+      "old": "CHANGES_BY",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_INCLUDE",
+      "old": "ALSO_INCLUDES",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_EXCHANGE",
+      "old": "AIMS_TO_EXCHANGE",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_CONVERT",
+      "old": "CONVERTS",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_PROVIDE_SUPPORT_FOR",
+      "old": "PROVIDES_SUPPORT_FOR",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_CARRY",
+      "old": "CARRIES",
+      "votes": 2
+    },
+    {
+      "new": "HAS_WEIGHT",
+      "old": "WEIGHS",
+      "votes": 2
+    },
+    {
+      "new": "CHARGES",
+      "old": "CAN_CHARGE",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_BE_OBSERVED_BY",
+      "old": "CAN_BE_OBSERVED_BY",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_SHOW",
+      "old": "CONTAINS_OBSERVATION_OF",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_CONTAIN",
+      "old": "INCLUDES",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_BE_DIFFERENT_IN",
+      "old": "DEFINITION_VARIES_IN",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_SET",
+      "old": "IMPOSES",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_BE_DISTORTED_BY",
+      "old": "DISTORTED_BY",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_BE",
+      "old": "MAY_BE",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_ESTIMATE",
+      "old": "AIMS_TO_ESTIMATE",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_COMBINE",
+      "old": "INVOLVES",
+      "votes": 2
+    },
+    {
+      "new": "CROSS_AT",
+      "old": "CROSSES",
+      "votes": 2
+    },
+    {
+      "new": "ABLE_TO_CATALYZE",
+      "old": "ACCELERATES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_CATALYZE",
+      "old": "DERIVED_FROM",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BIND",
+      "old": "ABLE_TO_DISTINGUISH",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BIND",
+      "old": "ACTS_ON",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BIND",
+      "old": "LARGER_THAN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BIND",
+      "old": "DERIVED_FROM",
+      "votes": 1
+    },
+    {
+      "new": "INDICATED_BY_ALTERATIONS_IN",
+      "old": "INDICATED_BY",
+      "votes": 1
+    },
+    {
+      "new": "PRESENT_AT_LEVEL_OF",
+      "old": "SPANS",
+      "votes": 1
+    },
+    {
+      "new": "PRESENT_AT_LEVEL_OF",
+      "old": "PRESENT_AT",
+      "votes": 1
+    },
+    {
+      "new": "ESSENTIAL_PART_OF",
+      "old": "PART_OF",
+      "votes": 1
+    },
+    {
+      "new": "AIMS_TO_CATALYZE",
+      "old": "CATALYZES",
+      "votes": 1
+    },
+    {
+      "new": "AIMS_TO_CATALYZE",
+      "old": "PERFORMS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE",
+      "old": "TRANSPORTS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE",
+      "old": "INTERACTS_WITH",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE",
+      "old": "PART_OF",
+      "votes": 1
+    },
+    {
+      "new": "TYPICALLY_FROM",
+      "old": "ALSO_KNOWN_AS",
+      "votes": 1
+    },
+    {
+      "new": "DEVELOPMENT_ENDED_IN",
+      "old": "PUBLISHED_IN",
+      "votes": 1
+    },
+    {
+      "new": "DEVELOPMENT_ENDED_IN",
+      "old": "DEVELOPMENT_ENDED",
+      "votes": 1
+    },
+    {
+      "new": "DEVELOPMENT_ENDED_IN",
+      "old": "PROPOSED_IN",
+      "votes": 1
+    },
+    {
+      "new": "MOTION_IS",
+      "old": "PART_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_CREATE",
+      "old": "GIVES_RISE_TO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_CREATE",
+      "old": "PRODUCES",
+      "votes": 1
+    },
+    {
+      "new": "COINED_TERM_IN",
+      "old": "PERFORMED_DURING",
+      "votes": 1
+    },
+    {
+      "new": "POPULARIZED_IN",
+      "old": "PERFORMED_DURING",
+      "votes": 1
+    },
+    {
+      "new": "CAPACITY_TO_DO",
+      "old": "CAPACITY_FOR",
+      "votes": 1
+    },
+    {
+      "new": "CAPACITY_TO_DO",
+      "old": "ALSO_KNOWN_AS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_FORM",
+      "old": "BECOMES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_FORM",
+      "old": "CAN_BECOME",
+      "votes": 1
+    },
+    {
+      "new": "CLASSIFIED_ACCORDING_TO",
+      "old": "CLASSIFIED_BY",
+      "votes": 1
+    },
+    {
+      "new": "HAS_SYMBOL",
+      "old": "ALSO_KNOWN_AS",
+      "votes": 1
+    },
+    {
+      "new": "BELONGS_TO_GROUP",
+      "old": "PART_OF",
+      "votes": 1
+    },
+    {
+      "new": "ENABLES_DIVERSITY_OF",
+      "old": "FORMS",
+      "votes": 1
+    },
+    {
+      "new": "LESS_ABUNDANT_THAN",
+      "old": "SECOND_MOST_ABUNDANT_AFTER",
+      "votes": 1
+    },
+    {
+      "new": "ORDERED_ARRANGEMENT_OF",
+      "old": "PART_OF",
+      "votes": 1
+    },
+    {
+      "new": "DEPICTION_OF",
+      "old": "BASED_ON",
+      "votes": 1
+    },
+    {
+      "new": "DEPICTION_OF",
+      "old": "DEPICTS",
+      "votes": 1
+    },
+    {
+      "new": "DEPICTION_OF",
+      "old": "GRAPHIC_DESCRIPTION_OF",
+      "votes": 1
+    },
+    {
+      "new": "PERIODIC_FUNCTION_OF",
+      "old": "ORDERED_BY",
+      "votes": 1
+    },
+    {
+      "new": "PERIODIC_FUNCTION_OF",
+      "old": "ABOUT",
+      "votes": 1
+    },
+    {
+      "new": "PERIODIC_FUNCTION_OF",
+      "old": "EXPLAINED_BY",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_INCLUDE",
+      "old": "DIVIDED_INTO",
+      "votes": 1
+    },
+    {
+      "new": "GASEOUS_STATE_IS",
+      "old": "CAN_BE",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_CONVERT_TO",
+      "old": "EXISTS_AS",
+      "votes": 1
+    },
+    {
+      "new": "WITH",
+      "old": "REARRANGES",
+      "votes": 1
+    },
+    {
+      "new": "WITH",
+      "old": "INVOLVES",
+      "votes": 1
+    },
+    {
+      "new": "YIELDS",
+      "old": "GENERATES",
+      "votes": 1
+    },
+    {
+      "new": "INVOLVES_FORMATION_AND_BREAKING_OF",
+      "old": "INVOLVES",
+      "votes": 1
+    },
+    {
+      "new": "ANGULAR_DIAMETER_COMPARED_TO",
+      "old": "LARGER_THAN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_FUNCTION_AS",
+      "old": "PERFORMS_FUNCTION_AS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_FUNCTION_AS",
+      "old": "PERFORMED_DURING",
+      "votes": 1
+    },
+    {
+      "new": "HISTORICALLY_WAS",
+      "old": "RESULTS_IN",
+      "votes": 1
+    },
+    {
+      "new": "POSSESSED_INTRINSIC_VALUE_AS",
+      "old": "COMPOSED_OF",
+      "votes": 1
+    },
+    {
+      "new": "VALUE_DERIVED_BY",
+      "old": "VALUE_DERIVED_FROM",
+      "votes": 1
+    },
+    {
+      "new": "MUST_BE_ACCEPTED_IN",
+      "old": "VALID_IN",
+      "votes": 1
+    },
+    {
+      "new": "ORBITS_AROUND",
+      "old": "COMPOSED_OF",
+      "votes": 1
+    },
+    {
+      "new": "ORBITS_AROUND",
+      "old": "ORBITS",
+      "votes": 1
+    },
+    {
+      "new": "ORBITS_AROUND",
+      "old": "PART_OF",
+      "votes": 1
+    },
+    {
+      "new": "ORBITS_AROUND",
+      "old": "INCLUDES",
+      "votes": 1
+    },
+    {
+      "new": "FUSES",
+      "old": "CONTAINS",
+      "votes": 1
+    },
+    {
+      "new": "FUSED_INTO",
+      "old": "CONVERTED_TO",
+      "votes": 1
+    },
+    {
+      "new": "FUSED_INTO",
+      "old": "CONVERTED_INTO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_CONVERTED_TO",
+      "old": "CONVERTED_TO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_CONVERTED_TO",
+      "old": "CONVERTED_INTO",
+      "votes": 1
+    },
+    {
+      "new": "UNDER",
+      "old": "REQUIRES",
+      "votes": 1
+    },
+    {
+      "new": "BUYS",
+      "old": "BUYS_LESS_OF",
+      "votes": 1
+    },
+    {
+      "new": "AFFECTED_DURING",
+      "old": "PARTICULARLY_IN",
+      "votes": 1
+    },
+    {
+      "new": "AIMS_TO_REPRESENT",
+      "old": "AIMS_TO_UNDERSTAND",
+      "votes": 1
+    },
+    {
+      "new": "INFLUENCES_PRICE_OF",
+      "old": "OFFERS",
+      "votes": 1
+    },
+    {
+      "new": "INFLUENCES_PRICE_OF",
+      "old": "AIMS_TO_PRODUCE",
+      "votes": 1
+    },
+    {
+      "new": "EXCHANGES_FOR",
+      "old": "PROVIDES",
+      "votes": 1
+    },
+    {
+      "new": "EXCHANGES_FOR",
+      "old": "OFFERS",
+      "votes": 1
+    },
+    {
+      "new": "ALLOWS_TO_BE_EVALUATED_AND_PRICED",
+      "old": "EVALUATES",
+      "votes": 1
+    },
+    {
+      "new": "ALLOWS_TO_BE_EVALUATED_AND_PRICED",
+      "old": "ALLOW_EVALUATION_OF",
+      "votes": 1
+    },
+    {
+      "new": "ALLOWS_TO_BE_EVALUATED_AND_PRICED",
+      "old": "PRICES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_STORE",
+      "old": "ENCODES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_RETRIEVE",
+      "old": "ENCODES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_PROVIDE_SUPPORT_FOR",
+      "old": "SPANS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_PROVIDE_SUPPORT_FOR",
+      "old": "ALLOWS_PASSAGE_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_STUDY",
+      "old": "ABOUT",
+      "votes": 1
+    },
+    {
+      "new": "HAS_SIZE_IN",
+      "old": "HAS_PROPERTY",
+      "votes": 1
+    },
+    {
+      "new": "CONTAINS_MORE_THAN",
+      "old": "HAS",
+      "votes": 1
+    },
+    {
+      "new": "GIVES",
+      "old": "GIVES_RISE_TO",
+      "votes": 1
+    },
+    {
+      "new": "GIVES",
+      "old": "ALTERNATIVE_TO",
+      "votes": 1
+    },
+    {
+      "new": "HAS_IMPORTANT_ROLE_IN",
+      "old": "HAS",
+      "votes": 1
+    },
+    {
+      "new": "RECYCLED_DURING",
+      "old": "RECYCLED_BY",
+      "votes": 1
+    },
+    {
+      "new": "SPECIFICITY_DETERMINED_BY",
+      "old": "CHARACTERIZED_BY",
+      "votes": 1
+    },
+    {
+      "new": "DOMINANT_IN",
+      "old": "DOMINANT_FORM_IN",
+      "votes": 1
+    },
+    {
+      "new": "USED_TO_ABSORB",
+      "old": "ABSORBS",
+      "votes": 1
+    },
+    {
+      "new": "AS_FAR_BACK_AS",
+      "old": "EVOLVED_DURING",
+      "votes": 1
+    },
+    {
+      "new": "ACCEPTED_IN",
+      "old": "ACTIVE_IN",
+      "votes": 1
+    },
+    {
+      "new": "ACCEPTED_IN",
+      "old": "ACTIVE_DURING",
+      "votes": 1
+    },
+    {
+      "new": "ACCEPTED_IN",
+      "old": "LOCATED_IN",
+      "votes": 1
+    },
+    {
+      "new": "GAVE_RISE_TO",
+      "old": "GIVES_RISE_TO",
+      "votes": 1
+    },
+    {
+      "new": "SIMILARITY_BETWEEN",
+      "old": "CHARACTERISTIC_OF",
+      "votes": 1
+    },
+    {
+      "new": "RECONSTRUCTED_USING",
+      "old": "RECONSTRUCTED_FROM",
+      "votes": 1
+    },
+    {
+      "new": "BASED_UPON",
+      "old": "BASED_ON",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_CONVERT_TO",
+      "old": "PRODUCES",
+      "votes": 1
+    },
+    {
+      "new": "DIMINUTIVE_OF",
+      "old": "DERIVED_FROM",
+      "votes": 1
+    },
+    {
+      "new": "REIGNITED_IN",
+      "old": "OCCUR_IN",
+      "votes": 1
+    },
+    {
+      "new": "TRIGGERED_WHEN_INSUFFICIENT",
+      "old": "CAUSED_BY_LACK_OF",
+      "votes": 1
+    },
+    {
+      "new": "MAY_OCCUR_DURING",
+      "old": "MAY_HAPPEN_DURING",
+      "votes": 1
+    },
+    {
+      "new": "GENERALLY_ACCEPTED_BY",
+      "old": "CREATED_BY",
+      "votes": 1
+    },
+    {
+      "new": "GENERALLY_ACCEPTED_IN",
+      "old": "CREATED_ON",
+      "votes": 1
+    },
+    {
+      "new": "DEPENDENCE_OF",
+      "old": "AFFECTS",
+      "votes": 1
+    },
+    {
+      "new": "USED_TO_PREDICT_PROPERTIES_OF",
+      "old": "USED_TO_PREDICT",
+      "votes": 1
+    },
+    {
+      "new": "RECOGNIZED_AS_FUNDAMENTAL_DISCOVERY_IN",
+      "old": "RECOGNIZED_IN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_FORM",
+      "old": "CAN_FORM",
+      "votes": 1
+    },
+    {
+      "new": "ARE_STATE_OF",
+      "old": "EXISTS_AS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_CONVERT_TO",
+      "old": "CONVERTIBLE_INTO",
+      "votes": 1
+    },
+    {
+      "new": "ABUNDANT_IN",
+      "old": "LOCATED_IN",
+      "votes": 1
+    },
+    {
+      "new": "LOCATED_OUTSIDE",
+      "old": "OUTSIDE_OF",
+      "votes": 1
+    },
+    {
+      "new": "ENABLES_TO_ADJUST",
+      "old": "ENABLES_ADJUSTMENT_OF",
+      "votes": 1
+    },
+    {
+      "new": "CAUSES_INCREASE_IN",
+      "old": "AFFECTS",
+      "votes": 1
+    },
+    {
+      "new": "CONFIRMED_IN",
+      "old": "TRUE_NATURE_CONFIRMED_IN",
+      "votes": 1
+    },
+    {
+      "new": "DESCRIBES_RELATIONSHIP_BETWEEN",
+      "old": "DESCRIBES_RELATIONSHIP_WITH",
+      "votes": 1
+    },
+    {
+      "new": "LOCATED_WITHIN",
+      "old": "ENCLOSED_BY",
+      "votes": 1
+    },
+    {
+      "new": "LOCATED_WITHIN",
+      "old": "CONTAINED_WITHIN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_CONVERT_TO",
+      "old": "BECOMES",
+      "votes": 1
+    },
+    {
+      "new": "EXISTS_OVER",
+      "old": "CAN_EXIST_OVER",
+      "votes": 1
+    },
+    {
+      "new": "USED_TO_INFER",
+      "old": "INFER",
+      "votes": 1
+    },
+    {
+      "new": "DIRECTED_TOWARDS_UNDERSTANDING_AND_SOLVING_PROBLEMS_IN",
+      "old": "DIRECTED_TOWARDS",
+      "votes": 1
+    },
+    {
+      "new": "WORKS_IN",
+      "old": "WORKS_AT",
+      "votes": 1
+    },
+    {
+      "new": "HELD_INSIDE",
+      "old": "LOCATED_IN",
+      "votes": 1
+    },
+    {
+      "new": "STRIPS_ELECTRONS_FROM",
+      "old": "ACTS_ON",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_RUBBED_WITH",
+      "old": "RUBBED_WITH",
+      "votes": 1
+    },
+    {
+      "new": "ACTS_IN",
+      "old": "AFFECTS",
+      "votes": 1
+    },
+    {
+      "new": "RATIO_TO",
+      "old": "COMPARED_TO",
+      "votes": 1
+    },
+    {
+      "new": "NEGLIGIBLE_AT",
+      "old": "CAN_BE_NEGLECTED_AT",
+      "votes": 1
+    },
+    {
+      "new": "NOT_PASSED_ON_TO",
+      "old": "NOT_INHERITED_BY",
+      "votes": 1
+    },
+    {
+      "new": "BECAME_CENTRAL_AROUND",
+      "old": "BECAME_CENTRAL_TO",
+      "votes": 1
+    },
+    {
+      "new": "IMPROVES_ACCURACY_OF",
+      "old": "IMPROVES",
+      "votes": 1
+    },
+    {
+      "new": "POINTS_TOWARDS",
+      "old": "POINTS_TO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_CONTROL",
+      "old": "CONTROLS",
+      "votes": 1
+    },
+    {
+      "new": "AIMS_TO_SUPPLY",
+      "old": "AIMS_TO_BENEFIT",
+      "votes": 1
+    },
+    {
+      "new": "NOT_MODIFIED_BY",
+      "old": "MODIFIED_BY",
+      "votes": 1
+    },
+    {
+      "new": "STUDIED_IN_CONTEXT_OF",
+      "old": "ABOUT",
+      "votes": 1
+    },
+    {
+      "new": "THEORIZED_CONSISTED_OF",
+      "old": "THEORIZED",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_CREATE",
+      "old": "CAN_CREATE",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_EXPEL",
+      "old": "EXPELS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_EXPEL_AT_FRACTION_OF",
+      "old": "EXPELS_AT_SPEED_UP_TO",
+      "votes": 1
+    },
+    {
+      "new": "DRIVEN_INTO",
+      "old": "DIRECTED_TOWARDS",
+      "votes": 1
+    },
+    {
+      "new": "RANGE_START",
+      "old": "RANGE_FROM",
+      "votes": 1
+    },
+    {
+      "new": "RANGE_END",
+      "old": "RANGE_TO",
+      "votes": 1
+    },
+    {
+      "new": "TRACED_BACK_TO",
+      "old": "TRACED_TO",
+      "votes": 1
+    },
+    {
+      "new": "USED_INSTRUMENT",
+      "old": "USED",
+      "votes": 1
+    },
+    {
+      "new": "PERFORMED_DETAILED_STUDY_OF",
+      "old": "STUDIES",
+      "votes": 1
+    },
+    {
+      "new": "CATALOGED_FROM",
+      "old": "CATALOGED_AT",
+      "votes": 1
+    },
+    {
+      "new": "EXTENDS_TO",
+      "old": "ALSO_KNOWN_AS",
+      "votes": 1
+    },
+    {
+      "new": "AIMED_TO_CONVERT_TO",
+      "old": "ATTEMPTED_CONVERSION_TO",
+      "votes": 1
+    },
+    {
+      "new": "FIRST_USED_DURING",
+      "old": "FIRST_USED_IN",
+      "votes": 1
+    },
+    {
+      "new": "INFLUENCES_PRICE_OF",
+      "old": "AIMS_TO_OBTAIN",
+      "votes": 1
+    },
+    {
+      "new": "TOPIC_OF_STUDY_OF",
+      "old": "TOPIC_OF",
+      "votes": 1
+    },
+    {
+      "new": "IMPROVEMENT_LIMITED_BY",
+      "old": "AFFECTED_BY",
+      "votes": 1
+    },
+    {
+      "new": "PROLIFERATED_DURING",
+      "old": "PERFORMED_DURING",
+      "votes": 1
+    },
+    {
+      "new": "TAKES_FORM_OF",
+      "old": "CAN_BE",
+      "votes": 1
+    },
+    {
+      "new": "MAPPED_ACROSS",
+      "old": "MAPPED_ONTO",
+      "votes": 1
+    },
+    {
+      "new": "MENTAL_RECREATION_OF",
+      "old": "MENTAL_REPRESENTATION_OF",
+      "votes": 1
+    },
+    {
+      "new": "FOR_LANGUAGE",
+      "old": "FOR",
+      "votes": 1
+    },
+    {
+      "new": "USED_ON",
+      "old": "APPLIES_TO",
+      "votes": 1
+    },
+    {
+      "new": "ASSISTED_WITH",
+      "old": "ASSISTED_BY",
+      "votes": 1
+    },
+    {
+      "new": "NOT_PRODUCES",
+      "old": "DOES_NOT_PRODUCE",
+      "votes": 1
+    },
+    {
+      "new": "ORDERED_FOR",
+      "old": "ORDERED_POLICY_FOR",
+      "votes": 1
+    },
+    {
+      "new": "HAS_SIMILAR_RATIO_TO",
+      "old": "HAS",
+      "votes": 1
+    },
+    {
+      "new": "BELIEVED_IMPORTANT_FOR",
+      "old": "BELIEVED_TO_BE",
+      "votes": 1
+    },
+    {
+      "new": "IMPORTANT_FOR_MAINTAINING",
+      "old": "MAINTAINS",
+      "votes": 1
+    },
+    {
+      "new": "LACKING_IN_STUNTS_GROWTH_OF",
+      "old": "REQUIRED_FOR_GROWTH_OF",
+      "votes": 1
+    },
+    {
+      "new": "LACKING_IN_STUNTS_GROWTH_OF",
+      "old": "ESTABLISHED_IN",
+      "votes": 1
+    },
+    {
+      "new": "PRODUCED_QUANTITY_OF",
+      "old": "PRODUCED_AMOUNT",
+      "votes": 1
+    },
+    {
+      "new": "HAS_DIAMETER_RANGE",
+      "old": "HAS_SIZE_RANGE",
+      "votes": 1
+    },
+    {
+      "new": "HAS_MAX_LENGTH",
+      "old": "CAN_REACH_LENGTH",
+      "votes": 1
+    },
+    {
+      "new": "HAS_MAX_LENGTH",
+      "old": "HAS_AVERAGE_LENGTH",
+      "votes": 1
+    },
+    {
+      "new": "BRINGS_TO_FOCUS",
+      "old": "BRINGS_BACK_TO",
+      "votes": 1
+    },
+    {
+      "new": "PROVIDES_SENSE_OF_PRIDE_TO",
+      "old": "PROVIDES_PRIDE_FOR",
+      "votes": 1
+    },
+    {
+      "new": "PROVIDES_IDENTITY_TO",
+      "old": "PROVIDES_PRIDE_FOR",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_INCREASE",
+      "old": "CAUSES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_USE_FOR",
+      "old": "USES_INSTEAD_OF",
+      "votes": 1
+    },
+    {
+      "new": "OXYGENATED",
+      "old": "CONTRIBUTED_TO_OXYGENATION_OF",
+      "votes": 1
+    },
+    {
+      "new": "ENABLED_EVOLUTION_OF",
+      "old": "RENDERED_EVOLUTION_OF_POSSIBLE",
+      "votes": 1
+    },
+    {
+      "new": "DOES_NOT_USE_AS_CARBON_SOURCE",
+      "old": "DOES_NOT_USE",
+      "votes": 1
+    },
+    {
+      "new": "PRODUCED_BY_RUBBING",
+      "old": "PRODUCED_BY",
+      "votes": 1
+    },
+    {
+      "new": "CONTAINS_BEGINNING_OF",
+      "old": "BEGINNING_OF",
+      "votes": 1
+    },
+    {
+      "new": "PASSED_FROM_TO",
+      "old": "PASSED_BETWEEN",
+      "votes": 1
+    },
+    {
+      "new": "DIFFER_IN",
+      "old": "SPECIFIED_BY",
+      "votes": 1
+    },
+    {
+      "new": "DIFFER_IN",
+      "old": "HAVE",
+      "votes": 1
+    },
+    {
+      "new": "EQUAL_TO",
+      "old": "EQUALS",
+      "votes": 1
+    },
+    {
+      "new": "REWORK_OF",
+      "old": "BASED_ON",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_FORM",
+      "old": "ABILITY_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_FORM_BONDS_WITH",
+      "old": "FORMS_BONDS_WITH",
+      "votes": 1
+    },
+    {
+      "new": "AIDED_DEVELOPMENT_OF",
+      "old": "AIDED_EXPLANATION_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_ARRANGE_INTO",
+      "old": "ARRANGE_INTO",
+      "votes": 1
+    },
+    {
+      "new": "PUBLISHED_VIEWS_ON",
+      "old": "PUBLISHED",
+      "votes": 1
+    },
+    {
+      "new": "HAS_MAGNITUDE",
+      "old": "AMOUNT",
+      "votes": 1
+    },
+    {
+      "new": "DETECTABLE_BY",
+      "old": "DETECTABLE_THROUGH",
+      "votes": 1
+    },
+    {
+      "new": "REPRESENTS_COUNT_OF",
+      "old": "REPRESENTS_NUMBER_OF",
+      "votes": 1
+    },
+    {
+      "new": "PUBLISHED_BY",
+      "old": "AUTHORED",
+      "votes": 1
+    },
+    {
+      "new": "DURATION_OF_RETENTION",
+      "old": "DURATION",
+      "votes": 1
+    },
+    {
+      "new": "RETENTION_OF",
+      "old": "PERFORMED_DURING",
+      "votes": 1
+    },
+    {
+      "new": "DURATION_OF",
+      "old": "DURATION",
+      "votes": 1
+    },
+    {
+      "new": "APPROXIMATELY",
+      "old": "AMOUNT",
+      "votes": 1
+    },
+    {
+      "new": "ITEMS_IN",
+      "old": "IN",
+      "votes": 1
+    },
+    {
+      "new": "REDEEMABLE_BY",
+      "old": "ISSUED_TO",
+      "votes": 1
+    },
+    {
+      "new": "ATTESTED_IN",
+      "old": "ATTESTED_TO",
+      "votes": 1
+    },
+    {
+      "new": "HAD_CAUSE",
+      "old": "CAUSED_BY",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_FORM",
+      "old": "MIXED_WITH_TO_FORM",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_MIXED_WITH",
+      "old": "MIXED_WITH_TO_FORM",
+      "votes": 1
+    },
+    {
+      "new": "MADE_BY",
+      "old": "DEVELOPED_BY",
+      "votes": 1
+    },
+    {
+      "new": "SHOWED_IS",
+      "old": "SHOWED_THAT",
+      "votes": 1
+    },
+    {
+      "new": "SHOWED_IS",
+      "old": "SHOWED_PURITY_OF",
+      "votes": 1
+    },
+    {
+      "new": "PROPOSED_IDEA_OF",
+      "old": "PROPOSED",
+      "votes": 1
+    },
+    {
+      "new": "ARGUED_ABOUT_ROLE_OF",
+      "old": "ARGUED_ABOUT",
+      "votes": 1
+    },
+    {
+      "new": "CRYSTALLIZED",
+      "old": "SHOWED_PURITY_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BURST",
+      "old": "BURSTS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_CRACK",
+      "old": "CRACKS",
+      "votes": 1
+    },
+    {
+      "new": "POINTS_TOWARDS",
+      "old": "DIRECTED_TOWARDS",
+      "votes": 1
+    },
+    {
+      "new": "GIVES_EQUATION_FOR",
+      "old": "DESCRIBES",
+      "votes": 1
+    },
+    {
+      "new": "EXPERIMENTED_WITH",
+      "old": "EXPERIMENTED_ON",
+      "votes": 1
+    },
+    {
+      "new": "CRITICAL_FOR",
+      "old": "MAINTAINS",
+      "votes": 1
+    },
+    {
+      "new": "CRITICAL_FOR",
+      "old": "SUPPLIES",
+      "votes": 1
+    },
+    {
+      "new": "DESCRIBES_FORMATION_OF",
+      "old": "DESCRIBES_TYPE_OF",
+      "votes": 1
+    },
+    {
+      "new": "SHOWED_IDENTITY_OF",
+      "old": "SHOWED",
+      "votes": 1
+    },
+    {
+      "new": "EXPLAINS_EFFECT_ON",
+      "old": "EXPLAINS_EFFECT_OF",
+      "votes": 1
+    },
+    {
+      "new": "LEAKS_INTO",
+      "old": "SAME_CONCENTRATION_OF_SMALL_MOLECULES_AS",
+      "votes": 1
+    },
+    {
+      "new": "LEAKS_INTO",
+      "old": "ADJACENT_TO",
+      "votes": 1
+    },
+    {
+      "new": "SAME_CONCENTRATION_AS",
+      "old": "SAME_CONCENTRATION_OF_SMALL_MOLECULES_AS",
+      "votes": 1
+    },
+    {
+      "new": "SAME_CONCENTRATION_AS",
+      "old": "ADJACENT_TO",
+      "votes": 1
+    },
+    {
+      "new": "SHOWS_RELATION_BETWEEN",
+      "old": "ABOUT",
+      "votes": 1
+    },
+    {
+      "new": "EXPLAINS_USING",
+      "old": "EXPLAINS_IN_TERMS_OF",
+      "votes": 1
+    },
+    {
+      "new": "TYPICALLY_LASTS",
+      "old": "LASTS_FOR",
+      "votes": 1
+    },
+    {
+      "new": "SHARE_NUMBER_OF",
+      "old": "SAME_NUMBER_AS",
+      "votes": 1
+    },
+    {
+      "new": "USUALLY_COMPUTED_AS",
+      "old": "USUALLY_IS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_INCLUDE",
+      "old": "ORDERED_BY",
+      "votes": 1
+    },
+    {
+      "new": "STARTED_WHEN_NEW",
+      "old": "STARTED_WHEN_NEW_HAS_FIRST_ELECTRON",
+      "votes": 1
+    },
+    {
+      "new": "SPANNED",
+      "old": "HAS_DIAMETER",
+      "votes": 1
+    },
+    {
+      "new": "RESOLVES",
+      "old": "AIMS_TO_RESOLVE",
+      "votes": 1
+    },
+    {
+      "new": "FOCUSES_AWARENESS_ON",
+      "old": "AWARE_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_EXIST_UNDER",
+      "old": "EXISTS_ABOVE_PRESSURE",
+      "votes": 1
+    },
+    {
+      "new": "HAS_VALUE_FOR",
+      "old": "HAS_COVALENT_RADIUS",
+      "votes": 1
+    },
+    {
+      "new": "EXPLAIN_EXISTENCE_OF",
+      "old": "AIMS_TO_EXPLAIN",
+      "votes": 1
+    },
+    {
+      "new": "CONTRASTED_WITH_RELATIONSHIP_BETWEEN",
+      "old": "CONTRASTED_WITH",
+      "votes": 1
+    },
+    {
+      "new": "SPECIALIZES_IN",
+      "old": "ASSOCIATED_WITH",
+      "votes": 1
+    },
+    {
+      "new": "IDENTIFIES_AS_NEXUS_OF",
+      "old": "IDENTIFIES_AS",
+      "votes": 1
+    },
+    {
+      "new": "ADVANCED_THEORY_OF",
+      "old": "ADVANCED",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_IMAGE",
+      "old": "USED_FOR",
+      "votes": 1
+    },
+    {
+      "new": "USED_RATHER_THAN",
+      "old": "ALTERNATIVE_TO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_PREDICT",
+      "old": "USED_FOR",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_CAPTURE",
+      "old": "REDUCES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_SYNTHESIZE",
+      "old": "SYNTHESIZES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_SYNTHESIZE",
+      "old": "GENERATES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_GENERATE",
+      "old": "SYNTHESIZES",
+      "votes": 1
+    },
+    {
+      "new": "REGULATES_PASSAGE_OUT_OF",
+      "old": "REGULATES_PASSAGE_INTO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_MAKE_IMPERMEABLE",
+      "old": "HELPS_MAKE_IMPERMEABLE",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_TRANSPORT_INTO",
+      "old": "REQUIRED_FOR_ENTRY",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_TRANSPORT_OUT_OF",
+      "old": "REQUIRED_FOR_ENTRY",
+      "votes": 1
+    },
+    {
+      "new": "STRETCHES_THROUGH",
+      "old": "CROSSES",
+      "votes": 1
+    },
+    {
+      "new": "RESPONSIBLE_FOR_ATTACHMENT_OF",
+      "old": "PART_OF",
+      "votes": 1
+    },
+    {
+      "new": "EQUIVALENT_OF",
+      "old": "EQUIVALENT_TO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_ALTER",
+      "old": "ALTERS",
+      "votes": 1
+    },
+    {
+      "new": "SELECTED_FOR_REPRODUCTION_BY_COMPATIBILITY_WITH",
+      "old": "SELECTED_FOR_COMPATIBILITY_WITH",
+      "votes": 1
+    },
+    {
+      "new": "USES_MULTIPLE_OF",
+      "old": "USES",
+      "votes": 1
+    },
+    {
+      "new": "SHARED_POSITION_WITH",
+      "old": "HELD_SAME_POSITION_AS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_INDUCE",
+      "old": "DISCOVERED_EFFECT_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_INDUCE",
+      "old": "INDUCES",
+      "votes": 1
+    },
+    {
+      "new": "BEND_IN_PRESENCE_OF",
+      "old": "BEND_IN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_DESIGN",
+      "old": "APPLIES_TO",
+      "votes": 1
+    },
+    {
+      "new": "INDEPENDENTLY_FOUND",
+      "old": "GAVE",
+      "votes": 1
+    },
+    {
+      "new": "ATTEMPTED_TO_DISPROVE",
+      "old": "AIMED_TO_DISPROVE",
+      "votes": 1
+    },
+    {
+      "new": "HAS_MOLECULAR_STRUCTURE",
+      "old": "HAS",
+      "votes": 1
+    },
+    {
+      "new": "RANGE_WITH",
+      "old": "RANGE_TO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_PERFORM",
+      "old": "METHOD_USED_IN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_ANALYZE",
+      "old": "METHOD_USED_IN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BUILD",
+      "old": "METHOD_USED_IN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_STUDIED_BY",
+      "old": "STUDIED_BY",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_FORM_FROM",
+      "old": "FORMED_BY",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_PRODUCE",
+      "old": "EMITS",
+      "votes": 1
+    },
+    {
+      "new": "LOCATED_WITHIN",
+      "old": "LOCATED_IN",
+      "votes": 1
+    },
+    {
+      "new": "FORMED_BEYOND",
+      "old": "LOCATED_BEYOND",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_TRANSLATED_INTO",
+      "old": "MAY_NOT_TRANSLATE_INTO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_TRANSLATED_INTO",
+      "old": "MAY_NOT_BE_TRANSLATED_INTO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_TRANSLATED_INTO",
+      "old": "MAY_RESULT_IN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_RESULT_IN",
+      "old": "MAY_NOT_TRANSLATE_INTO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_RESULT_IN",
+      "old": "MAY_NOT_BE_TRANSLATED_INTO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_RESULT_IN",
+      "old": "MAY_RESULT_IN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_TRANSDUCED_INTO",
+      "old": "MAY_BE_TRANSDUCED_INTO",
+      "votes": 1
+    },
+    {
+      "new": "MELTED_DOWN",
+      "old": "COLLECTED",
+      "votes": 1
+    },
+    {
+      "new": "NOT_TO_BE_CONFUSED_WITH",
+      "old": "ALSO_KNOWN_AS",
+      "votes": 1
+    },
+    {
+      "new": "SHOWED_CAPACITY_OF",
+      "old": "SHOWED",
+      "votes": 1
+    },
+    {
+      "new": "IMPORTANT_DURING",
+      "old": "BECAME_IMPORTANT_DURING",
+      "votes": 1
+    },
+    {
+      "new": "LESS_COMMON_THAN",
+      "old": "ALSO_KNOWN_AS",
+      "votes": 1
+    },
+    {
+      "new": "USES_AFTER_FRONT_END",
+      "old": "USES",
+      "votes": 1
+    },
+    {
+      "new": "OUTPUTS_AS",
+      "old": "SIMILAR_TO",
+      "votes": 1
+    },
+    {
+      "new": "FORMED_FOUNDATIONS_OF",
+      "old": "PART_OF",
+      "votes": 1
+    },
+    {
+      "new": "INFLUENCED_DURING",
+      "old": "ASSOCIATED_WITH",
+      "votes": 1
+    },
+    {
+      "new": "NEVER_APPROACHES",
+      "old": "CANNOT_APPROACH",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_TRANSFORM_INTO",
+      "old": "PRODUCES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_USE_FOR",
+      "old": "ALSO_KNOWN_AS",
+      "votes": 1
+    },
+    {
+      "new": "DEPOSITED_BY",
+      "old": "DERIVED_FROM",
+      "votes": 1
+    },
+    {
+      "new": "CONTAINS_ON_AVERAGE",
+      "old": "AVERAGE_CONTAINS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_TRANSFER",
+      "old": "TRANSFERS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_JOIN_WITH",
+      "old": "JOINS_WITH",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_ADD",
+      "old": "ADDS",
+      "votes": 1
+    },
+    {
+      "new": "FIRST_APPEARED",
+      "old": "FIRST_APPEARED_DURING",
+      "votes": 1
+    },
+    {
+      "new": "SELECTS_FOR",
+      "old": "PRESERVES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_ASSEMBLE",
+      "old": "ASSEMBLES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_MIXED_WITH",
+      "old": "MIXED_TO_PRODUCE",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_PRODUCE",
+      "old": "MAKES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_ABSORB",
+      "old": "INCREASES",
+      "votes": 1
+    },
+    {
+      "new": "PUT_IN",
+      "old": "PLACED_IN",
+      "votes": 1
+    },
+    {
+      "new": "ALIGNED_PARALLEL",
+      "old": "ALIGNED_PARALLEL_TO",
+      "votes": 1
+    },
+    {
+      "new": "ALIGNED_PARALLEL",
+      "old": "ALIGNED_OPPOSITE_TO",
+      "votes": 1
+    },
+    {
+      "new": "ALIGNED_PARALLEL",
+      "old": "CAUSES",
+      "votes": 1
+    },
+    {
+      "new": "ALIGNED_OPPOSITE",
+      "old": "ALIGNED_PARALLEL_TO",
+      "votes": 1
+    },
+    {
+      "new": "ALIGNED_OPPOSITE",
+      "old": "ALIGNED_OPPOSITE_TO",
+      "votes": 1
+    },
+    {
+      "new": "ALIGNED_OPPOSITE",
+      "old": "CAUSES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_INCLUDE",
+      "old": "BASED_ON",
+      "votes": 1
+    },
+    {
+      "new": "TOO_COOL_AND_DENSE_TO_BE_EXPLAINED_BY_COOLING_OF",
+      "old": "COOLER_AND_DENSER_THAN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_USED_IN",
+      "old": "USED_IN_CONSTRUCTION_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_STORE",
+      "old": "USED_TO_STORE",
+      "votes": 1
+    },
+    {
+      "new": "EXISTS_AT",
+      "old": "FORMED_AT",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_IONIZE",
+      "old": "IONIZES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_PRODUCE",
+      "old": "SPAWNS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_PRODUCE",
+      "old": "WILL_PRODUCE",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_SPAWN",
+      "old": "SPAWNS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_SPAWN",
+      "old": "WILL_PRODUCE",
+      "votes": 1
+    },
+    {
+      "new": "REACTED_BY",
+      "old": "PERFORMS",
+      "votes": 1
+    },
+    {
+      "new": "DID_NOT_GO_BELOW",
+      "old": "VALUED_AT",
+      "votes": 1
+    },
+    {
+      "new": "DID_NOT_GO_BELOW",
+      "old": "DOES_NOT_EXCEED",
+      "votes": 1
+    },
+    {
+      "new": "HAD_DIFFICULTY_RECALLING",
+      "old": "RECALLED",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_INDUCED_BY",
+      "old": "DEMONSTRATES_RESULT_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_RESULT_IN",
+      "old": "RESULTS_IN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_ACT_AS",
+      "old": "ACTS_AS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_PREDICT",
+      "old": "AIMS_TO_PREDICT",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_REGULATE",
+      "old": "REGULATES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BREAK",
+      "old": "BREAKS",
+      "votes": 1
+    },
+    {
+      "new": "COUNT_AT_START_OF",
+      "old": "AMOUNT",
+      "votes": 1
+    },
+    {
+      "new": "COUNT_AT_END_OF",
+      "old": "AMOUNT",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_WITHSTAND_LOADS_OF",
+      "old": "WITHSTANDS_LOADS_OF",
+      "votes": 1
+    },
+    {
+      "new": "USED_INSTEAD_OF",
+      "old": "ALTERNATIVE_TO",
+      "votes": 1
+    },
+    {
+      "new": "CAN_BE_WRITTEN_IN_TERMS_OF",
+      "old": "WRITTEN_IN_TERMS_OF",
+      "votes": 1
+    },
+    {
+      "new": "CAN_BE_USED_TO_DERIVE",
+      "old": "USED_TO_DERIVE",
+      "votes": 1
+    },
+    {
+      "new": "ABUNDANT_IN",
+      "old": "AMONG",
+      "votes": 1
+    },
+    {
+      "new": "PARTICULARLY_CAUSED_BY",
+      "old": "PARTICULARLY",
+      "votes": 1
+    },
+    {
+      "new": "ACCELERATED_SINCE",
+      "old": "SINCE",
+      "votes": 1
+    },
+    {
+      "new": "ASSIGNED_TO",
+      "old": "ASSIGNED_EC_NUMBER",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_TRANSFER",
+      "old": "SPREADS",
+      "votes": 1
+    },
+    {
+      "new": "RESULTS_IN_REPLACEMENT_OF",
+      "old": "RESULTS_IN_DISPLACEMENT_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO",
+      "old": "UNDERGOES",
+      "votes": 1
+    },
+    {
+      "new": "NOT_ABSORBED_BY",
+      "old": "REFLECTED_BY",
+      "votes": 1
+    },
+    {
+      "new": "HAS_COLOR",
+      "old": "HAS",
+      "votes": 1
+    },
+    {
+      "new": "PLACED_IN_CONTACT_WITH",
+      "old": "PLACED_ON",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_SHOW_IN_CORRECT_SEQUENCE",
+      "old": "SHOWED",
+      "votes": 1
+    },
+    {
+      "new": "THERMODYNAMICALLY_UNSTABLE_RELATIVE_TO",
+      "old": "MORE_STABLE_THAN",
+      "votes": 1
+    },
+    {
+      "new": "THERMODYNAMICALLY_UNSTABLE_RELATIVE_TO",
+      "old": "TRANSFORMED_INTO",
+      "votes": 1
+    },
+    {
+      "new": "THERMODYNAMICALLY_UNSTABLE_RELATIVE_TO",
+      "old": "TRANSFORMS_INTO_AT_HIGH_TEMPERATURES",
+      "votes": 1
+    },
+    {
+      "new": "THERMODYNAMICALLY_UNSTABLE_RELATIVE_TO",
+      "old": "DENSER_THAN",
+      "votes": 1
+    },
+    {
+      "new": "STRUCTURE_DUE_TO",
+      "old": "STRUCTURE_STRENGTH_DUE_TO",
+      "votes": 1
+    },
+    {
+      "new": "THERMODYNAMIC_PROPERTY_OF",
+      "old": "ABOUT",
+      "votes": 1
+    },
+    {
+      "new": "CAN_BURN_UP_IN",
+      "old": "BURNS_UP_IN",
+      "votes": 1
+    },
+    {
+      "new": "EMPLOYED_METHOD",
+      "old": "EMPLOYS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_RAISE",
+      "old": "RAISES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_DECREASE",
+      "old": "DECREASES",
+      "votes": 1
+    },
+    {
+      "new": "CONFER_DOUBLE_BOND_CHARACTER_TO",
+      "old": "CONFERS_CHARACTER_TO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_EMIT",
+      "old": "EMITS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE",
+      "old": "HELD_TOGETHER_BY",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_EXIST_AS",
+      "old": "EXISTS_IN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_USED_IN",
+      "old": "USED_AS",
+      "votes": 1
+    },
+    {
+      "new": "INDICATORS_OF",
+      "old": "ACTS_AS",
+      "votes": 1
+    },
+    {
+      "new": "AGE_ESTIMATED_FROM",
+      "old": "ESTIMATED_FROM",
+      "votes": 1
+    },
+    {
+      "new": "FIRST_DETECTED_ON",
+      "old": "FIRST_DETECTED_IN",
+      "votes": 1
+    },
+    {
+      "new": "PEAKED_AT",
+      "old": "PEAKED_AT_LUMINOSITY",
+      "votes": 1
+    },
+    {
+      "new": "POSSIBLE_EXPLANATION_FOR",
+      "old": "ALTERNATIVE_EXPLANATION_FOR",
+      "votes": 1
+    },
+    {
+      "new": "DENSITY_SIMILAR_TO",
+      "old": "HAS_DENSITY_SIMILAR_TO",
+      "votes": 1
+    },
+    {
+      "new": "MASS_LIMIT_FOR",
+      "old": "LIMIT_FOR",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_USE_FOR",
+      "old": "INVOLVES",
+      "votes": 1
+    },
+    {
+      "new": "ON",
+      "old": "APPLIES_TO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_RECALL_FOR",
+      "old": "RECALLED",
+      "votes": 1
+    },
+    {
+      "new": "CAN_ACTIVATE",
+      "old": "ACTIVATES",
+      "votes": 1
+    },
+    {
+      "new": "SUDDEN_INCREASE_IN",
+      "old": "INDICATES_CHANGE_IN",
+      "votes": 1
+    },
+    {
+      "new": "USED_TO_DEVELOP",
+      "old": "USED_FOR_DEVELOPMENT_OF",
+      "votes": 1
+    },
+    {
+      "new": "APPEAR_TO_LACK",
+      "old": "LACKS",
+      "votes": 1
+    },
+    {
+      "new": "HAS_STATUS_AS",
+      "old": "STATUS_AS",
+      "votes": 1
+    },
+    {
+      "new": "ACCEPTED_WAY_TO_SETTLE",
+      "old": "DENOMINATES",
+      "votes": 1
+    },
+    {
+      "new": "UNIT_IN_WHICH_DENOMINATED",
+      "old": "DENOMINATES",
+      "votes": 1
+    },
+    {
+      "new": "LOCATED_NEXT_TO",
+      "old": "ADJACENT_TO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_USED_IN",
+      "old": "USED_DURING",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_IMPROVED_BY",
+      "old": "IMPROVED_BY",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_USE_AS_SUPPORT",
+      "old": "SUPPORTED_BY",
+      "votes": 1
+    },
+    {
+      "new": "USED_TO_EXPLAIN",
+      "old": "AIMS_TO_EXPLAIN",
+      "votes": 1
+    },
+    {
+      "new": "ADAPTATION_FOR",
+      "old": "AIMS_TO_PROMOTE",
+      "votes": 1
+    },
+    {
+      "new": "AS",
+      "old": "ALSO_KNOWN_AS",
+      "votes": 1
+    },
+    {
+      "new": "JOINED_BY",
+      "old": "JOINED_TOGETHER_BY",
+      "votes": 1
+    },
+    {
+      "new": "HAS_FORCE_TYPE",
+      "old": "DESCRIBED_AS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_ALIGN_WITH",
+      "old": "TENDS_TO_ALIGN_WITH",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_LOSE",
+      "old": "PART_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_LOSE",
+      "old": "THRESHOLD_FOR",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_OVERWHELM",
+      "old": "OVERWHELMS",
+      "votes": 1
+    },
+    {
+      "new": "INTERMEDIATE_OF",
+      "old": "PART_OF",
+      "votes": 1
+    },
+    {
+      "new": "MOTION_OF",
+      "old": "MOTION_RELATIVE_TO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_ALTER",
+      "old": "DESCRIBES_CHANGE_IN",
+      "votes": 1
+    },
+    {
+      "new": "VALIDATES",
+      "old": "RELEVANT_TO",
+      "votes": 1
+    },
+    {
+      "new": "NOT_SUFFICIENT_TO_VALIDATE",
+      "old": "RELEVANT_TO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_RESULT_IN",
+      "old": "AIMS_TO_EXPLAIN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_HAVE",
+      "old": "HAS_PROPERTY",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_CHANGE",
+      "old": "CHANGES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_INCREASE",
+      "old": "AFFECTS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_DECREASE",
+      "old": "AFFECTS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_EXIST_BETWEEN",
+      "old": "CAN_BE_COMPRESSED_TO",
+      "votes": 1
+    },
+    {
+      "new": "REPRESENTS_AREA_OF_RESEARCH_IN",
+      "old": "POPULAR_FOR",
+      "votes": 1
+    },
+    {
+      "new": "FORM_INTO",
+      "old": "FORMED_AS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_FORM_FROM",
+      "old": "PART_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_REACH",
+      "old": "RANGE_TO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_EXPRESSED_IN",
+      "old": "EXPRESSED_IN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_EXPRESSED_IN",
+      "old": "EXPRESSION_DEPENDS_ON",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_INFLUENCED_BY",
+      "old": "EXPRESSION_DEPENDS_ON",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_CONSIDERED_AS",
+      "old": "ALSO_KNOWN_AS",
+      "votes": 1
+    },
+    {
+      "new": "INVOLVES_SHARING_OF",
+      "old": "INVOLVES",
+      "votes": 1
+    },
+    {
+      "new": "MODELS",
+      "old": "MODEL_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_DECREASE_VALUE_OF",
+      "old": "REDUCES_VALUE_OF",
+      "votes": 1
+    },
+    {
+      "new": "MEASURED_IN_TERMS_OF",
+      "old": "REDUCES_VALUE_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_MEASURE",
+      "old": "REPRESENTS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_PROVIDE",
+      "old": "PROVIDES",
+      "votes": 1
+    },
+    {
+      "new": "PLACED_ACCORDING_TO",
+      "old": "PLACEMENT_BASED_ON",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_EXHIBIT",
+      "old": "CAUSES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_EXPLAIN",
+      "old": "EXPLAINS",
+      "votes": 1
+    },
+    {
+      "new": "OBSERVED_ACROSS",
+      "old": "OBSERVED_IN",
+      "votes": 1
+    },
+    {
+      "new": "AIMS_TO_SUPPRESS",
+      "old": "AT_EXPENSE_OF",
+      "votes": 1
+    },
+    {
+      "new": "HAS_DATE_RANGE",
+      "old": "LIFESPAN",
+      "votes": 1
+    },
+    {
+      "new": "DESCRIBED_AS_APPROXIMATION_TO_TRUTH",
+      "old": "DESCRIBES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_INITIATE",
+      "old": "ACHIEVES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BURN",
+      "old": "BURNS",
+      "votes": 1
+    },
+    {
+      "new": "SIZE_COMPARISON",
+      "old": "HAS_SIZE",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_FORM",
+      "old": "MAY_FORM",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_INCREASE_BY_REMOVING",
+      "old": "INCREASED_BY_REMOVING",
+      "votes": 1
+    },
+    {
+      "new": "ZERO_AT",
+      "old": "IS_ZERO_AT",
+      "votes": 1
+    },
+    {
+      "new": "SITE_OF",
+      "old": "LOCATION_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_INCLUDE",
+      "old": "AIMS_TO_PROVIDE",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_SPECULATE_ON",
+      "old": "USED_FOR_SPECULATION_ON",
+      "votes": 1
+    },
+    {
+      "new": "HAS_REGION",
+      "old": "HAS_PART",
+      "votes": 1
+    },
+    {
+      "new": "NOT_EMIT",
+      "old": "DO_NOT_EMIT",
+      "votes": 1
+    },
+    {
+      "new": "LOCATED_NEAR",
+      "old": "REFLECTS_LIGHT_FROM",
+      "votes": 1
+    },
+    {
+      "new": "LOCATED_NEAR",
+      "old": "NEAR",
+      "votes": 1
+    },
+    {
+      "new": "HAS_MASS_BETWEEN",
+      "old": "VARYING_IN_SIZE_BETWEEN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_DRIVE",
+      "old": "DRIVES",
+      "votes": 1
+    },
+    {
+      "new": "BROUGHT",
+      "old": "INTRODUCED",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_FEEL",
+      "old": "DISPOSED_TO_FEEL",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_MEASURE",
+      "old": "SUPPORTED_VIEW_ON",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_STUDY",
+      "old": "ASSOCIATED_WITH",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_LEARNED_FROM",
+      "old": "LEARNED_THROUGH",
+      "votes": 1
+    },
+    {
+      "new": "MOSTLY_ACHIEVED_BY",
+      "old": "ACHIEVED_BY",
+      "votes": 1
+    },
+    {
+      "new": "PRESENTED_TO",
+      "old": "DIRECTED_TOWARDS",
+      "votes": 1
+    },
+    {
+      "new": "ALTERATION_OF",
+      "old": "ALTERS",
+      "votes": 1
+    },
+    {
+      "new": "I_E",
+      "old": "DETECTED_BY",
+      "votes": 1
+    },
+    {
+      "new": "ONLY_FUEL_TO_ENTER",
+      "old": "ENTERS",
+      "votes": 1
+    },
+    {
+      "new": "METABOLIZED_IN",
+      "old": "ENTERS",
+      "votes": 1
+    },
+    {
+      "new": "CONSUMED_FOR_EACH",
+      "old": "CONSUMED_WITH",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_RELEASE_ENERGY_AS",
+      "old": "ENERGY_CAPTURED_AS",
+      "votes": 1
+    },
+    {
+      "new": "ULTIMATELY_CONVERTED_TO",
+      "old": "CONVERTED_TO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_TRAVERSE",
+      "old": "AIMS_TO_TRAVERSE",
+      "votes": 1
+    },
+    {
+      "new": "DESIGNED_TO_SPAN",
+      "old": "AIMS_TO_TRAVERSE",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_INCLUDE",
+      "old": "PART_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_STRIKE",
+      "old": "MOVES_ON",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_ATTRACT",
+      "old": "MUTUALLY_ATTRACT",
+      "votes": 1
+    },
+    {
+      "new": "REGRETTED_USE_OF_TERM",
+      "old": "THOUGHT_OF",
+      "votes": 1
+    },
+    {
+      "new": "AIMS_TO_IMPROVE",
+      "old": "USED_FOR",
+      "votes": 1
+    },
+    {
+      "new": "FORWARDED_TO",
+      "old": "WROTE_TO",
+      "votes": 1
+    },
+    {
+      "new": "PREFERRED_TERM",
+      "old": "ALSO_KNOWN_AS",
+      "votes": 1
+    },
+    {
+      "new": "SAME_IN",
+      "old": "CONSTANT_IN",
+      "votes": 1
+    },
+    {
+      "new": "IMPACTS",
+      "old": "AFFECTS",
+      "votes": 1
+    },
+    {
+      "new": "FOR_PURPOSE_OF",
+      "old": "FOR",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_LOSE",
+      "old": "REGAINS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_LOSE",
+      "old": "LOSES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_REGAIN",
+      "old": "REGAINS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_REGAIN",
+      "old": "LOSES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_TAKE_UP",
+      "old": "TAKES_UP",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_PASS_ELECTRON_TO",
+      "old": "PASSES_ELECTRON_TO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_CONVERTED_TO",
+      "old": "REDUCED_TO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_USED_BY",
+      "old": "USED_BY",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_SPLIT_IN",
+      "old": "SPLIT_DURING",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_RELEASE",
+      "old": "RELEASES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_DEPEND_ON",
+      "old": "DEPEND_ON",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE",
+      "old": "IS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_FILTER_OUT",
+      "old": "FILTER_OUT",
+      "votes": 1
+    },
+    {
+      "new": "ASSEMBLY_INSTRUCTED_BY",
+      "old": "ASSEMBLED_USING_INFORMATION_ENCODED_IN",
+      "votes": 1
+    },
+    {
+      "new": "FUNCTIONS_AS",
+      "old": "USED_AS",
+      "votes": 1
+    },
+    {
+      "new": "MOVES_AWAY_FROM",
+      "old": "AFTER_MOVED_AWAY_FROM",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_SURMOUNT",
+      "old": "MUST_SURMOUNT",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_PROVIDED_AS",
+      "old": "CAN_BE_PROVIDED_AS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_GENERATE",
+      "old": "SOURCE_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_TRANSFER",
+      "old": "TRANSFER_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_SPREAD_TO",
+      "old": "FROM",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_SPREAD_TO",
+      "old": "MOST_COMMON_IN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_SPREAD",
+      "old": "CONTRIBUTES_TO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_ACQUIRE",
+      "old": "ACQUIRES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_TRANSFER_GENES_TO",
+      "old": "TRANSFER_TO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_TRANSFER_DNA_BETWEEN",
+      "old": "TRANSFER_BETWEEN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_TRANSFER_GENES_ACROSS",
+      "old": "TRANSFER_ACROSS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_USED_IN",
+      "old": "ABSENT_FROM",
+      "votes": 1
+    },
+    {
+      "new": "FUNCTIONS_AS",
+      "old": "ACTS_AS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_DESCRIBED_BY",
+      "old": "DESCRIBED_IN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_ACT_AS",
+      "old": "CAUSES_BEHAVIOR_SIMILAR_TO",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_OBSERVED_BY",
+      "old": "OBSERVED_WITH",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_ALIGN_WITH",
+      "old": "ALIGNS_WITH",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_MOVE_DUE_TO",
+      "old": "MOVED_BY",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_AFFECT",
+      "old": "AFFECTS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_RETURN_TO",
+      "old": "MAY_NOT_RETURN_TO",
+      "votes": 1
+    },
+    {
+      "new": "DIMENSION_MEASURED_IN",
+      "old": "HAS_DIMENSION_ON_ORDER_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BREAK_FREE_OF",
+      "old": "CAN_BREAK_FREE_OF",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_PARTICIPATE_IN",
+      "old": "PARTICIPATES_IN",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_FIND",
+      "old": "FINDS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_USED_AS",
+      "old": "USED_AS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_MEASURE",
+      "old": "USED_TO_MEASURE",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_IMPOSE",
+      "old": "IMPOSES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_PROVIDE",
+      "old": "IMPOSES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_INCREASE",
+      "old": "AIMS_TO_INCREASE",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_INCREASE",
+      "old": "AIMS_TO_ENABLE",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO",
+      "old": "EXPERIENCES",
+      "votes": 1
+    },
+    {
+      "new": "ENCODED_BY",
+      "old": "DERIVED_FROM",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_ACHIEVE",
+      "old": "PROPOSED_AS_MECHANISM_FOR",
+      "votes": 1
+    },
+    {
+      "new": "ANALYZED_BY",
+      "old": "ANALYZED_USING",
+      "votes": 1
+    },
+    {
+      "new": "UNDERLINED_BY",
+      "old": "UNDERLINED",
+      "votes": 1
+    },
+    {
+      "new": "AIMS_TO_INCULCATE_IN",
+      "old": "AIMED_AT",
+      "votes": 1
+    },
+    {
+      "new": "AIMS_TO_ASSIMILATE",
+      "old": "ASSIMILATED",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_DECREASED_BY",
+      "old": "DECREASED_BY_LOWERING",
+      "votes": 1
+    },
+    {
+      "new": "STANDARD_REFERENCE_FOR",
+      "old": "ABOUT",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_FILTER",
+      "old": "COLLECTED",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_FILTER",
+      "old": "FILTERS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_COLLECT",
+      "old": "COLLECTED",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_COLLECT",
+      "old": "FILTERS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_TRANSFORM",
+      "old": "TRANSFORMS",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_SEPARATE",
+      "old": "AIMS_TO_IDENTIFY",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_SEPARATE",
+      "old": "AIMS_TO_SEPARATE",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_MOVE",
+      "old": "INVOLVES_MOVING",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_MOVE",
+      "old": "INVOLVES",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_MOVE_OVER",
+      "old": "MOVED_OVER",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_RELY_ON",
+      "old": "RELY_ON",
+      "votes": 1
+    },
+    {
+      "new": "ABLE_TO_BE_IDENTIFIED_BY",
+      "old": "IDENTIFIED_BY",
+      "votes": 1
+    },
+    {
+      "new": "IMPROVE_SAFETY_AND_TRAFFIC_FLOW_AT",
+      "old": "IMPROVES_SAFETY_AT",
+      "votes": 1
+    },
+    {
+      "new": "IMPROVE_SAFETY_AND_TRAFFIC_FLOW_AT",
+      "old": "IMPROVES_TRAFFIC_FLOW_AT",
+      "votes": 1
+    },
+    {
+      "new": "CAN_BE_IMPLEMENTED_AT",
+      "old": "IMPLEMENTED_AT",
+      "votes": 1
+    },
+    {
+      "new": "THEORETICALLY_ADVANCED_BY",
+      "old": "ADVANCED_BY",
+      "votes": 1
+    },
+    {
+      "new": "THEORETICALLY_ADVANCED_DURING",
+      "old": "ADVANCED_DURING",
+      "votes": 1
+    },
+    {
+      "new": "CAPABLE_DURING",
+      "old": "ACTIVE_IN",
+      "votes": 1
+    },
+    {
+      "new": "MODIFIED_FROM",
+      "old": "PART_OF",
+      "votes": 1
+    },
+    {
+      "new": "MODIFIED_FROM",
+      "old": "COMBINED_WITH",
+      "votes": 1
+    },
+    {
+      "new": "FORMS_SPECTRUM_OF",
+      "old": "BLENDS_TO_FORM",
+      "votes": 1
+    },
+    {
+      "new": "HAS_BOUNDARY",
+      "old": "PART_OF",
+      "votes": 1
+    },
+    {
+      "new": "HAS_FEATURE",
+      "old": "PART_OF",
+      "votes": 1
+    },
+    {
+      "new": "LIVES_ON",
+      "old": "LIVING_IN",
+      "votes": 1
+    }
+  ]
+}
