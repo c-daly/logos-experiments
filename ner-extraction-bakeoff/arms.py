@@ -353,6 +353,22 @@ async def big_model_clean(text: str):
     return await _llm_extract(text, system, model=model)
 
 
+async def local_clean(text: str):
+    """Local LLM (llama.cpp via HERMES_LLM_BASE_URL) + clean compact vocab -- can a
+    local model match gpt-4o-mini's clean-vocab extraction at $0? The bakeoff's own
+    finding is that closed-vocab is the lever (not model size), so a competent local
+    model + clean vocab should land close. Mirror of big_model_clean, local endpoint."""
+    model = os.environ.get("BAKEOFF_LOCAL_MODEL", "qwen3-instruct")
+    system = _BASE_SYSTEM + _VOCAB_CLAUSE.format(vocab=", ".join(_CLEAN_VOCAB))
+    return await _llm_extract(text, system, model=model)
+
+
+async def local_open(text: str):
+    """Local LLM, open prompt (no vocab) -- the local analogue of big_model."""
+    model = os.environ.get("BAKEOFF_LOCAL_MODEL", "qwen3-instruct")
+    return await _llm_extract(text, _BASE_SYSTEM, model=model)
+
+
 # NB: contains literal JSON braces, so it must NOT be .format()'d directly --
 # only _VOCAB_CLAUSE (which has the {vocab} field) is formatted, then appended.
 _REL_ONLY_SYSTEM = (
@@ -406,6 +422,9 @@ ARMS = {
     "ranked_window_32": ranked_window_32,    # size probe: top-32 of the ranked vocab
     "big_model": big_model,                  # gpt-4o, open prompt
     "big_model_clean": big_model_clean,      # gpt-4o + clean vocab
+    # local LLM (llama.cpp via HERMES_LLM_BASE_URL) -- can we drop the cloud for NER?
+    "local_clean": local_clean,              # local model + clean vocab (vs closed_vocab_clean)
+    "local_open": local_open,                # local model, open prompt (vs big_model)
     # spaCy node extractors (free/local) + dependency RE
     "spacy": spacy,                          # NER (doc.ents) -- the ceiling
     "spacy_pos": spacy_pos,                  # NOUN/PROPN tokens
