@@ -328,6 +328,17 @@ async def ranked_window_curated(text: str):
     return await _closed_vocab(text, list(relation_vocabulary_curated()))
 
 
+async def ranked_window_64(text: str):
+    """Window-SIZE probe: top-64 slice of the same ranked vocabulary."""
+    return await _closed_vocab(text, list(relation_vocabulary_ranked()[:64]))
+
+
+async def ranked_window_32(text: str):
+    """Window-SIZE probe: top-32 slice -- same size class as the clean-32
+    ceiling arm, but sourced from the live vocabulary."""
+    return await _closed_vocab(text, list(relation_vocabulary_ranked()[:32]))
+
+
 async def big_model(text: str):
     """Open prompt (no vocab constraint) on a larger model -- does a bigger
     model over-generate LESS, or is over-generation model-independent?"""
@@ -391,6 +402,8 @@ ARMS = {
     "closed_vocab_clean": closed_vocab_clean,  # mini + clean compact vocab
     "ranked_window": ranked_window,          # mini + live vocab, top-120 by edge_count (H5 post-fix)
     "ranked_window_curated": ranked_window_curated,  # mini + curated survivors, top-120 by count
+    "ranked_window_64": ranked_window_64,    # size probe: top-64 of the ranked vocab
+    "ranked_window_32": ranked_window_32,    # size probe: top-32 of the ranked vocab
     "big_model": big_model,                  # gpt-4o, open prompt
     "big_model_clean": big_model_clean,      # gpt-4o + clean vocab
     # spaCy node extractors (free/local) + dependency RE

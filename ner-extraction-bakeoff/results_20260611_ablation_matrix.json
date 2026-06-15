@@ -1,0 +1,1372 @@
+{
+  "design": {
+    "K": 3,
+    "gold": 40,
+    "workers": 4,
+    "windows": {
+      "open": 0,
+      "alpha120": 24,
+      "ranked120": 24,
+      "ranked32": 24,
+      "clean32": 32
+    },
+    "types": {
+      "notypes": 0,
+      "defaults": 14,
+      "live": 18
+    },
+    "spacy_arms": "unavailable (module absent; historical 0.0 rows were silent failures)"
+  },
+  "cells": {
+    "open/notypes": {
+      "raw": [
+        {
+          "failures": 0,
+          "elapsed_s": 14.5,
+          "entity_f1": 0.857,
+          "entity_recall": 0.831,
+          "type_accuracy": 0.431,
+          "link_f1": 0.527,
+          "link_recall": 0.537,
+          "label_f1": 0.196,
+          "distinct_predicates": 49,
+          "total_relations": 59,
+          "predicates_per_relation": 0.831,
+          "df1_fraction": 0.878
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 13.1,
+          "entity_f1": 0.858,
+          "entity_recall": 0.835,
+          "type_accuracy": 0.385,
+          "link_f1": 0.51,
+          "link_recall": 0.525,
+          "label_f1": 0.183,
+          "distinct_predicates": 50,
+          "total_relations": 61,
+          "predicates_per_relation": 0.82,
+          "df1_fraction": 0.88
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 15.7,
+          "entity_f1": 0.868,
+          "entity_recall": 0.835,
+          "type_accuracy": 0.435,
+          "link_f1": 0.568,
+          "link_recall": 0.575,
+          "label_f1": 0.196,
+          "distinct_predicates": 48,
+          "total_relations": 58,
+          "predicates_per_relation": 0.828,
+          "df1_fraction": 0.875
+        }
+      ],
+      "norm": [
+        {
+          "failures": 0,
+          "elapsed_s": 14.5,
+          "entity_f1": 0.857,
+          "entity_recall": 0.831,
+          "type_accuracy": 0.431,
+          "link_f1": 0.527,
+          "link_recall": 0.537,
+          "label_f1": 0.196,
+          "distinct_predicates": 49,
+          "total_relations": 59,
+          "predicates_per_relation": 0.831,
+          "df1_fraction": 0.878
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 13.1,
+          "entity_f1": 0.858,
+          "entity_recall": 0.835,
+          "type_accuracy": 0.385,
+          "link_f1": 0.51,
+          "link_recall": 0.525,
+          "label_f1": 0.183,
+          "distinct_predicates": 49,
+          "total_relations": 60,
+          "predicates_per_relation": 0.817,
+          "df1_fraction": 0.878
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 15.7,
+          "entity_f1": 0.868,
+          "entity_recall": 0.835,
+          "type_accuracy": 0.435,
+          "link_f1": 0.568,
+          "link_recall": 0.575,
+          "label_f1": 0.196,
+          "distinct_predicates": 48,
+          "total_relations": 58,
+          "predicates_per_relation": 0.828,
+          "df1_fraction": 0.875
+        }
+      ]
+    },
+    "open/defaults": {
+      "raw": [
+        {
+          "failures": 0,
+          "elapsed_s": 13.0,
+          "entity_f1": 0.856,
+          "entity_recall": 0.842,
+          "type_accuracy": 0.138,
+          "link_f1": 0.522,
+          "link_recall": 0.562,
+          "label_f1": 0.2,
+          "distinct_predicates": 53,
+          "total_relations": 66,
+          "predicates_per_relation": 0.803,
+          "df1_fraction": 0.925
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 13.8,
+          "entity_f1": 0.848,
+          "entity_recall": 0.833,
+          "type_accuracy": 0.129,
+          "link_f1": 0.518,
+          "link_recall": 0.562,
+          "label_f1": 0.158,
+          "distinct_predicates": 53,
+          "total_relations": 66,
+          "predicates_per_relation": 0.803,
+          "df1_fraction": 0.868
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 12.6,
+          "entity_f1": 0.851,
+          "entity_recall": 0.84,
+          "type_accuracy": 0.129,
+          "link_f1": 0.518,
+          "link_recall": 0.562,
+          "label_f1": 0.175,
+          "distinct_predicates": 53,
+          "total_relations": 66,
+          "predicates_per_relation": 0.803,
+          "df1_fraction": 0.887
+        }
+      ],
+      "norm": [
+        {
+          "failures": 0,
+          "elapsed_s": 13.0,
+          "entity_f1": 0.856,
+          "entity_recall": 0.842,
+          "type_accuracy": 0.138,
+          "link_f1": 0.522,
+          "link_recall": 0.562,
+          "label_f1": 0.2,
+          "distinct_predicates": 53,
+          "total_relations": 66,
+          "predicates_per_relation": 0.803,
+          "df1_fraction": 0.925
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 13.8,
+          "entity_f1": 0.848,
+          "entity_recall": 0.833,
+          "type_accuracy": 0.129,
+          "link_f1": 0.518,
+          "link_recall": 0.562,
+          "label_f1": 0.158,
+          "distinct_predicates": 53,
+          "total_relations": 66,
+          "predicates_per_relation": 0.803,
+          "df1_fraction": 0.868
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 12.6,
+          "entity_f1": 0.851,
+          "entity_recall": 0.84,
+          "type_accuracy": 0.129,
+          "link_f1": 0.518,
+          "link_recall": 0.562,
+          "label_f1": 0.175,
+          "distinct_predicates": 53,
+          "total_relations": 66,
+          "predicates_per_relation": 0.803,
+          "df1_fraction": 0.887
+        }
+      ]
+    },
+    "open/live": {
+      "raw": [
+        {
+          "failures": 0,
+          "elapsed_s": 19.0,
+          "entity_f1": 0.843,
+          "entity_recall": 0.831,
+          "type_accuracy": 0.133,
+          "link_f1": 0.499,
+          "link_recall": 0.537,
+          "label_f1": 0.168,
+          "distinct_predicates": 53,
+          "total_relations": 68,
+          "predicates_per_relation": 0.779,
+          "df1_fraction": 0.887
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 18.5,
+          "entity_f1": 0.877,
+          "entity_recall": 0.869,
+          "type_accuracy": 0.154,
+          "link_f1": 0.541,
+          "link_recall": 0.588,
+          "label_f1": 0.198,
+          "distinct_predicates": 54,
+          "total_relations": 69,
+          "predicates_per_relation": 0.783,
+          "df1_fraction": 0.87
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 14.7,
+          "entity_f1": 0.877,
+          "entity_recall": 0.869,
+          "type_accuracy": 0.142,
+          "link_f1": 0.553,
+          "link_recall": 0.6,
+          "label_f1": 0.185,
+          "distinct_predicates": 53,
+          "total_relations": 68,
+          "predicates_per_relation": 0.779,
+          "df1_fraction": 0.887
+        }
+      ],
+      "norm": [
+        {
+          "failures": 0,
+          "elapsed_s": 19.0,
+          "entity_f1": 0.843,
+          "entity_recall": 0.831,
+          "type_accuracy": 0.133,
+          "link_f1": 0.499,
+          "link_recall": 0.537,
+          "label_f1": 0.168,
+          "distinct_predicates": 53,
+          "total_relations": 67,
+          "predicates_per_relation": 0.791,
+          "df1_fraction": 0.887
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 18.5,
+          "entity_f1": 0.877,
+          "entity_recall": 0.869,
+          "type_accuracy": 0.154,
+          "link_f1": 0.541,
+          "link_recall": 0.588,
+          "label_f1": 0.198,
+          "distinct_predicates": 54,
+          "total_relations": 68,
+          "predicates_per_relation": 0.794,
+          "df1_fraction": 0.87
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 14.7,
+          "entity_f1": 0.877,
+          "entity_recall": 0.869,
+          "type_accuracy": 0.142,
+          "link_f1": 0.553,
+          "link_recall": 0.6,
+          "label_f1": 0.185,
+          "distinct_predicates": 53,
+          "total_relations": 67,
+          "predicates_per_relation": 0.791,
+          "df1_fraction": 0.887
+        }
+      ]
+    },
+    "alpha120/notypes": {
+      "raw": [
+        {
+          "failures": 0,
+          "elapsed_s": 13.9,
+          "entity_f1": 0.81,
+          "entity_recall": 0.79,
+          "type_accuracy": 0.54,
+          "link_f1": 0.485,
+          "link_recall": 0.512,
+          "label_f1": 0.113,
+          "distinct_predicates": 33,
+          "total_relations": 62,
+          "predicates_per_relation": 0.532,
+          "df1_fraction": 0.727
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 13.8,
+          "entity_f1": 0.819,
+          "entity_recall": 0.79,
+          "type_accuracy": 0.548,
+          "link_f1": 0.506,
+          "link_recall": 0.525,
+          "label_f1": 0.121,
+          "distinct_predicates": 33,
+          "total_relations": 62,
+          "predicates_per_relation": 0.532,
+          "df1_fraction": 0.727
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 12.9,
+          "entity_f1": 0.796,
+          "entity_recall": 0.773,
+          "type_accuracy": 0.51,
+          "link_f1": 0.468,
+          "link_recall": 0.487,
+          "label_f1": 0.096,
+          "distinct_predicates": 33,
+          "total_relations": 61,
+          "predicates_per_relation": 0.541,
+          "df1_fraction": 0.758
+        }
+      ],
+      "norm": [
+        {
+          "failures": 0,
+          "elapsed_s": 13.9,
+          "entity_f1": 0.81,
+          "entity_recall": 0.79,
+          "type_accuracy": 0.54,
+          "link_f1": 0.485,
+          "link_recall": 0.512,
+          "label_f1": 0.113,
+          "distinct_predicates": 32,
+          "total_relations": 61,
+          "predicates_per_relation": 0.525,
+          "df1_fraction": 0.719
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 13.8,
+          "entity_f1": 0.819,
+          "entity_recall": 0.79,
+          "type_accuracy": 0.548,
+          "link_f1": 0.51,
+          "link_recall": 0.525,
+          "label_f1": 0.121,
+          "distinct_predicates": 32,
+          "total_relations": 60,
+          "predicates_per_relation": 0.533,
+          "df1_fraction": 0.719
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 12.9,
+          "entity_f1": 0.796,
+          "entity_recall": 0.773,
+          "type_accuracy": 0.51,
+          "link_f1": 0.468,
+          "link_recall": 0.487,
+          "label_f1": 0.096,
+          "distinct_predicates": 32,
+          "total_relations": 60,
+          "predicates_per_relation": 0.533,
+          "df1_fraction": 0.75
+        }
+      ]
+    },
+    "alpha120/defaults": {
+      "raw": [
+        {
+          "failures": 0,
+          "elapsed_s": 13.9,
+          "entity_f1": 0.798,
+          "entity_recall": 0.783,
+          "type_accuracy": 0.138,
+          "link_f1": 0.46,
+          "link_recall": 0.487,
+          "label_f1": 0.121,
+          "distinct_predicates": 33,
+          "total_relations": 63,
+          "predicates_per_relation": 0.524,
+          "df1_fraction": 0.758
+        },
+        {
+          "failures": 1,
+          "elapsed_s": 63.5,
+          "entity_f1": 0.778,
+          "entity_recall": 0.767,
+          "type_accuracy": 0.125,
+          "link_f1": 0.438,
+          "link_recall": 0.463,
+          "label_f1": 0.121,
+          "distinct_predicates": 32,
+          "total_relations": 61,
+          "predicates_per_relation": 0.525,
+          "df1_fraction": 0.719
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 11.5,
+          "entity_f1": 0.79,
+          "entity_recall": 0.775,
+          "type_accuracy": 0.121,
+          "link_f1": 0.456,
+          "link_recall": 0.487,
+          "label_f1": 0.108,
+          "distinct_predicates": 33,
+          "total_relations": 65,
+          "predicates_per_relation": 0.508,
+          "df1_fraction": 0.758
+        }
+      ],
+      "norm": [
+        {
+          "failures": 0,
+          "elapsed_s": 13.9,
+          "entity_f1": 0.798,
+          "entity_recall": 0.783,
+          "type_accuracy": 0.138,
+          "link_f1": 0.46,
+          "link_recall": 0.487,
+          "label_f1": 0.121,
+          "distinct_predicates": 32,
+          "total_relations": 62,
+          "predicates_per_relation": 0.516,
+          "df1_fraction": 0.75
+        },
+        {
+          "failures": 1,
+          "elapsed_s": 63.5,
+          "entity_f1": 0.778,
+          "entity_recall": 0.767,
+          "type_accuracy": 0.125,
+          "link_f1": 0.438,
+          "link_recall": 0.463,
+          "label_f1": 0.121,
+          "distinct_predicates": 31,
+          "total_relations": 60,
+          "predicates_per_relation": 0.517,
+          "df1_fraction": 0.71
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 11.5,
+          "entity_f1": 0.79,
+          "entity_recall": 0.775,
+          "type_accuracy": 0.121,
+          "link_f1": 0.456,
+          "link_recall": 0.487,
+          "label_f1": 0.108,
+          "distinct_predicates": 32,
+          "total_relations": 64,
+          "predicates_per_relation": 0.5,
+          "df1_fraction": 0.75
+        }
+      ]
+    },
+    "alpha120/live": {
+      "raw": [
+        {
+          "failures": 1,
+          "elapsed_s": 66.1,
+          "entity_f1": 0.785,
+          "entity_recall": 0.775,
+          "type_accuracy": 0.125,
+          "link_f1": 0.474,
+          "link_recall": 0.5,
+          "label_f1": 0.071,
+          "distinct_predicates": 31,
+          "total_relations": 65,
+          "predicates_per_relation": 0.477,
+          "df1_fraction": 0.71
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 13.6,
+          "entity_f1": 0.79,
+          "entity_recall": 0.779,
+          "type_accuracy": 0.113,
+          "link_f1": 0.456,
+          "link_recall": 0.487,
+          "label_f1": 0.071,
+          "distinct_predicates": 28,
+          "total_relations": 67,
+          "predicates_per_relation": 0.418,
+          "df1_fraction": 0.714
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 12.9,
+          "entity_f1": 0.802,
+          "entity_recall": 0.792,
+          "type_accuracy": 0.138,
+          "link_f1": 0.46,
+          "link_recall": 0.487,
+          "label_f1": 0.071,
+          "distinct_predicates": 32,
+          "total_relations": 66,
+          "predicates_per_relation": 0.485,
+          "df1_fraction": 0.75
+        }
+      ],
+      "norm": [
+        {
+          "failures": 1,
+          "elapsed_s": 66.1,
+          "entity_f1": 0.785,
+          "entity_recall": 0.775,
+          "type_accuracy": 0.125,
+          "link_f1": 0.478,
+          "link_recall": 0.5,
+          "label_f1": 0.071,
+          "distinct_predicates": 30,
+          "total_relations": 64,
+          "predicates_per_relation": 0.469,
+          "df1_fraction": 0.7
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 13.6,
+          "entity_f1": 0.79,
+          "entity_recall": 0.779,
+          "type_accuracy": 0.113,
+          "link_f1": 0.46,
+          "link_recall": 0.487,
+          "label_f1": 0.071,
+          "distinct_predicates": 27,
+          "total_relations": 66,
+          "predicates_per_relation": 0.409,
+          "df1_fraction": 0.704
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 12.9,
+          "entity_f1": 0.802,
+          "entity_recall": 0.792,
+          "type_accuracy": 0.138,
+          "link_f1": 0.46,
+          "link_recall": 0.487,
+          "label_f1": 0.071,
+          "distinct_predicates": 31,
+          "total_relations": 65,
+          "predicates_per_relation": 0.477,
+          "df1_fraction": 0.742
+        }
+      ]
+    },
+    "ranked120/notypes": {
+      "raw": [
+        {
+          "failures": 0,
+          "elapsed_s": 12.6,
+          "entity_f1": 0.808,
+          "entity_recall": 0.79,
+          "type_accuracy": 0.469,
+          "link_f1": 0.485,
+          "link_recall": 0.5,
+          "label_f1": 0.113,
+          "distinct_predicates": 36,
+          "total_relations": 64,
+          "predicates_per_relation": 0.562,
+          "df1_fraction": 0.75
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 11.8,
+          "entity_f1": 0.816,
+          "entity_recall": 0.794,
+          "type_accuracy": 0.49,
+          "link_f1": 0.506,
+          "link_recall": 0.525,
+          "label_f1": 0.108,
+          "distinct_predicates": 36,
+          "total_relations": 64,
+          "predicates_per_relation": 0.562,
+          "df1_fraction": 0.722
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 11.6,
+          "entity_f1": 0.8,
+          "entity_recall": 0.781,
+          "type_accuracy": 0.481,
+          "link_f1": 0.485,
+          "link_recall": 0.5,
+          "label_f1": 0.125,
+          "distinct_predicates": 37,
+          "total_relations": 63,
+          "predicates_per_relation": 0.587,
+          "df1_fraction": 0.757
+        }
+      ],
+      "norm": [
+        {
+          "failures": 0,
+          "elapsed_s": 12.6,
+          "entity_f1": 0.808,
+          "entity_recall": 0.79,
+          "type_accuracy": 0.469,
+          "link_f1": 0.485,
+          "link_recall": 0.5,
+          "label_f1": 0.113,
+          "distinct_predicates": 35,
+          "total_relations": 63,
+          "predicates_per_relation": 0.556,
+          "df1_fraction": 0.743
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 11.8,
+          "entity_f1": 0.816,
+          "entity_recall": 0.794,
+          "type_accuracy": 0.49,
+          "link_f1": 0.506,
+          "link_recall": 0.525,
+          "label_f1": 0.108,
+          "distinct_predicates": 35,
+          "total_relations": 63,
+          "predicates_per_relation": 0.556,
+          "df1_fraction": 0.714
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 11.6,
+          "entity_f1": 0.8,
+          "entity_recall": 0.781,
+          "type_accuracy": 0.481,
+          "link_f1": 0.485,
+          "link_recall": 0.5,
+          "label_f1": 0.125,
+          "distinct_predicates": 36,
+          "total_relations": 62,
+          "predicates_per_relation": 0.581,
+          "df1_fraction": 0.75
+        }
+      ]
+    },
+    "ranked120/defaults": {
+      "raw": [
+        {
+          "failures": 0,
+          "elapsed_s": 12.7,
+          "entity_f1": 0.79,
+          "entity_recall": 0.775,
+          "type_accuracy": 0.121,
+          "link_f1": 0.456,
+          "link_recall": 0.487,
+          "label_f1": 0.096,
+          "distinct_predicates": 33,
+          "total_relations": 65,
+          "predicates_per_relation": 0.508,
+          "df1_fraction": 0.727
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 11.6,
+          "entity_f1": 0.761,
+          "entity_recall": 0.742,
+          "type_accuracy": 0.113,
+          "link_f1": 0.429,
+          "link_recall": 0.45,
+          "label_f1": 0.067,
+          "distinct_predicates": 33,
+          "total_relations": 64,
+          "predicates_per_relation": 0.516,
+          "df1_fraction": 0.758
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 11.8,
+          "entity_f1": 0.794,
+          "entity_recall": 0.783,
+          "type_accuracy": 0.129,
+          "link_f1": 0.446,
+          "link_recall": 0.475,
+          "label_f1": 0.071,
+          "distinct_predicates": 34,
+          "total_relations": 64,
+          "predicates_per_relation": 0.531,
+          "df1_fraction": 0.735
+        }
+      ],
+      "norm": [
+        {
+          "failures": 0,
+          "elapsed_s": 12.7,
+          "entity_f1": 0.79,
+          "entity_recall": 0.775,
+          "type_accuracy": 0.121,
+          "link_f1": 0.456,
+          "link_recall": 0.487,
+          "label_f1": 0.096,
+          "distinct_predicates": 32,
+          "total_relations": 64,
+          "predicates_per_relation": 0.5,
+          "df1_fraction": 0.719
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 11.6,
+          "entity_f1": 0.761,
+          "entity_recall": 0.742,
+          "type_accuracy": 0.113,
+          "link_f1": 0.429,
+          "link_recall": 0.45,
+          "label_f1": 0.067,
+          "distinct_predicates": 32,
+          "total_relations": 63,
+          "predicates_per_relation": 0.508,
+          "df1_fraction": 0.75
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 11.8,
+          "entity_f1": 0.794,
+          "entity_recall": 0.783,
+          "type_accuracy": 0.129,
+          "link_f1": 0.446,
+          "link_recall": 0.475,
+          "label_f1": 0.071,
+          "distinct_predicates": 33,
+          "total_relations": 63,
+          "predicates_per_relation": 0.524,
+          "df1_fraction": 0.727
+        }
+      ]
+    },
+    "ranked120/live": {
+      "raw": [
+        {
+          "failures": 0,
+          "elapsed_s": 12.7,
+          "entity_f1": 0.777,
+          "entity_recall": 0.767,
+          "type_accuracy": 0.113,
+          "link_f1": 0.433,
+          "link_recall": 0.463,
+          "label_f1": 0.083,
+          "distinct_predicates": 32,
+          "total_relations": 67,
+          "predicates_per_relation": 0.478,
+          "df1_fraction": 0.719
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 13.6,
+          "entity_f1": 0.752,
+          "entity_recall": 0.742,
+          "type_accuracy": 0.1,
+          "link_f1": 0.408,
+          "link_recall": 0.438,
+          "label_f1": 0.067,
+          "distinct_predicates": 32,
+          "total_relations": 68,
+          "predicates_per_relation": 0.471,
+          "df1_fraction": 0.656
+        },
+        {
+          "failures": 1,
+          "elapsed_s": 63.4,
+          "entity_f1": 0.747,
+          "entity_recall": 0.742,
+          "type_accuracy": 0.113,
+          "link_f1": 0.402,
+          "link_recall": 0.438,
+          "label_f1": 0.096,
+          "distinct_predicates": 31,
+          "total_relations": 66,
+          "predicates_per_relation": 0.47,
+          "df1_fraction": 0.71
+        }
+      ],
+      "norm": [
+        {
+          "failures": 0,
+          "elapsed_s": 12.7,
+          "entity_f1": 0.777,
+          "entity_recall": 0.767,
+          "type_accuracy": 0.113,
+          "link_f1": 0.433,
+          "link_recall": 0.463,
+          "label_f1": 0.083,
+          "distinct_predicates": 31,
+          "total_relations": 66,
+          "predicates_per_relation": 0.47,
+          "df1_fraction": 0.71
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 13.6,
+          "entity_f1": 0.752,
+          "entity_recall": 0.742,
+          "type_accuracy": 0.1,
+          "link_f1": 0.408,
+          "link_recall": 0.438,
+          "label_f1": 0.067,
+          "distinct_predicates": 32,
+          "total_relations": 67,
+          "predicates_per_relation": 0.478,
+          "df1_fraction": 0.688
+        },
+        {
+          "failures": 1,
+          "elapsed_s": 63.4,
+          "entity_f1": 0.747,
+          "entity_recall": 0.742,
+          "type_accuracy": 0.113,
+          "link_f1": 0.402,
+          "link_recall": 0.438,
+          "label_f1": 0.096,
+          "distinct_predicates": 31,
+          "total_relations": 65,
+          "predicates_per_relation": 0.477,
+          "df1_fraction": 0.742
+        }
+      ]
+    },
+    "ranked32/notypes": {
+      "raw": [
+        {
+          "failures": 0,
+          "elapsed_s": 11.3,
+          "entity_f1": 0.812,
+          "entity_recall": 0.79,
+          "type_accuracy": 0.481,
+          "link_f1": 0.497,
+          "link_recall": 0.512,
+          "label_f1": 0.125,
+          "distinct_predicates": 35,
+          "total_relations": 63,
+          "predicates_per_relation": 0.556,
+          "df1_fraction": 0.714
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 20.3,
+          "entity_f1": 0.811,
+          "entity_recall": 0.79,
+          "type_accuracy": 0.477,
+          "link_f1": 0.468,
+          "link_recall": 0.487,
+          "label_f1": 0.096,
+          "distinct_predicates": 36,
+          "total_relations": 62,
+          "predicates_per_relation": 0.581,
+          "df1_fraction": 0.75
+        },
+        {
+          "failures": 1,
+          "elapsed_s": 69.6,
+          "entity_f1": 0.787,
+          "entity_recall": 0.756,
+          "type_accuracy": 0.456,
+          "link_f1": 0.472,
+          "link_recall": 0.475,
+          "label_f1": 0.108,
+          "distinct_predicates": 35,
+          "total_relations": 60,
+          "predicates_per_relation": 0.583,
+          "df1_fraction": 0.714
+        }
+      ],
+      "norm": [
+        {
+          "failures": 0,
+          "elapsed_s": 11.3,
+          "entity_f1": 0.812,
+          "entity_recall": 0.79,
+          "type_accuracy": 0.481,
+          "link_f1": 0.497,
+          "link_recall": 0.512,
+          "label_f1": 0.125,
+          "distinct_predicates": 35,
+          "total_relations": 62,
+          "predicates_per_relation": 0.565,
+          "df1_fraction": 0.714
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 20.3,
+          "entity_f1": 0.811,
+          "entity_recall": 0.79,
+          "type_accuracy": 0.477,
+          "link_f1": 0.468,
+          "link_recall": 0.487,
+          "label_f1": 0.096,
+          "distinct_predicates": 34,
+          "total_relations": 60,
+          "predicates_per_relation": 0.567,
+          "df1_fraction": 0.735
+        },
+        {
+          "failures": 1,
+          "elapsed_s": 69.6,
+          "entity_f1": 0.787,
+          "entity_recall": 0.756,
+          "type_accuracy": 0.456,
+          "link_f1": 0.472,
+          "link_recall": 0.475,
+          "label_f1": 0.108,
+          "distinct_predicates": 35,
+          "total_relations": 59,
+          "predicates_per_relation": 0.593,
+          "df1_fraction": 0.714
+        }
+      ]
+    },
+    "ranked32/defaults": {
+      "raw": [
+        {
+          "failures": 0,
+          "elapsed_s": 12.3,
+          "entity_f1": 0.77,
+          "entity_recall": 0.758,
+          "type_accuracy": 0.125,
+          "link_f1": 0.442,
+          "link_recall": 0.475,
+          "label_f1": 0.083,
+          "distinct_predicates": 33,
+          "total_relations": 67,
+          "predicates_per_relation": 0.493,
+          "df1_fraction": 0.727
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 17.4,
+          "entity_f1": 0.79,
+          "entity_recall": 0.779,
+          "type_accuracy": 0.138,
+          "link_f1": 0.446,
+          "link_recall": 0.475,
+          "label_f1": 0.083,
+          "distinct_predicates": 33,
+          "total_relations": 66,
+          "predicates_per_relation": 0.5,
+          "df1_fraction": 0.758
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 12.6,
+          "entity_f1": 0.789,
+          "entity_recall": 0.775,
+          "type_accuracy": 0.129,
+          "link_f1": 0.45,
+          "link_recall": 0.475,
+          "label_f1": 0.083,
+          "distinct_predicates": 33,
+          "total_relations": 63,
+          "predicates_per_relation": 0.524,
+          "df1_fraction": 0.727
+        }
+      ],
+      "norm": [
+        {
+          "failures": 0,
+          "elapsed_s": 12.3,
+          "entity_f1": 0.77,
+          "entity_recall": 0.758,
+          "type_accuracy": 0.125,
+          "link_f1": 0.442,
+          "link_recall": 0.475,
+          "label_f1": 0.083,
+          "distinct_predicates": 32,
+          "total_relations": 66,
+          "predicates_per_relation": 0.485,
+          "df1_fraction": 0.719
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 17.4,
+          "entity_f1": 0.79,
+          "entity_recall": 0.779,
+          "type_accuracy": 0.138,
+          "link_f1": 0.446,
+          "link_recall": 0.475,
+          "label_f1": 0.083,
+          "distinct_predicates": 32,
+          "total_relations": 65,
+          "predicates_per_relation": 0.492,
+          "df1_fraction": 0.75
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 12.6,
+          "entity_f1": 0.789,
+          "entity_recall": 0.775,
+          "type_accuracy": 0.129,
+          "link_f1": 0.45,
+          "link_recall": 0.475,
+          "label_f1": 0.083,
+          "distinct_predicates": 32,
+          "total_relations": 62,
+          "predicates_per_relation": 0.516,
+          "df1_fraction": 0.719
+        }
+      ]
+    },
+    "ranked32/live": {
+      "raw": [
+        {
+          "failures": 0,
+          "elapsed_s": 14.1,
+          "entity_f1": 0.752,
+          "entity_recall": 0.742,
+          "type_accuracy": 0.1,
+          "link_f1": 0.408,
+          "link_recall": 0.438,
+          "label_f1": 0.092,
+          "distinct_predicates": 33,
+          "total_relations": 68,
+          "predicates_per_relation": 0.485,
+          "df1_fraction": 0.697
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 13.7,
+          "entity_f1": 0.757,
+          "entity_recall": 0.742,
+          "type_accuracy": 0.1,
+          "link_f1": 0.417,
+          "link_recall": 0.438,
+          "label_f1": 0.067,
+          "distinct_predicates": 32,
+          "total_relations": 67,
+          "predicates_per_relation": 0.478,
+          "df1_fraction": 0.688
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 12.5,
+          "entity_f1": 0.752,
+          "entity_recall": 0.742,
+          "type_accuracy": 0.1,
+          "link_f1": 0.408,
+          "link_recall": 0.438,
+          "label_f1": 0.054,
+          "distinct_predicates": 32,
+          "total_relations": 68,
+          "predicates_per_relation": 0.471,
+          "df1_fraction": 0.719
+        }
+      ],
+      "norm": [
+        {
+          "failures": 0,
+          "elapsed_s": 14.1,
+          "entity_f1": 0.752,
+          "entity_recall": 0.742,
+          "type_accuracy": 0.1,
+          "link_f1": 0.408,
+          "link_recall": 0.438,
+          "label_f1": 0.092,
+          "distinct_predicates": 33,
+          "total_relations": 67,
+          "predicates_per_relation": 0.493,
+          "df1_fraction": 0.727
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 13.7,
+          "entity_f1": 0.757,
+          "entity_recall": 0.742,
+          "type_accuracy": 0.1,
+          "link_f1": 0.417,
+          "link_recall": 0.438,
+          "label_f1": 0.067,
+          "distinct_predicates": 31,
+          "total_relations": 66,
+          "predicates_per_relation": 0.47,
+          "df1_fraction": 0.677
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 12.5,
+          "entity_f1": 0.752,
+          "entity_recall": 0.742,
+          "type_accuracy": 0.1,
+          "link_f1": 0.408,
+          "link_recall": 0.438,
+          "label_f1": 0.054,
+          "distinct_predicates": 32,
+          "total_relations": 67,
+          "predicates_per_relation": 0.478,
+          "df1_fraction": 0.75
+        }
+      ]
+    },
+    "clean32/notypes": {
+      "raw": [
+        {
+          "failures": 0,
+          "elapsed_s": 10.5,
+          "entity_f1": 0.849,
+          "entity_recall": 0.835,
+          "type_accuracy": 0.392,
+          "link_f1": 0.522,
+          "link_recall": 0.562,
+          "label_f1": 0.447,
+          "distinct_predicates": 26,
+          "total_relations": 68,
+          "predicates_per_relation": 0.382,
+          "df1_fraction": 0.538
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 10.7,
+          "entity_f1": 0.841,
+          "entity_recall": 0.831,
+          "type_accuracy": 0.381,
+          "link_f1": 0.489,
+          "link_recall": 0.525,
+          "label_f1": 0.427,
+          "distinct_predicates": 25,
+          "total_relations": 66,
+          "predicates_per_relation": 0.379,
+          "df1_fraction": 0.56
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 11.1,
+          "entity_f1": 0.871,
+          "entity_recall": 0.856,
+          "type_accuracy": 0.377,
+          "link_f1": 0.547,
+          "link_recall": 0.575,
+          "label_f1": 0.46,
+          "distinct_predicates": 26,
+          "total_relations": 65,
+          "predicates_per_relation": 0.4,
+          "df1_fraction": 0.577
+        }
+      ],
+      "norm": [
+        {
+          "failures": 0,
+          "elapsed_s": 10.5,
+          "entity_f1": 0.849,
+          "entity_recall": 0.835,
+          "type_accuracy": 0.392,
+          "link_f1": 0.527,
+          "link_recall": 0.562,
+          "label_f1": 0.452,
+          "distinct_predicates": 25,
+          "total_relations": 65,
+          "predicates_per_relation": 0.385,
+          "df1_fraction": 0.52
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 10.7,
+          "entity_f1": 0.841,
+          "entity_recall": 0.831,
+          "type_accuracy": 0.381,
+          "link_f1": 0.489,
+          "link_recall": 0.525,
+          "label_f1": 0.427,
+          "distinct_predicates": 25,
+          "total_relations": 65,
+          "predicates_per_relation": 0.385,
+          "df1_fraction": 0.56
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 11.1,
+          "entity_f1": 0.871,
+          "entity_recall": 0.856,
+          "type_accuracy": 0.377,
+          "link_f1": 0.547,
+          "link_recall": 0.575,
+          "label_f1": 0.46,
+          "distinct_predicates": 26,
+          "total_relations": 64,
+          "predicates_per_relation": 0.406,
+          "df1_fraction": 0.577
+        }
+      ]
+    },
+    "clean32/defaults": {
+      "raw": [
+        {
+          "failures": 0,
+          "elapsed_s": 11.6,
+          "entity_f1": 0.839,
+          "entity_recall": 0.838,
+          "type_accuracy": 0.123,
+          "link_f1": 0.475,
+          "link_recall": 0.525,
+          "label_f1": 0.348,
+          "distinct_predicates": 27,
+          "total_relations": 71,
+          "predicates_per_relation": 0.38,
+          "df1_fraction": 0.593
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 13.1,
+          "entity_f1": 0.847,
+          "entity_recall": 0.846,
+          "type_accuracy": 0.131,
+          "link_f1": 0.482,
+          "link_recall": 0.537,
+          "label_f1": 0.363,
+          "distinct_predicates": 27,
+          "total_relations": 71,
+          "predicates_per_relation": 0.38,
+          "df1_fraction": 0.556
+        },
+        {
+          "failures": 1,
+          "elapsed_s": 13.0,
+          "entity_f1": 0.823,
+          "entity_recall": 0.821,
+          "type_accuracy": 0.123,
+          "link_f1": 0.475,
+          "link_recall": 0.525,
+          "label_f1": 0.357,
+          "distinct_predicates": 27,
+          "total_relations": 69,
+          "predicates_per_relation": 0.391,
+          "df1_fraction": 0.593
+        }
+      ],
+      "norm": [
+        {
+          "failures": 0,
+          "elapsed_s": 11.6,
+          "entity_f1": 0.839,
+          "entity_recall": 0.838,
+          "type_accuracy": 0.123,
+          "link_f1": 0.475,
+          "link_recall": 0.525,
+          "label_f1": 0.348,
+          "distinct_predicates": 26,
+          "total_relations": 70,
+          "predicates_per_relation": 0.371,
+          "df1_fraction": 0.577
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 13.1,
+          "entity_f1": 0.847,
+          "entity_recall": 0.846,
+          "type_accuracy": 0.131,
+          "link_f1": 0.482,
+          "link_recall": 0.537,
+          "label_f1": 0.363,
+          "distinct_predicates": 26,
+          "total_relations": 70,
+          "predicates_per_relation": 0.371,
+          "df1_fraction": 0.538
+        },
+        {
+          "failures": 1,
+          "elapsed_s": 13.0,
+          "entity_f1": 0.823,
+          "entity_recall": 0.821,
+          "type_accuracy": 0.123,
+          "link_f1": 0.475,
+          "link_recall": 0.525,
+          "label_f1": 0.357,
+          "distinct_predicates": 26,
+          "total_relations": 68,
+          "predicates_per_relation": 0.382,
+          "df1_fraction": 0.577
+        }
+      ]
+    },
+    "clean32/live": {
+      "raw": [
+        {
+          "failures": 0,
+          "elapsed_s": 12.3,
+          "entity_f1": 0.834,
+          "entity_recall": 0.838,
+          "type_accuracy": 0.11,
+          "link_f1": 0.507,
+          "link_recall": 0.562,
+          "label_f1": 0.397,
+          "distinct_predicates": 26,
+          "total_relations": 72,
+          "predicates_per_relation": 0.361,
+          "df1_fraction": 0.5
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 14.8,
+          "entity_f1": 0.834,
+          "entity_recall": 0.838,
+          "type_accuracy": 0.098,
+          "link_f1": 0.484,
+          "link_recall": 0.537,
+          "label_f1": 0.409,
+          "distinct_predicates": 26,
+          "total_relations": 73,
+          "predicates_per_relation": 0.356,
+          "df1_fraction": 0.462
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 12.8,
+          "entity_f1": 0.843,
+          "entity_recall": 0.846,
+          "type_accuracy": 0.115,
+          "link_f1": 0.461,
+          "link_recall": 0.525,
+          "label_f1": 0.372,
+          "distinct_predicates": 27,
+          "total_relations": 72,
+          "predicates_per_relation": 0.375,
+          "df1_fraction": 0.519
+        }
+      ],
+      "norm": [
+        {
+          "failures": 0,
+          "elapsed_s": 12.3,
+          "entity_f1": 0.834,
+          "entity_recall": 0.838,
+          "type_accuracy": 0.11,
+          "link_f1": 0.507,
+          "link_recall": 0.562,
+          "label_f1": 0.397,
+          "distinct_predicates": 26,
+          "total_relations": 72,
+          "predicates_per_relation": 0.361,
+          "df1_fraction": 0.5
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 14.8,
+          "entity_f1": 0.834,
+          "entity_recall": 0.838,
+          "type_accuracy": 0.098,
+          "link_f1": 0.484,
+          "link_recall": 0.537,
+          "label_f1": 0.409,
+          "distinct_predicates": 26,
+          "total_relations": 73,
+          "predicates_per_relation": 0.356,
+          "df1_fraction": 0.462
+        },
+        {
+          "failures": 0,
+          "elapsed_s": 12.8,
+          "entity_f1": 0.843,
+          "entity_recall": 0.846,
+          "type_accuracy": 0.115,
+          "link_f1": 0.461,
+          "link_recall": 0.525,
+          "label_f1": 0.372,
+          "distinct_predicates": 27,
+          "total_relations": 71,
+          "predicates_per_relation": 0.38,
+          "df1_fraction": 0.556
+        }
+      ]
+    }
+  }
+}
