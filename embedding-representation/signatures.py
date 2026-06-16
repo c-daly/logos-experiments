@@ -18,6 +18,7 @@ from pathlib import Path
 
 import numpy as np
 
+from sophia.maintenance.emergence_clustering import _agglomerative_partitions, _silhouette
 from sophia.maintenance.structural_signature import build_signature, signature_similarity
 
 HERE = Path(__file__).resolve().parent
@@ -80,6 +81,50 @@ def main() -> None:
     nonempty = sum(1 for u in uuids if sigs.get(u))
     print(f"wrote {SIG_PATH}")
     print(f"signature coverage: {nonempty}/{len(uuids)} = {nonempty / len(uuids):.3f}")
+
+
+def signature_distance_matrix(sigs: list[Counter]) -> np.ndarray:
+    """Symmetric weighted-Jaccard DISTANCE matrix (1 - signature_similarity)."""
+    n = len(sigs)
+    dm = np.zeros((n, n), dtype="float32")
+    for i in range(n):
+        for j in range(i + 1, n):
+            d = 1.0 - signature_similarity(sigs[i], sigs[j])
+            dm[i, j] = dm[j, i] = d
+    return dm
+
+
+def nn_chunk_rate_dm(dm: np.ndarray, chunk_ids: list, k: int = 10) -> dict:
+    """Sanity check for the relations arm: fraction of each point's k nearest
+    neighbours (by signature distance) that share its chunk, vs the random
+    expectation. For a chunk-BLIND representation this should be ~1x."""
+    n = len(dm)
+    cids = np.asarray(chunk_ids)
+    order = np.argsort(dm, axis=1)
+    obs = []
+    for i in range(n):
+        neigh = [j for j in order[i] if j != i][:k]
+        if neigh:
+            obs.append(float(np.mean(cids[neigh] == cids[i])))
+    observed = float(np.mean(obs)) if obs else 0.0
+    cnt = Counter(chunk_ids)
+    expected = sum(c * (c - 1) for c in cnt.values()) / (n * (n - 1)) if n > 1 else 0.0
+    return {
+        "nn_same_chunk": round(observed, 3),
+        "expected_random": round(expected, 3),
+        "ratio": round(observed / expected, 1) if expected else None,
+    }
+
+
+def best_cut_silhouette_dm(dm: np.ndarray) -> tuple[int | None, float | None]:
+    """Best-cut silhouette over a precomputed distance matrix, using the SAME
+    agglomerative cut that rescore.py uses for the vector arms."""
+    n = len(dm)
+    parts = _agglomerative_partitions(dm, 2, max(2, n // 3))
+    if not parts:
+        return None, None
+    k, lab = max(parts.items(), key=lambda kv: _silhouette(dm, kv[1]))
+    return int(k), round(_silhouette(dm, lab), 4)
 
 
 if __name__ == "__main__":
