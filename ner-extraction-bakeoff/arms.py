@@ -357,14 +357,30 @@ async def local_clean(text: str):
     """Local LLM (llama.cpp via HERMES_LLM_BASE_URL) + clean compact vocab -- can a
     local model match gpt-4o-mini's clean-vocab extraction at $0? The bakeoff's own
     finding is that closed-vocab is the lever (not model size), so a competent local
-    model + clean vocab should land close. Mirror of big_model_clean, local endpoint."""
+    model + clean vocab should land close. Mirror of big_model_clean, local endpoint.
+
+    Requires HERMES_LLM_BASE_URL to point at the local llama.cpp endpoint; without it
+    the hermes LLM provider will route to the OpenAI default and the model name will
+    be unrecognised there."""
+    if not os.environ.get("HERMES_LLM_BASE_URL"):
+        raise RuntimeError(
+            "local_clean requires HERMES_LLM_BASE_URL (e.g. http://localhost:8080/v1)"
+        )
     model = os.environ.get("BAKEOFF_LOCAL_MODEL", "qwen3-instruct")
     system = _BASE_SYSTEM + _VOCAB_CLAUSE.format(vocab=", ".join(_CLEAN_VOCAB))
     return await _llm_extract(text, system, model=model)
 
 
 async def local_open(text: str):
-    """Local LLM, open prompt (no vocab) -- the local analogue of big_model."""
+    """Local LLM, open prompt (no vocab) -- the local analogue of big_model.
+
+    Requires HERMES_LLM_BASE_URL to point at the local llama.cpp endpoint; without it
+    the hermes LLM provider will route to the OpenAI default and the model name will
+    be unrecognised there."""
+    if not os.environ.get("HERMES_LLM_BASE_URL"):
+        raise RuntimeError(
+            "local_open requires HERMES_LLM_BASE_URL (e.g. http://localhost:8080/v1)"
+        )
     model = os.environ.get("BAKEOFF_LOCAL_MODEL", "qwen3-instruct")
     return await _llm_extract(text, _BASE_SYSTEM, model=model)
 
