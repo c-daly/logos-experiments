@@ -62,9 +62,23 @@ def marked_text(row: dict) -> str:
     return f"«{name}» {sent}".strip()
 
 
+def gloss_text(row: dict) -> str:
+    """SENSE facet: the generated chunk-independent definition (attached by
+    gloss.attach_glosses). Falls back to the bare name if no gloss is present."""
+    return (row.get("gloss") or "").strip() or row["name"]
+
+
+def name_gloss_text(row: dict) -> str:
+    """Identity-anchored sense: '{name} — {gloss}'."""
+    g = (row.get("gloss") or "").strip()
+    return f"{row['name']} — {g}" if g else row["name"]
+
+
 REPS = {
     "name": name_text,
     "sentence": sentence_text,
     "name_sentence": name_sentence_text,
     "marked": marked_text,
+    "gloss": gloss_text,
+    "name_gloss": name_gloss_text,
 }
