@@ -89,7 +89,9 @@ def proper_in_context(name: str, raw_text: str, start: int) -> bool:
 def fetch() -> list[dict]:
     from neo4j import GraphDatabase
 
-    pw = os.environ.get("NEO4J_PASSWORD", "logosdev")
+    pw = os.environ.get("NEO4J_PASSWORD")
+    if not pw:
+        raise SystemExit("NEO4J_PASSWORD must be set")
     driver = GraphDatabase.driver("bolt://localhost:7687", auth=("neo4j", pw))
     q = (
         "MATCH (n:Node {type:'entity'}) "

@@ -15,7 +15,6 @@ from __future__ import annotations
 
 import json
 import random
-from collections import Counter
 from pathlib import Path
 
 import numpy as np
@@ -51,6 +50,9 @@ def main():
     attach_glosses(sample, load_glosses())
 
     name_vecs = load_name_vectors(uuids)
+    sample = [r for r in sample if r["uuid"] in name_vecs]
+    uuids = [r["uuid"] for r in sample]
+    chunk_ids = [r["raw_text"] for r in sample]
     name = np.asarray([name_vecs[u] for u in uuids], dtype="float32")
     ns = embed_cached([REPS["name_sentence"](r) for r in sample])
     chunk_vecs = embed_cached([r["raw_text"] for r in sample])

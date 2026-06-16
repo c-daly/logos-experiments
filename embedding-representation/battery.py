@@ -123,6 +123,8 @@ def hopkins(X: np.ndarray, sample: int = 200, seed: int = 4) -> float:
 def score(X: np.ndarray) -> dict:
     """Full battery + whitened control, with a single shared SVD per arm."""
     X = np.asarray(X, dtype="float32")
+    if len(X) < 2:
+        raise ValueError(f"score() requires at least 2 vectors; got {len(X)}")
     Xc = X - X.mean(axis=0)
     u, s, _ = np.linalg.svd(Xc, full_matrices=False)  # the one expensive op
     pm, ps = pairwise_cos_stats(X)

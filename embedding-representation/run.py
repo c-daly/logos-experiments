@@ -76,8 +76,10 @@ def _openai(texts: list[str], chunk: int = 1000) -> np.ndarray:
 
 
 def embed_cached(texts: list[str]) -> np.ndarray:
+    if not texts:
+        return np.empty((0, DIM), dtype="float32")
     uniq = sorted(set(texts))
-    key = hashlib.sha1("\n".join(uniq).encode("utf-8")).hexdigest()[:16]
+    key = hashlib.sha1(f"{MODEL}/{DIM}\n{chr(10).join(uniq)}".encode("utf-8")).hexdigest()[:16]
     path = CACHE / f"{key}.npy"
     if path.exists():
         vecs = np.load(path)
@@ -120,6 +122,10 @@ def main() -> None:
 
     print("[name] loading production vectors from hcg_entity_embeddings (free) ...")
     name_vecs = load_name_vectors(uuids)
+    sample = [r for r in sample if r["uuid"] in name_vecs]
+    uuids = [r["uuid"] for r in sample]
+    chunk_ids = [r["raw_text"] for r in sample]
+    print(f"sample: {len(sample)} entities after filtering to those with name vectors  |  model: {MODEL}/{DIM}")
     arm_vecs = {"name": np.asarray([name_vecs[u] for u in uuids], dtype="float32")}
 
     for arm in ("sentence", "name_sentence", "marked", "gloss", "name_gloss"):
