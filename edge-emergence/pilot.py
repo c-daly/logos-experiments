@@ -52,9 +52,7 @@ NODE_COVERAGE_HARD_STOP = 0.50
 SIM_CONFIRM_BAR = 0.5  # provisional — freeze on readout (spec convention)
 MIN_SURFACE_INSTANCES = 2  # surfaces with 1 instance carry no distribution
 
-MAPPING_CSV = Path(
-    "/home/fearsidhe/projects/logos-workspace/logos-experiments/relation-vocab/mapping.csv"
-)
+MAPPING_CSV = Path(__file__).resolve().parent.parent / "relation-vocab" / "mapping.csv"
 HERMES_URL = os.environ.get("HERMES_URL", "http://localhost:17000")
 
 
@@ -140,7 +138,7 @@ def fetch_label_embeddings(surfaces: list[str]) -> dict[str, np.ndarray]:
     keys = sorted(texts)
     for i in range(0, len(keys), 300):
         chunk = keys[i : i + 300]
-        safe = [t.replace('"', "") for t in chunk]
+        safe = [t.replace("\\", "").replace('"', "") for t in chunk]
         expr = "text in [" + ",".join(f'"{t}"' for t in safe) + "]"
         for row in col.query(expr=expr, output_fields=["text", "embedding"]):
             s = texts.get(row["text"])
@@ -157,23 +155,23 @@ def fetch_label_embeddings(surfaces: list[str]) -> dict[str, np.ndarray]:
 
         async def embed_all() -> None:
             sem = asyncio.Semaphore(4)
+            async with httpx.AsyncClient(timeout=60.0) as client:
 
-            async def one(s: str) -> None:
-                async with sem:
-                    try:
-                        async with httpx.AsyncClient(timeout=60.0) as c:
-                            r = await c.post(
+                async def one(s: str) -> None:
+                    async with sem:
+                        try:
+                            r = await client.post(
                                 f"{HERMES_URL}/embed_text",
                                 json={"text": label_text(s)},
                             )
-                        r.raise_for_status()
-                        emb = r.json().get("embedding")
-                        if emb:
-                            out[s] = np.asarray(emb, dtype=np.float32)
-                    except Exception as exc:  # fail-soft: surface skipped
-                        print(f"  [embed] {s}: {str(exc)[:60]}", file=sys.stderr)
+                            r.raise_for_status()
+                            emb = r.json().get("embedding")
+                            if emb:
+                                out[s] = np.asarray(emb, dtype=np.float32)
+                        except Exception as exc:  # fail-soft: surface skipped
+                            print(f"  [embed] {s}: {str(exc)[:60]}", file=sys.stderr)
 
-            await asyncio.gather(*(one(s) for s in missing))
+                await asyncio.gather(*(one(s) for s in missing))
 
         asyncio.run(embed_all())
     return out
@@ -357,7 +355,7 @@ def main() -> None:
     import csv
 
     gold_pairs = []
-    with open(MAPPING_CSV) as f:
+    with open(MAPPING_CSV, encoding="utf-8") as f:
         for row in csv.DictReader(f):
             if row.get("predicate") and row.get("proposed_target"):
                 gold_pairs.append((row["predicate"], row["proposed_target"]))
