@@ -159,6 +159,53 @@ _VOCAB_CLAUSE = (
 )
 
 
+def _extract_json(content: str) -> dict:
+    """Parse JSON from a model response that may contain a <think>...</think>
+    preamble (Qwen3 thinking mode) or a fenced code block.
+
+    Resolution order:
+    1. Strip any leading ``<think>...</think>`` block (and surrounding whitespace).
+    2. Try json.loads on the cleaned text directly.
+    3. Try the first fenced ```json``` or ``` block.
+    4. Try the substring from the first ``{`` to the last ``}`` (handles prose
+       preamble the model emitted before the JSON object).
+    5. Raise ValueError -- callers must surface parse failures; silent {} would
+       make every sentence score 0 entities/relations with no recorded failure.
+    """
+    import re as _re
+
+    # Step 1: strip <think>...</think> (Qwen3 thinking mode, possibly nested).
+    cleaned = _re.sub(r"<think>.*?</think>", "", content, flags=_re.DOTALL).strip()
+
+    # Step 2: direct parse.
+    try:
+        return json.loads(cleaned)
+    except json.JSONDecodeError:
+        pass
+
+    # Step 3: fenced code block.
+    m = _re.search(r"```(?:json)?\s*(.*?)```", cleaned, _re.DOTALL)
+    if m:
+        try:
+            return json.loads(m.group(1))
+        except json.JSONDecodeError:
+            pass
+
+    # Step 4: brace-delimited substring (handles prose preamble after think strip).
+    start = cleaned.find("{")
+    end = cleaned.rfind("}")
+    if start != -1 and end > start:
+        try:
+            return json.loads(cleaned[start : end + 1])
+        except json.JSONDecodeError:
+            pass
+
+    raise ValueError(
+        f"_llm_extract: no valid JSON found in model response "
+        f"(first 200 chars of raw content: {content[:200]!r})"
+    )
+
+
 async def _llm_extract(text: str, system: str, model: str | None):
     """Run an open-prompt NER+RE extraction via generate_completion. The
     model is passed PER CALL (the only reliable override -- HERMES_LLM_MODEL
@@ -176,16 +223,7 @@ async def _llm_extract(text: str, system: str, model: str | None):
         metadata={"scenario": "bakeoff"},
     )
     content = result.get("choices", [{}])[0].get("message", {}).get("content", "")
-    try:
-        data = json.loads(content)
-    except json.JSONDecodeError:
-        import re as _re
-
-        m = _re.search(r"```(?:json)?\s*(.*?)```", content, _re.DOTALL)
-        try:
-            data = json.loads(m.group(1)) if m else {}
-        except json.JSONDecodeError:
-            data = {}
+    data = _extract_json(content)
     return _norm_entities(data.get("entities")), _norm_relations(data.get("relations"))
 
 
