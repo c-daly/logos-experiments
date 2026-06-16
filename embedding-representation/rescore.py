@@ -28,6 +28,7 @@ from sophia.maintenance.emergence_clustering import (
 from run import embed_cached, load_name_vectors, nn_chunk_rate
 from represent import REPS
 from decouple import chunk_centered, chunk_residual
+from gloss import attach_glosses, load_glosses
 
 HERE = Path(__file__).resolve().parent
 SAMPLE = 800  # match _MAX_CLUSTER_INPUT
@@ -47,6 +48,7 @@ def main():
     sample = json.loads((HERE / "sample.json").read_text())
     uuids = [r["uuid"] for r in sample]
     chunk_ids = [r["raw_text"] for r in sample]
+    attach_glosses(sample, load_glosses())
 
     name_vecs = load_name_vectors(uuids)
     name = np.asarray([name_vecs[u] for u in uuids], dtype="float32")
@@ -60,6 +62,8 @@ def main():
         "marked": embed_cached([REPS["marked"](r) for r in sample]),
         "chunk_centered": chunk_centered(ns, chunk_ids),
         "chunk_residual": chunk_residual(ns, chunk_vecs),
+        "gloss": embed_cached([REPS["gloss"](r) for r in sample]),
+        "name_gloss": embed_cached([REPS["name_gloss"](r) for r in sample]),
     }
 
     print(f"{'arm':<16}{'best_k':>8}{'silhouette':>12}{'chunk_ratio':>13}")

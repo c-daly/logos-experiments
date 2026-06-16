@@ -30,6 +30,7 @@ import numpy as np
 
 import battery as B
 from represent import REPS
+from gloss import attach_glosses, load_glosses
 
 HERE = Path(__file__).resolve().parent
 CACHE = HERE / ".cache"
@@ -113,6 +114,7 @@ def main() -> None:
     uuids = [r["uuid"] for r in sample]
     chunk_ids = [r["raw_text"] for r in sample]
     print(f"sample: {len(sample)} entities  |  model: {MODEL}/{DIM}")
+    attach_glosses(sample, load_glosses())
 
     results = {"model": MODEL, "dim": DIM, "n": len(sample), "arms": {}}
 
@@ -120,7 +122,7 @@ def main() -> None:
     name_vecs = load_name_vectors(uuids)
     arm_vecs = {"name": np.asarray([name_vecs[u] for u in uuids], dtype="float32")}
 
-    for arm in ("sentence", "name_sentence", "marked"):
+    for arm in ("sentence", "name_sentence", "marked", "gloss", "name_gloss"):
         texts = [REPS[arm](r) for r in sample]
         uniq = len(set(texts))
         print(f"[{arm}] {uniq} unique / {len(texts)} nodes; embedding (cached) ...")
