@@ -1,0 +1,30 @@
+sample: 5330 entities  |  model: text-embedding-3-large/3072
+[name] loading production vectors from hcg_entity_embeddings (free) ...
+[sentence] 2063 unique / 5330 nodes; embedding (cached) ...
+[name_sentence] 5330 unique / 5330 nodes; embedding (cached) ...
+[marked] 5330 unique / 5330 nodes; embedding (cached) ...
+[name] scoring battery (1 SVD) ...
+[sentence] scoring battery (1 SVD) ...
+[name_sentence] scoring battery (1 SVD) ...
+[marked] scoring battery (1 SVD) ...
+
+wrote results.json
+
+=== battery (raw) — vs the name baseline ===
+arm             anisotropy_    nn_margin  pairwise_co  effective_r  intrinsic_d      hopkins  chunk_ratio
+name                 0.4058       1.1065       0.0669       1867.1         1.38        0.619         37.4
+sentence             0.3313          1.0       0.0832       1214.4         0.11        0.898        177.0
+name_sentence        0.3686       1.2525       0.0791       1616.7         5.08        0.713        180.8
+marked               0.3539       1.2755       0.0829       1518.1         3.23        0.765        186.6
+
+=== whitened control (nn_margin flat => no hidden structure) ===
+name           nn_margin=1.0309   anisotropy=0.0015   spread=0.0112
+sentence       nn_margin=1.0      anisotropy=0.0274   spread=0.0228
+name_sentence  nn_margin=1.0794   anisotropy=0.0017   spread=0.0119
+marked         nn_margin=1.1007   anisotropy=0.0043   spread=0.0125
+
+=== chunk-collapse (nn_same_chunk vs random; high ratio = measuring chunks not entities) ===
+name           same_chunk=0.121   random=0.003   ratio=37.4
+sentence       same_chunk=0.571   random=0.003   ratio=177.0
+name_sentence  same_chunk=0.583   random=0.003   ratio=180.8
+marked         same_chunk=0.602   random=0.003   ratio=186.6

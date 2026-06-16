@@ -1,0 +1,11 @@
+arm               best_k  silhouette  chunk_ratio
+(control)                      0.213             
+(junk-drawer)                  0.060             
+name                 266      0.0624         37.4
+sentence             265      0.1807        177.0
+name_sentence        264      0.1316        180.8
+marked               265      0.1515        186.6
+chunk_centered         2      0.2236        103.7
+chunk_residual         2      0.1186        141.1
+
+wrote rescore.json

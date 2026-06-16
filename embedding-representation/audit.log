@@ -1,0 +1,21 @@
+live entities: 5349
+
+=== genuine extraction errors (fraction of live entities) ===
+  has_digit        282 ( 5.3%)   e.g. ['450 bc', 'c. 1300', '60 to 75 angstrom (å)', 'middle of the 1980', 'april 1955']
+  measurement      197 ( 3.7%)   e.g. ['0.1 to 5.0 μm', '1 cm', '1579', '1830', '1950']
+  year_number      144 ( 2.7%)   e.g. ['1579', '1830', '1950', '450 bc', '1877']
+  too_short         49 ( 0.9%)   e.g. ['12', 'z', 'h', 'li', '6']
+  too_long          25 ( 0.5%)   e.g. ['first known example of a modern treatment of magnetic phenomenon', 'star with the same density but 500 time the radius of the sun', 'how the great kaan causeth the bark of trees, made into something like paper, to pass for money all over his country', 'science of mental life, both of it phenomenon and their condition', 'understanding of the mental state and behavior of person held by ordinary person']
+  ANY error        529 ( 9.9%)   <- removable
+  proper (named)   911 (17.0%)   vs 4438 common-noun concepts (both legitimate)
+
+mean confidence: all=0.7  noise=0.7  proper=0.7
+
+=== battery on NAME vectors by group (common-noun vs proper: who needs context?) ===
+subset                   n  anisotropy_    nn_margin  pairwise_co  effective_r  intrinsic_d
+raw                   5344       0.4058       1.1096       0.0673       1867.7         1.47
+minus_errors          4815       0.4101       1.1109       0.0683       1826.4         1.37
+common_noun           4013       0.4169       1.1136       0.0693       1746.9         1.29
+proper                 802       0.4243       1.0938       0.0741        608.8         1.52
+
+wrote audit.json

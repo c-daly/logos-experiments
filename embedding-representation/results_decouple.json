@@ -1,0 +1,97 @@
+{
+  "model": "text-embedding-3-large",
+  "dim": 3072,
+  "n": 5330,
+  "arms": {
+    "name_sentence": {
+      "raw": {
+        "n": 5330,
+        "dim": 3072,
+        "anisotropy_centroid": 0.3686,
+        "pairwise_cos_mean": 0.1356,
+        "pairwise_cos_spread": 0.0791,
+        "nn_margin": 1.2525,
+        "effective_rank": 1616.7,
+        "participation_ratio": 133.4,
+        "intrinsic_dim_twonn": 5.08,
+        "hopkins": 0.713,
+        "variance_dims": {
+          "0.9": 538,
+          "0.95": 833,
+          "0.99": 1582
+        }
+      },
+      "whitened": {
+        "anisotropy_centroid": 0.0017,
+        "pairwise_cos_spread": 0.0119,
+        "nn_margin": 1.0794,
+        "intrinsic_dim_twonn": 16.0
+      },
+      "chunk_collapse": {
+        "nn_same_chunk": 0.583,
+        "expected_random": 0.003,
+        "ratio": 180.8
+      }
+    },
+    "chunk_centered": {
+      "raw": {
+        "n": 5330,
+        "dim": 3072,
+        "anisotropy_centroid": 0.008,
+        "pairwise_cos_mean": -0.0,
+        "pairwise_cos_spread": 0.0525,
+        "nn_margin": 1.2265,
+        "effective_rank": 1780.3,
+        "participation_ratio": 329.7,
+        "intrinsic_dim_twonn": 5.26,
+        "hopkins": 0.631,
+        "variance_dims": {
+          "0.9": 698,
+          "0.95": 1011,
+          "0.99": 1762
+        }
+      },
+      "whitened": {
+        "anisotropy_centroid": 0.0014,
+        "pairwise_cos_spread": 0.0119,
+        "nn_margin": 1.0488,
+        "intrinsic_dim_twonn": 25.04
+      },
+      "chunk_collapse": {
+        "nn_same_chunk": 0.335,
+        "expected_random": 0.003,
+        "ratio": 103.7
+      }
+    },
+    "chunk_residual": {
+      "raw": {
+        "n": 5330,
+        "dim": 3072,
+        "anisotropy_centroid": 0.2986,
+        "pairwise_cos_mean": 0.0889,
+        "pairwise_cos_spread": 0.0553,
+        "nn_margin": 1.2355,
+        "effective_rank": 1813.2,
+        "participation_ratio": 328.1,
+        "intrinsic_dim_twonn": 5.18,
+        "hopkins": 0.661,
+        "variance_dims": {
+          "0.9": 725,
+          "0.95": 1047,
+          "0.99": 1802
+        }
+      },
+      "whitened": {
+        "anisotropy_centroid": 0.0017,
+        "pairwise_cos_spread": 0.0119,
+        "nn_margin": 1.0802,
+        "intrinsic_dim_twonn": 15.85
+      },
+      "chunk_collapse": {
+        "nn_same_chunk": 0.455,
+        "expected_random": 0.003,
+        "ratio": 141.1
+      }
+    }
+  }
+}

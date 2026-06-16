@@ -1,0 +1,45 @@
+{
+  "n_entities": 5349,
+  "detectors": {
+    "measurement": 197,
+    "year_number": 144,
+    "has_digit": 282,
+    "too_long": 25,
+    "too_short": 49
+  },
+  "proper": 911,
+  "subsets": {
+    "raw": {
+      "n": 5344,
+      "anisotropy_centroid": 0.4058,
+      "nn_margin": 1.1096,
+      "pairwise_cos_spread": 0.0673,
+      "effective_rank": 1867.7,
+      "intrinsic_dim_twonn": 1.47
+    },
+    "minus_errors": {
+      "n": 4815,
+      "anisotropy_centroid": 0.4101,
+      "nn_margin": 1.1109,
+      "pairwise_cos_spread": 0.0683,
+      "effective_rank": 1826.4,
+      "intrinsic_dim_twonn": 1.37
+    },
+    "common_noun": {
+      "n": 4013,
+      "anisotropy_centroid": 0.4169,
+      "nn_margin": 1.1136,
+      "pairwise_cos_spread": 0.0693,
+      "effective_rank": 1746.9,
+      "intrinsic_dim_twonn": 1.29
+    },
+    "proper": {
+      "n": 802,
+      "anisotropy_centroid": 0.4243,
+      "nn_margin": 1.0938,
+      "pairwise_cos_spread": 0.0741,
+      "effective_rank": 608.8,
+      "intrinsic_dim_twonn": 1.52
+    }
+  }
+}
