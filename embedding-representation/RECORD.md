@@ -470,3 +470,50 @@ slot into correspondence later:
 Two concrete first moves when we resume: (1) chunk-independent **sense** embedding
 (small experiment, same harness); (2) revive **structural_signature** as a
 first-class facet (highest leverage). Full reasoning in the vault memories.
+
+## Run 3 — sense (gloss) facet; structure deferred (2026-06-16)
+
+`rescore.json`. One chunk-independent LLM definition per unique entity name
+(gpt-4o-mini, temp 0, 100% coverage of the 5330-entity sample), embedded with
+text-embedding-3-large/3072. Scored on best-cut silhouette + chunk_ratio.
+
+| arm | best_k | silhouette | chunk_ratio | |
+|-----|--------|------------|-------------|--|
+| name (baseline) | 266 | 0.062 | 37× | |
+| sentence | 265 | 0.181 | 177× | chunk-coupled (false) |
+| name_sentence | 264 | 0.132 | 181× | chunk-coupled (false) |
+| marked | 265 | 0.152 | 187× | chunk-coupled (false) |
+| chunk_centered | 2 | 0.224 | 104× | one coarse 2-way split |
+| **gloss** | 265 | **0.070** | **47×** | |
+| **name_gloss** | 265 | **0.069** | **46×** | |
+| (control ceiling) | | 0.213 | | clean external categories |
+
+**Verdict — the hypothesis split: chunk-independence held, separability did not.**
+
+1. **Chunk-clean (the good half).** gloss / name_gloss chunk_ratio ~46–47× ≈ the
+   name floor (37×), NOT the 177–187× of the passage arms. A generated definition
+   encodes entity-level *sense* without importing chunk geometry — the property no
+   prior context arm achieved.
+2. **No lift (the disappointing half).** silhouette 0.070 ≈ name 0.062, far below
+   the 0.213 control. The disambiguated sense added essentially nothing to cluster
+   separability.
+
+**Metric caveat.** On this within-domain continuum the only high silhouettes are
+chunk artefacts (sentence) or a coarse k=2 split (chunk_centered); the 0.213
+control was on artificially distinct categories. So best-cut silhouette may be near
+its floor for any fine-grained representation here — we cannot fully separate
+"gloss doesn't help" from "the metric can't see it." No positive signal either way.
+
+**Structure (relations) arm — built but DEFERRED.** `signatures.py` + the
+weighted-Jaccard scoring helpers are implemented and unit-tested, and the signature
+pull is at 100% coverage (mean 2.2 pairs/entity, IS_A-dominated). But scoring
+relations on the *current* graph is circular: neighbour-types come from emergence
+typing and node identity from entity-resolution — both downstream of the very
+bare-name representation under test. The un-confounded test requires a graph
+re-ingested with a better representation, then relations measured on that. Deferred
+to that spike.
+
+**Bottom line.** A richer single text channel does not manufacture crisp type
+structure from a within-domain continuum. Consistent with the 2026-06-15
+conclusion that the bottleneck is retrieval (query→passage) and the path forward is
+multi-view correspondence — not more single-channel representation arms.
