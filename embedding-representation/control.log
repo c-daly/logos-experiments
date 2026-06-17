@@ -1,0 +1,19 @@
+control: 80 bare names across 8 categories; embedding ...
+    embedded 80/80
+
+=== does the control SEPARATE? ===
+  within-category cosine : 0.423
+  between-category cosine: 0.221
+  separation (within-between): 0.201
+  cosine silhouette       : 0.213   (>0.1 = real clusters)
+  5-NN category purity    : 0.973   (1.0 = every neighbour same category)
+
+=== GLOBAL intrinsic battery on this KNOWN-clustered set vs our entities ===
+  metric                   control  our entities
+  anisotropy_centroid       0.5038         0.406
+  nn_margin                 1.0619          1.11
+  pairwise_cos_spread       0.0892         0.067
+  intrinsic_dim_twonn        26.68          1.47
+  hopkins                     0.56         0.619
+
+wrote control.json

@@ -1,0 +1,32 @@
+{
+  "name": {
+    "best_k": 266,
+    "silhouette": 0.0624,
+    "chunk_ratio": 37.4
+  },
+  "sentence": {
+    "best_k": 265,
+    "silhouette": 0.1807,
+    "chunk_ratio": 177.0
+  },
+  "name_sentence": {
+    "best_k": 264,
+    "silhouette": 0.1316,
+    "chunk_ratio": 180.8
+  },
+  "marked": {
+    "best_k": 265,
+    "silhouette": 0.1515,
+    "chunk_ratio": 186.6
+  },
+  "chunk_centered": {
+    "best_k": 2,
+    "silhouette": 0.2236,
+    "chunk_ratio": 103.7
+  },
+  "chunk_residual": {
+    "best_k": 2,
+    "silhouette": 0.1186,
+    "chunk_ratio": 141.1
+  }
+}

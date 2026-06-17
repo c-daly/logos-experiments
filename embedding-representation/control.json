@@ -1,0 +1,30 @@
+{
+  "within": 0.4229186177253723,
+  "between": 0.22146517038345337,
+  "silhouette": 0.2130456417798996,
+  "knn_purity": 0.9725,
+  "global_battery": {
+    "n": 80,
+    "dim": 3072,
+    "anisotropy_centroid": 0.5038,
+    "pairwise_cos_mean": 0.2444,
+    "pairwise_cos_spread": 0.0892,
+    "nn_margin": 1.0619,
+    "effective_rank": 74.0,
+    "participation_ratio": 42.8,
+    "intrinsic_dim_twonn": 26.68,
+    "hopkins": 0.56,
+    "variance_dims": {
+      "0.9": 59,
+      "0.95": 68,
+      "0.99": 77
+    }
+  },
+  "our_entities": {
+    "anisotropy_centroid": 0.406,
+    "nn_margin": 1.11,
+    "pairwise_cos_spread": 0.067,
+    "intrinsic_dim_twonn": 1.47,
+    "hopkins": 0.619
+  }
+}

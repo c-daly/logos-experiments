@@ -1,0 +1,127 @@
+{
+  "model": "text-embedding-3-large",
+  "dim": 3072,
+  "n": 5330,
+  "arms": {
+    "name": {
+      "raw": {
+        "n": 5330,
+        "dim": 3072,
+        "anisotropy_centroid": 0.4058,
+        "pairwise_cos_mean": 0.1643,
+        "pairwise_cos_spread": 0.0669,
+        "nn_margin": 1.1065,
+        "effective_rank": 1867.1,
+        "participation_ratio": 197.8,
+        "intrinsic_dim_twonn": 1.38,
+        "hopkins": 0.619,
+        "variance_dims": {
+          "0.9": 722,
+          "0.95": 1102,
+          "0.99": 1947
+        }
+      },
+      "whitened": {
+        "anisotropy_centroid": 0.0015,
+        "pairwise_cos_spread": 0.0112,
+        "nn_margin": 1.0309,
+        "intrinsic_dim_twonn": 1.6
+      },
+      "chunk_collapse": {
+        "nn_same_chunk": 0.121,
+        "expected_random": 0.003,
+        "ratio": 37.4
+      }
+    },
+    "sentence": {
+      "raw": {
+        "n": 5330,
+        "dim": 3072,
+        "anisotropy_centroid": 0.3313,
+        "pairwise_cos_mean": 0.1095,
+        "pairwise_cos_spread": 0.0832,
+        "nn_margin": 1.0,
+        "effective_rank": 1214.4,
+        "participation_ratio": 125.5,
+        "intrinsic_dim_twonn": 0.11,
+        "hopkins": 0.898,
+        "variance_dims": {
+          "0.9": 472,
+          "0.95": 705,
+          "0.99": 1227
+        }
+      },
+      "whitened": {
+        "anisotropy_centroid": 0.0274,
+        "pairwise_cos_spread": 0.0228,
+        "nn_margin": 1.0,
+        "intrinsic_dim_twonn": 0.09
+      },
+      "chunk_collapse": {
+        "nn_same_chunk": 0.571,
+        "expected_random": 0.003,
+        "ratio": 177.0
+      }
+    },
+    "name_sentence": {
+      "raw": {
+        "n": 5330,
+        "dim": 3072,
+        "anisotropy_centroid": 0.3686,
+        "pairwise_cos_mean": 0.1356,
+        "pairwise_cos_spread": 0.0791,
+        "nn_margin": 1.2525,
+        "effective_rank": 1616.7,
+        "participation_ratio": 133.4,
+        "intrinsic_dim_twonn": 5.08,
+        "hopkins": 0.713,
+        "variance_dims": {
+          "0.9": 538,
+          "0.95": 833,
+          "0.99": 1582
+        }
+      },
+      "whitened": {
+        "anisotropy_centroid": 0.0017,
+        "pairwise_cos_spread": 0.0119,
+        "nn_margin": 1.0794,
+        "intrinsic_dim_twonn": 16.0
+      },
+      "chunk_collapse": {
+        "nn_same_chunk": 0.583,
+        "expected_random": 0.003,
+        "ratio": 180.8
+      }
+    },
+    "marked": {
+      "raw": {
+        "n": 5330,
+        "dim": 3072,
+        "anisotropy_centroid": 0.3539,
+        "pairwise_cos_mean": 0.125,
+        "pairwise_cos_spread": 0.0829,
+        "nn_margin": 1.2755,
+        "effective_rank": 1518.1,
+        "participation_ratio": 123.2,
+        "intrinsic_dim_twonn": 3.23,
+        "hopkins": 0.765,
+        "variance_dims": {
+          "0.9": 496,
+          "0.95": 764,
+          "0.99": 1441
+        }
+      },
+      "whitened": {
+        "anisotropy_centroid": 0.0043,
+        "pairwise_cos_spread": 0.0125,
+        "nn_margin": 1.1007,
+        "intrinsic_dim_twonn": 9.72
+      },
+      "chunk_collapse": {
+        "nn_same_chunk": 0.602,
+        "expected_random": 0.003,
+        "ratio": 186.6
+      }
+    }
+  }
+}

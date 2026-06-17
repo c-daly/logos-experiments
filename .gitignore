@@ -20,3 +20,8 @@ structural-edge-prediction/workspace/
 .idea/
 .vscode/
 .DS_Store
+
+# embedding-representation: large local artifacts (cached vectors ~340MB; sample
+# pull is regenerable via sample.py). Keep snapshots small.
+embedding-representation/.cache/
+embedding-representation/sample.json
