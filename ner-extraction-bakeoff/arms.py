@@ -159,6 +159,53 @@ _VOCAB_CLAUSE = (
 )
 
 
+def _extract_json(content: str) -> dict:
+    """Parse JSON from a model response that may contain a <think>...</think>
+    preamble (Qwen3 thinking mode) or a fenced code block.
+
+    Resolution order:
+    1. Strip any leading ``<think>...</think>`` block (and surrounding whitespace).
+    2. Try json.loads on the cleaned text directly.
+    3. Try the first fenced ```json``` or ``` block.
+    4. Try the substring from the first ``{`` to the last ``}`` (handles prose
+       preamble the model emitted before the JSON object).
+    5. Raise ValueError -- callers must surface parse failures; silent {} would
+       make every sentence score 0 entities/relations with no recorded failure.
+    """
+    import re as _re
+
+    # Step 1: strip <think>...</think> (Qwen3 thinking mode, possibly nested).
+    cleaned = _re.sub(r"<think>.*?</think>", "", content, flags=_re.DOTALL).strip()
+
+    # Step 2: direct parse.
+    try:
+        return json.loads(cleaned)
+    except json.JSONDecodeError:
+        pass
+
+    # Step 3: fenced code block.
+    m = _re.search(r"```(?:json)?\s*(.*?)```", cleaned, _re.DOTALL)
+    if m:
+        try:
+            return json.loads(m.group(1))
+        except json.JSONDecodeError:
+            pass
+
+    # Step 4: brace-delimited substring (handles prose preamble after think strip).
+    start = cleaned.find("{")
+    end = cleaned.rfind("}")
+    if start != -1 and end > start:
+        try:
+            return json.loads(cleaned[start : end + 1])
+        except json.JSONDecodeError:
+            pass
+
+    raise ValueError(
+        f"_llm_extract: no valid JSON found in model response "
+        f"(first 200 chars of raw content: {content[:200]!r})"
+    )
+
+
 async def _llm_extract(text: str, system: str, model: str | None):
     """Run an open-prompt NER+RE extraction via generate_completion. The
     model is passed PER CALL (the only reliable override -- HERMES_LLM_MODEL
@@ -176,16 +223,7 @@ async def _llm_extract(text: str, system: str, model: str | None):
         metadata={"scenario": "bakeoff"},
     )
     content = result.get("choices", [{}])[0].get("message", {}).get("content", "")
-    try:
-        data = json.loads(content)
-    except json.JSONDecodeError:
-        import re as _re
-
-        m = _re.search(r"```(?:json)?\s*(.*?)```", content, _re.DOTALL)
-        try:
-            data = json.loads(m.group(1)) if m else {}
-        except json.JSONDecodeError:
-            data = {}
+    data = _extract_json(content)
     return _norm_entities(data.get("entities")), _norm_relations(data.get("relations"))
 
 
@@ -353,6 +391,38 @@ async def big_model_clean(text: str):
     return await _llm_extract(text, system, model=model)
 
 
+async def local_clean(text: str):
+    """Local LLM (llama.cpp via HERMES_LLM_BASE_URL) + clean compact vocab -- can a
+    local model match gpt-4o-mini's clean-vocab extraction at $0? The bakeoff's own
+    finding is that closed-vocab is the lever (not model size), so a competent local
+    model + clean vocab should land close. Mirror of big_model_clean, local endpoint.
+
+    Requires HERMES_LLM_BASE_URL to point at the local llama.cpp endpoint; without it
+    the hermes LLM provider will route to the OpenAI default and the model name will
+    be unrecognised there."""
+    if not os.environ.get("HERMES_LLM_BASE_URL"):
+        raise RuntimeError(
+            "local_clean requires HERMES_LLM_BASE_URL (e.g. http://localhost:8080/v1)"
+        )
+    model = os.environ.get("BAKEOFF_LOCAL_MODEL", "qwen3-instruct")
+    system = _BASE_SYSTEM + _VOCAB_CLAUSE.format(vocab=", ".join(_CLEAN_VOCAB))
+    return await _llm_extract(text, system, model=model)
+
+
+async def local_open(text: str):
+    """Local LLM, open prompt (no vocab) -- the local analogue of big_model.
+
+    Requires HERMES_LLM_BASE_URL to point at the local llama.cpp endpoint; without it
+    the hermes LLM provider will route to the OpenAI default and the model name will
+    be unrecognised there."""
+    if not os.environ.get("HERMES_LLM_BASE_URL"):
+        raise RuntimeError(
+            "local_open requires HERMES_LLM_BASE_URL (e.g. http://localhost:8080/v1)"
+        )
+    model = os.environ.get("BAKEOFF_LOCAL_MODEL", "qwen3-instruct")
+    return await _llm_extract(text, _BASE_SYSTEM, model=model)
+
+
 # NB: contains literal JSON braces, so it must NOT be .format()'d directly --
 # only _VOCAB_CLAUSE (which has the {vocab} field) is formatted, then appended.
 _REL_ONLY_SYSTEM = (
@@ -406,6 +476,9 @@ ARMS = {
     "ranked_window_32": ranked_window_32,    # size probe: top-32 of the ranked vocab
     "big_model": big_model,                  # gpt-4o, open prompt
     "big_model_clean": big_model_clean,      # gpt-4o + clean vocab
+    # local LLM (llama.cpp via HERMES_LLM_BASE_URL) -- can we drop the cloud for NER?
+    "local_clean": local_clean,              # local model + clean vocab (vs closed_vocab_clean)
+    "local_open": local_open,                # local model, open prompt (vs big_model)
     # spaCy node extractors (free/local) + dependency RE
     "spacy": spacy,                          # NER (doc.ents) -- the ceiling
     "spacy_pos": spacy_pos,                  # NOUN/PROPN tokens
