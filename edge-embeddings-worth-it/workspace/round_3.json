@@ -1,0 +1,2583 @@
+{
+  "round": 3,
+  "seed_n": 1,
+  "smoke": false,
+  "min_cluster_size": 2,
+  "counts": {
+    "entity_nodes": 172,
+    "edge_nodes": 172,
+    "node_members": 164,
+    "node_dropped_junk": 8,
+    "edge_members": 107,
+    "edge_structural_excluded": 63,
+    "edge_embeddings_new": 170
+  },
+  "entity_filter": true,
+  "entity_domains": {
+    "c2d29894-d5b1-4049-ac2c-cfb26417aa62": "animals",
+    "0d0da210-d504-4b90-abca-cbba883573c9": "animals",
+    "d1203713-ce89-4bd3-baef-b0fa079f1d23": "animals",
+    "a006ce58-cb16-4d5c-928e-a09509758007": "animals",
+    "74401073-6f0e-4455-a72b-afa5d996f7c7": "animals",
+    "727caf0a-8648-4fab-82f7-58c8f9b06e24": "animals",
+    "f67f602c-3d03-4158-a2ce-0eb6a820a4f9": "animals",
+    "eb4a1bc7-5f99-402c-8885-c6c52972fef2": "animals",
+    "933dfb76-e42e-4b72-9a5c-8975e29542ac": "animals",
+    "c6d74c3b-0893-4753-a579-425310c0d8dd": "animals",
+    "a991333e-5803-4490-9560-99107d3ca167": "animals",
+    "e6ccdb1d-f3d3-4f1b-ac64-e125ce237771": "animals",
+    "2b1539db-612f-4df7-bce8-eb05bafb0888": "animals",
+    "57ffa589-dde3-4f43-913f-251bb7f79e4d": "animals",
+    "fdfd0c69-8de1-4f8d-bcb3-1536eb607bc9": "animals",
+    "01000e4a-554d-437e-b4eb-a2e083c7031a": "animals",
+    "893bcd14-7d4c-4790-984b-e9d2d24daa81": "animals",
+    "c90a5af5-b70f-4608-b41d-d672d5fa48b7": "animals",
+    "712c668f-9417-49a7-85f5-2316981cea0a": "animals",
+    "d35e00aa-f45d-4de1-8fc1-84a104986e66": "animals",
+    "f180ded2-b8d1-44a1-90ae-d53b0f6e0108": "animals",
+    "50396a2a-a34a-4be7-84b7-76050b6246ed": "animals",
+    "e99bfc36-28a0-41b5-b648-d1af9e9c9066": "animals",
+    "511199b9-bad8-4df8-a89b-e4e41e9bda12": "animals",
+    "413f59e7-6343-4517-ae7b-541418ccdc2e": "animals",
+    "bcb1bb73-38b2-4dc9-8486-b6f822e861e0": "animals",
+    "a11a5128-9639-4037-b101-55dc55fe6a8d": "animals",
+    "69d3b394-1027-4403-8ad7-96731b6f3e3f": "animals",
+    "53cf76b7-3aa8-413c-8330-0193b8bc48d3": "animals",
+    "5dc64acb-9f91-4ed3-9d4c-2979b533d952": "animals",
+    "8292fb5b-1908-4e76-8b59-d29be14e3dcb": "lab_instruments",
+    "21d37a37-5663-4a9a-95aa-841a9f542b54": "lab_instruments",
+    "10546154-a030-4457-8510-3a8e660e9efb": "lab_instruments",
+    "19eece7f-5590-4f5e-8f6d-5a6e6025dca4": "lab_instruments",
+    "0de5157e-f470-41d7-9f8f-c1c9c029a33d": "lab_instruments",
+    "90549376-824e-4d25-bebf-1e4736a86c67": "lab_instruments",
+    "7da85930-46ae-44a9-8700-14b82489406f": "lab_instruments",
+    "48bba8a1-234e-4d73-b325-2a1ef48b2eba": "lab_instruments",
+    "0fbaac0f-4d67-47f0-b24b-b4ee7b98c321": "lab_instruments",
+    "b072e0b0-3c75-4c54-afa6-d0a4fdae3d45": "lab_instruments",
+    "afe4c8b2-66b2-4ee0-85dd-5e4975d895fb": "lab_instruments",
+    "e2296978-6048-40e8-b2ec-9c836b897a73": "lab_instruments",
+    "7f3d76b9-0ac6-4fca-8721-e0bc61bd3db1": "lab_instruments",
+    "5034a67d-00b9-4338-9b1b-c26bd0700ca5": "lab_instruments",
+    "301a5167-5f0b-4638-b192-d13966dfe7a8": "lab_instruments",
+    "21131034-c629-49e0-9384-3fefb7f11f26": "lab_instruments",
+    "710481b7-6ee5-408c-83b5-0f1ed72f2282": "lab_instruments",
+    "f8939f6d-4819-45ab-b3ad-7026abf9bc41": "lab_instruments",
+    "b651f89f-e280-48e6-820f-46f7ef5a0648": "lab_instruments",
+    "e9dea2dc-dc7d-4b30-8a57-f4cd0a9b7f16": "lab_instruments",
+    "353ec2a2-0405-4564-9b45-1122f1f9d93e": "lab_instruments",
+    "c7160059-2fe5-446e-add6-3029bbbc9df9": "lab_instruments",
+    "ea154e2b-3615-45f4-bc37-66351f647831": "lab_instruments",
+    "742a2b92-9259-4a78-b412-23145d4f2988": "lab_instruments",
+    "9847f31f-cb91-4a56-b63b-70ac04f526a5": "lab_instruments",
+    "a69eabb4-f56e-44d3-93ef-9a4c5e2a0227": "math_physics",
+    "ca57bed2-cf62-40c5-b3ee-36132918ef9a": "math_physics",
+    "4bfd4773-22b3-4c0b-9e3f-b3f876a8960e": "math_physics",
+    "f80a46f5-06fd-4984-b0a9-214067545053": "math_physics",
+    "43228baa-d600-403c-bc03-50b779d37e41": "math_physics",
+    "55f7597e-b511-4f3c-b514-230ce1c34bcd": "math_physics",
+    "9bb7b535-a954-47ae-9642-1eb133a12ea8": "math_physics",
+    "e20e424a-c7f5-4bde-a5e9-22ff12b0f930": "math_physics",
+    "de4ba9e8-5d3e-45c2-9d13-df7945815b7e": "math_physics",
+    "b1b1d356-0580-48ab-97f9-dcebf8c49fb9": "math_physics",
+    "827f08ab-d652-4068-82f0-226c7a9d7ff6": "math_physics",
+    "d5450031-93fd-45cd-89cc-d73d106a9221": "math_physics",
+    "9987683f-2521-4cd3-ad43-550f7f10de26": "math_physics",
+    "c288986e-65d0-49d8-998f-6f98346adcc1": "math_physics",
+    "fdddd97e-ede0-4f22-94af-7a7d1a8583c9": "math_physics",
+    "c6344ab8-7387-41a4-96e3-2a8e13f20637": "math_physics",
+    "0cca730f-4a6e-4b96-8b62-9f8f09d3d8c0": "math_physics",
+    "51b65b7d-14e2-446e-be8a-017cd50de0b0": "math_physics",
+    "f135ecae-4e0f-41ab-97a7-3ed55e082de2": "math_physics",
+    "792a0d68-df53-472a-badc-94716560d8a7": "math_physics",
+    "487cc1cf-903d-4e1c-be25-e9b829eee087": "math_physics",
+    "75e23028-d235-4456-a88c-45348b21b933": "math_physics",
+    "5c80216b-7e57-4fb2-bc54-e6a86dbf9e3d": "math_physics",
+    "9a6ef133-687c-4868-823c-47c646ecd61e": "vehicles",
+    "dc327b47-3b4b-4db4-9961-dfb1b63d2736": "vehicles",
+    "1a905b39-cbab-4e9f-8bbc-7eeddfd5f8c4": "vehicles",
+    "85309caa-6753-4e75-8c8e-0eb691790076": "vehicles",
+    "f9884d71-62be-4c70-b5dc-75b0ca2960e0": "vehicles",
+    "1e9f04b0-a456-487f-9c40-e79af7858142": "vehicles",
+    "c7e3c553-4f8f-4aed-95ac-6c92bcb71512": "vehicles",
+    "07fb65b3-1e73-41d8-a528-e498a62724bf": "vehicles",
+    "1df1bd8b-c832-4a8e-a574-c06c90d3a2e7": "vehicles",
+    "71526906-4bdb-41a8-9bec-7d17ac365927": "vehicles",
+    "cbb0ced2-1eb3-4302-b1b8-58bbb992720a": "vehicles",
+    "a0db5adc-7893-49c5-9175-4a697b8546ab": "vehicles",
+    "036ff296-42f4-435e-96c6-46d2867d9000": "vehicles",
+    "4532b361-5ec4-45ff-866f-302f79537500": "vehicles",
+    "526be72d-67ae-4e09-b4ea-7b6a279cefa2": "vehicles",
+    "600b1b44-fd89-4bc5-83d0-cdfd110ff58b": "vehicles",
+    "745bc496-0694-49be-b62a-bfed5ff07ce7": "vehicles",
+    "c00e5044-0a02-46a6-ada6-d8b570addc2d": "vehicles",
+    "1886c6fe-ba8e-4f0f-8d3b-c2139eb89383": "vehicles",
+    "0f2444a6-0fac-4473-9fc3-944e73dde4b1": "vehicles",
+    "e7516179-5100-4b9e-96fe-a49bb1b689ff": "vehicles",
+    "2eb154c9-6c4e-4ca9-9887-6895d0822ca0": "vehicles",
+    "3976a012-c687-4bb9-9878-d5b8c83bb1c1": "plants",
+    "2753ddbf-6882-4193-8881-ef40b3730a69": "plants",
+    "fa8052ae-3fd7-4626-8ea3-e1d163f6fb3f": "plants",
+    "b22ab356-7b86-4d60-9028-1ada970d6fd5": "plants",
+    "0fac109c-5d14-4ec4-82b8-44eafd5a0d5d": "plants",
+    "b0fa4db2-79be-4174-b218-333fb1c52bb9": "plants",
+    "418a84af-95d4-45dc-a7df-88b7034fe9cf": "plants",
+    "9e84a9af-f798-4eaa-abc4-e50b2d0c9e0e": "plants",
+    "d3638378-c9a9-487e-bd5f-c38d68331b9b": "plants",
+    "a96a23ce-2f8d-4c06-b86b-258594f2dd26": "plants",
+    "8c536b55-6588-4362-afa4-49b719cdeba6": "plants",
+    "1e3b2d19-ed3c-49c0-9b9c-274bced046ca": "plants",
+    "99d92ecd-cc17-4347-8c64-61a178af30eb": "plants",
+    "755ddedc-97d9-4ec6-b822-82f4fc956aac": "plants",
+    "6f452635-6fe5-4e16-b28e-f5c386dd5a84": "plants",
+    "bdacb9f5-689b-4062-a667-c1d1348ff546": "plants",
+    "46ae7754-be61-4375-9fae-56e80acba70d": "plants",
+    "eff1de0e-dde9-4e1c-933b-dd9997898843": "plants",
+    "58d49c2c-18d4-42ee-9ff4-2ab571b19b66": "plants",
+    "79c11635-1244-47d1-a348-de6c1931c4fb": "plants",
+    "09af331c-62bf-4b92-b398-a47cc4e9af23": "plants",
+    "a53b2bad-8c1e-4a3c-8966-7775cca82cd9": "plants",
+    "e1d9e735-4832-4453-b642-33d434f88a09": "plants",
+    "d2eb2b3c-7efc-4877-8ce3-be66a499a6d5": "plants",
+    "3b1e2ad4-14d1-4fd0-869e-07e20b1a127b": "plants",
+    "fb68edfe-e3fd-4f6e-9751-da33f87ae241": "celestial_bodies",
+    "32e75db6-9c01-409c-9905-46955025bc43": "celestial_bodies",
+    "01e5b335-ad41-4265-bdd8-c4abc608086a": "celestial_bodies",
+    "32ad6e4a-cca4-44e2-8089-7ee4d0cf59d5": "celestial_bodies",
+    "c6fb5ec3-4dec-48e4-ab66-5f36ebad30a8": "celestial_bodies",
+    "d78d0bec-bf5a-403b-9e3c-e95cfe21f7ed": "celestial_bodies",
+    "57708976-34bc-4ffa-8ed2-dff575833ba0": "celestial_bodies",
+    "4fecff23-5149-45cd-a4c5-6c423ef941ab": "celestial_bodies",
+    "5491409d-596c-495e-967c-7cb2114f58f7": "celestial_bodies",
+    "837a33f2-a63b-4165-ae8a-7748ddccb7ec": "celestial_bodies",
+    "5ff95f3f-30ce-4976-b261-cbb824a2d383": "celestial_bodies",
+    "41b1e002-e182-4c0b-b29b-24d45d82b7d6": "celestial_bodies",
+    "352af36b-59e4-469c-915b-1fc7825fcb4b": "celestial_bodies",
+    "74287f4e-0ec6-4137-8fe6-0eeaf45b603b": "celestial_bodies",
+    "713897af-feba-478d-975d-d99cdfc9a7df": "celestial_bodies",
+    "6e06d0ae-7243-47b8-b3e0-f2c7f6458fa7": "celestial_bodies",
+    "644a96b2-aaea-4a1a-b528-9d05427fea17": "celestial_bodies",
+    "8fc6711e-45dc-4014-b367-642c5998e1bc": "celestial_bodies",
+    "bafb7ca2-69ca-4231-9247-28a32de046ca": "celestial_bodies",
+    "338375df-0a08-426d-a124-3e642e5221a3": "celestial_bodies",
+    "e910c23e-f1e5-47e8-b0c1-223a360c19e7": "celestial_bodies",
+    "65c310ee-4f6f-427f-89c5-02c68ceca5d2": "celestial_bodies",
+    "8924a015-2b7e-4181-9ef2-9cd9e540f3c8": "celestial_bodies"
+  },
+  "entity_sentences": {
+    "c2d29894-d5b1-4049-ac2c-cfb26417aa62": "The cheetah sprints across the savanna faster than any other land animal.",
+    "0d0da210-d504-4b90-abca-cbba883573c9": "The cheetah sprints across the savanna faster than any other land animal.",
+    "d1203713-ce89-4bd3-baef-b0fa079f1d23": "The cheetah sprints across the savanna faster than any other land animal.",
+    "a006ce58-cb16-4d5c-928e-a09509758007": "The peregrine falcon dives toward its prey at tremendous speed.",
+    "74401073-6f0e-4455-a72b-afa5d996f7c7": "The peregrine falcon dives toward its prey at tremendous speed.",
+    "727caf0a-8648-4fab-82f7-58c8f9b06e24": "The peregrine falcon dives toward its prey at tremendous speed.",
+    "f67f602c-3d03-4158-a2ce-0eb6a820a4f9": "The peregrine falcon dives toward its prey at tremendous speed.",
+    "eb4a1bc7-5f99-402c-8885-c6c52972fef2": "The grizzly bear forages for berries before its winter hibernation.",
+    "933dfb76-e42e-4b72-9a5c-8975e29542ac": "The grizzly bear forages for berries before its winter hibernation.",
+    "c6d74c3b-0893-4753-a579-425310c0d8dd": "The grizzly bear forages for berries before its winter hibernation.",
+    "a991333e-5803-4490-9560-99107d3ca167": "A chameleon shifts its skin color to blend with the branch.",
+    "e6ccdb1d-f3d3-4f1b-ac64-e125ce237771": "A chameleon shifts its skin color to blend with the branch.",
+    "2b1539db-612f-4df7-bce8-eb05bafb0888": "A chameleon shifts its skin color to blend with the branch.",
+    "57ffa589-dde3-4f43-913f-251bb7f79e4d": "A honeybee carries pollen back from the meadow to the hive.",
+    "fdfd0c69-8de1-4f8d-bcb3-1536eb607bc9": "A honeybee carries pollen back from the meadow to the hive.",
+    "01000e4a-554d-437e-b4eb-a2e083c7031a": "A honeybee carries pollen back from the meadow to the hive.",
+    "893bcd14-7d4c-4790-984b-e9d2d24daa81": "The gray wolf hunts in a coordinated pack across the tundra.",
+    "c90a5af5-b70f-4608-b41d-d672d5fa48b7": "The gray wolf hunts in a coordinated pack across the tundra.",
+    "712c668f-9417-49a7-85f5-2316981cea0a": "A komodo dragon ambushes the deer with a venomous bite.",
+    "d35e00aa-f45d-4de1-8fc1-84a104986e66": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "f180ded2-b8d1-44a1-90ae-d53b0f6e0108": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "50396a2a-a34a-4be7-84b7-76050b6246ed": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "e99bfc36-28a0-41b5-b648-d1af9e9c9066": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "511199b9-bad8-4df8-a89b-e4e41e9bda12": "The red kangaroo bounds across the outback on powerful hind legs.",
+    "413f59e7-6343-4517-ae7b-541418ccdc2e": "The red kangaroo bounds across the outback on powerful hind legs.",
+    "bcb1bb73-38b2-4dc9-8486-b6f822e861e0": "The red kangaroo bounds across the outback on powerful hind legs.",
+    "a11a5128-9639-4037-b101-55dc55fe6a8d": "The red kangaroo bounds across the outback on powerful hind legs.",
+    "69d3b394-1027-4403-8ad7-96731b6f3e3f": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "53cf76b7-3aa8-413c-8330-0193b8bc48d3": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "5dc64acb-9f91-4ed3-9d4c-2979b533d952": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "8292fb5b-1908-4e76-8b59-d29be14e3dcb": "The mass spectrometer ionizes the sample and sorts ions by mass.",
+    "21d37a37-5663-4a9a-95aa-841a9f542b54": "The mass spectrometer ionizes the sample and sorts ions by mass.",
+    "10546154-a030-4457-8510-3a8e660e9efb": "The mass spectrometer ionizes the sample and sorts ions by mass.",
+    "19eece7f-5590-4f5e-8f6d-5a6e6025dca4": "A pipette dispenses a precise microliter volume into the well plate.",
+    "0de5157e-f470-41d7-9f8f-c1c9c029a33d": "A pipette dispenses a precise microliter volume into the well plate.",
+    "90549376-824e-4d25-bebf-1e4736a86c67": "A pipette dispenses a precise microliter volume into the well plate.",
+    "7da85930-46ae-44a9-8700-14b82489406f": "An autoclave sterilizes the glassware with pressurized steam.",
+    "48bba8a1-234e-4d73-b325-2a1ef48b2eba": "An autoclave sterilizes the glassware with pressurized steam.",
+    "0fbaac0f-4d67-47f0-b24b-b4ee7b98c321": "An autoclave sterilizes the glassware with pressurized steam.",
+    "b072e0b0-3c75-4c54-afa6-d0a4fdae3d45": "An autoclave sterilizes the glassware with pressurized steam.",
+    "afe4c8b2-66b2-4ee0-85dd-5e4975d895fb": "A Bunsen burner heats the flask over a steady blue flame.",
+    "e2296978-6048-40e8-b2ec-9c836b897a73": "A Bunsen burner heats the flask over a steady blue flame.",
+    "7f3d76b9-0ac6-4fca-8721-e0bc61bd3db1": "A Bunsen burner heats the flask over a steady blue flame.",
+    "5034a67d-00b9-4338-9b1b-c26bd0700ca5": "A pH meter reports the acidity of the buffer solution.",
+    "301a5167-5f0b-4638-b192-d13966dfe7a8": "A pH meter reports the acidity of the buffer solution.",
+    "21131034-c629-49e0-9384-3fefb7f11f26": "A pH meter reports the acidity of the buffer solution.",
+    "710481b7-6ee5-408c-83b5-0f1ed72f2282": "A pH meter reports the acidity of the buffer solution.",
+    "f8939f6d-4819-45ab-b3ad-7026abf9bc41": "An analytical balance weighs the reagent to the nearest milligram.",
+    "b651f89f-e280-48e6-820f-46f7ef5a0648": "An analytical balance weighs the reagent to the nearest milligram.",
+    "e9dea2dc-dc7d-4b30-8a57-f4cd0a9b7f16": "An analytical balance weighs the reagent to the nearest milligram.",
+    "353ec2a2-0405-4564-9b45-1122f1f9d93e": "An analytical balance weighs the reagent to the nearest milligram.",
+    "c7160059-2fe5-446e-add6-3029bbbc9df9": "A microtome slices the tissue into ultra-thin sections for the slide.",
+    "ea154e2b-3615-45f4-bc37-66351f647831": "A microtome slices the tissue into ultra-thin sections for the slide.",
+    "742a2b92-9259-4a78-b412-23145d4f2988": "A microtome slices the tissue into ultra-thin sections for the slide.",
+    "9847f31f-cb91-4a56-b63b-70ac04f526a5": "A microtome slices the tissue into ultra-thin sections for the slide.",
+    "a69eabb4-f56e-44d3-93ef-9a4c5e2a0227": "The gradient ∇f points in the direction of steepest ascent of the scalar field.",
+    "ca57bed2-cf62-40c5-b3ee-36132918ef9a": "The gradient ∇f points in the direction of steepest ascent of the scalar field.",
+    "4bfd4773-22b3-4c0b-9e3f-b3f876a8960e": "The gradient ∇f points in the direction of steepest ascent of the scalar field.",
+    "f80a46f5-06fd-4984-b0a9-214067545053": "The summation ∑ accumulates each term of the infinite series.",
+    "43228baa-d600-403c-bc03-50b779d37e41": "The summation ∑ accumulates each term of the infinite series.",
+    "55f7597e-b511-4f3c-b514-230ce1c34bcd": "A partial derivative ∂u/∂x measures change while the other variables stay fixed.",
+    "9bb7b535-a954-47ae-9642-1eb133a12ea8": "A partial derivative ∂u/∂x measures change while the other variables stay fixed.",
+    "e20e424a-c7f5-4bde-a5e9-22ff12b0f930": "A partial derivative ∂u/∂x measures change while the other variables stay fixed.",
+    "de4ba9e8-5d3e-45c2-9d13-df7945815b7e": "A mass spectrum plots intensity against the mass-to-charge ratio m/z.",
+    "b1b1d356-0580-48ab-97f9-dcebf8c49fb9": "A mass spectrum plots intensity against the mass-to-charge ratio m/z.",
+    "827f08ab-d652-4068-82f0-226c7a9d7ff6": "A mass spectrum plots intensity against the mass-to-charge ratio m/z.",
+    "d5450031-93fd-45cd-89cc-d73d106a9221": "The wavefunction ψ encodes the probability amplitude of the particle.",
+    "9987683f-2521-4cd3-ad43-550f7f10de26": "The wavefunction ψ encodes the probability amplitude of the particle.",
+    "c288986e-65d0-49d8-998f-6f98346adcc1": "The wavefunction ψ encodes the probability amplitude of the particle.",
+    "fdddd97e-ede0-4f22-94af-7a7d1a8583c9": "A photon of frequency ν carries energy proportional to Planck’s constant.",
+    "c6344ab8-7387-41a4-96e3-2a8e13f20637": "A photon of frequency ν carries energy proportional to Planck’s constant.",
+    "0cca730f-4a6e-4b96-8b62-9f8f09d3d8c0": "A photon of frequency ν carries energy proportional to Planck’s constant.",
+    "51b65b7d-14e2-446e-be8a-017cd50de0b0": "A vector field ⃗F can be decomposed into curl-free and divergence-free parts.",
+    "f135ecae-4e0f-41ab-97a7-3ed55e082de2": "A vector field ⃗F can be decomposed into curl-free and divergence-free parts.",
+    "792a0d68-df53-472a-badc-94716560d8a7": "A vector field ⃗F can be decomposed into curl-free and divergence-free parts.",
+    "487cc1cf-903d-4e1c-be25-e9b829eee087": "The eigenvalue λ satisfies the characteristic equation of the matrix.",
+    "75e23028-d235-4456-a88c-45348b21b933": "The eigenvalue λ satisfies the characteristic equation of the matrix.",
+    "5c80216b-7e57-4fb2-bc54-e6a86dbf9e3d": "The eigenvalue λ satisfies the characteristic equation of the matrix.",
+    "9a6ef133-687c-4868-823c-47c646ecd61e": "The locomotive hauls a long freight train across the mountain pass.",
+    "dc327b47-3b4b-4db4-9961-dfb1b63d2736": "The locomotive hauls a long freight train across the mountain pass.",
+    "1a905b39-cbab-4e9f-8bbc-7eeddfd5f8c4": "The locomotive hauls a long freight train across the mountain pass.",
+    "85309caa-6753-4e75-8c8e-0eb691790076": "The locomotive hauls a long freight train across the mountain pass.",
+    "f9884d71-62be-4c70-b5dc-75b0ca2960e0": "A hydrofoil lifts its hull above the water as it accelerates.",
+    "1e9f04b0-a456-487f-9c40-e79af7858142": "The cargo ship ferries containers across the open ocean.",
+    "c7e3c553-4f8f-4aed-95ac-6c92bcb71512": "The cargo ship ferries containers across the open ocean.",
+    "07fb65b3-1e73-41d8-a528-e498a62724bf": "The cargo ship ferries containers across the open ocean.",
+    "1df1bd8b-c832-4a8e-a574-c06c90d3a2e7": "The cargo ship ferries containers across the open ocean.",
+    "71526906-4bdb-41a8-9bec-7d17ac365927": "The electric sedan recharges its battery at the roadside station.",
+    "cbb0ced2-1eb3-4302-b1b8-58bbb992720a": "A submarine dives beneath the thermocline to evade detection.",
+    "a0db5adc-7893-49c5-9175-4a697b8546ab": "A submarine dives beneath the thermocline to evade detection.",
+    "036ff296-42f4-435e-96c6-46d2867d9000": "The bullet train glides along the maglev track at high speed.",
+    "4532b361-5ec4-45ff-866f-302f79537500": "The bullet train glides along the maglev track at high speed.",
+    "526be72d-67ae-4e09-b4ea-7b6a279cefa2": "A glider rides the thermal updraft without any engine.",
+    "600b1b44-fd89-4bc5-83d0-cdfd110ff58b": "The airliner taxis to the runway before its transatlantic flight.",
+    "745bc496-0694-49be-b62a-bfed5ff07ce7": "A hot-air balloon drifts over the valley with the morning breeze.",
+    "c00e5044-0a02-46a6-ada6-d8b570addc2d": "A hot-air balloon drifts over the valley with the morning breeze.",
+    "1886c6fe-ba8e-4f0f-8d3b-c2139eb89383": "A hot-air balloon drifts over the valley with the morning breeze.",
+    "0f2444a6-0fac-4473-9fc3-944e73dde4b1": "A forklift stacks pallets in the warehouse aisle.",
+    "e7516179-5100-4b9e-96fe-a49bb1b689ff": "A forklift stacks pallets in the warehouse aisle.",
+    "2eb154c9-6c4e-4ca9-9887-6895d0822ca0": "A forklift stacks pallets in the warehouse aisle.",
+    "3976a012-c687-4bb9-9878-d5b8c83bb1c1": "The redwood towers over the forest as one of the tallest living trees.",
+    "2753ddbf-6882-4193-8881-ef40b3730a69": "The redwood towers over the forest as one of the tallest living trees.",
+    "fa8052ae-3fd7-4626-8ea3-e1d163f6fb3f": "The redwood towers over the forest as one of the tallest living trees.",
+    "b22ab356-7b86-4d60-9028-1ada970d6fd5": "The Venus flytrap snaps shut on an insect that touches its hairs.",
+    "0fac109c-5d14-4ec4-82b8-44eafd5a0d5d": "The Venus flytrap snaps shut on an insect that touches its hairs.",
+    "b0fa4db2-79be-4174-b218-333fb1c52bb9": "The Venus flytrap snaps shut on an insect that touches its hairs.",
+    "418a84af-95d4-45dc-a7df-88b7034fe9cf": "The Venus flytrap snaps shut on an insect that touches its hairs.",
+    "9e84a9af-f798-4eaa-abc4-e50b2d0c9e0e": "The saguaro cactus stores water in its ribbed green trunk.",
+    "d3638378-c9a9-487e-bd5f-c38d68331b9b": "The saguaro cactus stores water in its ribbed green trunk.",
+    "a96a23ce-2f8d-4c06-b86b-258594f2dd26": "The saguaro cactus stores water in its ribbed green trunk.",
+    "8c536b55-6588-4362-afa4-49b719cdeba6": "The saguaro cactus stores water in its ribbed green trunk.",
+    "1e3b2d19-ed3c-49c0-9b9c-274bced046ca": "The saguaro cactus stores water in its ribbed green trunk.",
+    "99d92ecd-cc17-4347-8c64-61a178af30eb": "The orchid anchors its roots to the bark of a rainforest tree.",
+    "755ddedc-97d9-4ec6-b822-82f4fc956aac": "The orchid anchors its roots to the bark of a rainforest tree.",
+    "6f452635-6fe5-4e16-b28e-f5c386dd5a84": "The orchid anchors its roots to the bark of a rainforest tree.",
+    "bdacb9f5-689b-4062-a667-c1d1348ff546": "The orchid anchors its roots to the bark of a rainforest tree.",
+    "46ae7754-be61-4375-9fae-56e80acba70d": "The oak drops thousands of acorns onto the woodland floor.",
+    "eff1de0e-dde9-4e1c-933b-dd9997898843": "The oak drops thousands of acorns onto the woodland floor.",
+    "58d49c2c-18d4-42ee-9ff4-2ab571b19b66": "A moss carpets the boulder in a soft green layer.",
+    "79c11635-1244-47d1-a348-de6c1931c4fb": "The lavender attracts bees with its fragrant purple spikes.",
+    "09af331c-62bf-4b92-b398-a47cc4e9af23": "The lavender attracts bees with its fragrant purple spikes.",
+    "a53b2bad-8c1e-4a3c-8966-7775cca82cd9": "The wheat ripens to gold before the autumn harvest.",
+    "e1d9e735-4832-4453-b642-33d434f88a09": "The wheat ripens to gold before the autumn harvest.",
+    "d2eb2b3c-7efc-4877-8ce3-be66a499a6d5": "The wheat ripens to gold before the autumn harvest.",
+    "3b1e2ad4-14d1-4fd0-869e-07e20b1a127b": "The wheat ripens to gold before the autumn harvest.",
+    "fb68edfe-e3fd-4f6e-9751-da33f87ae241": "Jupiter is the largest planet and shelters dozens of moons.",
+    "32e75db6-9c01-409c-9905-46955025bc43": "Jupiter is the largest planet and shelters dozens of moons.",
+    "01e5b335-ad41-4265-bdd8-c4abc608086a": "A comet grows a glowing tail as it nears the inner solar system.",
+    "32ad6e4a-cca4-44e2-8089-7ee4d0cf59d5": "A comet grows a glowing tail as it nears the inner solar system.",
+    "c6fb5ec3-4dec-48e4-ab66-5f36ebad30a8": "A comet grows a glowing tail as it nears the inner solar system.",
+    "d78d0bec-bf5a-403b-9e3c-e95cfe21f7ed": "A neutron star packs more mass than the Sun into a city-sized sphere.",
+    "57708976-34bc-4ffa-8ed2-dff575833ba0": "A neutron star packs more mass than the Sun into a city-sized sphere.",
+    "4fecff23-5149-45cd-a4c5-6c423ef941ab": "A neutron star packs more mass than the Sun into a city-sized sphere.",
+    "5491409d-596c-495e-967c-7cb2114f58f7": "The red giant Betelgeuse swells near the end of its stellar life.",
+    "837a33f2-a63b-4165-ae8a-7748ddccb7ec": "The red giant Betelgeuse swells near the end of its stellar life.",
+    "5ff95f3f-30ce-4976-b261-cbb824a2d383": "The red giant Betelgeuse swells near the end of its stellar life.",
+    "41b1e002-e182-4c0b-b29b-24d45d82b7d6": "Saturn wears a bright system of icy rings around its equator.",
+    "352af36b-59e4-469c-915b-1fc7825fcb4b": "Saturn wears a bright system of icy rings around its equator.",
+    "74287f4e-0ec6-4137-8fe6-0eeaf45b603b": "A black hole bends light around its event horizon.",
+    "713897af-feba-478d-975d-d99cdfc9a7df": "A black hole bends light around its event horizon.",
+    "6e06d0ae-7243-47b8-b3e0-f2c7f6458fa7": "A black hole bends light around its event horizon.",
+    "644a96b2-aaea-4a1a-b528-9d05427fea17": "A supernova outshines its entire host galaxy for a few weeks.",
+    "8fc6711e-45dc-4014-b367-642c5998e1bc": "A supernova outshines its entire host galaxy for a few weeks.",
+    "bafb7ca2-69ca-4231-9247-28a32de046ca": "The Moon raises ocean tides as it circles the Earth.",
+    "338375df-0a08-426d-a124-3e642e5221a3": "The Moon raises ocean tides as it circles the Earth.",
+    "e910c23e-f1e5-47e8-b0c1-223a360c19e7": "The Moon raises ocean tides as it circles the Earth.",
+    "65c310ee-4f6f-427f-89c5-02c68ceca5d2": "A nebula condenses cold gas into the first new stars.",
+    "8924a015-2b7e-4181-9ef2-9cd9e540f3c8": "A nebula condenses cold gas into the first new stars."
+  },
+  "edge_sentences": {
+    "cc03e1bf-1131-4b6d-8178-74950080dcda": "An octopus uses its eight arms to crawl along the reef.",
+    "c244fce8-fbf2-4d5f-980d-039dd30573f0": "An octopus uses its eight arms to crawl along the reef.",
+    "ea3b943c-efdc-4996-bfe4-2fd8e9cbf1ff": "A chameleon shifts its skin color to blend with the branch.",
+    "e2492b39-6788-4906-b4f2-08d9967a015c": "A chameleon shifts its skin color to blend with the branch.",
+    "dea75e5d-4ee9-44de-aef0-a6ddf87953aa": "The emperor penguin huddles with its colony against the Antarctic wind.",
+    "47e59454-d88c-48c2-87b6-8a78e88e723e": "The emperor penguin huddles with its colony against the Antarctic wind.",
+    "4faaa10c-20d4-4dd2-b4c0-ec49831f5e3a": "The emperor penguin huddles with its colony against the Antarctic wind.",
+    "83aa7c1c-d80e-4c22-811b-cfb9de2dbe48": "The emperor penguin huddles with its colony against the Antarctic wind.",
+    "31dd06a4-0b2e-4f6e-83cb-e18fbb37e7e1": "The gray wolf hunts in a coordinated pack across the tundra.",
+    "1c78d33a-b8df-4018-9d4a-7e4e6d6f53b0": "The gray wolf hunts in a coordinated pack across the tundra.",
+    "aac6ff3a-9039-47d0-baa5-5c24f3376985": "A komodo dragon ambushes the deer with a venomous bite.",
+    "851e63e7-17dd-415e-b75f-22810855e325": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "b5b2bec2-0838-495a-a807-d9971e93f6e0": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "26ab23ac-6e91-4a4c-ae9c-4d7d248a750b": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "96f83352-032d-4db7-ad64-7c85fab940a8": "An elephant uses its trunk to draw water from the river.",
+    "c15ccf09-537f-4b6b-bb8c-0734f04762bc": "An elephant uses its trunk to draw water from the river.",
+    "6ce40ff1-408e-4c0e-b3b6-dae5f79fefe9": "The red kangaroo bounds across the outback on powerful hind legs.",
+    "c1d620bc-964d-4706-ac36-4e12858eb7d8": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "9bbae7f5-bf08-4f6b-bbf1-0fb688fae141": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "8ebd750a-af49-4a67-ab73-f77fe52844cb": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "eeba4129-8ef6-4e07-bdb5-457eb94118e9": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "18588de6-bf81-461a-94d1-094c17d33f16": "The arctic fox grows a white coat to hide in the snow.",
+    "62a2f25f-1231-4263-9f1b-3293d4e2bb47": "The arctic fox grows a white coat to hide in the snow.",
+    "5c889d13-0824-469a-9708-a1fbe0bf2e8c": "The mass spectrometer ionizes the sample and sorts ions by mass.",
+    "88f8c99e-d746-45d5-871d-da2fc2422c8a": "The mass spectrometer ionizes the sample and sorts ions by mass.",
+    "36b67750-7072-4246-ac93-b8101b53dbd1": "A centrifuge spins the test tubes to separate the plasma from the cells.",
+    "e7a5da66-d3d6-42e2-be76-2837cee9dd4f": "A centrifuge spins the test tubes to separate the plasma from the cells.",
+    "f76a8d78-1c87-485f-9a8b-b2f288dd8b62": "A centrifuge spins the test tubes to separate the plasma from the cells.",
+    "72c0edf8-b8b1-4833-8612-80a58c176a0b": "A centrifuge spins the test tubes to separate the plasma from the cells.",
+    "375a2d7e-e72f-428d-bd5e-9fa5ba132b7f": "The electron microscope resolves structures far smaller than a wavelength of light.",
+    "883c53e8-9fd2-4b37-99f5-8281ca8dbb9b": "The electron microscope resolves structures far smaller than a wavelength of light.",
+    "cae657c1-b259-4ffc-b74c-da38ca266f64": "The electron microscope resolves structures far smaller than a wavelength of light.",
+    "cc27d511-e320-4fea-b730-25feb33d98b0": "The spectrophotometer measures how much light the solution absorbs.",
+    "27ae42c6-3406-46a0-8a8d-c5626063e243": "The spectrophotometer measures how much light the solution absorbs.",
+    "af5ee047-df67-48ee-ace1-6a42845edece": "The spectrophotometer measures how much light the solution absorbs.",
+    "5b03df94-3984-4962-9a80-0dc3d8d201ea": "The spectrophotometer measures how much light the solution absorbs.",
+    "63609051-1e53-4cb7-8f08-781f53b7590d": "The oscilloscope traces the voltage waveform on its display.",
+    "5800b665-0cd5-43d0-ace0-52af6e64c374": "The oscilloscope traces the voltage waveform on its display.",
+    "250418dd-b1da-4ad6-b3a9-cd32e3788442": "The oscilloscope traces the voltage waveform on its display.",
+    "69226086-6661-4c9d-b64e-4c76e16ac29c": "The chromatography column separates the mixture into its components.",
+    "b8e8050b-443e-4e07-9203-8794f6dfdd2c": "The chromatography column separates the mixture into its components.",
+    "a44a5fc4-8848-463f-8053-156a4e08b979": "The thermocycler runs the polymerase chain reaction across many temperature cycles.",
+    "9ed96478-efcf-47ce-a004-7655b3ad1fa5": "The thermocycler runs the polymerase chain reaction across many temperature cycles.",
+    "bfab0c37-7f01-4c87-870f-dc40f73dbb75": "The thermocycler runs the polymerase chain reaction across many temperature cycles.",
+    "3d77a837-5454-4211-ad24-9081d36bb494": "The fume hood vents toxic vapors away from the technician.",
+    "7814d60a-cfc6-47e8-89c6-51a49d494b88": "The fume hood vents toxic vapors away from the technician.",
+    "5095a3a7-0ea0-42fc-9bd5-0c7c3681218f": "The fume hood vents toxic vapors away from the technician.",
+    "b7e9cc0d-f019-4619-8ea6-5c960bbd71c7": "The fume hood vents toxic vapors away from the technician.",
+    "688f44aa-b382-496f-bb2c-445dd68221ef": "The fume hood vents toxic vapors away from the technician.",
+    "558b44b9-2397-4e4c-89a6-299df52cddfa": "The fume hood vents toxic vapors away from the technician.",
+    "c68f7ae5-8749-467a-9d73-4d600dab5d4d": "The fume hood vents toxic vapors away from the technician.",
+    "630771ac-689d-4c49-a545-b313cfca19f8": "A definite integral ∫ computes the area swept beneath the curve.",
+    "0e8282c4-6754-4efa-89f3-67746ec0e2e7": "A definite integral ∫ computes the area swept beneath the curve.",
+    "d95aa243-252a-4525-b99b-a289d9aa38fb": "The summation ∑ accumulates each term of the infinite series.",
+    "69ff2f7b-d0e6-4ab7-b264-0f2f7ff63691": "A partial derivative ∂u/∂x measures change while the other variables stay fixed.",
+    "d4988d9a-c2a1-48a7-adfd-e6ce9a93c144": "A partial derivative ∂u/∂x measures change while the other variables stay fixed.",
+    "3b82b489-8a77-4e02-8ad4-6d545f190ee8": "A partial derivative ∂u/∂x measures change while the other variables stay fixed.",
+    "1343154a-22ff-4265-98b7-5d186cb47266": "The constant π relates a circle’s circumference to its diameter.",
+    "060d7688-4572-4421-8c62-ac4eea536495": "The constant π relates a circle’s circumference to its diameter.",
+    "2f214ba0-ccbd-4db5-afa4-be6ffa34dcce": "The fine-structure constant α governs the strength of electromagnetic coupling.",
+    "e34323fd-3283-4355-b1c9-e84a60262218": "The fine-structure constant α governs the strength of electromagnetic coupling.",
+    "67436826-e26a-4272-a5a4-16bc8ce019bd": "The fine-structure constant α governs the strength of electromagnetic coupling.",
+    "f8c3a46d-2b41-4b6f-9488-6b5bcaec1e2c": "The fine-structure constant α governs the strength of electromagnetic coupling.",
+    "85a78530-87df-4232-baa9-a278bf289435": "The inequality x ≤ y bounds the solution set from above.",
+    "e171faf9-4fcd-48c9-93cc-997e67ff4c07": "The inequality x ≤ y bounds the solution set from above.",
+    "cc8d4d51-4164-494e-8565-589c6d9fdf56": "A photon of frequency ν carries energy proportional to Planck’s constant.",
+    "92131c9a-acb2-43ea-a7f7-bdab0b54b796": "A photon of frequency ν carries energy proportional to Planck’s constant.",
+    "d4c77a64-332a-4afa-a8ff-a368497814ed": "The Laplacian ∇²φ appears in the heat and the wave equations alike.",
+    "3b88dca6-08e4-40c0-87b3-7670d1ef67d2": "The Laplacian ∇²φ appears in the heat and the wave equations alike.",
+    "2910195b-6c87-4a19-b4ca-1e405d5898d9": "The Laplacian ∇²φ appears in the heat and the wave equations alike.",
+    "8c6554f5-0028-47cd-a1d4-d84527f5ab11": "The Laplacian ∇²φ appears in the heat and the wave equations alike.",
+    "fe2543a2-edbc-4fed-a9ed-7493dcec2fca": "The Laplacian ∇²φ appears in the heat and the wave equations alike.",
+    "1c422535-6ef0-410f-ad91-414cb03efb84": "The molecule H₂O bends at an angle of about 104.5 degrees.",
+    "2809dc23-65bc-4613-9ba5-ebbf5d5e62fe": "The molecule H₂O bends at an angle of about 104.5 degrees.",
+    "eb1a8e20-bad6-4acc-a86d-4ffb5eeb6996": "Entropy ΔS never decreases for an isolated thermodynamic system.",
+    "dd63f4f1-2856-466e-a7e6-e95faf144e19": "Entropy ΔS never decreases for an isolated thermodynamic system.",
+    "90c31eec-5b9c-4e55-9aaa-cf2e4aac4a97": "The locomotive hauls a long freight train across the mountain pass.",
+    "535bc2ec-0158-4e70-8cee-b3418746ef3b": "A hydrofoil lifts its hull above the water as it accelerates.",
+    "43d15140-ca9f-427f-b3d5-f08060b50238": "A hydrofoil lifts its hull above the water as it accelerates.",
+    "d6edf72a-8080-4f39-82a2-98875bcdb8d8": "A hydrofoil lifts its hull above the water as it accelerates.",
+    "b8c30f72-4b5e-4b5b-bc82-65bdab642081": "A hydrofoil lifts its hull above the water as it accelerates.",
+    "3cc2527b-83f8-44ab-9bbe-d86677b2818d": "A helicopter hovers above the helipad before it descends.",
+    "ce390959-af07-4a68-8da0-a54779fc420b": "A helicopter hovers above the helipad before it descends.",
+    "8413ee6f-2473-4615-aebb-25b876e0a98f": "A helicopter hovers above the helipad before it descends.",
+    "4b5c1a9b-d78e-44c7-a3a5-0976d55398cf": "A helicopter hovers above the helipad before it descends.",
+    "adf838be-d486-4190-af4a-73543a0b0d2b": "The bullet train glides along the maglev track at high speed.",
+    "702d32e3-0e42-40e8-8650-41c1c9eaa9d4": "The bullet train glides along the maglev track at high speed.",
+    "521ecd4c-2aa0-4cf7-8269-4d745dbec0fc": "The motorcycle leans into the curve along the coastal highway.",
+    "6ceeb2bd-e085-4ed0-bf77-e6973bc79c8f": "The motorcycle leans into the curve along the coastal highway.",
+    "422e4936-c10f-4da9-84d0-20be59612cf1": "A tractor plows the field ahead of the spring planting.",
+    "11888d57-19b7-4aa2-949b-533cefe2c975": "A tractor plows the field ahead of the spring planting.",
+    "6c747bcd-0d77-4db4-b7d5-d170992e247d": "A tractor plows the field ahead of the spring planting.",
+    "76205b54-3b2c-47ed-ab0b-109bef77c0bc": "The airliner taxis to the runway before its transatlantic flight.",
+    "99130780-5401-4405-bfed-b5cb0e41aec6": "The airliner taxis to the runway before its transatlantic flight.",
+    "07c78fdc-12ec-4915-9d0e-92f590690062": "The airliner taxis to the runway before its transatlantic flight.",
+    "7454b02a-d163-46f4-a900-af8bd9e0de84": "The airliner taxis to the runway before its transatlantic flight.",
+    "597e45d2-7e4f-4ef3-a82f-4ef6a0e976b9": "The cable car climbs the steep slope toward the summit station.",
+    "90e9ae18-d95a-4707-a2cb-77d7bac14ee9": "The cable car climbs the steep slope toward the summit station.",
+    "32d0c3d7-4146-425f-9c5e-0af4c6513784": "The cable car climbs the steep slope toward the summit station.",
+    "1a68aab4-19de-4b6c-ba37-a2c1a56f2551": "The cable car climbs the steep slope toward the summit station.",
+    "3a59c91d-c1a3-472b-9ec1-a24791a3bab5": "A sunflower turns its face to track the sun across the sky.",
+    "aed2e026-2982-4ee5-83a5-1c6a559a5717": "A sunflower turns its face to track the sun across the sky.",
+    "fcd35b94-a48c-4215-8e10-09434d88f356": "A sunflower turns its face to track the sun across the sky.",
+    "22e34d6b-be4c-47ce-a807-9bc84150651d": "A sunflower turns its face to track the sun across the sky.",
+    "b78c494a-4d27-4988-9f0f-81f973a3ab2b": "A fern unfurls its fronds in the damp shade of the understory.",
+    "276dc018-d9a2-4ac7-bf31-cefd019fd1c8": "A fern unfurls its fronds in the damp shade of the understory.",
+    "ea1f93dc-3c5d-4e9d-9db6-dd8cbf87f084": "A fern unfurls its fronds in the damp shade of the understory.",
+    "32acc459-c9f3-41d5-8c4c-727449736ac3": "The orchid anchors its roots to the bark of a rainforest tree.",
+    "8a35fa9e-47cf-44ba-95ab-bbd1a08e70ba": "The orchid anchors its roots to the bark of a rainforest tree.",
+    "3adb2732-eb5d-4fbe-8c31-5c90cefdf0d8": "The orchid anchors its roots to the bark of a rainforest tree.",
+    "66ed94cf-2ee3-482c-ad34-e6ecaab90a77": "A water lily floats its broad pads on the surface of the pond.",
+    "6dc30e35-2544-469a-8e2b-1de2622b102f": "A water lily floats its broad pads on the surface of the pond.",
+    "fb2d5b82-bd5b-4c92-a359-dcdb1bad1090": "A water lily floats its broad pads on the surface of the pond.",
+    "8c7ee714-47d5-4b34-851c-a9e71d30cb85": "A mangrove props itself above the tidal mud on stilted roots.",
+    "68f7df59-14e4-40f5-b100-00bfbfaa0735": "A mangrove props itself above the tidal mud on stilted roots.",
+    "39fd9492-eeef-4741-9558-461481b32382": "A pitcher plant traps insects in its slippery fluid-filled cup.",
+    "9dbd2919-3eba-4a88-9ded-b9e47d9518da": "A pitcher plant traps insects in its slippery fluid-filled cup.",
+    "d3637dd7-bb68-448d-b9d9-018eb44a7db2": "A pitcher plant traps insects in its slippery fluid-filled cup.",
+    "cd715912-54ce-4ab8-94a7-fc20b72fe2aa": "The Andromeda galaxy spirals toward our own Milky Way.",
+    "a0f74f64-d4a0-4097-abf3-bc2c6763969f": "The Andromeda galaxy spirals toward our own Milky Way.",
+    "33a16245-2ffa-40ec-bb49-0b4ea6b62d0b": "A neutron star packs more mass than the Sun into a city-sized sphere.",
+    "f15e119d-c9d0-474f-84c6-8dfca1dd3429": "The red giant Betelgeuse swells near the end of its stellar life.",
+    "73fd7f22-6201-4d98-99b8-a6f56f4aeb12": "The red giant Betelgeuse swells near the end of its stellar life.",
+    "7757bdc9-23f6-4d74-841a-4ebd50f30b3f": "The red giant Betelgeuse swells near the end of its stellar life.",
+    "22840ada-a771-44c1-8b85-73ce4b4768ee": "The red giant Betelgeuse swells near the end of its stellar life.",
+    "05f8d7e3-a543-4244-b843-f0ba69411a51": "A pulsar sweeps its radio beam past Earth with clockwork regularity.",
+    "3faf44c5-ebe2-4250-97f4-6174d0163939": "A pulsar sweeps its radio beam past Earth with clockwork regularity.",
+    "d7355164-4df8-492e-83ea-4729d8b11cbb": "A black hole bends light around its event horizon.",
+    "439fd05f-fe62-447f-885f-4572d695f371": "A black hole bends light around its event horizon.",
+    "98fe41f1-e651-4962-8623-c23bfa93805d": "The asteroid Vesta orbits the Sun within the main belt.",
+    "69f7db3b-1d9e-409c-844e-52e9d0a4d788": "The asteroid Vesta orbits the Sun within the main belt.",
+    "99bc55be-709f-43fe-b0b8-5b82badbba81": "The asteroid Vesta orbits the Sun within the main belt.",
+    "4f747ab6-6f6b-416d-a45c-e00a47f60f55": "The asteroid Vesta orbits the Sun within the main belt.",
+    "557e934c-b4c7-4d74-8d9c-17013b907eca": "The dwarf planet Pluto drags a thin atmosphere through its long orbit.",
+    "bf40f2be-484f-41f3-89df-a1ce840df51c": "A quasar blazes from the heart of a distant active galaxy.",
+    "33e2a690-0f28-43c4-b29c-9a965cdedffe": "A quasar blazes from the heart of a distant active galaxy.",
+    "7c1800c6-4048-4454-b1c1-43798a6933b0": "A nebula condenses cold gas into the first new stars.",
+    "5f009df2-32fc-408f-9a29-d8d61f985f2a": "A nebula condenses cold gas into the first new stars."
+  },
+  "node_clusters": [
+    {
+      "label": 0,
+      "members": [
+        {
+          "uuid": "10546154-a030-4457-8510-3a8e660e9efb",
+          "name": "bottlenose dolphin"
+        },
+        {
+          "uuid": "5474c112-4ad1-4a50-9cae-b7c764793bba",
+          "name": "elephant"
+        },
+        {
+          "uuid": "2b1539db-612f-4df7-bce8-eb05bafb0888",
+          "name": "octopus"
+        },
+        {
+          "uuid": "727caf0a-8648-4fab-82f7-58c8f9b06e24",
+          "name": "narwhal"
+        },
+        {
+          "uuid": "a006ce58-cb16-4d5c-928e-a09509758007",
+          "name": "marine mammal"
+        }
+      ]
+    },
+    {
+      "label": 1,
+      "members": [
+        {
+          "uuid": "31c9a25c-d0a2-4116-8c4f-410e4f6f0bba",
+          "name": "trunk"
+        },
+        {
+          "uuid": "48bba8a1-234e-4d73-b325-2a1ef48b2eba",
+          "name": "canopy"
+        }
+      ]
+    },
+    {
+      "label": 2,
+      "members": [
+        {
+          "uuid": "f67f602c-3d03-4158-a2ce-0eb6a820a4f9",
+          "name": "tusk"
+        },
+        {
+          "uuid": "69d3b394-1027-4403-8ad7-96731b6f3e3f",
+          "name": "tundra"
+        }
+      ]
+    },
+    {
+      "label": 3,
+      "members": [
+        {
+          "uuid": "74401073-6f0e-4455-a72b-afa5d996f7c7",
+          "name": "jaw"
+        },
+        {
+          "uuid": "cbb0ced2-1eb3-4302-b1b8-58bbb992720a",
+          "name": "curve"
+        },
+        {
+          "uuid": "1886c6fe-ba8e-4f0f-8d3b-c2139eb89383",
+          "name": "circle"
+        },
+        {
+          "uuid": "712c668f-9417-49a7-85f5-2316981cea0a",
+          "name": "branch"
+        },
+        {
+          "uuid": "b651f89f-e280-48e6-820f-46f7ef5a0648",
+          "name": "cell"
+        }
+      ]
+    },
+    {
+      "label": 4,
+      "members": [
+        {
+          "uuid": "21d37a37-5663-4a9a-95aa-841a9f542b54",
+          "name": "fish"
+        },
+        {
+          "uuid": "42ff7ce6-a6fc-40f8-b38c-b6636b1b61aa",
+          "name": "deer"
+        }
+      ]
+    },
+    {
+      "label": 5,
+      "members": [
+        {
+          "uuid": "5a2c6250-88b2-4e03-8a6e-a07c188a8e5a",
+          "name": "water"
+        },
+        {
+          "uuid": "c90776f9-ad8d-4513-ba8e-92e6b15108eb",
+          "name": "river"
+        },
+        {
+          "uuid": "f180ded2-b8d1-44a1-90ae-d53b0f6e0108",
+          "name": "wind"
+        },
+        {
+          "uuid": "e2296978-6048-40e8-b2ec-9c836b897a73",
+          "name": "snow"
+        }
+      ]
+    },
+    {
+      "label": 6,
+      "members": [
+        {
+          "uuid": "fdfd0c69-8de1-4f8d-bcb3-1536eb607bc9",
+          "name": "grizzly bear"
+        },
+        {
+          "uuid": "c2d29894-d5b1-4049-ac2c-cfb26417aa62",
+          "name": "cheetah"
+        },
+        {
+          "uuid": "b072e0b0-3c75-4c54-afa6-d0a4fdae3d45",
+          "name": "jaguar"
+        },
+        {
+          "uuid": "53cf76b7-3aa8-413c-8330-0193b8bc48d3",
+          "name": "gray wolf"
+        }
+      ]
+    },
+    {
+      "label": 7,
+      "members": [
+        {
+          "uuid": "01000e4a-554d-437e-b4eb-a2e083c7031a",
+          "name": "berry"
+        },
+        {
+          "uuid": "a11a5128-9639-4037-b101-55dc55fe6a8d",
+          "name": "honeybee"
+        },
+        {
+          "uuid": "bcb1bb73-38b2-4dc9-8486-b6f822e861e0",
+          "name": "pollen"
+        },
+        {
+          "uuid": "0fac109c-5d14-4ec4-82b8-44eafd5a0d5d",
+          "name": "particle"
+        }
+      ]
+    },
+    {
+      "label": 8,
+      "members": [
+        {
+          "uuid": "413f59e7-6343-4517-ae7b-541418ccdc2e",
+          "name": "meadow"
+        },
+        {
+          "uuid": "0d0da210-d504-4b90-abca-cbba883573c9",
+          "name": "savanna"
+        }
+      ]
+    },
+    {
+      "label": 9,
+      "members": [
+        {
+          "uuid": "511199b9-bad8-4df8-a89b-e4e41e9bda12",
+          "name": "hive"
+        },
+        {
+          "uuid": "6f452635-6fe5-4e16-b28e-f5c386dd5a84",
+          "name": "heat"
+        },
+        {
+          "uuid": "eff1de0e-dde9-4e1c-933b-dd9997898843",
+          "name": "h₂o"
+        }
+      ]
+    },
+    {
+      "label": 10,
+      "members": [
+        {
+          "uuid": "5dc64acb-9f91-4ed3-9d4c-2979b533d952",
+          "name": "pack"
+        },
+        {
+          "uuid": "8220655e-90b1-4a52-964b-305f8467a48d",
+          "name": "variable"
+        },
+        {
+          "uuid": "042e50c7-5eed-47b4-806b-92eab2cec2da",
+          "name": "display"
+        },
+        {
+          "uuid": "c288986e-65d0-49d8-998f-6f98346adcc1",
+          "name": "component"
+        },
+        {
+          "uuid": "0356e986-7115-4116-a071-0e7b8423b3df",
+          "name": "fixed"
+        },
+        {
+          "uuid": "3b1e2ad4-14d1-4fd0-869e-07e20b1a127b",
+          "name": "matrix"
+        },
+        {
+          "uuid": "837a33f2-a63b-4165-ae8a-7748ddccb7ec",
+          "name": "container"
+        }
+      ]
+    },
+    {
+      "label": 11,
+      "members": [
+        {
+          "uuid": "74287f4e-0ec6-4137-8fe6-0eeaf45b603b",
+          "name": "battery"
+        },
+        {
+          "uuid": "338375df-0a08-426d-a124-3e642e5221a3",
+          "name": "engine"
+        },
+        {
+          "uuid": "21131034-c629-49e0-9384-3fefb7f11f26",
+          "name": "ion"
+        }
+      ]
+    },
+    {
+      "label": 12,
+      "members": [
+        {
+          "uuid": "6e06d0ae-7243-47b8-b3e0-f2c7f6458fa7",
+          "name": "roadside station"
+        },
+        {
+          "uuid": "8924a015-2b7e-4181-9ef2-9cd9e540f3c8",
+          "name": "coastal highway"
+        }
+      ]
+    },
+    {
+      "label": 13,
+      "members": [
+        {
+          "uuid": "644a96b2-aaea-4a1a-b528-9d05427fea17",
+          "name": "thermocline"
+        },
+        {
+          "uuid": "e910c23e-f1e5-47e8-b0c1-223a360c19e7",
+          "name": "thermal updraft"
+        },
+        {
+          "uuid": "5899f141-4b5a-4d0c-a6a4-397a2b272052",
+          "name": "thermocycler"
+        },
+        {
+          "uuid": "220cb48c-9406-4c13-8f8e-bf897d90d8fc",
+          "name": "temperature cycle"
+        },
+        {
+          "uuid": "fb68edfe-e3fd-4f6e-9751-da33f87ae241",
+          "name": "isolated thermodynamic system"
+        }
+      ]
+    },
+    {
+      "label": 14,
+      "members": [
+        {
+          "uuid": "dbc333c7-6197-447a-badb-ef861e664f77",
+          "name": "bullet train"
+        },
+        {
+          "uuid": "cfd94a94-d40b-4b90-a982-2c1ea5f67d26",
+          "name": "maglev track"
+        },
+        {
+          "uuid": "c6fb5ec3-4dec-48e4-ab66-5f36ebad30a8",
+          "name": "locomotive"
+        },
+        {
+          "uuid": "01e5b335-ad41-4265-bdd8-c4abc608086a",
+          "name": "freight train"
+        }
+      ]
+    },
+    {
+      "label": 15,
+      "members": [
+        {
+          "uuid": "0b5c432b-2a50-4468-b5f3-39457766b7ce",
+          "name": "high speed"
+        },
+        {
+          "uuid": "d78d0bec-bf5a-403b-9e3c-e95cfe21f7ed",
+          "name": "accelerates"
+        }
+      ]
+    },
+    {
+      "label": 16,
+      "members": [
+        {
+          "uuid": "65c310ee-4f6f-427f-89c5-02c68ceca5d2",
+          "name": "motorcycle"
+        },
+        {
+          "uuid": "57708976-34bc-4ffa-8ed2-dff575833ba0",
+          "name": "hydrofoil"
+        },
+        {
+          "uuid": "352af36b-59e4-469c-915b-1fc7825fcb4b",
+          "name": "helicopter"
+        },
+        {
+          "uuid": "41b1e002-e182-4c0b-b29b-24d45d82b7d6",
+          "name": "helipad"
+        }
+      ]
+    },
+    {
+      "label": 17,
+      "members": [
+        {
+          "uuid": "487cc1cf-903d-4e1c-be25-e9b829eee087",
+          "name": "fume hood"
+        },
+        {
+          "uuid": "75e23028-d235-4456-a88c-45348b21b933",
+          "name": "toxic vapors"
+        }
+      ]
+    },
+    {
+      "label": 18,
+      "members": [
+        {
+          "uuid": "f8939f6d-4819-45ab-b3ad-7026abf9bc41",
+          "name": "centrifuge"
+        },
+        {
+          "uuid": "d5450031-93fd-45cd-89cc-d73d106a9221",
+          "name": "chromatography column"
+        }
+      ]
+    },
+    {
+      "label": 19,
+      "members": [
+        {
+          "uuid": "e9dea2dc-dc7d-4b30-8a57-f4cd0a9b7f16",
+          "name": "test tube"
+        },
+        {
+          "uuid": "5034a67d-00b9-4338-9b1b-c26bd0700ca5",
+          "name": "sample"
+        }
+      ]
+    },
+    {
+      "label": 20,
+      "members": [
+        {
+          "uuid": "353ec2a2-0405-4564-9b45-1122f1f9d93e",
+          "name": "plasma"
+        },
+        {
+          "uuid": "a69eabb4-f56e-44d3-93ef-9a4c5e2a0227",
+          "name": "well plate"
+        }
+      ]
+    },
+    {
+      "label": 21,
+      "members": [
+        {
+          "uuid": "ea154e2b-3615-45f4-bc37-66351f647831",
+          "name": "electron microscope"
+        },
+        {
+          "uuid": "85309caa-6753-4e75-8c8e-0eb691790076",
+          "name": "microtome"
+        },
+        {
+          "uuid": "1a905b39-cbab-4e9f-8bbc-7eeddfd5f8c4",
+          "name": "ultra-thin section"
+        }
+      ]
+    },
+    {
+      "label": 22,
+      "members": [
+        {
+          "uuid": "4bfd4773-22b3-4c0b-9e3f-b3f876a8960e",
+          "name": "pipette"
+        },
+        {
+          "uuid": "ca57bed2-cf62-40c5-b3ee-36132918ef9a",
+          "name": "microliter"
+        },
+        {
+          "uuid": "c6344ab8-7387-41a4-96e3-2a8e13f20637",
+          "name": "ph meter"
+        },
+        {
+          "uuid": "51b65b7d-14e2-446e-be8a-017cd50de0b0",
+          "name": "milligram"
+        }
+      ]
+    },
+    {
+      "label": 23,
+      "members": [
+        {
+          "uuid": "f80a46f5-06fd-4984-b0a9-214067545053",
+          "name": "spectrophotometer"
+        },
+        {
+          "uuid": "1e3b2d19-ed3c-49c0-9b9c-274bced046ca",
+          "name": "photon"
+        }
+      ]
+    },
+    {
+      "label": 24,
+      "members": [
+        {
+          "uuid": "e20e424a-c7f5-4bde-a5e9-22ff12b0f930",
+          "name": "glassware"
+        },
+        {
+          "uuid": "b1b1d356-0580-48ab-97f9-dcebf8c49fb9",
+          "name": "flask"
+        }
+      ]
+    },
+    {
+      "label": 25,
+      "members": [
+        {
+          "uuid": "9bb7b535-a954-47ae-9642-1eb133a12ea8",
+          "name": "pressurized steam"
+        },
+        {
+          "uuid": "55f7597e-b511-4f3c-b514-230ce1c34bcd",
+          "name": "autoclave"
+        }
+      ]
+    },
+    {
+      "label": 26,
+      "members": [
+        {
+          "uuid": "61d39939-da9f-45f6-b5e6-f944d24bfe51",
+          "name": "oscilloscope"
+        },
+        {
+          "uuid": "a4260583-3b4b-4b44-b682-98d6b5c8c4f0",
+          "name": "voltage waveform"
+        }
+      ]
+    },
+    {
+      "label": 27,
+      "members": [
+        {
+          "uuid": "de4ba9e8-5d3e-45c2-9d13-df7945815b7e",
+          "name": "bunsen burner"
+        },
+        {
+          "uuid": "827f08ab-d652-4068-82f0-226c7a9d7ff6",
+          "name": "blue flame"
+        }
+      ]
+    },
+    {
+      "label": 28,
+      "members": [
+        {
+          "uuid": "fdddd97e-ede0-4f22-94af-7a7d1a8583c9",
+          "name": "acidity"
+        },
+        {
+          "uuid": "2b6340c1-5e55-427a-9a41-670d14f162b6",
+          "name": "intensity"
+        }
+      ]
+    },
+    {
+      "label": 29,
+      "members": [
+        {
+          "uuid": "0cca730f-4a6e-4b96-8b62-9f8f09d3d8c0",
+          "name": "buffer solution"
+        },
+        {
+          "uuid": "43228baa-d600-403c-bc03-50b779d37e41",
+          "name": "solution"
+        },
+        {
+          "uuid": "3976a012-c687-4bb9-9878-d5b8c83bb1c1",
+          "name": "solution set"
+        }
+      ]
+    },
+    {
+      "label": 30,
+      "members": [
+        {
+          "uuid": "792a0d68-df53-472a-badc-94716560d8a7",
+          "name": "reagent"
+        },
+        {
+          "uuid": "9987683f-2521-4cd3-ad43-550f7f10de26",
+          "name": "mixture"
+        }
+      ]
+    },
+    {
+      "label": 31,
+      "members": [
+        {
+          "uuid": "e6ccdb1d-f3d3-4f1b-ac64-e125ce237771",
+          "name": "eight arms"
+        },
+        {
+          "uuid": "0de5157e-f470-41d7-9f8f-c1c9c029a33d",
+          "name": "hind legs"
+        }
+      ]
+    },
+    {
+      "label": 32,
+      "members": [
+        {
+          "uuid": "a991333e-5803-4490-9560-99107d3ca167",
+          "name": "reef"
+        },
+        {
+          "uuid": "0fbaac0f-4d67-47f0-b24b-b4ee7b98c321",
+          "name": "rainforest"
+        }
+      ]
+    },
+    {
+      "label": 33,
+      "members": [
+        {
+          "uuid": "71526906-4bdb-41a8-9bec-7d17ac365927",
+          "name": "definite integral"
+        },
+        {
+          "uuid": "25cf9529-315e-48f4-9c84-fba01a5587e1",
+          "name": "partial derivative"
+        },
+        {
+          "uuid": "1e9f04b0-a456-487f-9c40-e79af7858142",
+          "name": "∇f"
+        },
+        {
+          "uuid": "bdacb9f5-689b-4062-a667-c1d1348ff546",
+          "name": "∇²φ"
+        }
+      ]
+    },
+    {
+      "label": 34,
+      "members": [
+        {
+          "uuid": "036ff296-42f4-435e-96c6-46d2867d9000",
+          "name": "summation"
+        },
+        {
+          "uuid": "526be72d-67ae-4e09-b4ea-7b6a279cefa2",
+          "name": "infinite series"
+        },
+        {
+          "uuid": "4532b361-5ec4-45ff-866f-302f79537500",
+          "name": "∑"
+        }
+      ]
+    },
+    {
+      "label": 35,
+      "members": [
+        {
+          "uuid": "9ec07c87-2b96-4c11-bd10-8b969435387f",
+          "name": "u"
+        },
+        {
+          "uuid": "6dbc0169-a9cb-4453-ac8b-a890563f4013",
+          "name": "x"
+        },
+        {
+          "uuid": "600b1b44-fd89-4bc5-83d0-cdfd110ff58b",
+          "name": "π"
+        },
+        {
+          "uuid": "418a84af-95d4-45dc-a7df-88b7034fe9cf",
+          "name": "ψ"
+        },
+        {
+          "uuid": "fa8052ae-3fd7-4626-8ea3-e1d163f6fb3f",
+          "name": "y"
+        },
+        {
+          "uuid": "a96a23ce-2f8d-4c06-b86b-258594f2dd26",
+          "name": "ν"
+        }
+      ]
+    },
+    {
+      "label": 36,
+      "members": [
+        {
+          "uuid": "77476cfc-cf15-4151-95cf-533e6948a4b4",
+          "name": "change"
+        },
+        {
+          "uuid": "c90a5af5-b70f-4608-b41d-d672d5fa48b7",
+          "name": "chameleon"
+        }
+      ]
+    },
+    {
+      "label": 37,
+      "members": [
+        {
+          "uuid": "dc327b47-3b4b-4db4-9961-dfb1b63d2736",
+          "name": "slide"
+        },
+        {
+          "uuid": "bafb7ca2-69ca-4231-9247-28a32de046ca",
+          "name": "glider"
+        }
+      ]
+    },
+    {
+      "label": 38,
+      "members": [
+        {
+          "uuid": "f9884d71-62be-4c70-b5dc-75b0ca2960e0",
+          "name": "gradient"
+        },
+        {
+          "uuid": "1df1bd8b-c832-4a8e-a574-c06c90d3a2e7",
+          "name": "direction"
+        }
+      ]
+    },
+    {
+      "label": 39,
+      "members": [
+        {
+          "uuid": "c7e3c553-4f8f-4aed-95ac-6c92bcb71512",
+          "name": "scalar field"
+        },
+        {
+          "uuid": "58d49c2c-18d4-42ee-9ff4-2ab571b19b66",
+          "name": "vector field ⃗f"
+        }
+      ]
+    },
+    {
+      "label": 40,
+      "members": [
+        {
+          "uuid": "d1203713-ce89-4bd3-baef-b0fa079f1d23",
+          "name": "land animal"
+        },
+        {
+          "uuid": "19eece7f-5590-4f5e-8f6d-5a6e6025dca4",
+          "name": "red kangaroo"
+        }
+      ]
+    },
+    {
+      "label": 41,
+      "members": [
+        {
+          "uuid": "c6d74c3b-0893-4753-a579-425310c0d8dd",
+          "name": "peregrine falcon"
+        },
+        {
+          "uuid": "50396a2a-a34a-4be7-84b7-76050b6246ed",
+          "name": "emperor penguin"
+        }
+      ]
+    },
+    {
+      "label": 42,
+      "members": [
+        {
+          "uuid": "e99bfc36-28a0-41b5-b648-d1af9e9c9066",
+          "name": "antarctic"
+        },
+        {
+          "uuid": "7f3d76b9-0ac6-4fca-8721-e0bc61bd3db1",
+          "name": "arctic fox"
+        }
+      ]
+    },
+    {
+      "label": 43,
+      "members": [
+        {
+          "uuid": "90549376-824e-4d25-bebf-1e4736a86c67",
+          "name": "outback"
+        },
+        {
+          "uuid": "5491409d-596c-495e-967c-7cb2114f58f7",
+          "name": "open ocean"
+        }
+      ]
+    },
+    {
+      "label": 44,
+      "members": [
+        {
+          "uuid": "32e75db6-9c01-409c-9905-46955025bc43",
+          "name": "entropy δs"
+        },
+        {
+          "uuid": "b22ab356-7b86-4d60-9028-1ada970d6fd5",
+          "name": "probability amplitude"
+        }
+      ]
+    },
+    {
+      "label": 45,
+      "members": [
+        {
+          "uuid": "745bc496-0694-49be-b62a-bfed5ff07ce7",
+          "name": "circumference"
+        },
+        {
+          "uuid": "c00e5044-0a02-46a6-ada6-d8b570addc2d",
+          "name": "diameter"
+        }
+      ]
+    },
+    {
+      "label": 46,
+      "members": [
+        {
+          "uuid": "0f2444a6-0fac-4473-9fc3-944e73dde4b1",
+          "name": "fine-structure constant"
+        },
+        {
+          "uuid": "9e84a9af-f798-4eaa-abc4-e50b2d0c9e0e",
+          "name": "planck constant"
+        }
+      ]
+    },
+    {
+      "label": 47,
+      "members": [
+        {
+          "uuid": "d5ef7c15-73f1-48d7-ba87-3b300cbedce7",
+          "name": "mass-to-charge ratio"
+        },
+        {
+          "uuid": "e4fabf71-d193-4f49-bf51-c9a15a67267b",
+          "name": "m/z"
+        },
+        {
+          "uuid": "301a5167-5f0b-4638-b192-d13966dfe7a8",
+          "name": "mass spectrometer"
+        }
+      ]
+    },
+    {
+      "label": 48,
+      "members": [
+        {
+          "uuid": "b0fa4db2-79be-4174-b218-333fb1c52bb9",
+          "name": "wavefunction"
+        },
+        {
+          "uuid": "755ddedc-97d9-4ec6-b822-82f4fc956aac",
+          "name": "wave equation"
+        },
+        {
+          "uuid": "e1d9e735-4832-4453-b642-33d434f88a09",
+          "name": "characteristic equation"
+        }
+      ]
+    },
+    {
+      "label": 49,
+      "members": [
+        {
+          "uuid": "99d92ecd-cc17-4347-8c64-61a178af30eb",
+          "name": "laplacian"
+        },
+        {
+          "uuid": "d2eb2b3c-7efc-4877-8ce3-be66a499a6d5",
+          "name": "λ"
+        }
+      ]
+    },
+    {
+      "label": 50,
+      "members": [
+        {
+          "uuid": "09af331c-62bf-4b92-b398-a47cc4e9af23",
+          "name": "curl-free"
+        },
+        {
+          "uuid": "79c11635-1244-47d1-a348-de6c1931c4fb",
+          "name": "divergence-free"
+        }
+      ]
+    },
+    {
+      "label": 51,
+      "members": [
+        {
+          "uuid": "32ad6e4a-cca4-44e2-8089-7ee4d0cf59d5",
+          "name": "mountain pass"
+        },
+        {
+          "uuid": "07fb65b3-1e73-41d8-a528-e498a62724bf",
+          "name": "steepest ascent"
+        }
+      ]
+    },
+    {
+      "label": 52,
+      "members": [
+        {
+          "uuid": "4fecff23-5149-45cd-a4c5-6c423ef941ab",
+          "name": "hull"
+        },
+        {
+          "uuid": "5ff95f3f-30ce-4976-b261-cbb824a2d383",
+          "name": "cargo ship"
+        },
+        {
+          "uuid": "8fc6711e-45dc-4014-b367-642c5998e1bc",
+          "name": "submarine"
+        }
+      ]
+    }
+  ],
+  "node_hierarchy": [
+    {
+      "size": 5,
+      "sample": [
+        "bottlenose dolphin",
+        "elephant",
+        "octopus",
+        "narwhal",
+        "marine mammal"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "trunk",
+        "canopy"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "tusk",
+        "tundra"
+      ],
+      "children": []
+    },
+    {
+      "size": 5,
+      "sample": [
+        "jaw",
+        "curve",
+        "circle",
+        "branch",
+        "cell"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "fish",
+        "deer"
+      ],
+      "children": []
+    },
+    {
+      "size": 4,
+      "sample": [
+        "water",
+        "river",
+        "wind",
+        "snow"
+      ],
+      "children": []
+    },
+    {
+      "size": 4,
+      "sample": [
+        "grizzly bear",
+        "cheetah",
+        "jaguar",
+        "gray wolf"
+      ],
+      "children": []
+    },
+    {
+      "size": 4,
+      "sample": [
+        "berry",
+        "honeybee",
+        "pollen",
+        "particle"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "meadow",
+        "savanna"
+      ],
+      "children": []
+    },
+    {
+      "size": 3,
+      "sample": [
+        "hive",
+        "heat",
+        "h₂o"
+      ],
+      "children": []
+    },
+    {
+      "size": 7,
+      "sample": [
+        "pack",
+        "variable",
+        "display",
+        "component",
+        "fixed",
+        "matrix"
+      ],
+      "children": []
+    },
+    {
+      "size": 3,
+      "sample": [
+        "battery",
+        "engine",
+        "ion"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "roadside station",
+        "coastal highway"
+      ],
+      "children": []
+    },
+    {
+      "size": 5,
+      "sample": [
+        "thermocline",
+        "thermal updraft",
+        "thermocycler",
+        "temperature cycle",
+        "isolated thermodynamic system"
+      ],
+      "children": []
+    },
+    {
+      "size": 4,
+      "sample": [
+        "bullet train",
+        "maglev track",
+        "locomotive",
+        "freight train"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "high speed",
+        "accelerates"
+      ],
+      "children": []
+    },
+    {
+      "size": 4,
+      "sample": [
+        "motorcycle",
+        "hydrofoil",
+        "helicopter",
+        "helipad"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "fume hood",
+        "toxic vapors"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "centrifuge",
+        "chromatography column"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "test tube",
+        "sample"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "plasma",
+        "well plate"
+      ],
+      "children": []
+    },
+    {
+      "size": 3,
+      "sample": [
+        "electron microscope",
+        "microtome",
+        "ultra-thin section"
+      ],
+      "children": []
+    },
+    {
+      "size": 4,
+      "sample": [
+        "pipette",
+        "microliter",
+        "ph meter",
+        "milligram"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "spectrophotometer",
+        "photon"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "glassware",
+        "flask"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "pressurized steam",
+        "autoclave"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "oscilloscope",
+        "voltage waveform"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "bunsen burner",
+        "blue flame"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "acidity",
+        "intensity"
+      ],
+      "children": []
+    },
+    {
+      "size": 3,
+      "sample": [
+        "buffer solution",
+        "solution",
+        "solution set"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "reagent",
+        "mixture"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "eight arms",
+        "hind legs"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "reef",
+        "rainforest"
+      ],
+      "children": []
+    },
+    {
+      "size": 4,
+      "sample": [
+        "definite integral",
+        "partial derivative",
+        "∇f",
+        "∇²φ"
+      ],
+      "children": []
+    },
+    {
+      "size": 3,
+      "sample": [
+        "summation",
+        "infinite series",
+        "∑"
+      ],
+      "children": []
+    },
+    {
+      "size": 6,
+      "sample": [
+        "u",
+        "x",
+        "π",
+        "ψ",
+        "y",
+        "ν"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "change",
+        "chameleon"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "slide",
+        "glider"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "gradient",
+        "direction"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "scalar field",
+        "vector field ⃗f"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "land animal",
+        "red kangaroo"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "peregrine falcon",
+        "emperor penguin"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "antarctic",
+        "arctic fox"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "outback",
+        "open ocean"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "entropy δs",
+        "probability amplitude"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "circumference",
+        "diameter"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "fine-structure constant",
+        "planck constant"
+      ],
+      "children": []
+    },
+    {
+      "size": 3,
+      "sample": [
+        "mass-to-charge ratio",
+        "m/z",
+        "mass spectrometer"
+      ],
+      "children": []
+    },
+    {
+      "size": 3,
+      "sample": [
+        "wavefunction",
+        "wave equation",
+        "characteristic equation"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "laplacian",
+        "λ"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "curl-free",
+        "divergence-free"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "mountain pass",
+        "steepest ascent"
+      ],
+      "children": []
+    },
+    {
+      "size": 3,
+      "sample": [
+        "hull",
+        "cargo ship",
+        "submarine"
+      ],
+      "children": []
+    }
+  ],
+  "node_hierarchy_assignment": {
+    "10546154-a030-4457-8510-3a8e660e9efb": 0,
+    "5474c112-4ad1-4a50-9cae-b7c764793bba": 0,
+    "2b1539db-612f-4df7-bce8-eb05bafb0888": 0,
+    "727caf0a-8648-4fab-82f7-58c8f9b06e24": 0,
+    "a006ce58-cb16-4d5c-928e-a09509758007": 0,
+    "31c9a25c-d0a2-4116-8c4f-410e4f6f0bba": 1,
+    "48bba8a1-234e-4d73-b325-2a1ef48b2eba": 1,
+    "f67f602c-3d03-4158-a2ce-0eb6a820a4f9": 2,
+    "69d3b394-1027-4403-8ad7-96731b6f3e3f": 2,
+    "74401073-6f0e-4455-a72b-afa5d996f7c7": 3,
+    "cbb0ced2-1eb3-4302-b1b8-58bbb992720a": 3,
+    "1886c6fe-ba8e-4f0f-8d3b-c2139eb89383": 3,
+    "712c668f-9417-49a7-85f5-2316981cea0a": 3,
+    "b651f89f-e280-48e6-820f-46f7ef5a0648": 3,
+    "21d37a37-5663-4a9a-95aa-841a9f542b54": 4,
+    "42ff7ce6-a6fc-40f8-b38c-b6636b1b61aa": 4,
+    "5a2c6250-88b2-4e03-8a6e-a07c188a8e5a": 5,
+    "c90776f9-ad8d-4513-ba8e-92e6b15108eb": 5,
+    "f180ded2-b8d1-44a1-90ae-d53b0f6e0108": 5,
+    "e2296978-6048-40e8-b2ec-9c836b897a73": 5,
+    "fdfd0c69-8de1-4f8d-bcb3-1536eb607bc9": 6,
+    "c2d29894-d5b1-4049-ac2c-cfb26417aa62": 6,
+    "b072e0b0-3c75-4c54-afa6-d0a4fdae3d45": 6,
+    "53cf76b7-3aa8-413c-8330-0193b8bc48d3": 6,
+    "01000e4a-554d-437e-b4eb-a2e083c7031a": 7,
+    "a11a5128-9639-4037-b101-55dc55fe6a8d": 7,
+    "bcb1bb73-38b2-4dc9-8486-b6f822e861e0": 7,
+    "0fac109c-5d14-4ec4-82b8-44eafd5a0d5d": 7,
+    "413f59e7-6343-4517-ae7b-541418ccdc2e": 8,
+    "0d0da210-d504-4b90-abca-cbba883573c9": 8,
+    "511199b9-bad8-4df8-a89b-e4e41e9bda12": 9,
+    "6f452635-6fe5-4e16-b28e-f5c386dd5a84": 9,
+    "eff1de0e-dde9-4e1c-933b-dd9997898843": 9,
+    "5dc64acb-9f91-4ed3-9d4c-2979b533d952": 10,
+    "8220655e-90b1-4a52-964b-305f8467a48d": 10,
+    "042e50c7-5eed-47b4-806b-92eab2cec2da": 10,
+    "c288986e-65d0-49d8-998f-6f98346adcc1": 10,
+    "0356e986-7115-4116-a071-0e7b8423b3df": 10,
+    "3b1e2ad4-14d1-4fd0-869e-07e20b1a127b": 10,
+    "837a33f2-a63b-4165-ae8a-7748ddccb7ec": 10,
+    "74287f4e-0ec6-4137-8fe6-0eeaf45b603b": 11,
+    "338375df-0a08-426d-a124-3e642e5221a3": 11,
+    "21131034-c629-49e0-9384-3fefb7f11f26": 11,
+    "6e06d0ae-7243-47b8-b3e0-f2c7f6458fa7": 12,
+    "8924a015-2b7e-4181-9ef2-9cd9e540f3c8": 12,
+    "644a96b2-aaea-4a1a-b528-9d05427fea17": 13,
+    "e910c23e-f1e5-47e8-b0c1-223a360c19e7": 13,
+    "5899f141-4b5a-4d0c-a6a4-397a2b272052": 13,
+    "220cb48c-9406-4c13-8f8e-bf897d90d8fc": 13,
+    "fb68edfe-e3fd-4f6e-9751-da33f87ae241": 13,
+    "dbc333c7-6197-447a-badb-ef861e664f77": 14,
+    "cfd94a94-d40b-4b90-a982-2c1ea5f67d26": 14,
+    "c6fb5ec3-4dec-48e4-ab66-5f36ebad30a8": 14,
+    "01e5b335-ad41-4265-bdd8-c4abc608086a": 14,
+    "0b5c432b-2a50-4468-b5f3-39457766b7ce": 15,
+    "d78d0bec-bf5a-403b-9e3c-e95cfe21f7ed": 15,
+    "65c310ee-4f6f-427f-89c5-02c68ceca5d2": 16,
+    "57708976-34bc-4ffa-8ed2-dff575833ba0": 16,
+    "352af36b-59e4-469c-915b-1fc7825fcb4b": 16,
+    "41b1e002-e182-4c0b-b29b-24d45d82b7d6": 16,
+    "487cc1cf-903d-4e1c-be25-e9b829eee087": 17,
+    "75e23028-d235-4456-a88c-45348b21b933": 17,
+    "f8939f6d-4819-45ab-b3ad-7026abf9bc41": 18,
+    "d5450031-93fd-45cd-89cc-d73d106a9221": 18,
+    "e9dea2dc-dc7d-4b30-8a57-f4cd0a9b7f16": 19,
+    "5034a67d-00b9-4338-9b1b-c26bd0700ca5": 19,
+    "353ec2a2-0405-4564-9b45-1122f1f9d93e": 20,
+    "a69eabb4-f56e-44d3-93ef-9a4c5e2a0227": 20,
+    "ea154e2b-3615-45f4-bc37-66351f647831": 21,
+    "85309caa-6753-4e75-8c8e-0eb691790076": 21,
+    "1a905b39-cbab-4e9f-8bbc-7eeddfd5f8c4": 21,
+    "4bfd4773-22b3-4c0b-9e3f-b3f876a8960e": 22,
+    "ca57bed2-cf62-40c5-b3ee-36132918ef9a": 22,
+    "c6344ab8-7387-41a4-96e3-2a8e13f20637": 22,
+    "51b65b7d-14e2-446e-be8a-017cd50de0b0": 22,
+    "f80a46f5-06fd-4984-b0a9-214067545053": 23,
+    "1e3b2d19-ed3c-49c0-9b9c-274bced046ca": 23,
+    "e20e424a-c7f5-4bde-a5e9-22ff12b0f930": 24,
+    "b1b1d356-0580-48ab-97f9-dcebf8c49fb9": 24,
+    "9bb7b535-a954-47ae-9642-1eb133a12ea8": 25,
+    "55f7597e-b511-4f3c-b514-230ce1c34bcd": 25,
+    "61d39939-da9f-45f6-b5e6-f944d24bfe51": 26,
+    "a4260583-3b4b-4b44-b682-98d6b5c8c4f0": 26,
+    "de4ba9e8-5d3e-45c2-9d13-df7945815b7e": 27,
+    "827f08ab-d652-4068-82f0-226c7a9d7ff6": 27,
+    "fdddd97e-ede0-4f22-94af-7a7d1a8583c9": 28,
+    "2b6340c1-5e55-427a-9a41-670d14f162b6": 28,
+    "0cca730f-4a6e-4b96-8b62-9f8f09d3d8c0": 29,
+    "43228baa-d600-403c-bc03-50b779d37e41": 29,
+    "3976a012-c687-4bb9-9878-d5b8c83bb1c1": 29,
+    "792a0d68-df53-472a-badc-94716560d8a7": 30,
+    "9987683f-2521-4cd3-ad43-550f7f10de26": 30,
+    "e6ccdb1d-f3d3-4f1b-ac64-e125ce237771": 31,
+    "0de5157e-f470-41d7-9f8f-c1c9c029a33d": 31,
+    "a991333e-5803-4490-9560-99107d3ca167": 32,
+    "0fbaac0f-4d67-47f0-b24b-b4ee7b98c321": 32,
+    "71526906-4bdb-41a8-9bec-7d17ac365927": 33,
+    "25cf9529-315e-48f4-9c84-fba01a5587e1": 33,
+    "1e9f04b0-a456-487f-9c40-e79af7858142": 33,
+    "bdacb9f5-689b-4062-a667-c1d1348ff546": 33,
+    "036ff296-42f4-435e-96c6-46d2867d9000": 34,
+    "526be72d-67ae-4e09-b4ea-7b6a279cefa2": 34,
+    "4532b361-5ec4-45ff-866f-302f79537500": 34,
+    "9ec07c87-2b96-4c11-bd10-8b969435387f": 35,
+    "6dbc0169-a9cb-4453-ac8b-a890563f4013": 35,
+    "600b1b44-fd89-4bc5-83d0-cdfd110ff58b": 35,
+    "418a84af-95d4-45dc-a7df-88b7034fe9cf": 35,
+    "fa8052ae-3fd7-4626-8ea3-e1d163f6fb3f": 35,
+    "a96a23ce-2f8d-4c06-b86b-258594f2dd26": 35,
+    "77476cfc-cf15-4151-95cf-533e6948a4b4": 36,
+    "c90a5af5-b70f-4608-b41d-d672d5fa48b7": 36,
+    "dc327b47-3b4b-4db4-9961-dfb1b63d2736": 37,
+    "bafb7ca2-69ca-4231-9247-28a32de046ca": 37,
+    "f9884d71-62be-4c70-b5dc-75b0ca2960e0": 38,
+    "1df1bd8b-c832-4a8e-a574-c06c90d3a2e7": 38,
+    "c7e3c553-4f8f-4aed-95ac-6c92bcb71512": 39,
+    "58d49c2c-18d4-42ee-9ff4-2ab571b19b66": 39,
+    "d1203713-ce89-4bd3-baef-b0fa079f1d23": 40,
+    "19eece7f-5590-4f5e-8f6d-5a6e6025dca4": 40,
+    "c6d74c3b-0893-4753-a579-425310c0d8dd": 41,
+    "50396a2a-a34a-4be7-84b7-76050b6246ed": 41,
+    "e99bfc36-28a0-41b5-b648-d1af9e9c9066": 42,
+    "7f3d76b9-0ac6-4fca-8721-e0bc61bd3db1": 42,
+    "90549376-824e-4d25-bebf-1e4736a86c67": 43,
+    "5491409d-596c-495e-967c-7cb2114f58f7": 43,
+    "32e75db6-9c01-409c-9905-46955025bc43": 44,
+    "b22ab356-7b86-4d60-9028-1ada970d6fd5": 44,
+    "745bc496-0694-49be-b62a-bfed5ff07ce7": 45,
+    "c00e5044-0a02-46a6-ada6-d8b570addc2d": 45,
+    "0f2444a6-0fac-4473-9fc3-944e73dde4b1": 46,
+    "9e84a9af-f798-4eaa-abc4-e50b2d0c9e0e": 46,
+    "d5ef7c15-73f1-48d7-ba87-3b300cbedce7": 47,
+    "e4fabf71-d193-4f49-bf51-c9a15a67267b": 47,
+    "301a5167-5f0b-4638-b192-d13966dfe7a8": 47,
+    "b0fa4db2-79be-4174-b218-333fb1c52bb9": 48,
+    "755ddedc-97d9-4ec6-b822-82f4fc956aac": 48,
+    "e1d9e735-4832-4453-b642-33d434f88a09": 48,
+    "99d92ecd-cc17-4347-8c64-61a178af30eb": 49,
+    "d2eb2b3c-7efc-4877-8ce3-be66a499a6d5": 49,
+    "09af331c-62bf-4b92-b398-a47cc4e9af23": 50,
+    "79c11635-1244-47d1-a348-de6c1931c4fb": 50,
+    "32ad6e4a-cca4-44e2-8089-7ee4d0cf59d5": 51,
+    "07fb65b3-1e73-41d8-a528-e498a62724bf": 51,
+    "4fecff23-5149-45cd-a4c5-6c423ef941ab": 52,
+    "5ff95f3f-30ce-4976-b261-cbb824a2d383": 52,
+    "8fc6711e-45dc-4014-b367-642c5998e1bc": 52
+  },
+  "edge_clusters": [
+    {
+      "label": 0,
+      "edges": [
+        {
+          "uuid": "4f747ab6-6f6b-416d-a45c-e00a47f60f55",
+          "relation": "LOCATED_AT",
+          "source": "713897af-feba-478d-975d-d99cdfc9a7df",
+          "target": "6e06d0ae-7243-47b8-b3e0-f2c7f6458fa7",
+          "label": "electric sedan --LOCATED_AT--> roadside station"
+        },
+        {
+          "uuid": "3faf44c5-ebe2-4250-97f4-6174d0163939",
+          "relation": "LOCATED_IN",
+          "source": "5ff95f3f-30ce-4976-b261-cbb824a2d383",
+          "target": "5491409d-596c-495e-967c-7cb2114f58f7",
+          "label": "cargo ship --LOCATED_IN--> open ocean"
+        },
+        {
+          "uuid": "c15ccf09-537f-4b6b-bb8c-0734f04762bc",
+          "relation": "LOCATED_IN",
+          "source": "50396a2a-a34a-4be7-84b7-76050b6246ed",
+          "target": "e99bfc36-28a0-41b5-b648-d1af9e9c9066",
+          "label": "emperor penguin --LOCATED_IN--> antarctic"
+        },
+        {
+          "uuid": "62a2f25f-1231-4263-9f1b-3293d4e2bb47",
+          "relation": "LOCATED_IN",
+          "source": "5dc64acb-9f91-4ed3-9d4c-2979b533d952",
+          "target": "69d3b394-1027-4403-8ad7-96731b6f3e3f",
+          "label": "pack --LOCATED_IN--> tundra"
+        },
+        {
+          "uuid": "72c0edf8-b8b1-4833-8612-80a58c176a0b",
+          "relation": "LOCATED_IN",
+          "source": "21d37a37-5663-4a9a-95aa-841a9f542b54",
+          "target": "8292fb5b-1908-4e76-8b59-d29be14e3dcb",
+          "label": "fish --LOCATED_IN--> murky bay"
+        },
+        {
+          "uuid": "cae657c1-b259-4ffc-b74c-da38ca266f64",
+          "relation": "LOCATED_IN",
+          "source": "5a2c6250-88b2-4e03-8a6e-a07c188a8e5a",
+          "target": "c90776f9-ad8d-4513-ba8e-92e6b15108eb",
+          "label": "water --LOCATED_IN--> river"
+        },
+        {
+          "uuid": "af5ee047-df67-48ee-ace1-6a42845edece",
+          "relation": "LOCATED_IN",
+          "source": "19eece7f-5590-4f5e-8f6d-5a6e6025dca4",
+          "target": "90549376-824e-4d25-bebf-1e4736a86c67",
+          "label": "red kangaroo --LOCATED_IN--> outback"
+        },
+        {
+          "uuid": "5800b665-0cd5-43d0-ace0-52af6e64c374",
+          "relation": "LOCATED_IN",
+          "source": "b072e0b0-3c75-4c54-afa6-d0a4fdae3d45",
+          "target": "48bba8a1-234e-4d73-b325-2a1ef48b2eba",
+          "label": "jaguar --LOCATED_IN--> canopy"
+        },
+        {
+          "uuid": "6dc30e35-2544-469a-8e2b-1de2622b102f",
+          "relation": "APPEARS_IN",
+          "source": "bdacb9f5-689b-4062-a667-c1d1348ff546",
+          "target": "6f452635-6fe5-4e16-b28e-f5c386dd5a84",
+          "label": "∇²φ --APPEARS_IN--> heat"
+        },
+        {
+          "uuid": "fb2d5b82-bd5b-4c92-a359-dcdb1bad1090",
+          "relation": "APPEARS_IN",
+          "source": "bdacb9f5-689b-4062-a667-c1d1348ff546",
+          "target": "755ddedc-97d9-4ec6-b822-82f4fc956aac",
+          "label": "∇²φ --APPEARS_IN--> wave equation"
+        }
+      ]
+    },
+    {
+      "label": 1,
+      "edges": [
+        {
+          "uuid": "557e934c-b4c7-4d74-8d9c-17013b907eca",
+          "relation": "DIVES_BELOW",
+          "source": "8fc6711e-45dc-4014-b367-642c5998e1bc",
+          "target": "644a96b2-aaea-4a1a-b528-9d05427fea17",
+          "label": "submarine --DIVES_BELOW--> thermocline"
+        },
+        {
+          "uuid": "ea3b943c-efdc-4996-bfe4-2fd8e9cbf1ff",
+          "relation": "DIVES_TOWARD",
+          "source": "c6d74c3b-0893-4753-a579-425310c0d8dd",
+          "target": "933dfb76-e42e-4b72-9a5c-8975e29542ac",
+          "label": "peregrine falcon --DIVES_TOWARD--> prey"
+        }
+      ]
+    },
+    {
+      "label": 2,
+      "edges": [
+        {
+          "uuid": "bf40f2be-484f-41f3-89df-a1ce840df51c",
+          "relation": "GLIDES_ALONG",
+          "source": "dbc333c7-6197-447a-badb-ef861e664f77",
+          "target": "cfd94a94-d40b-4b90-a982-2c1ea5f67d26",
+          "label": "bullet train --GLIDES_ALONG--> maglev track"
+        },
+        {
+          "uuid": "83aa7c1c-d80e-4c22-811b-cfb9de2dbe48",
+          "relation": "CRAWLS_ALONG",
+          "source": "2b1539db-612f-4df7-bce8-eb05bafb0888",
+          "target": "a991333e-5803-4490-9560-99107d3ca167",
+          "label": "octopus --CRAWLS_ALONG--> reef"
+        }
+      ]
+    },
+    {
+      "label": 3,
+      "edges": [
+        {
+          "uuid": "33e2a690-0f28-43c4-b29c-9a965cdedffe",
+          "relation": "MOVES_AT",
+          "source": "dbc333c7-6197-447a-badb-ef861e664f77",
+          "target": "0b5c432b-2a50-4468-b5f3-39457766b7ce",
+          "label": "bullet train --MOVES_AT--> high speed"
+        },
+        {
+          "uuid": "e2492b39-6788-4906-b4f2-08d9967a015c",
+          "relation": "MOVES_AT",
+          "source": "c6d74c3b-0893-4753-a579-425310c0d8dd",
+          "target": "eb4a1bc7-5f99-402c-8885-c6c52972fef2",
+          "label": "peregrine falcon --MOVES_AT--> tremendous speed"
+        },
+        {
+          "uuid": "b5b2bec2-0838-495a-a807-d9971e93f6e0",
+          "relation": "CHANGES_TO",
+          "source": "c90a5af5-b70f-4608-b41d-d672d5fa48b7",
+          "target": "893bcd14-7d4c-4790-984b-e9d2d24daa81",
+          "label": "chameleon --CHANGES_TO--> skin color"
+        },
+        {
+          "uuid": "8ebd750a-af49-4a67-ab73-f77fe52844cb",
+          "relation": "MOVES_TO",
+          "source": "a11a5128-9639-4037-b101-55dc55fe6a8d",
+          "target": "511199b9-bad8-4df8-a89b-e4e41e9bda12",
+          "label": "honeybee --MOVES_TO--> hive"
+        }
+      ]
+    },
+    {
+      "label": 4,
+      "edges": [
+        {
+          "uuid": "5f009df2-32fc-408f-9a29-d8d61f985f2a",
+          "relation": "WITHOUT",
+          "source": "bafb7ca2-69ca-4231-9247-28a32de046ca",
+          "target": "338375df-0a08-426d-a124-3e642e5221a3",
+          "label": "glider --WITHOUT--> engine"
+        },
+        {
+          "uuid": "7757bdc9-23f6-4d74-841a-4ebd50f30b3f",
+          "relation": "ABOVE",
+          "source": "4fecff23-5149-45cd-a4c5-6c423ef941ab",
+          "target": "5a2c6250-88b2-4e03-8a6e-a07c188a8e5a",
+          "label": "hull --ABOVE--> water"
+        },
+        {
+          "uuid": "702d32e3-0e42-40e8-8650-41c1c9eaa9d4",
+          "relation": "BENEATH",
+          "source": "71526906-4bdb-41a8-9bec-7d17ac365927",
+          "target": "cbb0ced2-1eb3-4302-b1b8-58bbb992720a",
+          "label": "definite integral --BENEATH--> curve"
+        }
+      ]
+    },
+    {
+      "label": 5,
+      "edges": [
+        {
+          "uuid": "a0f74f64-d4a0-4097-abf3-bc2c6763969f",
+          "relation": "CROSSES",
+          "source": "01e5b335-ad41-4265-bdd8-c4abc608086a",
+          "target": "32ad6e4a-cca4-44e2-8089-7ee4d0cf59d5",
+          "label": "freight train --CROSSES--> mountain pass"
+        },
+        {
+          "uuid": "2809dc23-65bc-4613-9ba5-ebbf5d5e62fe",
+          "relation": "OCCURS_ACROSS",
+          "source": "efa8b69e-52f6-4e85-9605-e63ee8a116d2",
+          "target": "220cb48c-9406-4c13-8f8e-bf897d90d8fc",
+          "label": "polymerase chain reaction --OCCURS_ACROSS--> temperature cycle"
+        }
+      ]
+    },
+    {
+      "label": 6,
+      "edges": [
+        {
+          "uuid": "22840ada-a771-44c1-8b85-73ce4b4768ee",
+          "relation": "PERFORMS",
+          "source": "57708976-34bc-4ffa-8ed2-dff575833ba0",
+          "target": "d78d0bec-bf5a-403b-9e3c-e95cfe21f7ed",
+          "label": "hydrofoil --PERFORMS--> accelerates"
+        },
+        {
+          "uuid": "63609051-1e53-4cb7-8f08-781f53b7590d",
+          "relation": "PERFORMS_ACTION",
+          "source": "b072e0b0-3c75-4c54-afa6-d0a4fdae3d45",
+          "target": "7da85930-46ae-44a9-8700-14b82489406f",
+          "label": "jaguar --PERFORMS_ACTION--> kill"
+        },
+        {
+          "uuid": "1c422535-6ef0-410f-ad91-414cb03efb84",
+          "relation": "PERFORMS",
+          "source": "5899f141-4b5a-4d0c-a6a4-397a2b272052",
+          "target": "efa8b69e-52f6-4e85-9605-e63ee8a116d2",
+          "label": "thermocycler --PERFORMS--> polymerase chain reaction"
+        }
+      ]
+    },
+    {
+      "label": 7,
+      "edges": [
+        {
+          "uuid": "4faaa10c-20d4-4dd2-b4c0-ec49831f5e3a",
+          "relation": "USES",
+          "source": "2b1539db-612f-4df7-bce8-eb05bafb0888",
+          "target": "e6ccdb1d-f3d3-4f1b-ac64-e125ce237771",
+          "label": "octopus --USES--> eight arms"
+        },
+        {
+          "uuid": "375a2d7e-e72f-428d-bd5e-9fa5ba132b7f",
+          "relation": "USES",
+          "source": "5474c112-4ad1-4a50-9cae-b7c764793bba",
+          "target": "31c9a25c-d0a2-4116-8c4f-410e4f6f0bba",
+          "label": "elephant --USES--> trunk"
+        },
+        {
+          "uuid": "5b03df94-3984-4962-9a80-0dc3d8d201ea",
+          "relation": "USES",
+          "source": "19eece7f-5590-4f5e-8f6d-5a6e6025dca4",
+          "target": "0de5157e-f470-41d7-9f8f-c1c9c029a33d",
+          "label": "red kangaroo --USES--> hind legs"
+        },
+        {
+          "uuid": "b7e9cc0d-f019-4619-8ea6-5c960bbd71c7",
+          "relation": "CONTAINS",
+          "source": "e9dea2dc-dc7d-4b30-8a57-f4cd0a9b7f16",
+          "target": "353ec2a2-0405-4564-9b45-1122f1f9d93e",
+          "label": "test tube --CONTAINS--> plasma"
+        },
+        {
+          "uuid": "688f44aa-b382-496f-bb2c-445dd68221ef",
+          "relation": "CONTAINS",
+          "source": "e9dea2dc-dc7d-4b30-8a57-f4cd0a9b7f16",
+          "target": "b651f89f-e280-48e6-820f-46f7ef5a0648",
+          "label": "test tube --CONTAINS--> cell"
+        },
+        {
+          "uuid": "d4988d9a-c2a1-48a7-adfd-e6ce9a93c144",
+          "relation": "MEASURES",
+          "source": "f80a46f5-06fd-4984-b0a9-214067545053",
+          "target": "43228baa-d600-403c-bc03-50b779d37e41",
+          "label": "spectrophotometer --MEASURES--> solution"
+        },
+        {
+          "uuid": "3b82b489-8a77-4e02-8ad4-6d545f190ee8",
+          "relation": "MEASURES",
+          "source": "f80a46f5-06fd-4984-b0a9-214067545053",
+          "target": "c7160059-2fe5-446e-add6-3029bbbc9df9",
+          "label": "spectrophotometer --MEASURES--> light"
+        },
+        {
+          "uuid": "060d7688-4572-4421-8c62-ac4eea536495",
+          "relation": "USES",
+          "source": "55f7597e-b511-4f3c-b514-230ce1c34bcd",
+          "target": "9bb7b535-a954-47ae-9642-1eb133a12ea8",
+          "label": "autoclave --USES--> pressurized steam"
+        },
+        {
+          "uuid": "92131c9a-acb2-43ea-a7f7-bdab0b54b796",
+          "relation": "CONSISTS_OF",
+          "source": "9987683f-2521-4cd3-ad43-550f7f10de26",
+          "target": "c288986e-65d0-49d8-998f-6f98346adcc1",
+          "label": "mixture --CONSISTS_OF--> component"
+        },
+        {
+          "uuid": "2910195b-6c87-4a19-b4ca-1e405d5898d9",
+          "relation": "MEASURES",
+          "source": "c6344ab8-7387-41a4-96e3-2a8e13f20637",
+          "target": "fdddd97e-ede0-4f22-94af-7a7d1a8583c9",
+          "label": "ph meter --MEASURES--> acidity"
+        },
+        {
+          "uuid": "ce390959-af07-4a68-8da0-a54779fc420b",
+          "relation": "INDICATES",
+          "source": "1e9f04b0-a456-487f-9c40-e79af7858142",
+          "target": "1df1bd8b-c832-4a8e-a574-c06c90d3a2e7",
+          "label": "∇f --INDICATES--> direction"
+        },
+        {
+          "uuid": "8413ee6f-2473-4615-aebb-25b876e0a98f",
+          "relation": "DESCRIBES",
+          "source": "1df1bd8b-c832-4a8e-a574-c06c90d3a2e7",
+          "target": "07fb65b3-1e73-41d8-a528-e498a62724bf",
+          "label": "direction --DESCRIBES--> steepest ascent"
+        },
+        {
+          "uuid": "4b5c1a9b-d78e-44c7-a3a5-0976d55398cf",
+          "relation": "RELATES_TO",
+          "source": "07fb65b3-1e73-41d8-a528-e498a62724bf",
+          "target": "c7e3c553-4f8f-4aed-95ac-6c92bcb71512",
+          "label": "steepest ascent --RELATES_TO--> scalar field"
+        },
+        {
+          "uuid": "adf838be-d486-4190-af4a-73543a0b0d2b",
+          "relation": "COMPUTES",
+          "source": "71526906-4bdb-41a8-9bec-7d17ac365927",
+          "target": "a0db5adc-7893-49c5-9175-4a697b8546ab",
+          "label": "definite integral --COMPUTES--> area"
+        },
+        {
+          "uuid": "521ecd4c-2aa0-4cf7-8269-4d745dbec0fc",
+          "relation": "REPRESENTS",
+          "source": "036ff296-42f4-435e-96c6-46d2867d9000",
+          "target": "4532b361-5ec4-45ff-866f-302f79537500",
+          "label": "summation --REPRESENTS--> ∑"
+        },
+        {
+          "uuid": "76205b54-3b2c-47ed-ab0b-109bef77c0bc",
+          "relation": "MEASURES",
+          "source": "25cf9529-315e-48f4-9c84-fba01a5587e1",
+          "target": "9ec07c87-2b96-4c11-bd10-8b969435387f",
+          "label": "partial derivative --MEASURES--> u"
+        },
+        {
+          "uuid": "99130780-5401-4405-bfed-b5cb0e41aec6",
+          "relation": "MEASURES",
+          "source": "25cf9529-315e-48f4-9c84-fba01a5587e1",
+          "target": "6dbc0169-a9cb-4453-ac8b-a890563f4013",
+          "label": "partial derivative --MEASURES--> x"
+        },
+        {
+          "uuid": "07c78fdc-12ec-4915-9d0e-92f590690062",
+          "relation": "AFFECTS",
+          "source": "77476cfc-cf15-4151-95cf-533e6948a4b4",
+          "target": "8220655e-90b1-4a52-964b-305f8467a48d",
+          "label": "change --AFFECTS--> variable"
+        },
+        {
+          "uuid": "597e45d2-7e4f-4ef3-a82f-4ef6a0e976b9",
+          "relation": "RELATES_TO",
+          "source": "600b1b44-fd89-4bc5-83d0-cdfd110ff58b",
+          "target": "745bc496-0694-49be-b62a-bfed5ff07ce7",
+          "label": "π --RELATES_TO--> circumference"
+        },
+        {
+          "uuid": "90e9ae18-d95a-4707-a2cb-77d7bac14ee9",
+          "relation": "RELATES_TO",
+          "source": "600b1b44-fd89-4bc5-83d0-cdfd110ff58b",
+          "target": "c00e5044-0a02-46a6-ada6-d8b570addc2d",
+          "label": "π --RELATES_TO--> diameter"
+        },
+        {
+          "uuid": "ea1f93dc-3c5d-4e9d-9db6-dd8cbf87f084",
+          "relation": "ASSOCIATED_WITH",
+          "source": "b22ab356-7b86-4d60-9028-1ada970d6fd5",
+          "target": "0fac109c-5d14-4ec4-82b8-44eafd5a0d5d",
+          "label": "probability amplitude --ASSOCIATED_WITH--> particle"
+        },
+        {
+          "uuid": "66ed94cf-2ee3-482c-ad34-e6ecaab90a77",
+          "relation": "RELATED_TO",
+          "source": "99d92ecd-cc17-4347-8c64-61a178af30eb",
+          "target": "bdacb9f5-689b-4062-a667-c1d1348ff546",
+          "label": "laplacian --RELATED_TO--> ∇²φ"
+        },
+        {
+          "uuid": "d3637dd7-bb68-448d-b9d9-018eb44a7db2",
+          "relation": "APPLIES_TO",
+          "source": "e1d9e735-4832-4453-b642-33d434f88a09",
+          "target": "3b1e2ad4-14d1-4fd0-869e-07e20b1a127b",
+          "label": "characteristic equation --APPLIES_TO--> matrix"
+        }
+      ]
+    },
+    {
+      "label": 8,
+      "edges": [
+        {
+          "uuid": "1c78d33a-b8df-4018-9d4a-7e4e6d6f53b0",
+          "relation": "PRECEDES",
+          "source": "fdfd0c69-8de1-4f8d-bcb3-1536eb607bc9",
+          "target": "57ffa589-dde3-4f43-913f-251bb7f79e4d",
+          "label": "grizzly bear --PRECEDES--> winter hibernation"
+        },
+        {
+          "uuid": "b8c30f72-4b5e-4b5b-bc82-65bdab642081",
+          "relation": "PREPARED_FOR",
+          "source": "1a905b39-cbab-4e9f-8bbc-7eeddfd5f8c4",
+          "target": "dc327b47-3b4b-4db4-9961-dfb1b63d2736",
+          "label": "ultra-thin section --PREPARED_FOR--> slide"
+        }
+      ]
+    },
+    {
+      "label": 9,
+      "edges": [
+        {
+          "uuid": "9bbae7f5-bf08-4f6b-bbf1-0fb688fae141",
+          "relation": "CARRIES",
+          "source": "a11a5128-9639-4037-b101-55dc55fe6a8d",
+          "target": "bcb1bb73-38b2-4dc9-8486-b6f822e861e0",
+          "label": "honeybee --CARRIES--> pollen"
+        },
+        {
+          "uuid": "32acc459-c9f3-41d5-8c4c-727449736ac3",
+          "relation": "CARRIES",
+          "source": "1e3b2d19-ed3c-49c0-9b9c-274bced046ca",
+          "target": "a96a23ce-2f8d-4c06-b86b-258594f2dd26",
+          "label": "photon --CARRIES--> ν"
+        }
+      ]
+    },
+    {
+      "label": 10,
+      "edges": [
+        {
+          "uuid": "250418dd-b1da-4ad6-b3a9-cd32e3788442",
+          "relation": "PART_OF",
+          "source": "48bba8a1-234e-4d73-b325-2a1ef48b2eba",
+          "target": "0fbaac0f-4d67-47f0-b24b-b4ee7b98c321",
+          "label": "canopy --PART_OF--> rainforest"
+        },
+        {
+          "uuid": "32d0c3d7-4146-425f-9c5e-0af4c6513784",
+          "relation": "PART_OF",
+          "source": "745bc496-0694-49be-b62a-bfed5ff07ce7",
+          "target": "1886c6fe-ba8e-4f0f-8d3b-c2139eb89383",
+          "label": "circumference --PART_OF--> circle"
+        },
+        {
+          "uuid": "1a68aab4-19de-4b6c-ba37-a2c1a56f2551",
+          "relation": "PART_OF",
+          "source": "c00e5044-0a02-46a6-ada6-d8b570addc2d",
+          "target": "1886c6fe-ba8e-4f0f-8d3b-c2139eb89383",
+          "label": "diameter --PART_OF--> circle"
+        }
+      ]
+    },
+    {
+      "label": 11,
+      "edges": [
+        {
+          "uuid": "9ed96478-efcf-47ce-a004-7655b3ad1fa5",
+          "relation": "SORTS_BY",
+          "source": "301a5167-5f0b-4638-b192-d13966dfe7a8",
+          "target": "21131034-c629-49e0-9384-3fefb7f11f26",
+          "label": "mass spectrometer --SORTS_BY--> ion"
+        },
+        {
+          "uuid": "bfab0c37-7f01-4c87-870f-dc40f73dbb75",
+          "relation": "SORTED_BY",
+          "source": "21131034-c629-49e0-9384-3fefb7f11f26",
+          "target": "710481b7-6ee5-408c-83b5-0f1ed72f2282",
+          "label": "ion --SORTED_BY--> mass"
+        }
+      ]
+    },
+    {
+      "label": 12,
+      "edges": [
+        {
+          "uuid": "558b44b9-2397-4e4c-89a6-299df52cddfa",
+          "relation": "SEPARATES_FROM",
+          "source": "f8939f6d-4819-45ab-b3ad-7026abf9bc41",
+          "target": "353ec2a2-0405-4564-9b45-1122f1f9d93e",
+          "label": "centrifuge --SEPARATES_FROM--> plasma"
+        },
+        {
+          "uuid": "c68f7ae5-8749-467a-9d73-4d600dab5d4d",
+          "relation": "SEPARATES_FROM",
+          "source": "f8939f6d-4819-45ab-b3ad-7026abf9bc41",
+          "target": "b651f89f-e280-48e6-820f-46f7ef5a0648",
+          "label": "centrifuge --SEPARATES_FROM--> cell"
+        },
+        {
+          "uuid": "cc8d4d51-4164-494e-8565-589c6d9fdf56",
+          "relation": "SEPARATES",
+          "source": "d5450031-93fd-45cd-89cc-d73d106a9221",
+          "target": "9987683f-2521-4cd3-ad43-550f7f10de26",
+          "label": "chromatography column --SEPARATES--> mixture"
+        }
+      ]
+    },
+    {
+      "label": 13,
+      "edges": [
+        {
+          "uuid": "630771ac-689d-4c49-a545-b313cfca19f8",
+          "relation": "DISPENSES_INTO",
+          "source": "4bfd4773-22b3-4c0b-9e3f-b3f876a8960e",
+          "target": "a69eabb4-f56e-44d3-93ef-9a4c5e2a0227",
+          "label": "pipette --DISPENSES_INTO--> well plate"
+        },
+        {
+          "uuid": "0e8282c4-6754-4efa-89f3-67746ec0e2e7",
+          "relation": "DISPENSES_VOLUME",
+          "source": "4bfd4773-22b3-4c0b-9e3f-b3f876a8960e",
+          "target": "ca57bed2-cf62-40c5-b3ee-36132918ef9a",
+          "label": "pipette --DISPENSES_VOLUME--> microliter"
+        }
+      ]
+    },
+    {
+      "label": 14,
+      "edges": [
+        {
+          "uuid": "f8c3a46d-2b41-4b6f-9488-6b5bcaec1e2c",
+          "relation": "DISPLAYS_ON",
+          "source": "61d39939-da9f-45f6-b5e6-f944d24bfe51",
+          "target": "042e50c7-5eed-47b4-806b-92eab2cec2da",
+          "label": "oscilloscope --DISPLAYS_ON--> display"
+        },
+        {
+          "uuid": "8c6554f5-0028-47cd-a1d4-d84527f5ab11",
+          "relation": "REPORTS_ON",
+          "source": "c6344ab8-7387-41a4-96e3-2a8e13f20637",
+          "target": "0cca730f-4a6e-4b96-8b62-9f8f09d3d8c0",
+          "label": "ph meter --REPORTS_ON--> buffer solution"
+        }
+      ]
+    },
+    {
+      "label": 15,
+      "edges": [
+        {
+          "uuid": "e171faf9-4fcd-48c9-93cc-997e67ff4c07",
+          "relation": "PRODUCES",
+          "source": "de4ba9e8-5d3e-45c2-9d13-df7945815b7e",
+          "target": "827f08ab-d652-4068-82f0-226c7a9d7ff6",
+          "label": "bunsen burner --PRODUCES--> blue flame"
+        },
+        {
+          "uuid": "d6edf72a-8080-4f39-82a2-98875bcdb8d8",
+          "relation": "PRODUCES",
+          "source": "85309caa-6753-4e75-8c8e-0eb691790076",
+          "target": "1a905b39-cbab-4e9f-8bbc-7eeddfd5f8c4",
+          "label": "microtome --PRODUCES--> ultra-thin section"
+        }
+      ]
+    },
+    {
+      "label": 16,
+      "edges": [
+        {
+          "uuid": "22e34d6b-be4c-47ce-a807-9bc84150651d",
+          "relation": "LESS_THAN_OR_EQUAL_TO",
+          "source": "6dbc0169-a9cb-4453-ac8b-a890563f4013",
+          "target": "fa8052ae-3fd7-4626-8ea3-e1d163f6fb3f",
+          "label": "x --LESS_THAN_OR_EQUAL_TO--> y"
+        },
+        {
+          "uuid": "8a35fa9e-47cf-44ba-95ab-bbd1a08e70ba",
+          "relation": "PROPORTIONAL_TO",
+          "source": "a96a23ce-2f8d-4c06-b86b-258594f2dd26",
+          "target": "8c536b55-6588-4362-afa4-49b719cdeba6",
+          "label": "ν --PROPORTIONAL_TO--> energy"
+        },
+        {
+          "uuid": "3adb2732-eb5d-4fbe-8c31-5c90cefdf0d8",
+          "relation": "PROPORTIONAL_TO",
+          "source": "8c536b55-6588-4362-afa4-49b719cdeba6",
+          "target": "9e84a9af-f798-4eaa-abc4-e50b2d0c9e0e",
+          "label": "energy --PROPORTIONAL_TO--> planck constant"
+        }
+      ]
+    },
+    {
+      "label": 17,
+      "edges": [
+        {
+          "uuid": "b78c494a-4d27-4988-9f0f-81f973a3ab2b",
+          "relation": "ENCODES",
+          "source": "b0fa4db2-79be-4174-b218-333fb1c52bb9",
+          "target": "418a84af-95d4-45dc-a7df-88b7034fe9cf",
+          "label": "wavefunction --ENCODES--> ψ"
+        },
+        {
+          "uuid": "276dc018-d9a2-4ac7-bf31-cefd019fd1c8",
+          "relation": "ENCODES",
+          "source": "b0fa4db2-79be-4174-b218-333fb1c52bb9",
+          "target": "b22ab356-7b86-4d60-9028-1ada970d6fd5",
+          "label": "wavefunction --ENCODES--> probability amplitude"
+        }
+      ]
+    },
+    {
+      "label": 18,
+      "edges": [
+        {
+          "uuid": "8c7ee714-47d5-4b34-851c-a9e71d30cb85",
+          "relation": "DECOMPOSED_INTO",
+          "source": "58d49c2c-18d4-42ee-9ff4-2ab571b19b66",
+          "target": "09af331c-62bf-4b92-b398-a47cc4e9af23",
+          "label": "vector field ⃗f --DECOMPOSED_INTO--> curl-free"
+        },
+        {
+          "uuid": "68f7df59-14e4-40f5-b100-00bfbfaa0735",
+          "relation": "DECOMPOSED_INTO",
+          "source": "58d49c2c-18d4-42ee-9ff4-2ab571b19b66",
+          "target": "79c11635-1244-47d1-a348-de6c1931c4fb",
+          "label": "vector field ⃗f --DECOMPOSED_INTO--> divergence-free"
+        }
+      ]
+    }
+  ],
+  "endpoint_type_view": {
+    "transportation -> transportation": 6,
+    "entity -> entity": 5,
+    "transportation_48dae77b -> entity": 1,
+    "transportation_8bbd5412 -> entity": 2,
+    "transportation -> topography": 1,
+    "transportation -> aquatic_environment": 1,
+    "transportation -> entity": 1,
+    "anatomy -> anatomy": 1,
+    "organism -> organism": 7,
+    "organism -> anatomy": 1,
+    "marine_ecosystem -> marine_ecosystem": 2,
+    "ecosystem -> ecosystem": 8,
+    "organism -> natural_phenomenon": 2,
+    "organism_5ac85961 -> ecosystem": 1,
+    "agent -> aquatic_environment": 2,
+    "aquatic_environment -> aquatic_environment": 2,
+    "agent -> agent": 1,
+    "organism -> scientific_entity": 1,
+    "organism -> phenomenon": 1,
+    "phenomenon -> phenomenon": 1,
+    "scientific_entity -> scientific_entity": 3,
+    "laboratory_equipment -> laboratory_equipment": 8,
+    "laboratory_equipment -> natural_phenomenon_eb0660fb": 2,
+    "laboratory_equipment -> object": 3,
+    "laboratory_equipment -> phenomenon": 1,
+    "laboratory_equipment_a743c663 -> laboratory_equipment": 2,
+    "laboratory_equipment -> phenomenon_cf1a077e": 1,
+    "laboratory_equipment -> laboratory_equipment_f90670e0": 1,
+    "object -> object": 3,
+    "laboratory_equipment_d1209cc5 -> process": 1,
+    "process -> process": 1,
+    "entity -> process": 1,
+    "object -> mathematical_entity": 1,
+    "mathematical_entity -> mathematical_entity": 2,
+    "mathematical_entity -> topography": 1,
+    "topography -> mathematical_entity": 1,
+    "mathematical_concept -> mathematical_entity": 2,
+    "mathematical_concept -> scientific_entity_90e07ad5": 1,
+    "mathematical_concept -> mathematical_concept": 4,
+    "mathematical_concept -> object_69d2305e": 1,
+    "mathematical_concept -> scientific_concept": 3,
+    "scientific_concept -> mathematical_entity_474ebe8e": 2,
+    "scientific_concept -> scientific_concept": 12,
+    "scientific_concept -> mathematical_concept_18e7579d": 1,
+    "scientific_concept -> scientific_concept_05300772": 1,
+    "scientific_concept_05300772 -> scientific_concept": 1
+  }
+}

@@ -1,0 +1,102 @@
+{"round": 1, "domain": "animals", "text": "The cheetah sprints across the savanna faster than any other land animal."}
+{"round": 1, "domain": "animals", "text": "A narwhal is a marine mammal whose tusk spirals out from its jaw."}
+{"round": 1, "domain": "animals", "text": "The peregrine falcon dives toward its prey at tremendous speed."}
+{"round": 1, "domain": "animals", "text": "An octopus uses its eight arms to crawl along the reef."}
+{"round": 1, "domain": "animals", "text": "The grizzly bear forages for berries before its winter hibernation."}
+{"round": 1, "domain": "animals", "text": "A chameleon shifts its skin color to blend with the branch."}
+{"round": 1, "domain": "animals", "text": "The emperor penguin huddles with its colony against the Antarctic wind."}
+{"round": 1, "domain": "animals", "text": "A honeybee carries pollen back from the meadow to the hive."}
+{"round": 1, "domain": "animals", "text": "The gray wolf hunts in a coordinated pack across the tundra."}
+{"round": 1, "domain": "animals", "text": "A komodo dragon ambushes the deer with a venomous bite."}
+{"round": 1, "domain": "animals", "text": "The bottlenose dolphin echolocates fish in the murky bay."}
+{"round": 1, "domain": "animals", "text": "An elephant uses its trunk to draw water from the river."}
+{"round": 1, "domain": "animals", "text": "The red kangaroo bounds across the outback on powerful hind legs."}
+{"round": 1, "domain": "animals", "text": "A jaguar drags its kill up into the canopy of the rainforest."}
+{"round": 1, "domain": "animals", "text": "The arctic fox grows a white coat to hide in the snow."}
+{"round": 1, "domain": "lab_instruments", "text": "The mass spectrometer ionizes the sample and sorts ions by mass."}
+{"round": 1, "domain": "lab_instruments", "text": "A centrifuge spins the test tubes to separate the plasma from the cells."}
+{"round": 1, "domain": "lab_instruments", "text": "The electron microscope resolves structures far smaller than a wavelength of light."}
+{"round": 1, "domain": "lab_instruments", "text": "A pipette dispenses a precise microliter volume into the well plate."}
+{"round": 1, "domain": "lab_instruments", "text": "The spectrophotometer measures how much light the solution absorbs."}
+{"round": 1, "domain": "lab_instruments", "text": "An autoclave sterilizes the glassware with pressurized steam."}
+{"round": 1, "domain": "lab_instruments", "text": "The oscilloscope traces the voltage waveform on its display."}
+{"round": 1, "domain": "lab_instruments", "text": "A Bunsen burner heats the flask over a steady blue flame."}
+{"round": 1, "domain": "lab_instruments", "text": "The chromatography column separates the mixture into its components."}
+{"round": 1, "domain": "lab_instruments", "text": "A pH meter reports the acidity of the buffer solution."}
+{"round": 1, "domain": "lab_instruments", "text": "The thermocycler runs the polymerase chain reaction across many temperature cycles."}
+{"round": 1, "domain": "lab_instruments", "text": "An analytical balance weighs the reagent to the nearest milligram."}
+{"round": 1, "domain": "lab_instruments", "text": "The fume hood vents toxic vapors away from the technician."}
+{"round": 1, "domain": "lab_instruments", "text": "A microtome slices the tissue into ultra-thin sections for the slide."}
+{"round": 2, "domain": "math_physics", "text": "The gradient \u2207f points in the direction of steepest ascent of the scalar field."}
+{"round": 2, "domain": "math_physics", "text": "A definite integral \u222b computes the area swept beneath the curve."}
+{"round": 2, "domain": "math_physics", "text": "The summation \u2211 accumulates each term of the infinite series."}
+{"round": 2, "domain": "math_physics", "text": "A partial derivative \u2202u/\u2202x measures change while the other variables stay fixed."}
+{"round": 2, "domain": "math_physics", "text": "The constant \u03c0 relates a circle\u2019s circumference to its diameter."}
+{"round": 2, "domain": "math_physics", "text": "The fine-structure constant \u03b1 governs the strength of electromagnetic coupling."}
+{"round": 2, "domain": "math_physics", "text": "A mass spectrum plots intensity against the mass-to-charge ratio m/z."}
+{"round": 2, "domain": "math_physics", "text": "The inequality x \u2264 y bounds the solution set from above."}
+{"round": 2, "domain": "math_physics", "text": "The wavefunction \u03c8 encodes the probability amplitude of the particle."}
+{"round": 2, "domain": "math_physics", "text": "A photon of frequency \u03bd carries energy proportional to Planck\u2019s constant."}
+{"round": 2, "domain": "math_physics", "text": "The Laplacian \u2207\u00b2\u03c6 appears in the heat and the wave equations alike."}
+{"round": 2, "domain": "math_physics", "text": "The molecule H\u2082O bends at an angle of about 104.5 degrees."}
+{"round": 2, "domain": "math_physics", "text": "A vector field \u20d7F can be decomposed into curl-free and divergence-free parts."}
+{"round": 2, "domain": "math_physics", "text": "The eigenvalue \u03bb satisfies the characteristic equation of the matrix."}
+{"round": 2, "domain": "math_physics", "text": "Entropy \u0394S never decreases for an isolated thermodynamic system."}
+{"round": 2, "domain": "vehicles", "text": "The locomotive hauls a long freight train across the mountain pass."}
+{"round": 2, "domain": "vehicles", "text": "A hydrofoil lifts its hull above the water as it accelerates."}
+{"round": 2, "domain": "vehicles", "text": "The cargo ship ferries containers across the open ocean."}
+{"round": 2, "domain": "vehicles", "text": "A helicopter hovers above the helipad before it descends."}
+{"round": 2, "domain": "vehicles", "text": "The electric sedan recharges its battery at the roadside station."}
+{"round": 2, "domain": "vehicles", "text": "A submarine dives beneath the thermocline to evade detection."}
+{"round": 2, "domain": "vehicles", "text": "The bullet train glides along the maglev track at high speed."}
+{"round": 2, "domain": "vehicles", "text": "A glider rides the thermal updraft without any engine."}
+{"round": 2, "domain": "vehicles", "text": "The motorcycle leans into the curve along the coastal highway."}
+{"round": 2, "domain": "vehicles", "text": "A tractor plows the field ahead of the spring planting."}
+{"round": 2, "domain": "vehicles", "text": "The airliner taxis to the runway before its transatlantic flight."}
+{"round": 2, "domain": "vehicles", "text": "A hot-air balloon drifts over the valley with the morning breeze."}
+{"round": 2, "domain": "vehicles", "text": "The cable car climbs the steep slope toward the summit station."}
+{"round": 2, "domain": "vehicles", "text": "A forklift stacks pallets in the warehouse aisle."}
+{"round": 3, "domain": "plants", "text": "The redwood towers over the forest as one of the tallest living trees."}
+{"round": 3, "domain": "plants", "text": "A sunflower turns its face to track the sun across the sky."}
+{"round": 3, "domain": "plants", "text": "The Venus flytrap snaps shut on an insect that touches its hairs."}
+{"round": 3, "domain": "plants", "text": "A fern unfurls its fronds in the damp shade of the understory."}
+{"round": 3, "domain": "plants", "text": "The saguaro cactus stores water in its ribbed green trunk."}
+{"round": 3, "domain": "plants", "text": "A bamboo shoot grows several centimeters in a single day."}
+{"round": 3, "domain": "plants", "text": "The orchid anchors its roots to the bark of a rainforest tree."}
+{"round": 3, "domain": "plants", "text": "A water lily floats its broad pads on the surface of the pond."}
+{"round": 3, "domain": "plants", "text": "The oak drops thousands of acorns onto the woodland floor."}
+{"round": 3, "domain": "plants", "text": "A moss carpets the boulder in a soft green layer."}
+{"round": 3, "domain": "plants", "text": "The lavender attracts bees with its fragrant purple spikes."}
+{"round": 3, "domain": "plants", "text": "A mangrove props itself above the tidal mud on stilted roots."}
+{"round": 3, "domain": "plants", "text": "The wheat ripens to gold before the autumn harvest."}
+{"round": 3, "domain": "plants", "text": "A pitcher plant traps insects in its slippery fluid-filled cup."}
+{"round": 3, "domain": "celestial_bodies", "text": "Jupiter is the largest planet and shelters dozens of moons."}
+{"round": 3, "domain": "celestial_bodies", "text": "A comet grows a glowing tail as it nears the inner solar system."}
+{"round": 3, "domain": "celestial_bodies", "text": "The Andromeda galaxy spirals toward our own Milky Way."}
+{"round": 3, "domain": "celestial_bodies", "text": "A neutron star packs more mass than the Sun into a city-sized sphere."}
+{"round": 3, "domain": "celestial_bodies", "text": "The red giant Betelgeuse swells near the end of its stellar life."}
+{"round": 3, "domain": "celestial_bodies", "text": "A pulsar sweeps its radio beam past Earth with clockwork regularity."}
+{"round": 3, "domain": "celestial_bodies", "text": "Saturn wears a bright system of icy rings around its equator."}
+{"round": 3, "domain": "celestial_bodies", "text": "A black hole bends light around its event horizon."}
+{"round": 3, "domain": "celestial_bodies", "text": "The asteroid Vesta orbits the Sun within the main belt."}
+{"round": 3, "domain": "celestial_bodies", "text": "A supernova outshines its entire host galaxy for a few weeks."}
+{"round": 3, "domain": "celestial_bodies", "text": "The dwarf planet Pluto drags a thin atmosphere through its long orbit."}
+{"round": 3, "domain": "celestial_bodies", "text": "A quasar blazes from the heart of a distant active galaxy."}
+{"round": 3, "domain": "celestial_bodies", "text": "The Moon raises ocean tides as it circles the Earth."}
+{"round": 3, "domain": "celestial_bodies", "text": "A nebula condenses cold gas into the first new stars."}
+{"round": 4, "domain": "animals", "text": "The honeybee pollinates the sunflower while gathering its nectar."}
+{"round": 4, "domain": "plants", "text": "The redwood shelters the gray wolf in the shade of its trunk."}
+{"round": 4, "domain": "lab_instruments", "text": "The mass spectrometer measures the mass-to-charge ratio m/z of the sample."}
+{"round": 4, "domain": "math_physics", "text": "The wavefunction \u03c8 governs the behavior of the photon."}
+{"round": 4, "domain": "animals", "text": "The narwhal hunts fish beneath the polar ice near the emperor penguin."}
+{"round": 4, "domain": "vehicles", "text": "The submarine surfaces beside the cargo ship in the harbor."}
+{"round": 4, "domain": "celestial_bodies", "text": "The comet orbits Jupiter before it swings past Saturn."}
+{"round": 4, "domain": "lab_instruments", "text": "The centrifuge spins the plasma that the spectrophotometer then analyzes."}
+{"round": 4, "domain": "plants", "text": "The lavender attracts the honeybee away from the orchid."}
+{"round": 4, "domain": "math_physics", "text": "The gradient \u2207f drives the photon along the steepest path of the field."}
+{"round": 4, "domain": "vehicles", "text": "The locomotive hauls the freight that the forklift loaded at the warehouse."}
+{"round": 4, "domain": "celestial_bodies", "text": "The Moon pulls the tide that lifts the cargo ship in the bay."}
+{"round": 4, "domain": "animals", "text": "The cheetah chases the red kangaroo across the open plain."}
+{"round": 4, "domain": "plants", "text": "The oak drops acorns that the grizzly bear gathers before winter."}
+{"round": 4, "domain": "lab_instruments", "text": "The electron microscope resolves the tissue that the microtome sliced."}
+{"round": 4, "domain": "math_physics", "text": "The integral \u222b sums the area that the summation \u2211 approximates."}

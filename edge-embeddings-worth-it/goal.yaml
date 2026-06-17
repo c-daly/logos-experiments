@@ -1,0 +1,29 @@
+objective: |
+  Decide whether embedding reified edges is worth it. Run node-type AND edge-type
+  emergence on a knowledge graph that grows across multiple ingestion rounds, and
+  measure whether clustering edge-nodes produces edge-types that carve the relation
+  space better than leaving everything as the `related` junk-drawer.
+  Bootstrap is a parameter: N=1 seeds only {entity, related} with name-derived
+  centroids; larger N seeds more foundational types. Ingest a curated multi-domain
+  corpus (~6 labeled domains incl. symbol-rich math/science) in growing rounds via
+  Hermes /llm (file+Python, no inline shell). Each round: emergence on the entity
+  residue -> node-types; edges embedded RELATIONSHIP:<label> + clustered -> edge-types.
+success_criteria:
+  - metric: node_type_ari
+    threshold: 0.8
+    primary: true
+    description: Emergent node-types recover the corpus domains (ARI >= 0.8)
+  - metric: classification_coverage
+    threshold: 0.7
+    description: >=70% of nodes escape `entity`
+  - metric: edge_types_formed
+    threshold: 1
+    description: Edge-type emergence forms >=1 coherent edge cluster
+  - metric: edge_cluster_coherence
+    threshold: 0.7
+    description: Edge clusters are coherent not noise (the "worth it" signal)
+eval: eval/
+context: |
+  Standalone. Builds on branch feat/505-emergence-simple-lineage-hierarchy. Edges
+  embedded via Hermes /embed_text as "RELATIONSHIP: <relation>". DB reset between runs is fine.
+  Stack: Sophia :47000 (Bearer sophia_dev), Hermes :17000, Neo4j :7687, Milvus :19530.
