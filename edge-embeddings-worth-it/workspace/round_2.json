@@ -1,0 +1,1304 @@
+{
+  "round": 2,
+  "seed_n": 1,
+  "smoke": false,
+  "min_cluster_size": 2,
+  "counts": {
+    "entity_nodes": 118,
+    "edge_nodes": 132,
+    "node_members": 111,
+    "node_dropped_junk": 7,
+    "edge_members": 76,
+    "edge_structural_excluded": 56,
+    "edge_embeddings_new": 131
+  },
+  "entity_filter": true,
+  "entity_domains": {
+    "c2d29894-d5b1-4049-ac2c-cfb26417aa62": "animals",
+    "0d0da210-d504-4b90-abca-cbba883573c9": "animals",
+    "d1203713-ce89-4bd3-baef-b0fa079f1d23": "animals",
+    "a006ce58-cb16-4d5c-928e-a09509758007": "animals",
+    "74401073-6f0e-4455-a72b-afa5d996f7c7": "animals",
+    "727caf0a-8648-4fab-82f7-58c8f9b06e24": "animals",
+    "f67f602c-3d03-4158-a2ce-0eb6a820a4f9": "animals",
+    "eb4a1bc7-5f99-402c-8885-c6c52972fef2": "animals",
+    "933dfb76-e42e-4b72-9a5c-8975e29542ac": "animals",
+    "c6d74c3b-0893-4753-a579-425310c0d8dd": "animals",
+    "a991333e-5803-4490-9560-99107d3ca167": "animals",
+    "e6ccdb1d-f3d3-4f1b-ac64-e125ce237771": "animals",
+    "2b1539db-612f-4df7-bce8-eb05bafb0888": "animals",
+    "57ffa589-dde3-4f43-913f-251bb7f79e4d": "animals",
+    "fdfd0c69-8de1-4f8d-bcb3-1536eb607bc9": "animals",
+    "01000e4a-554d-437e-b4eb-a2e083c7031a": "animals",
+    "893bcd14-7d4c-4790-984b-e9d2d24daa81": "animals",
+    "c90a5af5-b70f-4608-b41d-d672d5fa48b7": "animals",
+    "712c668f-9417-49a7-85f5-2316981cea0a": "animals",
+    "d35e00aa-f45d-4de1-8fc1-84a104986e66": "animals",
+    "f180ded2-b8d1-44a1-90ae-d53b0f6e0108": "animals",
+    "50396a2a-a34a-4be7-84b7-76050b6246ed": "animals",
+    "e99bfc36-28a0-41b5-b648-d1af9e9c9066": "animals",
+    "511199b9-bad8-4df8-a89b-e4e41e9bda12": "animals",
+    "413f59e7-6343-4517-ae7b-541418ccdc2e": "animals",
+    "bcb1bb73-38b2-4dc9-8486-b6f822e861e0": "animals",
+    "a11a5128-9639-4037-b101-55dc55fe6a8d": "animals",
+    "69d3b394-1027-4403-8ad7-96731b6f3e3f": "animals",
+    "53cf76b7-3aa8-413c-8330-0193b8bc48d3": "animals",
+    "5dc64acb-9f91-4ed3-9d4c-2979b533d952": "animals",
+    "8292fb5b-1908-4e76-8b59-d29be14e3dcb": "lab_instruments",
+    "21d37a37-5663-4a9a-95aa-841a9f542b54": "lab_instruments",
+    "10546154-a030-4457-8510-3a8e660e9efb": "lab_instruments",
+    "19eece7f-5590-4f5e-8f6d-5a6e6025dca4": "lab_instruments",
+    "0de5157e-f470-41d7-9f8f-c1c9c029a33d": "lab_instruments",
+    "90549376-824e-4d25-bebf-1e4736a86c67": "lab_instruments",
+    "7da85930-46ae-44a9-8700-14b82489406f": "lab_instruments",
+    "48bba8a1-234e-4d73-b325-2a1ef48b2eba": "lab_instruments",
+    "0fbaac0f-4d67-47f0-b24b-b4ee7b98c321": "lab_instruments",
+    "b072e0b0-3c75-4c54-afa6-d0a4fdae3d45": "lab_instruments",
+    "afe4c8b2-66b2-4ee0-85dd-5e4975d895fb": "lab_instruments",
+    "e2296978-6048-40e8-b2ec-9c836b897a73": "lab_instruments",
+    "7f3d76b9-0ac6-4fca-8721-e0bc61bd3db1": "lab_instruments",
+    "5034a67d-00b9-4338-9b1b-c26bd0700ca5": "lab_instruments",
+    "301a5167-5f0b-4638-b192-d13966dfe7a8": "lab_instruments",
+    "21131034-c629-49e0-9384-3fefb7f11f26": "lab_instruments",
+    "710481b7-6ee5-408c-83b5-0f1ed72f2282": "lab_instruments",
+    "f8939f6d-4819-45ab-b3ad-7026abf9bc41": "lab_instruments",
+    "b651f89f-e280-48e6-820f-46f7ef5a0648": "lab_instruments",
+    "e9dea2dc-dc7d-4b30-8a57-f4cd0a9b7f16": "lab_instruments",
+    "353ec2a2-0405-4564-9b45-1122f1f9d93e": "lab_instruments",
+    "c7160059-2fe5-446e-add6-3029bbbc9df9": "lab_instruments",
+    "ea154e2b-3615-45f4-bc37-66351f647831": "lab_instruments",
+    "742a2b92-9259-4a78-b412-23145d4f2988": "lab_instruments",
+    "9847f31f-cb91-4a56-b63b-70ac04f526a5": "lab_instruments",
+    "a69eabb4-f56e-44d3-93ef-9a4c5e2a0227": "math_physics",
+    "ca57bed2-cf62-40c5-b3ee-36132918ef9a": "math_physics",
+    "4bfd4773-22b3-4c0b-9e3f-b3f876a8960e": "math_physics",
+    "f80a46f5-06fd-4984-b0a9-214067545053": "math_physics",
+    "43228baa-d600-403c-bc03-50b779d37e41": "math_physics",
+    "55f7597e-b511-4f3c-b514-230ce1c34bcd": "math_physics",
+    "9bb7b535-a954-47ae-9642-1eb133a12ea8": "math_physics",
+    "e20e424a-c7f5-4bde-a5e9-22ff12b0f930": "math_physics",
+    "de4ba9e8-5d3e-45c2-9d13-df7945815b7e": "math_physics",
+    "b1b1d356-0580-48ab-97f9-dcebf8c49fb9": "math_physics",
+    "827f08ab-d652-4068-82f0-226c7a9d7ff6": "math_physics",
+    "d5450031-93fd-45cd-89cc-d73d106a9221": "math_physics",
+    "9987683f-2521-4cd3-ad43-550f7f10de26": "math_physics",
+    "c288986e-65d0-49d8-998f-6f98346adcc1": "math_physics",
+    "fdddd97e-ede0-4f22-94af-7a7d1a8583c9": "math_physics",
+    "c6344ab8-7387-41a4-96e3-2a8e13f20637": "math_physics",
+    "0cca730f-4a6e-4b96-8b62-9f8f09d3d8c0": "math_physics",
+    "51b65b7d-14e2-446e-be8a-017cd50de0b0": "math_physics",
+    "f135ecae-4e0f-41ab-97a7-3ed55e082de2": "math_physics",
+    "792a0d68-df53-472a-badc-94716560d8a7": "math_physics",
+    "487cc1cf-903d-4e1c-be25-e9b829eee087": "math_physics",
+    "75e23028-d235-4456-a88c-45348b21b933": "math_physics",
+    "5c80216b-7e57-4fb2-bc54-e6a86dbf9e3d": "math_physics",
+    "9a6ef133-687c-4868-823c-47c646ecd61e": "vehicles",
+    "dc327b47-3b4b-4db4-9961-dfb1b63d2736": "vehicles",
+    "1a905b39-cbab-4e9f-8bbc-7eeddfd5f8c4": "vehicles",
+    "85309caa-6753-4e75-8c8e-0eb691790076": "vehicles",
+    "f9884d71-62be-4c70-b5dc-75b0ca2960e0": "vehicles",
+    "1e9f04b0-a456-487f-9c40-e79af7858142": "vehicles",
+    "c7e3c553-4f8f-4aed-95ac-6c92bcb71512": "vehicles",
+    "07fb65b3-1e73-41d8-a528-e498a62724bf": "vehicles",
+    "1df1bd8b-c832-4a8e-a574-c06c90d3a2e7": "vehicles",
+    "71526906-4bdb-41a8-9bec-7d17ac365927": "vehicles",
+    "cbb0ced2-1eb3-4302-b1b8-58bbb992720a": "vehicles",
+    "a0db5adc-7893-49c5-9175-4a697b8546ab": "vehicles",
+    "036ff296-42f4-435e-96c6-46d2867d9000": "vehicles",
+    "4532b361-5ec4-45ff-866f-302f79537500": "vehicles",
+    "526be72d-67ae-4e09-b4ea-7b6a279cefa2": "vehicles",
+    "600b1b44-fd89-4bc5-83d0-cdfd110ff58b": "vehicles",
+    "745bc496-0694-49be-b62a-bfed5ff07ce7": "vehicles",
+    "c00e5044-0a02-46a6-ada6-d8b570addc2d": "vehicles",
+    "1886c6fe-ba8e-4f0f-8d3b-c2139eb89383": "vehicles",
+    "0f2444a6-0fac-4473-9fc3-944e73dde4b1": "vehicles",
+    "e7516179-5100-4b9e-96fe-a49bb1b689ff": "vehicles",
+    "2eb154c9-6c4e-4ca9-9887-6895d0822ca0": "vehicles"
+  },
+  "entity_sentences": {
+    "c2d29894-d5b1-4049-ac2c-cfb26417aa62": "The cheetah sprints across the savanna faster than any other land animal.",
+    "0d0da210-d504-4b90-abca-cbba883573c9": "The cheetah sprints across the savanna faster than any other land animal.",
+    "d1203713-ce89-4bd3-baef-b0fa079f1d23": "The cheetah sprints across the savanna faster than any other land animal.",
+    "a006ce58-cb16-4d5c-928e-a09509758007": "The peregrine falcon dives toward its prey at tremendous speed.",
+    "74401073-6f0e-4455-a72b-afa5d996f7c7": "The peregrine falcon dives toward its prey at tremendous speed.",
+    "727caf0a-8648-4fab-82f7-58c8f9b06e24": "The peregrine falcon dives toward its prey at tremendous speed.",
+    "f67f602c-3d03-4158-a2ce-0eb6a820a4f9": "The peregrine falcon dives toward its prey at tremendous speed.",
+    "eb4a1bc7-5f99-402c-8885-c6c52972fef2": "The grizzly bear forages for berries before its winter hibernation.",
+    "933dfb76-e42e-4b72-9a5c-8975e29542ac": "The grizzly bear forages for berries before its winter hibernation.",
+    "c6d74c3b-0893-4753-a579-425310c0d8dd": "The grizzly bear forages for berries before its winter hibernation.",
+    "a991333e-5803-4490-9560-99107d3ca167": "A chameleon shifts its skin color to blend with the branch.",
+    "e6ccdb1d-f3d3-4f1b-ac64-e125ce237771": "A chameleon shifts its skin color to blend with the branch.",
+    "2b1539db-612f-4df7-bce8-eb05bafb0888": "A chameleon shifts its skin color to blend with the branch.",
+    "57ffa589-dde3-4f43-913f-251bb7f79e4d": "A honeybee carries pollen back from the meadow to the hive.",
+    "fdfd0c69-8de1-4f8d-bcb3-1536eb607bc9": "A honeybee carries pollen back from the meadow to the hive.",
+    "01000e4a-554d-437e-b4eb-a2e083c7031a": "A honeybee carries pollen back from the meadow to the hive.",
+    "893bcd14-7d4c-4790-984b-e9d2d24daa81": "The gray wolf hunts in a coordinated pack across the tundra.",
+    "c90a5af5-b70f-4608-b41d-d672d5fa48b7": "The gray wolf hunts in a coordinated pack across the tundra.",
+    "712c668f-9417-49a7-85f5-2316981cea0a": "A komodo dragon ambushes the deer with a venomous bite.",
+    "d35e00aa-f45d-4de1-8fc1-84a104986e66": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "f180ded2-b8d1-44a1-90ae-d53b0f6e0108": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "50396a2a-a34a-4be7-84b7-76050b6246ed": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "e99bfc36-28a0-41b5-b648-d1af9e9c9066": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "511199b9-bad8-4df8-a89b-e4e41e9bda12": "The red kangaroo bounds across the outback on powerful hind legs.",
+    "413f59e7-6343-4517-ae7b-541418ccdc2e": "The red kangaroo bounds across the outback on powerful hind legs.",
+    "bcb1bb73-38b2-4dc9-8486-b6f822e861e0": "The red kangaroo bounds across the outback on powerful hind legs.",
+    "a11a5128-9639-4037-b101-55dc55fe6a8d": "The red kangaroo bounds across the outback on powerful hind legs.",
+    "69d3b394-1027-4403-8ad7-96731b6f3e3f": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "53cf76b7-3aa8-413c-8330-0193b8bc48d3": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "5dc64acb-9f91-4ed3-9d4c-2979b533d952": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "8292fb5b-1908-4e76-8b59-d29be14e3dcb": "The mass spectrometer ionizes the sample and sorts ions by mass.",
+    "21d37a37-5663-4a9a-95aa-841a9f542b54": "The mass spectrometer ionizes the sample and sorts ions by mass.",
+    "10546154-a030-4457-8510-3a8e660e9efb": "The mass spectrometer ionizes the sample and sorts ions by mass.",
+    "19eece7f-5590-4f5e-8f6d-5a6e6025dca4": "A pipette dispenses a precise microliter volume into the well plate.",
+    "0de5157e-f470-41d7-9f8f-c1c9c029a33d": "A pipette dispenses a precise microliter volume into the well plate.",
+    "90549376-824e-4d25-bebf-1e4736a86c67": "A pipette dispenses a precise microliter volume into the well plate.",
+    "7da85930-46ae-44a9-8700-14b82489406f": "An autoclave sterilizes the glassware with pressurized steam.",
+    "48bba8a1-234e-4d73-b325-2a1ef48b2eba": "An autoclave sterilizes the glassware with pressurized steam.",
+    "0fbaac0f-4d67-47f0-b24b-b4ee7b98c321": "An autoclave sterilizes the glassware with pressurized steam.",
+    "b072e0b0-3c75-4c54-afa6-d0a4fdae3d45": "An autoclave sterilizes the glassware with pressurized steam.",
+    "afe4c8b2-66b2-4ee0-85dd-5e4975d895fb": "A Bunsen burner heats the flask over a steady blue flame.",
+    "e2296978-6048-40e8-b2ec-9c836b897a73": "A Bunsen burner heats the flask over a steady blue flame.",
+    "7f3d76b9-0ac6-4fca-8721-e0bc61bd3db1": "A Bunsen burner heats the flask over a steady blue flame.",
+    "5034a67d-00b9-4338-9b1b-c26bd0700ca5": "A pH meter reports the acidity of the buffer solution.",
+    "301a5167-5f0b-4638-b192-d13966dfe7a8": "A pH meter reports the acidity of the buffer solution.",
+    "21131034-c629-49e0-9384-3fefb7f11f26": "A pH meter reports the acidity of the buffer solution.",
+    "710481b7-6ee5-408c-83b5-0f1ed72f2282": "A pH meter reports the acidity of the buffer solution.",
+    "f8939f6d-4819-45ab-b3ad-7026abf9bc41": "An analytical balance weighs the reagent to the nearest milligram.",
+    "b651f89f-e280-48e6-820f-46f7ef5a0648": "An analytical balance weighs the reagent to the nearest milligram.",
+    "e9dea2dc-dc7d-4b30-8a57-f4cd0a9b7f16": "An analytical balance weighs the reagent to the nearest milligram.",
+    "353ec2a2-0405-4564-9b45-1122f1f9d93e": "An analytical balance weighs the reagent to the nearest milligram.",
+    "c7160059-2fe5-446e-add6-3029bbbc9df9": "A microtome slices the tissue into ultra-thin sections for the slide.",
+    "ea154e2b-3615-45f4-bc37-66351f647831": "A microtome slices the tissue into ultra-thin sections for the slide.",
+    "742a2b92-9259-4a78-b412-23145d4f2988": "A microtome slices the tissue into ultra-thin sections for the slide.",
+    "9847f31f-cb91-4a56-b63b-70ac04f526a5": "A microtome slices the tissue into ultra-thin sections for the slide.",
+    "a69eabb4-f56e-44d3-93ef-9a4c5e2a0227": "The gradient ∇f points in the direction of steepest ascent of the scalar field.",
+    "ca57bed2-cf62-40c5-b3ee-36132918ef9a": "The gradient ∇f points in the direction of steepest ascent of the scalar field.",
+    "4bfd4773-22b3-4c0b-9e3f-b3f876a8960e": "The gradient ∇f points in the direction of steepest ascent of the scalar field.",
+    "f80a46f5-06fd-4984-b0a9-214067545053": "The summation ∑ accumulates each term of the infinite series.",
+    "43228baa-d600-403c-bc03-50b779d37e41": "The summation ∑ accumulates each term of the infinite series.",
+    "55f7597e-b511-4f3c-b514-230ce1c34bcd": "A partial derivative ∂u/∂x measures change while the other variables stay fixed.",
+    "9bb7b535-a954-47ae-9642-1eb133a12ea8": "A partial derivative ∂u/∂x measures change while the other variables stay fixed.",
+    "e20e424a-c7f5-4bde-a5e9-22ff12b0f930": "A partial derivative ∂u/∂x measures change while the other variables stay fixed.",
+    "de4ba9e8-5d3e-45c2-9d13-df7945815b7e": "A mass spectrum plots intensity against the mass-to-charge ratio m/z.",
+    "b1b1d356-0580-48ab-97f9-dcebf8c49fb9": "A mass spectrum plots intensity against the mass-to-charge ratio m/z.",
+    "827f08ab-d652-4068-82f0-226c7a9d7ff6": "A mass spectrum plots intensity against the mass-to-charge ratio m/z.",
+    "d5450031-93fd-45cd-89cc-d73d106a9221": "The wavefunction ψ encodes the probability amplitude of the particle.",
+    "9987683f-2521-4cd3-ad43-550f7f10de26": "The wavefunction ψ encodes the probability amplitude of the particle.",
+    "c288986e-65d0-49d8-998f-6f98346adcc1": "The wavefunction ψ encodes the probability amplitude of the particle.",
+    "fdddd97e-ede0-4f22-94af-7a7d1a8583c9": "A photon of frequency ν carries energy proportional to Planck’s constant.",
+    "c6344ab8-7387-41a4-96e3-2a8e13f20637": "A photon of frequency ν carries energy proportional to Planck’s constant.",
+    "0cca730f-4a6e-4b96-8b62-9f8f09d3d8c0": "A photon of frequency ν carries energy proportional to Planck’s constant.",
+    "51b65b7d-14e2-446e-be8a-017cd50de0b0": "A vector field ⃗F can be decomposed into curl-free and divergence-free parts.",
+    "f135ecae-4e0f-41ab-97a7-3ed55e082de2": "A vector field ⃗F can be decomposed into curl-free and divergence-free parts.",
+    "792a0d68-df53-472a-badc-94716560d8a7": "A vector field ⃗F can be decomposed into curl-free and divergence-free parts.",
+    "487cc1cf-903d-4e1c-be25-e9b829eee087": "The eigenvalue λ satisfies the characteristic equation of the matrix.",
+    "75e23028-d235-4456-a88c-45348b21b933": "The eigenvalue λ satisfies the characteristic equation of the matrix.",
+    "5c80216b-7e57-4fb2-bc54-e6a86dbf9e3d": "The eigenvalue λ satisfies the characteristic equation of the matrix.",
+    "9a6ef133-687c-4868-823c-47c646ecd61e": "The locomotive hauls a long freight train across the mountain pass.",
+    "dc327b47-3b4b-4db4-9961-dfb1b63d2736": "The locomotive hauls a long freight train across the mountain pass.",
+    "1a905b39-cbab-4e9f-8bbc-7eeddfd5f8c4": "The locomotive hauls a long freight train across the mountain pass.",
+    "85309caa-6753-4e75-8c8e-0eb691790076": "The locomotive hauls a long freight train across the mountain pass.",
+    "f9884d71-62be-4c70-b5dc-75b0ca2960e0": "A hydrofoil lifts its hull above the water as it accelerates.",
+    "1e9f04b0-a456-487f-9c40-e79af7858142": "The cargo ship ferries containers across the open ocean.",
+    "c7e3c553-4f8f-4aed-95ac-6c92bcb71512": "The cargo ship ferries containers across the open ocean.",
+    "07fb65b3-1e73-41d8-a528-e498a62724bf": "The cargo ship ferries containers across the open ocean.",
+    "1df1bd8b-c832-4a8e-a574-c06c90d3a2e7": "The cargo ship ferries containers across the open ocean.",
+    "71526906-4bdb-41a8-9bec-7d17ac365927": "The electric sedan recharges its battery at the roadside station.",
+    "cbb0ced2-1eb3-4302-b1b8-58bbb992720a": "A submarine dives beneath the thermocline to evade detection.",
+    "a0db5adc-7893-49c5-9175-4a697b8546ab": "A submarine dives beneath the thermocline to evade detection.",
+    "036ff296-42f4-435e-96c6-46d2867d9000": "The bullet train glides along the maglev track at high speed.",
+    "4532b361-5ec4-45ff-866f-302f79537500": "The bullet train glides along the maglev track at high speed.",
+    "526be72d-67ae-4e09-b4ea-7b6a279cefa2": "A glider rides the thermal updraft without any engine.",
+    "600b1b44-fd89-4bc5-83d0-cdfd110ff58b": "The airliner taxis to the runway before its transatlantic flight.",
+    "745bc496-0694-49be-b62a-bfed5ff07ce7": "A hot-air balloon drifts over the valley with the morning breeze.",
+    "c00e5044-0a02-46a6-ada6-d8b570addc2d": "A hot-air balloon drifts over the valley with the morning breeze.",
+    "1886c6fe-ba8e-4f0f-8d3b-c2139eb89383": "A hot-air balloon drifts over the valley with the morning breeze.",
+    "0f2444a6-0fac-4473-9fc3-944e73dde4b1": "A forklift stacks pallets in the warehouse aisle.",
+    "e7516179-5100-4b9e-96fe-a49bb1b689ff": "A forklift stacks pallets in the warehouse aisle.",
+    "2eb154c9-6c4e-4ca9-9887-6895d0822ca0": "A forklift stacks pallets in the warehouse aisle."
+  },
+  "edge_sentences": {
+    "cc03e1bf-1131-4b6d-8178-74950080dcda": "An octopus uses its eight arms to crawl along the reef.",
+    "c244fce8-fbf2-4d5f-980d-039dd30573f0": "An octopus uses its eight arms to crawl along the reef.",
+    "ea3b943c-efdc-4996-bfe4-2fd8e9cbf1ff": "A chameleon shifts its skin color to blend with the branch.",
+    "e2492b39-6788-4906-b4f2-08d9967a015c": "A chameleon shifts its skin color to blend with the branch.",
+    "dea75e5d-4ee9-44de-aef0-a6ddf87953aa": "The emperor penguin huddles with its colony against the Antarctic wind.",
+    "47e59454-d88c-48c2-87b6-8a78e88e723e": "The emperor penguin huddles with its colony against the Antarctic wind.",
+    "4faaa10c-20d4-4dd2-b4c0-ec49831f5e3a": "The emperor penguin huddles with its colony against the Antarctic wind.",
+    "83aa7c1c-d80e-4c22-811b-cfb9de2dbe48": "The emperor penguin huddles with its colony against the Antarctic wind.",
+    "31dd06a4-0b2e-4f6e-83cb-e18fbb37e7e1": "The gray wolf hunts in a coordinated pack across the tundra.",
+    "1c78d33a-b8df-4018-9d4a-7e4e6d6f53b0": "The gray wolf hunts in a coordinated pack across the tundra.",
+    "aac6ff3a-9039-47d0-baa5-5c24f3376985": "A komodo dragon ambushes the deer with a venomous bite.",
+    "851e63e7-17dd-415e-b75f-22810855e325": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "b5b2bec2-0838-495a-a807-d9971e93f6e0": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "26ab23ac-6e91-4a4c-ae9c-4d7d248a750b": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "96f83352-032d-4db7-ad64-7c85fab940a8": "An elephant uses its trunk to draw water from the river.",
+    "c15ccf09-537f-4b6b-bb8c-0734f04762bc": "An elephant uses its trunk to draw water from the river.",
+    "6ce40ff1-408e-4c0e-b3b6-dae5f79fefe9": "The red kangaroo bounds across the outback on powerful hind legs.",
+    "c1d620bc-964d-4706-ac36-4e12858eb7d8": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "9bbae7f5-bf08-4f6b-bbf1-0fb688fae141": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "8ebd750a-af49-4a67-ab73-f77fe52844cb": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "eeba4129-8ef6-4e07-bdb5-457eb94118e9": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "18588de6-bf81-461a-94d1-094c17d33f16": "The arctic fox grows a white coat to hide in the snow.",
+    "62a2f25f-1231-4263-9f1b-3293d4e2bb47": "The arctic fox grows a white coat to hide in the snow.",
+    "5c889d13-0824-469a-9708-a1fbe0bf2e8c": "The mass spectrometer ionizes the sample and sorts ions by mass.",
+    "88f8c99e-d746-45d5-871d-da2fc2422c8a": "The mass spectrometer ionizes the sample and sorts ions by mass.",
+    "36b67750-7072-4246-ac93-b8101b53dbd1": "A centrifuge spins the test tubes to separate the plasma from the cells.",
+    "e7a5da66-d3d6-42e2-be76-2837cee9dd4f": "A centrifuge spins the test tubes to separate the plasma from the cells.",
+    "f76a8d78-1c87-485f-9a8b-b2f288dd8b62": "A centrifuge spins the test tubes to separate the plasma from the cells.",
+    "72c0edf8-b8b1-4833-8612-80a58c176a0b": "A centrifuge spins the test tubes to separate the plasma from the cells.",
+    "375a2d7e-e72f-428d-bd5e-9fa5ba132b7f": "The electron microscope resolves structures far smaller than a wavelength of light.",
+    "883c53e8-9fd2-4b37-99f5-8281ca8dbb9b": "The electron microscope resolves structures far smaller than a wavelength of light.",
+    "cae657c1-b259-4ffc-b74c-da38ca266f64": "The electron microscope resolves structures far smaller than a wavelength of light.",
+    "cc27d511-e320-4fea-b730-25feb33d98b0": "The spectrophotometer measures how much light the solution absorbs.",
+    "27ae42c6-3406-46a0-8a8d-c5626063e243": "The spectrophotometer measures how much light the solution absorbs.",
+    "af5ee047-df67-48ee-ace1-6a42845edece": "The spectrophotometer measures how much light the solution absorbs.",
+    "5b03df94-3984-4962-9a80-0dc3d8d201ea": "The spectrophotometer measures how much light the solution absorbs.",
+    "63609051-1e53-4cb7-8f08-781f53b7590d": "The oscilloscope traces the voltage waveform on its display.",
+    "5800b665-0cd5-43d0-ace0-52af6e64c374": "The oscilloscope traces the voltage waveform on its display.",
+    "250418dd-b1da-4ad6-b3a9-cd32e3788442": "The oscilloscope traces the voltage waveform on its display.",
+    "69226086-6661-4c9d-b64e-4c76e16ac29c": "The chromatography column separates the mixture into its components.",
+    "b8e8050b-443e-4e07-9203-8794f6dfdd2c": "The chromatography column separates the mixture into its components.",
+    "a44a5fc4-8848-463f-8053-156a4e08b979": "The thermocycler runs the polymerase chain reaction across many temperature cycles.",
+    "9ed96478-efcf-47ce-a004-7655b3ad1fa5": "The thermocycler runs the polymerase chain reaction across many temperature cycles.",
+    "bfab0c37-7f01-4c87-870f-dc40f73dbb75": "The thermocycler runs the polymerase chain reaction across many temperature cycles.",
+    "3d77a837-5454-4211-ad24-9081d36bb494": "The fume hood vents toxic vapors away from the technician.",
+    "7814d60a-cfc6-47e8-89c6-51a49d494b88": "The fume hood vents toxic vapors away from the technician.",
+    "5095a3a7-0ea0-42fc-9bd5-0c7c3681218f": "The fume hood vents toxic vapors away from the technician.",
+    "b7e9cc0d-f019-4619-8ea6-5c960bbd71c7": "The fume hood vents toxic vapors away from the technician.",
+    "688f44aa-b382-496f-bb2c-445dd68221ef": "The fume hood vents toxic vapors away from the technician.",
+    "558b44b9-2397-4e4c-89a6-299df52cddfa": "The fume hood vents toxic vapors away from the technician.",
+    "c68f7ae5-8749-467a-9d73-4d600dab5d4d": "The fume hood vents toxic vapors away from the technician.",
+    "630771ac-689d-4c49-a545-b313cfca19f8": "A definite integral ∫ computes the area swept beneath the curve.",
+    "0e8282c4-6754-4efa-89f3-67746ec0e2e7": "A definite integral ∫ computes the area swept beneath the curve.",
+    "d95aa243-252a-4525-b99b-a289d9aa38fb": "The summation ∑ accumulates each term of the infinite series.",
+    "69ff2f7b-d0e6-4ab7-b264-0f2f7ff63691": "A partial derivative ∂u/∂x measures change while the other variables stay fixed.",
+    "d4988d9a-c2a1-48a7-adfd-e6ce9a93c144": "A partial derivative ∂u/∂x measures change while the other variables stay fixed.",
+    "3b82b489-8a77-4e02-8ad4-6d545f190ee8": "A partial derivative ∂u/∂x measures change while the other variables stay fixed.",
+    "1343154a-22ff-4265-98b7-5d186cb47266": "The constant π relates a circle’s circumference to its diameter.",
+    "060d7688-4572-4421-8c62-ac4eea536495": "The constant π relates a circle’s circumference to its diameter.",
+    "2f214ba0-ccbd-4db5-afa4-be6ffa34dcce": "The fine-structure constant α governs the strength of electromagnetic coupling.",
+    "e34323fd-3283-4355-b1c9-e84a60262218": "The fine-structure constant α governs the strength of electromagnetic coupling.",
+    "67436826-e26a-4272-a5a4-16bc8ce019bd": "The fine-structure constant α governs the strength of electromagnetic coupling.",
+    "f8c3a46d-2b41-4b6f-9488-6b5bcaec1e2c": "The fine-structure constant α governs the strength of electromagnetic coupling.",
+    "85a78530-87df-4232-baa9-a278bf289435": "The inequality x ≤ y bounds the solution set from above.",
+    "e171faf9-4fcd-48c9-93cc-997e67ff4c07": "The inequality x ≤ y bounds the solution set from above.",
+    "cc8d4d51-4164-494e-8565-589c6d9fdf56": "A photon of frequency ν carries energy proportional to Planck’s constant.",
+    "92131c9a-acb2-43ea-a7f7-bdab0b54b796": "A photon of frequency ν carries energy proportional to Planck’s constant.",
+    "d4c77a64-332a-4afa-a8ff-a368497814ed": "The Laplacian ∇²φ appears in the heat and the wave equations alike.",
+    "3b88dca6-08e4-40c0-87b3-7670d1ef67d2": "The Laplacian ∇²φ appears in the heat and the wave equations alike.",
+    "2910195b-6c87-4a19-b4ca-1e405d5898d9": "The Laplacian ∇²φ appears in the heat and the wave equations alike.",
+    "8c6554f5-0028-47cd-a1d4-d84527f5ab11": "The Laplacian ∇²φ appears in the heat and the wave equations alike.",
+    "fe2543a2-edbc-4fed-a9ed-7493dcec2fca": "The Laplacian ∇²φ appears in the heat and the wave equations alike.",
+    "1c422535-6ef0-410f-ad91-414cb03efb84": "The molecule H₂O bends at an angle of about 104.5 degrees.",
+    "2809dc23-65bc-4613-9ba5-ebbf5d5e62fe": "The molecule H₂O bends at an angle of about 104.5 degrees.",
+    "eb1a8e20-bad6-4acc-a86d-4ffb5eeb6996": "Entropy ΔS never decreases for an isolated thermodynamic system.",
+    "dd63f4f1-2856-466e-a7e6-e95faf144e19": "Entropy ΔS never decreases for an isolated thermodynamic system.",
+    "90c31eec-5b9c-4e55-9aaa-cf2e4aac4a97": "The locomotive hauls a long freight train across the mountain pass.",
+    "535bc2ec-0158-4e70-8cee-b3418746ef3b": "A hydrofoil lifts its hull above the water as it accelerates.",
+    "43d15140-ca9f-427f-b3d5-f08060b50238": "A hydrofoil lifts its hull above the water as it accelerates.",
+    "d6edf72a-8080-4f39-82a2-98875bcdb8d8": "A hydrofoil lifts its hull above the water as it accelerates.",
+    "b8c30f72-4b5e-4b5b-bc82-65bdab642081": "A hydrofoil lifts its hull above the water as it accelerates.",
+    "3cc2527b-83f8-44ab-9bbe-d86677b2818d": "A helicopter hovers above the helipad before it descends.",
+    "ce390959-af07-4a68-8da0-a54779fc420b": "A helicopter hovers above the helipad before it descends.",
+    "8413ee6f-2473-4615-aebb-25b876e0a98f": "A helicopter hovers above the helipad before it descends.",
+    "4b5c1a9b-d78e-44c7-a3a5-0976d55398cf": "A helicopter hovers above the helipad before it descends.",
+    "adf838be-d486-4190-af4a-73543a0b0d2b": "The bullet train glides along the maglev track at high speed.",
+    "702d32e3-0e42-40e8-8650-41c1c9eaa9d4": "The bullet train glides along the maglev track at high speed.",
+    "521ecd4c-2aa0-4cf7-8269-4d745dbec0fc": "The motorcycle leans into the curve along the coastal highway.",
+    "6ceeb2bd-e085-4ed0-bf77-e6973bc79c8f": "The motorcycle leans into the curve along the coastal highway.",
+    "422e4936-c10f-4da9-84d0-20be59612cf1": "A tractor plows the field ahead of the spring planting.",
+    "11888d57-19b7-4aa2-949b-533cefe2c975": "A tractor plows the field ahead of the spring planting.",
+    "6c747bcd-0d77-4db4-b7d5-d170992e247d": "A tractor plows the field ahead of the spring planting.",
+    "76205b54-3b2c-47ed-ab0b-109bef77c0bc": "The airliner taxis to the runway before its transatlantic flight.",
+    "99130780-5401-4405-bfed-b5cb0e41aec6": "The airliner taxis to the runway before its transatlantic flight.",
+    "07c78fdc-12ec-4915-9d0e-92f590690062": "The airliner taxis to the runway before its transatlantic flight.",
+    "7454b02a-d163-46f4-a900-af8bd9e0de84": "The airliner taxis to the runway before its transatlantic flight.",
+    "597e45d2-7e4f-4ef3-a82f-4ef6a0e976b9": "The cable car climbs the steep slope toward the summit station.",
+    "90e9ae18-d95a-4707-a2cb-77d7bac14ee9": "The cable car climbs the steep slope toward the summit station.",
+    "32d0c3d7-4146-425f-9c5e-0af4c6513784": "The cable car climbs the steep slope toward the summit station.",
+    "1a68aab4-19de-4b6c-ba37-a2c1a56f2551": "The cable car climbs the steep slope toward the summit station."
+  },
+  "node_clusters": [
+    {
+      "label": 0,
+      "members": [
+        {
+          "uuid": "10546154-a030-4457-8510-3a8e660e9efb",
+          "name": "bottlenose dolphin"
+        },
+        {
+          "uuid": "5474c112-4ad1-4a50-9cae-b7c764793bba",
+          "name": "elephant"
+        },
+        {
+          "uuid": "2b1539db-612f-4df7-bce8-eb05bafb0888",
+          "name": "octopus"
+        },
+        {
+          "uuid": "727caf0a-8648-4fab-82f7-58c8f9b06e24",
+          "name": "narwhal"
+        },
+        {
+          "uuid": "a006ce58-cb16-4d5c-928e-a09509758007",
+          "name": "marine mammal"
+        }
+      ]
+    },
+    {
+      "label": 1,
+      "members": [
+        {
+          "uuid": "31c9a25c-d0a2-4116-8c4f-410e4f6f0bba",
+          "name": "trunk"
+        },
+        {
+          "uuid": "48bba8a1-234e-4d73-b325-2a1ef48b2eba",
+          "name": "canopy"
+        }
+      ]
+    },
+    {
+      "label": 2,
+      "members": [
+        {
+          "uuid": "f67f602c-3d03-4158-a2ce-0eb6a820a4f9",
+          "name": "tusk"
+        },
+        {
+          "uuid": "69d3b394-1027-4403-8ad7-96731b6f3e3f",
+          "name": "tundra"
+        },
+        {
+          "uuid": "90549376-824e-4d25-bebf-1e4736a86c67",
+          "name": "outback"
+        }
+      ]
+    },
+    {
+      "label": 3,
+      "members": [
+        {
+          "uuid": "74401073-6f0e-4455-a72b-afa5d996f7c7",
+          "name": "jaw"
+        },
+        {
+          "uuid": "511199b9-bad8-4df8-a89b-e4e41e9bda12",
+          "name": "hive"
+        },
+        {
+          "uuid": "cbb0ced2-1eb3-4302-b1b8-58bbb992720a",
+          "name": "curve"
+        },
+        {
+          "uuid": "1886c6fe-ba8e-4f0f-8d3b-c2139eb89383",
+          "name": "circle"
+        },
+        {
+          "uuid": "712c668f-9417-49a7-85f5-2316981cea0a",
+          "name": "branch"
+        },
+        {
+          "uuid": "b651f89f-e280-48e6-820f-46f7ef5a0648",
+          "name": "cell"
+        }
+      ]
+    },
+    {
+      "label": 4,
+      "members": [
+        {
+          "uuid": "21d37a37-5663-4a9a-95aa-841a9f542b54",
+          "name": "fish"
+        },
+        {
+          "uuid": "42ff7ce6-a6fc-40f8-b38c-b6636b1b61aa",
+          "name": "deer"
+        }
+      ]
+    },
+    {
+      "label": 5,
+      "members": [
+        {
+          "uuid": "5a2c6250-88b2-4e03-8a6e-a07c188a8e5a",
+          "name": "water"
+        },
+        {
+          "uuid": "c90776f9-ad8d-4513-ba8e-92e6b15108eb",
+          "name": "river"
+        },
+        {
+          "uuid": "f180ded2-b8d1-44a1-90ae-d53b0f6e0108",
+          "name": "wind"
+        },
+        {
+          "uuid": "e2296978-6048-40e8-b2ec-9c836b897a73",
+          "name": "snow"
+        }
+      ]
+    },
+    {
+      "label": 6,
+      "members": [
+        {
+          "uuid": "fdfd0c69-8de1-4f8d-bcb3-1536eb607bc9",
+          "name": "grizzly bear"
+        },
+        {
+          "uuid": "c2d29894-d5b1-4049-ac2c-cfb26417aa62",
+          "name": "cheetah"
+        },
+        {
+          "uuid": "b072e0b0-3c75-4c54-afa6-d0a4fdae3d45",
+          "name": "jaguar"
+        },
+        {
+          "uuid": "53cf76b7-3aa8-413c-8330-0193b8bc48d3",
+          "name": "gray wolf"
+        }
+      ]
+    },
+    {
+      "label": 7,
+      "members": [
+        {
+          "uuid": "01000e4a-554d-437e-b4eb-a2e083c7031a",
+          "name": "berry"
+        },
+        {
+          "uuid": "a11a5128-9639-4037-b101-55dc55fe6a8d",
+          "name": "honeybee"
+        },
+        {
+          "uuid": "bcb1bb73-38b2-4dc9-8486-b6f822e861e0",
+          "name": "pollen"
+        }
+      ]
+    },
+    {
+      "label": 8,
+      "members": [
+        {
+          "uuid": "413f59e7-6343-4517-ae7b-541418ccdc2e",
+          "name": "meadow"
+        },
+        {
+          "uuid": "0d0da210-d504-4b90-abca-cbba883573c9",
+          "name": "savanna"
+        }
+      ]
+    },
+    {
+      "label": 9,
+      "members": [
+        {
+          "uuid": "5dc64acb-9f91-4ed3-9d4c-2979b533d952",
+          "name": "pack"
+        },
+        {
+          "uuid": "8220655e-90b1-4a52-964b-305f8467a48d",
+          "name": "variable"
+        },
+        {
+          "uuid": "042e50c7-5eed-47b4-806b-92eab2cec2da",
+          "name": "display"
+        },
+        {
+          "uuid": "c288986e-65d0-49d8-998f-6f98346adcc1",
+          "name": "component"
+        },
+        {
+          "uuid": "0356e986-7115-4116-a071-0e7b8423b3df",
+          "name": "fixed"
+        },
+        {
+          "uuid": "5034a67d-00b9-4338-9b1b-c26bd0700ca5",
+          "name": "sample"
+        }
+      ]
+    },
+    {
+      "label": 10,
+      "members": [
+        {
+          "uuid": "487cc1cf-903d-4e1c-be25-e9b829eee087",
+          "name": "fume hood"
+        },
+        {
+          "uuid": "75e23028-d235-4456-a88c-45348b21b933",
+          "name": "toxic vapors"
+        }
+      ]
+    },
+    {
+      "label": 11,
+      "members": [
+        {
+          "uuid": "25cf9529-315e-48f4-9c84-fba01a5587e1",
+          "name": "partial derivative"
+        },
+        {
+          "uuid": "f9884d71-62be-4c70-b5dc-75b0ca2960e0",
+          "name": "gradient"
+        },
+        {
+          "uuid": "1e9f04b0-a456-487f-9c40-e79af7858142",
+          "name": "∇f"
+        },
+        {
+          "uuid": "1df1bd8b-c832-4a8e-a574-c06c90d3a2e7",
+          "name": "direction"
+        }
+      ]
+    },
+    {
+      "label": 12,
+      "members": [
+        {
+          "uuid": "9ec07c87-2b96-4c11-bd10-8b969435387f",
+          "name": "u"
+        },
+        {
+          "uuid": "6dbc0169-a9cb-4453-ac8b-a890563f4013",
+          "name": "x"
+        },
+        {
+          "uuid": "600b1b44-fd89-4bc5-83d0-cdfd110ff58b",
+          "name": "π"
+        }
+      ]
+    },
+    {
+      "label": 13,
+      "members": [
+        {
+          "uuid": "77476cfc-cf15-4151-95cf-533e6948a4b4",
+          "name": "change"
+        },
+        {
+          "uuid": "c90a5af5-b70f-4608-b41d-d672d5fa48b7",
+          "name": "chameleon"
+        }
+      ]
+    },
+    {
+      "label": 14,
+      "members": [
+        {
+          "uuid": "745bc496-0694-49be-b62a-bfed5ff07ce7",
+          "name": "circumference"
+        },
+        {
+          "uuid": "c00e5044-0a02-46a6-ada6-d8b570addc2d",
+          "name": "diameter"
+        }
+      ]
+    },
+    {
+      "label": 15,
+      "members": [
+        {
+          "uuid": "2eb154c9-6c4e-4ca9-9887-6895d0822ca0",
+          "name": "α"
+        },
+        {
+          "uuid": "21131034-c629-49e0-9384-3fefb7f11f26",
+          "name": "ion"
+        }
+      ]
+    },
+    {
+      "label": 16,
+      "members": [
+        {
+          "uuid": "f8939f6d-4819-45ab-b3ad-7026abf9bc41",
+          "name": "centrifuge"
+        },
+        {
+          "uuid": "d5450031-93fd-45cd-89cc-d73d106a9221",
+          "name": "chromatography column"
+        }
+      ]
+    },
+    {
+      "label": 17,
+      "members": [
+        {
+          "uuid": "e9dea2dc-dc7d-4b30-8a57-f4cd0a9b7f16",
+          "name": "test tube"
+        },
+        {
+          "uuid": "792a0d68-df53-472a-badc-94716560d8a7",
+          "name": "reagent"
+        }
+      ]
+    },
+    {
+      "label": 18,
+      "members": [
+        {
+          "uuid": "353ec2a2-0405-4564-9b45-1122f1f9d93e",
+          "name": "plasma"
+        },
+        {
+          "uuid": "a69eabb4-f56e-44d3-93ef-9a4c5e2a0227",
+          "name": "well plate"
+        }
+      ]
+    },
+    {
+      "label": 19,
+      "members": [
+        {
+          "uuid": "ea154e2b-3615-45f4-bc37-66351f647831",
+          "name": "electron microscope"
+        },
+        {
+          "uuid": "85309caa-6753-4e75-8c8e-0eb691790076",
+          "name": "microtome"
+        },
+        {
+          "uuid": "1a905b39-cbab-4e9f-8bbc-7eeddfd5f8c4",
+          "name": "ultra-thin section"
+        }
+      ]
+    },
+    {
+      "label": 20,
+      "members": [
+        {
+          "uuid": "4bfd4773-22b3-4c0b-9e3f-b3f876a8960e",
+          "name": "pipette"
+        },
+        {
+          "uuid": "ca57bed2-cf62-40c5-b3ee-36132918ef9a",
+          "name": "microliter"
+        },
+        {
+          "uuid": "51b65b7d-14e2-446e-be8a-017cd50de0b0",
+          "name": "milligram"
+        }
+      ]
+    },
+    {
+      "label": 21,
+      "members": [
+        {
+          "uuid": "f80a46f5-06fd-4984-b0a9-214067545053",
+          "name": "spectrophotometer"
+        },
+        {
+          "uuid": "c6344ab8-7387-41a4-96e3-2a8e13f20637",
+          "name": "ph meter"
+        },
+        {
+          "uuid": "f135ecae-4e0f-41ab-97a7-3ed55e082de2",
+          "name": "analytical balance"
+        },
+        {
+          "uuid": "301a5167-5f0b-4638-b192-d13966dfe7a8",
+          "name": "mass spectrometer"
+        }
+      ]
+    },
+    {
+      "label": 22,
+      "members": [
+        {
+          "uuid": "e20e424a-c7f5-4bde-a5e9-22ff12b0f930",
+          "name": "glassware"
+        },
+        {
+          "uuid": "b1b1d356-0580-48ab-97f9-dcebf8c49fb9",
+          "name": "flask"
+        }
+      ]
+    },
+    {
+      "label": 23,
+      "members": [
+        {
+          "uuid": "9bb7b535-a954-47ae-9642-1eb133a12ea8",
+          "name": "pressurized steam"
+        },
+        {
+          "uuid": "55f7597e-b511-4f3c-b514-230ce1c34bcd",
+          "name": "autoclave"
+        }
+      ]
+    },
+    {
+      "label": 24,
+      "members": [
+        {
+          "uuid": "61d39939-da9f-45f6-b5e6-f944d24bfe51",
+          "name": "oscilloscope"
+        },
+        {
+          "uuid": "a4260583-3b4b-4b44-b682-98d6b5c8c4f0",
+          "name": "voltage waveform"
+        }
+      ]
+    },
+    {
+      "label": 25,
+      "members": [
+        {
+          "uuid": "de4ba9e8-5d3e-45c2-9d13-df7945815b7e",
+          "name": "bunsen burner"
+        },
+        {
+          "uuid": "827f08ab-d652-4068-82f0-226c7a9d7ff6",
+          "name": "blue flame"
+        }
+      ]
+    },
+    {
+      "label": 26,
+      "members": [
+        {
+          "uuid": "0cca730f-4a6e-4b96-8b62-9f8f09d3d8c0",
+          "name": "buffer solution"
+        },
+        {
+          "uuid": "43228baa-d600-403c-bc03-50b779d37e41",
+          "name": "solution"
+        }
+      ]
+    },
+    {
+      "label": 27,
+      "members": [
+        {
+          "uuid": "5899f141-4b5a-4d0c-a6a4-397a2b272052",
+          "name": "thermocycler"
+        },
+        {
+          "uuid": "220cb48c-9406-4c13-8f8e-bf897d90d8fc",
+          "name": "temperature cycle"
+        }
+      ]
+    },
+    {
+      "label": 28,
+      "members": [
+        {
+          "uuid": "e6ccdb1d-f3d3-4f1b-ac64-e125ce237771",
+          "name": "eight arms"
+        },
+        {
+          "uuid": "0de5157e-f470-41d7-9f8f-c1c9c029a33d",
+          "name": "hind legs"
+        }
+      ]
+    },
+    {
+      "label": 29,
+      "members": [
+        {
+          "uuid": "a991333e-5803-4490-9560-99107d3ca167",
+          "name": "reef"
+        },
+        {
+          "uuid": "0fbaac0f-4d67-47f0-b24b-b4ee7b98c321",
+          "name": "rainforest"
+        }
+      ]
+    },
+    {
+      "label": 30,
+      "members": [
+        {
+          "uuid": "71526906-4bdb-41a8-9bec-7d17ac365927",
+          "name": "definite integral"
+        },
+        {
+          "uuid": "036ff296-42f4-435e-96c6-46d2867d9000",
+          "name": "summation"
+        },
+        {
+          "uuid": "526be72d-67ae-4e09-b4ea-7b6a279cefa2",
+          "name": "infinite series"
+        },
+        {
+          "uuid": "4532b361-5ec4-45ff-866f-302f79537500",
+          "name": "∑"
+        }
+      ]
+    },
+    {
+      "label": 31,
+      "members": [
+        {
+          "uuid": "d1203713-ce89-4bd3-baef-b0fa079f1d23",
+          "name": "land animal"
+        },
+        {
+          "uuid": "19eece7f-5590-4f5e-8f6d-5a6e6025dca4",
+          "name": "red kangaroo"
+        }
+      ]
+    },
+    {
+      "label": 32,
+      "members": [
+        {
+          "uuid": "c6d74c3b-0893-4753-a579-425310c0d8dd",
+          "name": "peregrine falcon"
+        },
+        {
+          "uuid": "50396a2a-a34a-4be7-84b7-76050b6246ed",
+          "name": "emperor penguin"
+        }
+      ]
+    },
+    {
+      "label": 33,
+      "members": [
+        {
+          "uuid": "e99bfc36-28a0-41b5-b648-d1af9e9c9066",
+          "name": "antarctic"
+        },
+        {
+          "uuid": "7f3d76b9-0ac6-4fca-8721-e0bc61bd3db1",
+          "name": "arctic fox"
+        }
+      ]
+    }
+  ],
+  "node_hierarchy": [
+    {
+      "size": 5,
+      "sample": [
+        "bottlenose dolphin",
+        "elephant",
+        "octopus",
+        "narwhal",
+        "marine mammal"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "trunk",
+        "canopy"
+      ],
+      "children": []
+    },
+    {
+      "size": 3,
+      "sample": [
+        "tusk",
+        "tundra",
+        "outback"
+      ],
+      "children": []
+    },
+    {
+      "size": 6,
+      "sample": [
+        "jaw",
+        "hive",
+        "curve",
+        "circle",
+        "branch",
+        "cell"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "fish",
+        "deer"
+      ],
+      "children": []
+    },
+    {
+      "size": 4,
+      "sample": [
+        "water",
+        "river",
+        "wind",
+        "snow"
+      ],
+      "children": []
+    },
+    {
+      "size": 4,
+      "sample": [
+        "grizzly bear",
+        "cheetah",
+        "jaguar",
+        "gray wolf"
+      ],
+      "children": []
+    },
+    {
+      "size": 3,
+      "sample": [
+        "berry",
+        "honeybee",
+        "pollen"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "meadow",
+        "savanna"
+      ],
+      "children": []
+    },
+    {
+      "size": 6,
+      "sample": [
+        "pack",
+        "variable",
+        "display",
+        "component",
+        "fixed",
+        "sample"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "fume hood",
+        "toxic vapors"
+      ],
+      "children": []
+    },
+    {
+      "size": 4,
+      "sample": [
+        "partial derivative",
+        "gradient",
+        "∇f",
+        "direction"
+      ],
+      "children": []
+    },
+    {
+      "size": 3,
+      "sample": [
+        "u",
+        "x",
+        "π"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "change",
+        "chameleon"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "circumference",
+        "diameter"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "α",
+        "ion"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "centrifuge",
+        "chromatography column"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "test tube",
+        "reagent"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "plasma",
+        "well plate"
+      ],
+      "children": []
+    },
+    {
+      "size": 3,
+      "sample": [
+        "electron microscope",
+        "microtome",
+        "ultra-thin section"
+      ],
+      "children": []
+    },
+    {
+      "size": 3,
+      "sample": [
+        "pipette",
+        "microliter",
+        "milligram"
+      ],
+      "children": []
+    },
+    {
+      "size": 4,
+      "sample": [
+        "spectrophotometer",
+        "ph meter",
+        "analytical balance",
+        "mass spectrometer"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "glassware",
+        "flask"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "pressurized steam",
+        "autoclave"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "oscilloscope",
+        "voltage waveform"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "bunsen burner",
+        "blue flame"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "buffer solution",
+        "solution"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "thermocycler",
+        "temperature cycle"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "eight arms",
+        "hind legs"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "reef",
+        "rainforest"
+      ],
+      "children": []
+    },
+    {
+      "size": 4,
+      "sample": [
+        "definite integral",
+        "summation",
+        "infinite series",
+        "∑"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "land animal",
+        "red kangaroo"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "peregrine falcon",
+        "emperor penguin"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "antarctic",
+        "arctic fox"
+      ],
+      "children": []
+    }
+  ],
+  "node_hierarchy_assignment": {
+    "10546154-a030-4457-8510-3a8e660e9efb": 0,
+    "5474c112-4ad1-4a50-9cae-b7c764793bba": 0,
+    "2b1539db-612f-4df7-bce8-eb05bafb0888": 0,
+    "727caf0a-8648-4fab-82f7-58c8f9b06e24": 0,
+    "a006ce58-cb16-4d5c-928e-a09509758007": 0,
+    "31c9a25c-d0a2-4116-8c4f-410e4f6f0bba": 1,
+    "48bba8a1-234e-4d73-b325-2a1ef48b2eba": 1,
+    "f67f602c-3d03-4158-a2ce-0eb6a820a4f9": 2,
+    "69d3b394-1027-4403-8ad7-96731b6f3e3f": 2,
+    "90549376-824e-4d25-bebf-1e4736a86c67": 2,
+    "74401073-6f0e-4455-a72b-afa5d996f7c7": 3,
+    "511199b9-bad8-4df8-a89b-e4e41e9bda12": 3,
+    "cbb0ced2-1eb3-4302-b1b8-58bbb992720a": 3,
+    "1886c6fe-ba8e-4f0f-8d3b-c2139eb89383": 3,
+    "712c668f-9417-49a7-85f5-2316981cea0a": 3,
+    "b651f89f-e280-48e6-820f-46f7ef5a0648": 3,
+    "21d37a37-5663-4a9a-95aa-841a9f542b54": 4,
+    "42ff7ce6-a6fc-40f8-b38c-b6636b1b61aa": 4,
+    "5a2c6250-88b2-4e03-8a6e-a07c188a8e5a": 5,
+    "c90776f9-ad8d-4513-ba8e-92e6b15108eb": 5,
+    "f180ded2-b8d1-44a1-90ae-d53b0f6e0108": 5,
+    "e2296978-6048-40e8-b2ec-9c836b897a73": 5,
+    "fdfd0c69-8de1-4f8d-bcb3-1536eb607bc9": 6,
+    "c2d29894-d5b1-4049-ac2c-cfb26417aa62": 6,
+    "b072e0b0-3c75-4c54-afa6-d0a4fdae3d45": 6,
+    "53cf76b7-3aa8-413c-8330-0193b8bc48d3": 6,
+    "01000e4a-554d-437e-b4eb-a2e083c7031a": 7,
+    "a11a5128-9639-4037-b101-55dc55fe6a8d": 7,
+    "bcb1bb73-38b2-4dc9-8486-b6f822e861e0": 7,
+    "413f59e7-6343-4517-ae7b-541418ccdc2e": 8,
+    "0d0da210-d504-4b90-abca-cbba883573c9": 8,
+    "5dc64acb-9f91-4ed3-9d4c-2979b533d952": 9,
+    "8220655e-90b1-4a52-964b-305f8467a48d": 9,
+    "042e50c7-5eed-47b4-806b-92eab2cec2da": 9,
+    "c288986e-65d0-49d8-998f-6f98346adcc1": 9,
+    "0356e986-7115-4116-a071-0e7b8423b3df": 9,
+    "5034a67d-00b9-4338-9b1b-c26bd0700ca5": 9,
+    "487cc1cf-903d-4e1c-be25-e9b829eee087": 10,
+    "75e23028-d235-4456-a88c-45348b21b933": 10,
+    "25cf9529-315e-48f4-9c84-fba01a5587e1": 11,
+    "f9884d71-62be-4c70-b5dc-75b0ca2960e0": 11,
+    "1e9f04b0-a456-487f-9c40-e79af7858142": 11,
+    "1df1bd8b-c832-4a8e-a574-c06c90d3a2e7": 11,
+    "9ec07c87-2b96-4c11-bd10-8b969435387f": 12,
+    "6dbc0169-a9cb-4453-ac8b-a890563f4013": 12,
+    "600b1b44-fd89-4bc5-83d0-cdfd110ff58b": 12,
+    "77476cfc-cf15-4151-95cf-533e6948a4b4": 13,
+    "c90a5af5-b70f-4608-b41d-d672d5fa48b7": 13,
+    "745bc496-0694-49be-b62a-bfed5ff07ce7": 14,
+    "c00e5044-0a02-46a6-ada6-d8b570addc2d": 14,
+    "2eb154c9-6c4e-4ca9-9887-6895d0822ca0": 15,
+    "21131034-c629-49e0-9384-3fefb7f11f26": 15,
+    "f8939f6d-4819-45ab-b3ad-7026abf9bc41": 16,
+    "d5450031-93fd-45cd-89cc-d73d106a9221": 16,
+    "e9dea2dc-dc7d-4b30-8a57-f4cd0a9b7f16": 17,
+    "792a0d68-df53-472a-badc-94716560d8a7": 17,
+    "353ec2a2-0405-4564-9b45-1122f1f9d93e": 18,
+    "a69eabb4-f56e-44d3-93ef-9a4c5e2a0227": 18,
+    "ea154e2b-3615-45f4-bc37-66351f647831": 19,
+    "85309caa-6753-4e75-8c8e-0eb691790076": 19,
+    "1a905b39-cbab-4e9f-8bbc-7eeddfd5f8c4": 19,
+    "4bfd4773-22b3-4c0b-9e3f-b3f876a8960e": 20,
+    "ca57bed2-cf62-40c5-b3ee-36132918ef9a": 20,
+    "51b65b7d-14e2-446e-be8a-017cd50de0b0": 20,
+    "f80a46f5-06fd-4984-b0a9-214067545053": 21,
+    "c6344ab8-7387-41a4-96e3-2a8e13f20637": 21,
+    "f135ecae-4e0f-41ab-97a7-3ed55e082de2": 21,
+    "301a5167-5f0b-4638-b192-d13966dfe7a8": 21,
+    "e20e424a-c7f5-4bde-a5e9-22ff12b0f930": 22,
+    "b1b1d356-0580-48ab-97f9-dcebf8c49fb9": 22,
+    "9bb7b535-a954-47ae-9642-1eb133a12ea8": 23,
+    "55f7597e-b511-4f3c-b514-230ce1c34bcd": 23,
+    "61d39939-da9f-45f6-b5e6-f944d24bfe51": 24,
+    "a4260583-3b4b-4b44-b682-98d6b5c8c4f0": 24,
+    "de4ba9e8-5d3e-45c2-9d13-df7945815b7e": 25,
+    "827f08ab-d652-4068-82f0-226c7a9d7ff6": 25,
+    "0cca730f-4a6e-4b96-8b62-9f8f09d3d8c0": 26,
+    "43228baa-d600-403c-bc03-50b779d37e41": 26,
+    "5899f141-4b5a-4d0c-a6a4-397a2b272052": 27,
+    "220cb48c-9406-4c13-8f8e-bf897d90d8fc": 27,
+    "e6ccdb1d-f3d3-4f1b-ac64-e125ce237771": 28,
+    "0de5157e-f470-41d7-9f8f-c1c9c029a33d": 28,
+    "a991333e-5803-4490-9560-99107d3ca167": 29,
+    "0fbaac0f-4d67-47f0-b24b-b4ee7b98c321": 29,
+    "71526906-4bdb-41a8-9bec-7d17ac365927": 30,
+    "036ff296-42f4-435e-96c6-46d2867d9000": 30,
+    "526be72d-67ae-4e09-b4ea-7b6a279cefa2": 30,
+    "4532b361-5ec4-45ff-866f-302f79537500": 30,
+    "d1203713-ce89-4bd3-baef-b0fa079f1d23": 31,
+    "19eece7f-5590-4f5e-8f6d-5a6e6025dca4": 31,
+    "c6d74c3b-0893-4753-a579-425310c0d8dd": 32,
+    "50396a2a-a34a-4be7-84b7-76050b6246ed": 32,
+    "e99bfc36-28a0-41b5-b648-d1af9e9c9066": 33,
+    "7f3d76b9-0ac6-4fca-8721-e0bc61bd3db1": 33
+  },
+  "edge_clusters": [],
+  "endpoint_type_view": {
+    "anatomy -> anatomy": 1,
+    "organism -> organism": 7,
+    "organism -> anatomy": 1,
+    "marine_ecosystem -> marine_ecosystem": 2,
+    "ecosystem -> ecosystem": 8,
+    "organism -> natural_phenomenon": 2,
+    "organism_5ac85961 -> ecosystem": 1,
+    "agent -> aquatic_environment": 2,
+    "aquatic_environment -> aquatic_environment": 2,
+    "agent -> agent": 1,
+    "organism -> scientific_entity": 1,
+    "organism -> phenomenon": 1,
+    "phenomenon -> phenomenon": 1,
+    "scientific_entity -> scientific_entity": 3,
+    "laboratory_equipment -> laboratory_equipment": 8,
+    "laboratory_equipment -> natural_phenomenon_eb0660fb": 2,
+    "laboratory_equipment -> object": 3,
+    "laboratory_equipment -> phenomenon": 1,
+    "laboratory_equipment_a743c663 -> laboratory_equipment": 2,
+    "laboratory_equipment -> phenomenon_cf1a077e": 1,
+    "laboratory_equipment -> laboratory_equipment_f90670e0": 1,
+    "object -> object": 3,
+    "laboratory_equipment_d1209cc5 -> process": 1,
+    "process -> process": 1,
+    "entity -> entity": 7,
+    "entity -> process": 1,
+    "object -> mathematical_entity": 1,
+    "mathematical_entity -> mathematical_entity": 2,
+    "mathematical_entity -> entity": 1,
+    "entity -> mathematical_entity": 1,
+    "mathematical_concept -> mathematical_entity": 2,
+    "mathematical_concept -> scientific_entity_90e07ad5": 1,
+    "mathematical_concept -> mathematical_concept": 1,
+    "entity -> object_69d2305e": 1,
+    "entity -> mathematical_entity_474ebe8e": 2
+  }
+}

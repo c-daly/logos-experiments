@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+# Large captured substrate fixtures — regenerable via sweep/build_substrate.py + sweep/capture.py
+sweep/fixture.json
+sweep/selftest_fixture.json

@@ -1,0 +1,60 @@
+{"text": "The mitochondrion synthesizes ATP through oxidative phosphorylation along its inner membrane.", "domain": "cell_biology", "round": 1}
+{"text": "Within the inner membrane, the electron transport chain passes electrons from NADH and FADH2 toward molecular oxygen.", "domain": "cell_biology", "round": 1}
+{"text": "As electrons traverse the electron transport chain, protons accumulate in the intermembrane space and build an electrochemical gradient.", "domain": "cell_biology", "round": 1}
+{"text": "ATP synthase exploits this proton gradient to phosphorylate ADP into ATP.", "domain": "cell_biology", "round": 1}
+{"text": "The citric acid cycle in the mitochondrial matrix supplies the NADH and FADH2 that feed the electron transport chain.", "domain": "cell_biology", "round": 2}
+{"text": "Pyruvate from glycolysis enters the mitochondrion and is oxidized to acetyl-CoA before the citric acid cycle.", "domain": "cell_biology", "round": 2}
+{"text": "Each mitochondrion carries its own circular DNA, which encodes several subunits of the electron transport chain.", "domain": "cell_biology", "round": 2}
+{"text": "When the proton gradient collapses, ATP synthase slows and the mitochondrion produces far less ATP.", "domain": "cell_biology", "round": 3}
+{"text": "Reactive oxygen species leak from the electron transport chain and can damage mitochondrial DNA and the inner membrane.", "domain": "cell_biology", "round": 3}
+{"text": "Cells rich in mitochondria, such as cardiac muscle, demand abundant ATP from oxidative phosphorylation.", "domain": "cell_biology", "round": 3}
+{"text": "A main-sequence star fuses hydrogen into helium in its core through the proton-proton chain.", "domain": "astrophysics", "round": 1}
+{"text": "Radiation pressure from hydrogen fusion balances the star's gravity and keeps the core stable.", "domain": "astrophysics", "round": 1}
+{"text": "When core hydrogen is exhausted, fusion migrates to a shell and the star swells into a red giant.", "domain": "astrophysics", "round": 1}
+{"text": "In a massive star, successive fusion stages forge carbon, oxygen, and finally iron in the core.", "domain": "astrophysics", "round": 1}
+{"text": "Iron releases no energy through fusion, so the core collapses and the star detonates as a supernova.", "domain": "astrophysics", "round": 2}
+{"text": "The supernova scatters heavy elements and leaves behind a neutron star or a black hole.", "domain": "astrophysics", "round": 2}
+{"text": "A neutron star compresses more than a solar mass into a sphere kilometers across, held up by neutron degeneracy pressure.", "domain": "astrophysics", "round": 2}
+{"text": "If the remnant exceeds roughly three solar masses, gravity overwhelms degeneracy pressure and a black hole forms.", "domain": "astrophysics", "round": 3}
+{"text": "The intense gravity of a black hole warps spacetime and traps light inside the event horizon.", "domain": "astrophysics", "round": 3}
+{"text": "A spinning neutron star sweeps beams of radiation across the sky and is observed as a pulsar.", "domain": "astrophysics", "round": 3}
+{"text": "A carbon atom forms four covalent bonds, giving organic molecules their structural diversity.", "domain": "organic_chemistry", "round": 1}
+{"text": "Hydrocarbons contain only carbon and hydrogen, joined by single, double, or triple covalent bonds.", "domain": "organic_chemistry", "round": 1}
+{"text": "A double bond between carbon atoms makes an alkene more reactive than the corresponding alkane.", "domain": "organic_chemistry", "round": 1}
+{"text": "The hydroxyl group defines an alcohol, while the carbonyl group appears in aldehydes and ketones.", "domain": "organic_chemistry", "round": 1}
+{"text": "A carboxylic acid combines a carbonyl group and a hydroxyl group on the same carbon atom.", "domain": "organic_chemistry", "round": 2}
+{"text": "In esterification, a carboxylic acid reacts with an alcohol to form an ester and water.", "domain": "organic_chemistry", "round": 2}
+{"text": "A nucleophile attacks the electrophilic carbon of a carbonyl group during an addition reaction.", "domain": "organic_chemistry", "round": 2}
+{"text": "Benzene's delocalized electrons form an aromatic ring that resists the addition reactions typical of an alkene.", "domain": "organic_chemistry", "round": 3}
+{"text": "A functional group such as the hydroxyl group or the carbonyl group dictates how an organic molecule reacts.", "domain": "organic_chemistry", "round": 3}
+{"text": "Polymers form when many monomers join through repeated covalent bonds along a carbon backbone.", "domain": "organic_chemistry", "round": 3}
+{"text": "When a pathogen breaches the skin, the innate immune system mounts the first response.", "domain": "immunology", "round": 1}
+{"text": "A macrophage engulfs the pathogen and displays its antigens on the cell surface.", "domain": "immunology", "round": 1}
+{"text": "A helper T cell recognizes the antigen presented by the macrophage and becomes activated.", "domain": "immunology", "round": 1}
+{"text": "The activated helper T cell secretes cytokines that stimulate B cells and killer T cells.", "domain": "immunology", "round": 1}
+{"text": "A B cell that binds the antigen differentiates into a plasma cell and secretes antibodies.", "domain": "immunology", "round": 2}
+{"text": "Antibodies bind the pathogen, neutralize it, and mark it for destruction by a phagocyte.", "domain": "immunology", "round": 2}
+{"text": "A killer T cell destroys infected host cells that display the pathogen's antigens.", "domain": "immunology", "round": 2}
+{"text": "After the infection clears, memory B cells and memory T cells persist for years.", "domain": "immunology", "round": 3}
+{"text": "On re-exposure, the memory cells recognize the antigen and produce antibodies far faster.", "domain": "immunology", "round": 3}
+{"text": "A vaccine primes this memory response by presenting harmless antigens to the immune system.", "domain": "immunology", "round": 3}
+{"text": "Earth's lithosphere is fractured into rigid plates that drift over the ductile asthenosphere.", "domain": "plate_tectonics", "round": 1}
+{"text": "Convection currents in the mantle drive the slow motion of the tectonic plates.", "domain": "plate_tectonics", "round": 1}
+{"text": "At a divergent boundary, two plates separate and magma rises to form new oceanic crust.", "domain": "plate_tectonics", "round": 1}
+{"text": "At a convergent boundary, a dense oceanic plate subducts beneath a lighter continental plate.", "domain": "plate_tectonics", "round": 1}
+{"text": "Subduction drags the oceanic plate into the mantle, where it melts and feeds a volcanic arc.", "domain": "plate_tectonics", "round": 2}
+{"text": "The friction of subduction stores stress along a fault until it releases as an earthquake.", "domain": "plate_tectonics", "round": 2}
+{"text": "At a transform boundary, two plates grind past each other along a fault.", "domain": "plate_tectonics", "round": 2}
+{"text": "Magma that reaches the surface erupts from a volcano and cools into basalt.", "domain": "plate_tectonics", "round": 3}
+{"text": "Seafloor spreading at a divergent boundary pushes the plates apart and widens the ocean basin.", "domain": "plate_tectonics", "round": 3}
+{"text": "The slow drift of the plates rearranges the continents over millions of years.", "domain": "plate_tectonics", "round": 3}
+{"text": "A neural network maps inputs to outputs through layers of weighted connections.", "domain": "machine_learning", "round": 1}
+{"text": "Each neuron computes a weighted sum of its inputs and applies a nonlinear activation function.", "domain": "machine_learning", "round": 1}
+{"text": "Training adjusts the weights to minimize a loss function over the training data.", "domain": "machine_learning", "round": 1}
+{"text": "Gradient descent updates each weight in the direction that reduces the loss.", "domain": "machine_learning", "round": 1}
+{"text": "Backpropagation computes the gradient of the loss with respect to every weight.", "domain": "machine_learning", "round": 2}
+{"text": "The learning rate controls how large a step gradient descent takes at each update.", "domain": "machine_learning", "round": 2}
+{"text": "A network with too many weights can overfit the training data and generalize poorly.", "domain": "machine_learning", "round": 2}
+{"text": "Regularization penalizes large weights and helps the neural network generalize to new data.", "domain": "machine_learning", "round": 3}
+{"text": "An activation function such as ReLU lets the neural network model nonlinear relationships.", "domain": "machine_learning", "round": 3}
+{"text": "Stacking many layers gives a deep neural network the capacity to learn rich features.", "domain": "machine_learning", "round": 3}

@@ -1,0 +1,866 @@
+{
+  "round": 1,
+  "seed_n": 1,
+  "smoke": false,
+  "min_cluster_size": 2,
+  "counts": {
+    "entity_nodes": 61,
+    "edge_nodes": 82,
+    "node_members": 54,
+    "node_dropped_junk": 6,
+    "edge_members": 38,
+    "edge_structural_excluded": 44,
+    "edge_embeddings_new": 82
+  },
+  "entity_filter": true,
+  "entity_domains": {
+    "c2d29894-d5b1-4049-ac2c-cfb26417aa62": "animals",
+    "0d0da210-d504-4b90-abca-cbba883573c9": "animals",
+    "d1203713-ce89-4bd3-baef-b0fa079f1d23": "animals",
+    "a006ce58-cb16-4d5c-928e-a09509758007": "animals",
+    "74401073-6f0e-4455-a72b-afa5d996f7c7": "animals",
+    "727caf0a-8648-4fab-82f7-58c8f9b06e24": "animals",
+    "f67f602c-3d03-4158-a2ce-0eb6a820a4f9": "animals",
+    "eb4a1bc7-5f99-402c-8885-c6c52972fef2": "animals",
+    "933dfb76-e42e-4b72-9a5c-8975e29542ac": "animals",
+    "c6d74c3b-0893-4753-a579-425310c0d8dd": "animals",
+    "a991333e-5803-4490-9560-99107d3ca167": "animals",
+    "e6ccdb1d-f3d3-4f1b-ac64-e125ce237771": "animals",
+    "2b1539db-612f-4df7-bce8-eb05bafb0888": "animals",
+    "57ffa589-dde3-4f43-913f-251bb7f79e4d": "animals",
+    "fdfd0c69-8de1-4f8d-bcb3-1536eb607bc9": "animals",
+    "01000e4a-554d-437e-b4eb-a2e083c7031a": "animals",
+    "893bcd14-7d4c-4790-984b-e9d2d24daa81": "animals",
+    "c90a5af5-b70f-4608-b41d-d672d5fa48b7": "animals",
+    "712c668f-9417-49a7-85f5-2316981cea0a": "animals",
+    "d35e00aa-f45d-4de1-8fc1-84a104986e66": "animals",
+    "f180ded2-b8d1-44a1-90ae-d53b0f6e0108": "animals",
+    "50396a2a-a34a-4be7-84b7-76050b6246ed": "animals",
+    "e99bfc36-28a0-41b5-b648-d1af9e9c9066": "animals",
+    "511199b9-bad8-4df8-a89b-e4e41e9bda12": "animals",
+    "413f59e7-6343-4517-ae7b-541418ccdc2e": "animals",
+    "bcb1bb73-38b2-4dc9-8486-b6f822e861e0": "animals",
+    "a11a5128-9639-4037-b101-55dc55fe6a8d": "animals",
+    "69d3b394-1027-4403-8ad7-96731b6f3e3f": "animals",
+    "53cf76b7-3aa8-413c-8330-0193b8bc48d3": "animals",
+    "5dc64acb-9f91-4ed3-9d4c-2979b533d952": "animals",
+    "8292fb5b-1908-4e76-8b59-d29be14e3dcb": "lab_instruments",
+    "21d37a37-5663-4a9a-95aa-841a9f542b54": "lab_instruments",
+    "10546154-a030-4457-8510-3a8e660e9efb": "lab_instruments",
+    "19eece7f-5590-4f5e-8f6d-5a6e6025dca4": "lab_instruments",
+    "0de5157e-f470-41d7-9f8f-c1c9c029a33d": "lab_instruments",
+    "90549376-824e-4d25-bebf-1e4736a86c67": "lab_instruments",
+    "7da85930-46ae-44a9-8700-14b82489406f": "lab_instruments",
+    "48bba8a1-234e-4d73-b325-2a1ef48b2eba": "lab_instruments",
+    "0fbaac0f-4d67-47f0-b24b-b4ee7b98c321": "lab_instruments",
+    "b072e0b0-3c75-4c54-afa6-d0a4fdae3d45": "lab_instruments",
+    "afe4c8b2-66b2-4ee0-85dd-5e4975d895fb": "lab_instruments",
+    "e2296978-6048-40e8-b2ec-9c836b897a73": "lab_instruments",
+    "7f3d76b9-0ac6-4fca-8721-e0bc61bd3db1": "lab_instruments",
+    "5034a67d-00b9-4338-9b1b-c26bd0700ca5": "lab_instruments",
+    "301a5167-5f0b-4638-b192-d13966dfe7a8": "lab_instruments",
+    "21131034-c629-49e0-9384-3fefb7f11f26": "lab_instruments",
+    "710481b7-6ee5-408c-83b5-0f1ed72f2282": "lab_instruments",
+    "f8939f6d-4819-45ab-b3ad-7026abf9bc41": "lab_instruments",
+    "b651f89f-e280-48e6-820f-46f7ef5a0648": "lab_instruments",
+    "e9dea2dc-dc7d-4b30-8a57-f4cd0a9b7f16": "lab_instruments",
+    "353ec2a2-0405-4564-9b45-1122f1f9d93e": "lab_instruments",
+    "c7160059-2fe5-446e-add6-3029bbbc9df9": "lab_instruments",
+    "ea154e2b-3615-45f4-bc37-66351f647831": "lab_instruments",
+    "742a2b92-9259-4a78-b412-23145d4f2988": "lab_instruments",
+    "9847f31f-cb91-4a56-b63b-70ac04f526a5": "lab_instruments"
+  },
+  "entity_sentences": {
+    "c2d29894-d5b1-4049-ac2c-cfb26417aa62": "The cheetah sprints across the savanna faster than any other land animal.",
+    "0d0da210-d504-4b90-abca-cbba883573c9": "The cheetah sprints across the savanna faster than any other land animal.",
+    "d1203713-ce89-4bd3-baef-b0fa079f1d23": "The cheetah sprints across the savanna faster than any other land animal.",
+    "a006ce58-cb16-4d5c-928e-a09509758007": "The peregrine falcon dives toward its prey at tremendous speed.",
+    "74401073-6f0e-4455-a72b-afa5d996f7c7": "The peregrine falcon dives toward its prey at tremendous speed.",
+    "727caf0a-8648-4fab-82f7-58c8f9b06e24": "The peregrine falcon dives toward its prey at tremendous speed.",
+    "f67f602c-3d03-4158-a2ce-0eb6a820a4f9": "The peregrine falcon dives toward its prey at tremendous speed.",
+    "eb4a1bc7-5f99-402c-8885-c6c52972fef2": "The grizzly bear forages for berries before its winter hibernation.",
+    "933dfb76-e42e-4b72-9a5c-8975e29542ac": "The grizzly bear forages for berries before its winter hibernation.",
+    "c6d74c3b-0893-4753-a579-425310c0d8dd": "The grizzly bear forages for berries before its winter hibernation.",
+    "a991333e-5803-4490-9560-99107d3ca167": "A chameleon shifts its skin color to blend with the branch.",
+    "e6ccdb1d-f3d3-4f1b-ac64-e125ce237771": "A chameleon shifts its skin color to blend with the branch.",
+    "2b1539db-612f-4df7-bce8-eb05bafb0888": "A chameleon shifts its skin color to blend with the branch.",
+    "57ffa589-dde3-4f43-913f-251bb7f79e4d": "A honeybee carries pollen back from the meadow to the hive.",
+    "fdfd0c69-8de1-4f8d-bcb3-1536eb607bc9": "A honeybee carries pollen back from the meadow to the hive.",
+    "01000e4a-554d-437e-b4eb-a2e083c7031a": "A honeybee carries pollen back from the meadow to the hive.",
+    "893bcd14-7d4c-4790-984b-e9d2d24daa81": "The gray wolf hunts in a coordinated pack across the tundra.",
+    "c90a5af5-b70f-4608-b41d-d672d5fa48b7": "The gray wolf hunts in a coordinated pack across the tundra.",
+    "712c668f-9417-49a7-85f5-2316981cea0a": "A komodo dragon ambushes the deer with a venomous bite.",
+    "d35e00aa-f45d-4de1-8fc1-84a104986e66": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "f180ded2-b8d1-44a1-90ae-d53b0f6e0108": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "50396a2a-a34a-4be7-84b7-76050b6246ed": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "e99bfc36-28a0-41b5-b648-d1af9e9c9066": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "511199b9-bad8-4df8-a89b-e4e41e9bda12": "The red kangaroo bounds across the outback on powerful hind legs.",
+    "413f59e7-6343-4517-ae7b-541418ccdc2e": "The red kangaroo bounds across the outback on powerful hind legs.",
+    "bcb1bb73-38b2-4dc9-8486-b6f822e861e0": "The red kangaroo bounds across the outback on powerful hind legs.",
+    "a11a5128-9639-4037-b101-55dc55fe6a8d": "The red kangaroo bounds across the outback on powerful hind legs.",
+    "69d3b394-1027-4403-8ad7-96731b6f3e3f": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "53cf76b7-3aa8-413c-8330-0193b8bc48d3": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "5dc64acb-9f91-4ed3-9d4c-2979b533d952": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "8292fb5b-1908-4e76-8b59-d29be14e3dcb": "The mass spectrometer ionizes the sample and sorts ions by mass.",
+    "21d37a37-5663-4a9a-95aa-841a9f542b54": "The mass spectrometer ionizes the sample and sorts ions by mass.",
+    "10546154-a030-4457-8510-3a8e660e9efb": "The mass spectrometer ionizes the sample and sorts ions by mass.",
+    "19eece7f-5590-4f5e-8f6d-5a6e6025dca4": "A pipette dispenses a precise microliter volume into the well plate.",
+    "0de5157e-f470-41d7-9f8f-c1c9c029a33d": "A pipette dispenses a precise microliter volume into the well plate.",
+    "90549376-824e-4d25-bebf-1e4736a86c67": "A pipette dispenses a precise microliter volume into the well plate.",
+    "7da85930-46ae-44a9-8700-14b82489406f": "An autoclave sterilizes the glassware with pressurized steam.",
+    "48bba8a1-234e-4d73-b325-2a1ef48b2eba": "An autoclave sterilizes the glassware with pressurized steam.",
+    "0fbaac0f-4d67-47f0-b24b-b4ee7b98c321": "An autoclave sterilizes the glassware with pressurized steam.",
+    "b072e0b0-3c75-4c54-afa6-d0a4fdae3d45": "An autoclave sterilizes the glassware with pressurized steam.",
+    "afe4c8b2-66b2-4ee0-85dd-5e4975d895fb": "A Bunsen burner heats the flask over a steady blue flame.",
+    "e2296978-6048-40e8-b2ec-9c836b897a73": "A Bunsen burner heats the flask over a steady blue flame.",
+    "7f3d76b9-0ac6-4fca-8721-e0bc61bd3db1": "A Bunsen burner heats the flask over a steady blue flame.",
+    "5034a67d-00b9-4338-9b1b-c26bd0700ca5": "A pH meter reports the acidity of the buffer solution.",
+    "301a5167-5f0b-4638-b192-d13966dfe7a8": "A pH meter reports the acidity of the buffer solution.",
+    "21131034-c629-49e0-9384-3fefb7f11f26": "A pH meter reports the acidity of the buffer solution.",
+    "710481b7-6ee5-408c-83b5-0f1ed72f2282": "A pH meter reports the acidity of the buffer solution.",
+    "f8939f6d-4819-45ab-b3ad-7026abf9bc41": "An analytical balance weighs the reagent to the nearest milligram.",
+    "b651f89f-e280-48e6-820f-46f7ef5a0648": "An analytical balance weighs the reagent to the nearest milligram.",
+    "e9dea2dc-dc7d-4b30-8a57-f4cd0a9b7f16": "An analytical balance weighs the reagent to the nearest milligram.",
+    "353ec2a2-0405-4564-9b45-1122f1f9d93e": "An analytical balance weighs the reagent to the nearest milligram.",
+    "c7160059-2fe5-446e-add6-3029bbbc9df9": "A microtome slices the tissue into ultra-thin sections for the slide.",
+    "ea154e2b-3615-45f4-bc37-66351f647831": "A microtome slices the tissue into ultra-thin sections for the slide.",
+    "742a2b92-9259-4a78-b412-23145d4f2988": "A microtome slices the tissue into ultra-thin sections for the slide.",
+    "9847f31f-cb91-4a56-b63b-70ac04f526a5": "A microtome slices the tissue into ultra-thin sections for the slide."
+  },
+  "edge_sentences": {
+    "cc03e1bf-1131-4b6d-8178-74950080dcda": "An octopus uses its eight arms to crawl along the reef.",
+    "c244fce8-fbf2-4d5f-980d-039dd30573f0": "An octopus uses its eight arms to crawl along the reef.",
+    "ea3b943c-efdc-4996-bfe4-2fd8e9cbf1ff": "A chameleon shifts its skin color to blend with the branch.",
+    "e2492b39-6788-4906-b4f2-08d9967a015c": "A chameleon shifts its skin color to blend with the branch.",
+    "dea75e5d-4ee9-44de-aef0-a6ddf87953aa": "The emperor penguin huddles with its colony against the Antarctic wind.",
+    "47e59454-d88c-48c2-87b6-8a78e88e723e": "The emperor penguin huddles with its colony against the Antarctic wind.",
+    "4faaa10c-20d4-4dd2-b4c0-ec49831f5e3a": "The emperor penguin huddles with its colony against the Antarctic wind.",
+    "83aa7c1c-d80e-4c22-811b-cfb9de2dbe48": "The emperor penguin huddles with its colony against the Antarctic wind.",
+    "31dd06a4-0b2e-4f6e-83cb-e18fbb37e7e1": "The gray wolf hunts in a coordinated pack across the tundra.",
+    "1c78d33a-b8df-4018-9d4a-7e4e6d6f53b0": "The gray wolf hunts in a coordinated pack across the tundra.",
+    "aac6ff3a-9039-47d0-baa5-5c24f3376985": "A komodo dragon ambushes the deer with a venomous bite.",
+    "851e63e7-17dd-415e-b75f-22810855e325": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "b5b2bec2-0838-495a-a807-d9971e93f6e0": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "26ab23ac-6e91-4a4c-ae9c-4d7d248a750b": "The bottlenose dolphin echolocates fish in the murky bay.",
+    "96f83352-032d-4db7-ad64-7c85fab940a8": "An elephant uses its trunk to draw water from the river.",
+    "c15ccf09-537f-4b6b-bb8c-0734f04762bc": "An elephant uses its trunk to draw water from the river.",
+    "6ce40ff1-408e-4c0e-b3b6-dae5f79fefe9": "The red kangaroo bounds across the outback on powerful hind legs.",
+    "c1d620bc-964d-4706-ac36-4e12858eb7d8": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "9bbae7f5-bf08-4f6b-bbf1-0fb688fae141": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "8ebd750a-af49-4a67-ab73-f77fe52844cb": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "eeba4129-8ef6-4e07-bdb5-457eb94118e9": "A jaguar drags its kill up into the canopy of the rainforest.",
+    "18588de6-bf81-461a-94d1-094c17d33f16": "The arctic fox grows a white coat to hide in the snow.",
+    "62a2f25f-1231-4263-9f1b-3293d4e2bb47": "The arctic fox grows a white coat to hide in the snow.",
+    "5c889d13-0824-469a-9708-a1fbe0bf2e8c": "The mass spectrometer ionizes the sample and sorts ions by mass.",
+    "88f8c99e-d746-45d5-871d-da2fc2422c8a": "The mass spectrometer ionizes the sample and sorts ions by mass.",
+    "36b67750-7072-4246-ac93-b8101b53dbd1": "A centrifuge spins the test tubes to separate the plasma from the cells.",
+    "e7a5da66-d3d6-42e2-be76-2837cee9dd4f": "A centrifuge spins the test tubes to separate the plasma from the cells.",
+    "f76a8d78-1c87-485f-9a8b-b2f288dd8b62": "A centrifuge spins the test tubes to separate the plasma from the cells.",
+    "72c0edf8-b8b1-4833-8612-80a58c176a0b": "A centrifuge spins the test tubes to separate the plasma from the cells.",
+    "375a2d7e-e72f-428d-bd5e-9fa5ba132b7f": "The electron microscope resolves structures far smaller than a wavelength of light.",
+    "883c53e8-9fd2-4b37-99f5-8281ca8dbb9b": "The electron microscope resolves structures far smaller than a wavelength of light.",
+    "cae657c1-b259-4ffc-b74c-da38ca266f64": "The electron microscope resolves structures far smaller than a wavelength of light.",
+    "cc27d511-e320-4fea-b730-25feb33d98b0": "The spectrophotometer measures how much light the solution absorbs.",
+    "27ae42c6-3406-46a0-8a8d-c5626063e243": "The spectrophotometer measures how much light the solution absorbs.",
+    "af5ee047-df67-48ee-ace1-6a42845edece": "The spectrophotometer measures how much light the solution absorbs.",
+    "5b03df94-3984-4962-9a80-0dc3d8d201ea": "The spectrophotometer measures how much light the solution absorbs.",
+    "63609051-1e53-4cb7-8f08-781f53b7590d": "The oscilloscope traces the voltage waveform on its display.",
+    "5800b665-0cd5-43d0-ace0-52af6e64c374": "The oscilloscope traces the voltage waveform on its display.",
+    "250418dd-b1da-4ad6-b3a9-cd32e3788442": "The oscilloscope traces the voltage waveform on its display.",
+    "69226086-6661-4c9d-b64e-4c76e16ac29c": "The chromatography column separates the mixture into its components.",
+    "b8e8050b-443e-4e07-9203-8794f6dfdd2c": "The chromatography column separates the mixture into its components.",
+    "a44a5fc4-8848-463f-8053-156a4e08b979": "The thermocycler runs the polymerase chain reaction across many temperature cycles.",
+    "9ed96478-efcf-47ce-a004-7655b3ad1fa5": "The thermocycler runs the polymerase chain reaction across many temperature cycles.",
+    "bfab0c37-7f01-4c87-870f-dc40f73dbb75": "The thermocycler runs the polymerase chain reaction across many temperature cycles.",
+    "3d77a837-5454-4211-ad24-9081d36bb494": "The fume hood vents toxic vapors away from the technician.",
+    "7814d60a-cfc6-47e8-89c6-51a49d494b88": "The fume hood vents toxic vapors away from the technician.",
+    "5095a3a7-0ea0-42fc-9bd5-0c7c3681218f": "The fume hood vents toxic vapors away from the technician.",
+    "b7e9cc0d-f019-4619-8ea6-5c960bbd71c7": "The fume hood vents toxic vapors away from the technician.",
+    "688f44aa-b382-496f-bb2c-445dd68221ef": "The fume hood vents toxic vapors away from the technician.",
+    "558b44b9-2397-4e4c-89a6-299df52cddfa": "The fume hood vents toxic vapors away from the technician.",
+    "c68f7ae5-8749-467a-9d73-4d600dab5d4d": "The fume hood vents toxic vapors away from the technician."
+  },
+  "node_clusters": [
+    {
+      "label": 0,
+      "members": [
+        {
+          "uuid": "10546154-a030-4457-8510-3a8e660e9efb",
+          "name": "bottlenose dolphin"
+        },
+        {
+          "uuid": "5474c112-4ad1-4a50-9cae-b7c764793bba",
+          "name": "elephant"
+        },
+        {
+          "uuid": "2b1539db-612f-4df7-bce8-eb05bafb0888",
+          "name": "octopus"
+        },
+        {
+          "uuid": "727caf0a-8648-4fab-82f7-58c8f9b06e24",
+          "name": "narwhal"
+        },
+        {
+          "uuid": "a006ce58-cb16-4d5c-928e-a09509758007",
+          "name": "marine mammal"
+        }
+      ]
+    },
+    {
+      "label": 1,
+      "members": [
+        {
+          "uuid": "31c9a25c-d0a2-4116-8c4f-410e4f6f0bba",
+          "name": "trunk"
+        },
+        {
+          "uuid": "48bba8a1-234e-4d73-b325-2a1ef48b2eba",
+          "name": "canopy"
+        }
+      ]
+    },
+    {
+      "label": 2,
+      "members": [
+        {
+          "uuid": "f67f602c-3d03-4158-a2ce-0eb6a820a4f9",
+          "name": "tusk"
+        },
+        {
+          "uuid": "69d3b394-1027-4403-8ad7-96731b6f3e3f",
+          "name": "tundra"
+        },
+        {
+          "uuid": "90549376-824e-4d25-bebf-1e4736a86c67",
+          "name": "outback"
+        }
+      ]
+    },
+    {
+      "label": 3,
+      "members": [
+        {
+          "uuid": "74401073-6f0e-4455-a72b-afa5d996f7c7",
+          "name": "jaw"
+        },
+        {
+          "uuid": "511199b9-bad8-4df8-a89b-e4e41e9bda12",
+          "name": "hive"
+        },
+        {
+          "uuid": "712c668f-9417-49a7-85f5-2316981cea0a",
+          "name": "branch"
+        },
+        {
+          "uuid": "b651f89f-e280-48e6-820f-46f7ef5a0648",
+          "name": "cell"
+        }
+      ]
+    },
+    {
+      "label": 4,
+      "members": [
+        {
+          "uuid": "21d37a37-5663-4a9a-95aa-841a9f542b54",
+          "name": "fish"
+        },
+        {
+          "uuid": "42ff7ce6-a6fc-40f8-b38c-b6636b1b61aa",
+          "name": "deer"
+        }
+      ]
+    },
+    {
+      "label": 5,
+      "members": [
+        {
+          "uuid": "5a2c6250-88b2-4e03-8a6e-a07c188a8e5a",
+          "name": "water"
+        },
+        {
+          "uuid": "c90776f9-ad8d-4513-ba8e-92e6b15108eb",
+          "name": "river"
+        },
+        {
+          "uuid": "e2296978-6048-40e8-b2ec-9c836b897a73",
+          "name": "snow"
+        },
+        {
+          "uuid": "f180ded2-b8d1-44a1-90ae-d53b0f6e0108",
+          "name": "wind"
+        }
+      ]
+    },
+    {
+      "label": 6,
+      "members": [
+        {
+          "uuid": "fdfd0c69-8de1-4f8d-bcb3-1536eb607bc9",
+          "name": "grizzly bear"
+        },
+        {
+          "uuid": "c2d29894-d5b1-4049-ac2c-cfb26417aa62",
+          "name": "cheetah"
+        },
+        {
+          "uuid": "b072e0b0-3c75-4c54-afa6-d0a4fdae3d45",
+          "name": "jaguar"
+        },
+        {
+          "uuid": "53cf76b7-3aa8-413c-8330-0193b8bc48d3",
+          "name": "gray wolf"
+        }
+      ]
+    },
+    {
+      "label": 7,
+      "members": [
+        {
+          "uuid": "01000e4a-554d-437e-b4eb-a2e083c7031a",
+          "name": "berry"
+        },
+        {
+          "uuid": "a11a5128-9639-4037-b101-55dc55fe6a8d",
+          "name": "honeybee"
+        },
+        {
+          "uuid": "bcb1bb73-38b2-4dc9-8486-b6f822e861e0",
+          "name": "pollen"
+        }
+      ]
+    },
+    {
+      "label": 8,
+      "members": [
+        {
+          "uuid": "413f59e7-6343-4517-ae7b-541418ccdc2e",
+          "name": "meadow"
+        },
+        {
+          "uuid": "0d0da210-d504-4b90-abca-cbba883573c9",
+          "name": "savanna"
+        }
+      ]
+    },
+    {
+      "label": 9,
+      "members": [
+        {
+          "uuid": "5dc64acb-9f91-4ed3-9d4c-2979b533d952",
+          "name": "pack"
+        },
+        {
+          "uuid": "5034a67d-00b9-4338-9b1b-c26bd0700ca5",
+          "name": "sample"
+        }
+      ]
+    },
+    {
+      "label": 10,
+      "members": [
+        {
+          "uuid": "72d76f32-8c05-4b51-8c0a-03cbf62d601c",
+          "name": "komodo dragon"
+        },
+        {
+          "uuid": "c90a5af5-b70f-4608-b41d-d672d5fa48b7",
+          "name": "chameleon"
+        }
+      ]
+    },
+    {
+      "label": 11,
+      "members": [
+        {
+          "uuid": "e6ccdb1d-f3d3-4f1b-ac64-e125ce237771",
+          "name": "eight arms"
+        },
+        {
+          "uuid": "0de5157e-f470-41d7-9f8f-c1c9c029a33d",
+          "name": "hind legs"
+        }
+      ]
+    },
+    {
+      "label": 12,
+      "members": [
+        {
+          "uuid": "a991333e-5803-4490-9560-99107d3ca167",
+          "name": "reef"
+        },
+        {
+          "uuid": "0fbaac0f-4d67-47f0-b24b-b4ee7b98c321",
+          "name": "rainforest"
+        }
+      ]
+    },
+    {
+      "label": 13,
+      "members": [
+        {
+          "uuid": "d1203713-ce89-4bd3-baef-b0fa079f1d23",
+          "name": "land animal"
+        },
+        {
+          "uuid": "19eece7f-5590-4f5e-8f6d-5a6e6025dca4",
+          "name": "red kangaroo"
+        }
+      ]
+    },
+    {
+      "label": 14,
+      "members": [
+        {
+          "uuid": "c6d74c3b-0893-4753-a579-425310c0d8dd",
+          "name": "peregrine falcon"
+        },
+        {
+          "uuid": "50396a2a-a34a-4be7-84b7-76050b6246ed",
+          "name": "emperor penguin"
+        }
+      ]
+    },
+    {
+      "label": 15,
+      "members": [
+        {
+          "uuid": "e99bfc36-28a0-41b5-b648-d1af9e9c9066",
+          "name": "antarctic"
+        },
+        {
+          "uuid": "7f3d76b9-0ac6-4fca-8721-e0bc61bd3db1",
+          "name": "arctic fox"
+        }
+      ]
+    }
+  ],
+  "node_hierarchy": [
+    {
+      "size": 5,
+      "sample": [
+        "bottlenose dolphin",
+        "elephant",
+        "octopus",
+        "narwhal",
+        "marine mammal"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "trunk",
+        "canopy"
+      ],
+      "children": []
+    },
+    {
+      "size": 3,
+      "sample": [
+        "tusk",
+        "tundra",
+        "outback"
+      ],
+      "children": []
+    },
+    {
+      "size": 4,
+      "sample": [
+        "jaw",
+        "hive",
+        "branch",
+        "cell"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "fish",
+        "deer"
+      ],
+      "children": []
+    },
+    {
+      "size": 4,
+      "sample": [
+        "water",
+        "river",
+        "snow",
+        "wind"
+      ],
+      "children": []
+    },
+    {
+      "size": 4,
+      "sample": [
+        "grizzly bear",
+        "cheetah",
+        "jaguar",
+        "gray wolf"
+      ],
+      "children": []
+    },
+    {
+      "size": 3,
+      "sample": [
+        "berry",
+        "honeybee",
+        "pollen"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "meadow",
+        "savanna"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "pack",
+        "sample"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "komodo dragon",
+        "chameleon"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "eight arms",
+        "hind legs"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "reef",
+        "rainforest"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "land animal",
+        "red kangaroo"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "peregrine falcon",
+        "emperor penguin"
+      ],
+      "children": []
+    },
+    {
+      "size": 2,
+      "sample": [
+        "antarctic",
+        "arctic fox"
+      ],
+      "children": []
+    }
+  ],
+  "node_hierarchy_assignment": {
+    "10546154-a030-4457-8510-3a8e660e9efb": 0,
+    "5474c112-4ad1-4a50-9cae-b7c764793bba": 0,
+    "2b1539db-612f-4df7-bce8-eb05bafb0888": 0,
+    "727caf0a-8648-4fab-82f7-58c8f9b06e24": 0,
+    "a006ce58-cb16-4d5c-928e-a09509758007": 0,
+    "31c9a25c-d0a2-4116-8c4f-410e4f6f0bba": 1,
+    "48bba8a1-234e-4d73-b325-2a1ef48b2eba": 1,
+    "f67f602c-3d03-4158-a2ce-0eb6a820a4f9": 2,
+    "69d3b394-1027-4403-8ad7-96731b6f3e3f": 2,
+    "90549376-824e-4d25-bebf-1e4736a86c67": 2,
+    "74401073-6f0e-4455-a72b-afa5d996f7c7": 3,
+    "511199b9-bad8-4df8-a89b-e4e41e9bda12": 3,
+    "712c668f-9417-49a7-85f5-2316981cea0a": 3,
+    "b651f89f-e280-48e6-820f-46f7ef5a0648": 3,
+    "21d37a37-5663-4a9a-95aa-841a9f542b54": 4,
+    "42ff7ce6-a6fc-40f8-b38c-b6636b1b61aa": 4,
+    "5a2c6250-88b2-4e03-8a6e-a07c188a8e5a": 5,
+    "c90776f9-ad8d-4513-ba8e-92e6b15108eb": 5,
+    "e2296978-6048-40e8-b2ec-9c836b897a73": 5,
+    "f180ded2-b8d1-44a1-90ae-d53b0f6e0108": 5,
+    "fdfd0c69-8de1-4f8d-bcb3-1536eb607bc9": 6,
+    "c2d29894-d5b1-4049-ac2c-cfb26417aa62": 6,
+    "b072e0b0-3c75-4c54-afa6-d0a4fdae3d45": 6,
+    "53cf76b7-3aa8-413c-8330-0193b8bc48d3": 6,
+    "01000e4a-554d-437e-b4eb-a2e083c7031a": 7,
+    "a11a5128-9639-4037-b101-55dc55fe6a8d": 7,
+    "bcb1bb73-38b2-4dc9-8486-b6f822e861e0": 7,
+    "413f59e7-6343-4517-ae7b-541418ccdc2e": 8,
+    "0d0da210-d504-4b90-abca-cbba883573c9": 8,
+    "5dc64acb-9f91-4ed3-9d4c-2979b533d952": 9,
+    "5034a67d-00b9-4338-9b1b-c26bd0700ca5": 9,
+    "72d76f32-8c05-4b51-8c0a-03cbf62d601c": 10,
+    "c90a5af5-b70f-4608-b41d-d672d5fa48b7": 10,
+    "e6ccdb1d-f3d3-4f1b-ac64-e125ce237771": 11,
+    "0de5157e-f470-41d7-9f8f-c1c9c029a33d": 11,
+    "a991333e-5803-4490-9560-99107d3ca167": 12,
+    "0fbaac0f-4d67-47f0-b24b-b4ee7b98c321": 12,
+    "d1203713-ce89-4bd3-baef-b0fa079f1d23": 13,
+    "19eece7f-5590-4f5e-8f6d-5a6e6025dca4": 13,
+    "c6d74c3b-0893-4753-a579-425310c0d8dd": 14,
+    "50396a2a-a34a-4be7-84b7-76050b6246ed": 14,
+    "e99bfc36-28a0-41b5-b648-d1af9e9c9066": 15,
+    "7f3d76b9-0ac6-4fca-8721-e0bc61bd3db1": 15
+  },
+  "edge_clusters": [
+    {
+      "label": 0,
+      "edges": [
+        {
+          "uuid": "c244fce8-fbf2-4d5f-980d-039dd30573f0",
+          "relation": "EXTENDS_FROM",
+          "source": "f67f602c-3d03-4158-a2ce-0eb6a820a4f9",
+          "target": "74401073-6f0e-4455-a72b-afa5d996f7c7",
+          "label": "tusk --EXTENDS_FROM--> jaw"
+        },
+        {
+          "uuid": "26ab23ac-6e91-4a4c-ae9c-4d7d248a750b",
+          "relation": "BLENDS_WITH",
+          "source": "c90a5af5-b70f-4608-b41d-d672d5fa48b7",
+          "target": "712c668f-9417-49a7-85f5-2316981cea0a",
+          "label": "chameleon --BLENDS_WITH--> branch"
+        },
+        {
+          "uuid": "558b44b9-2397-4e4c-89a6-299df52cddfa",
+          "relation": "SEPARATES_FROM",
+          "source": "f8939f6d-4819-45ab-b3ad-7026abf9bc41",
+          "target": "353ec2a2-0405-4564-9b45-1122f1f9d93e",
+          "label": "centrifuge --SEPARATES_FROM--> plasma"
+        },
+        {
+          "uuid": "c68f7ae5-8749-467a-9d73-4d600dab5d4d",
+          "relation": "SEPARATES_FROM",
+          "source": "f8939f6d-4819-45ab-b3ad-7026abf9bc41",
+          "target": "b651f89f-e280-48e6-820f-46f7ef5a0648",
+          "label": "centrifuge --SEPARATES_FROM--> cell"
+        }
+      ]
+    },
+    {
+      "label": 1,
+      "edges": [
+        {
+          "uuid": "e2492b39-6788-4906-b4f2-08d9967a015c",
+          "relation": "MOVES_AT",
+          "source": "c6d74c3b-0893-4753-a579-425310c0d8dd",
+          "target": "eb4a1bc7-5f99-402c-8885-c6c52972fef2",
+          "label": "peregrine falcon --MOVES_AT--> tremendous speed"
+        },
+        {
+          "uuid": "b5b2bec2-0838-495a-a807-d9971e93f6e0",
+          "relation": "CHANGES_TO",
+          "source": "c90a5af5-b70f-4608-b41d-d672d5fa48b7",
+          "target": "893bcd14-7d4c-4790-984b-e9d2d24daa81",
+          "label": "chameleon --CHANGES_TO--> skin color"
+        },
+        {
+          "uuid": "8ebd750a-af49-4a67-ab73-f77fe52844cb",
+          "relation": "MOVES_TO",
+          "source": "a11a5128-9639-4037-b101-55dc55fe6a8d",
+          "target": "511199b9-bad8-4df8-a89b-e4e41e9bda12",
+          "label": "honeybee --MOVES_TO--> hive"
+        }
+      ]
+    },
+    {
+      "label": 2,
+      "edges": [
+        {
+          "uuid": "4faaa10c-20d4-4dd2-b4c0-ec49831f5e3a",
+          "relation": "USES",
+          "source": "2b1539db-612f-4df7-bce8-eb05bafb0888",
+          "target": "e6ccdb1d-f3d3-4f1b-ac64-e125ce237771",
+          "label": "octopus --USES--> eight arms"
+        },
+        {
+          "uuid": "9bbae7f5-bf08-4f6b-bbf1-0fb688fae141",
+          "relation": "CARRIES",
+          "source": "a11a5128-9639-4037-b101-55dc55fe6a8d",
+          "target": "bcb1bb73-38b2-4dc9-8486-b6f822e861e0",
+          "label": "honeybee --CARRIES--> pollen"
+        },
+        {
+          "uuid": "375a2d7e-e72f-428d-bd5e-9fa5ba132b7f",
+          "relation": "USES",
+          "source": "5474c112-4ad1-4a50-9cae-b7c764793bba",
+          "target": "31c9a25c-d0a2-4116-8c4f-410e4f6f0bba",
+          "label": "elephant --USES--> trunk"
+        },
+        {
+          "uuid": "5b03df94-3984-4962-9a80-0dc3d8d201ea",
+          "relation": "USES",
+          "source": "19eece7f-5590-4f5e-8f6d-5a6e6025dca4",
+          "target": "0de5157e-f470-41d7-9f8f-c1c9c029a33d",
+          "label": "red kangaroo --USES--> hind legs"
+        },
+        {
+          "uuid": "69226086-6661-4c9d-b64e-4c76e16ac29c",
+          "relation": "HAS",
+          "source": "7f3d76b9-0ac6-4fca-8721-e0bc61bd3db1",
+          "target": "afe4c8b2-66b2-4ee0-85dd-5e4975d895fb",
+          "label": "arctic fox --HAS--> white coat"
+        },
+        {
+          "uuid": "b7e9cc0d-f019-4619-8ea6-5c960bbd71c7",
+          "relation": "CONTAINS",
+          "source": "e9dea2dc-dc7d-4b30-8a57-f4cd0a9b7f16",
+          "target": "353ec2a2-0405-4564-9b45-1122f1f9d93e",
+          "label": "test tube --CONTAINS--> plasma"
+        },
+        {
+          "uuid": "688f44aa-b382-496f-bb2c-445dd68221ef",
+          "relation": "CONTAINS",
+          "source": "e9dea2dc-dc7d-4b30-8a57-f4cd0a9b7f16",
+          "target": "b651f89f-e280-48e6-820f-46f7ef5a0648",
+          "label": "test tube --CONTAINS--> cell"
+        }
+      ]
+    },
+    {
+      "label": 3,
+      "edges": [
+        {
+          "uuid": "96f83352-032d-4db7-ad64-7c85fab940a8",
+          "relation": "HUDDLES_WITH",
+          "source": "50396a2a-a34a-4be7-84b7-76050b6246ed",
+          "target": "d35e00aa-f45d-4de1-8fc1-84a104986e66",
+          "label": "emperor penguin --HUDDLES_WITH--> colony"
+        },
+        {
+          "uuid": "18588de6-bf81-461a-94d1-094c17d33f16",
+          "relation": "HUNTS_IN",
+          "source": "53cf76b7-3aa8-413c-8330-0193b8bc48d3",
+          "target": "5dc64acb-9f91-4ed3-9d4c-2979b533d952",
+          "label": "gray wolf --HUNTS_IN--> pack"
+        }
+      ]
+    },
+    {
+      "label": 4,
+      "edges": [
+        {
+          "uuid": "c15ccf09-537f-4b6b-bb8c-0734f04762bc",
+          "relation": "LOCATED_IN",
+          "source": "50396a2a-a34a-4be7-84b7-76050b6246ed",
+          "target": "e99bfc36-28a0-41b5-b648-d1af9e9c9066",
+          "label": "emperor penguin --LOCATED_IN--> antarctic"
+        },
+        {
+          "uuid": "62a2f25f-1231-4263-9f1b-3293d4e2bb47",
+          "relation": "LOCATED_IN",
+          "source": "5dc64acb-9f91-4ed3-9d4c-2979b533d952",
+          "target": "69d3b394-1027-4403-8ad7-96731b6f3e3f",
+          "label": "pack --LOCATED_IN--> tundra"
+        },
+        {
+          "uuid": "72c0edf8-b8b1-4833-8612-80a58c176a0b",
+          "relation": "LOCATED_IN",
+          "source": "21d37a37-5663-4a9a-95aa-841a9f542b54",
+          "target": "8292fb5b-1908-4e76-8b59-d29be14e3dcb",
+          "label": "fish --LOCATED_IN--> murky bay"
+        },
+        {
+          "uuid": "cae657c1-b259-4ffc-b74c-da38ca266f64",
+          "relation": "LOCATED_IN",
+          "source": "5a2c6250-88b2-4e03-8a6e-a07c188a8e5a",
+          "target": "c90776f9-ad8d-4513-ba8e-92e6b15108eb",
+          "label": "water --LOCATED_IN--> river"
+        },
+        {
+          "uuid": "af5ee047-df67-48ee-ace1-6a42845edece",
+          "relation": "LOCATED_IN",
+          "source": "19eece7f-5590-4f5e-8f6d-5a6e6025dca4",
+          "target": "90549376-824e-4d25-bebf-1e4736a86c67",
+          "label": "red kangaroo --LOCATED_IN--> outback"
+        },
+        {
+          "uuid": "5800b665-0cd5-43d0-ace0-52af6e64c374",
+          "relation": "LOCATED_IN",
+          "source": "b072e0b0-3c75-4c54-afa6-d0a4fdae3d45",
+          "target": "48bba8a1-234e-4d73-b325-2a1ef48b2eba",
+          "label": "jaguar --LOCATED_IN--> canopy"
+        },
+        {
+          "uuid": "250418dd-b1da-4ad6-b3a9-cd32e3788442",
+          "relation": "PART_OF",
+          "source": "48bba8a1-234e-4d73-b325-2a1ef48b2eba",
+          "target": "0fbaac0f-4d67-47f0-b24b-b4ee7b98c321",
+          "label": "canopy --PART_OF--> rainforest"
+        }
+      ]
+    },
+    {
+      "label": 5,
+      "edges": [
+        {
+          "uuid": "eeba4129-8ef6-4e07-bdb5-457eb94118e9",
+          "relation": "COLLECTED_FROM",
+          "source": "bcb1bb73-38b2-4dc9-8486-b6f822e861e0",
+          "target": "413f59e7-6343-4517-ae7b-541418ccdc2e",
+          "label": "pollen --COLLECTED_FROM--> meadow"
+        },
+        {
+          "uuid": "883c53e8-9fd2-4b37-99f5-8281ca8dbb9b",
+          "relation": "DRAW_FROM",
+          "source": "31c9a25c-d0a2-4116-8c4f-410e4f6f0bba",
+          "target": "5a2c6250-88b2-4e03-8a6e-a07c188a8e5a",
+          "label": "trunk --DRAW_FROM--> water"
+        }
+      ]
+    },
+    {
+      "label": 6,
+      "edges": [
+        {
+          "uuid": "9ed96478-efcf-47ce-a004-7655b3ad1fa5",
+          "relation": "SORTS_BY",
+          "source": "301a5167-5f0b-4638-b192-d13966dfe7a8",
+          "target": "21131034-c629-49e0-9384-3fefb7f11f26",
+          "label": "mass spectrometer --SORTS_BY--> ion"
+        },
+        {
+          "uuid": "bfab0c37-7f01-4c87-870f-dc40f73dbb75",
+          "relation": "SORTED_BY",
+          "source": "21131034-c629-49e0-9384-3fefb7f11f26",
+          "target": "710481b7-6ee5-408c-83b5-0f1ed72f2282",
+          "label": "ion --SORTED_BY--> mass"
+        }
+      ]
+    }
+  ],
+  "endpoint_type_view": {
+    "anatomy -> anatomy": 1,
+    "organism -> organism": 7,
+    "organism -> anatomy": 1,
+    "marine_ecosystem -> marine_ecosystem": 2,
+    "ecosystem -> ecosystem": 8,
+    "organism -> natural_phenomenon": 2,
+    "organism_5ac85961 -> ecosystem": 1,
+    "agent -> aquatic_environment": 2,
+    "aquatic_environment -> aquatic_environment": 2,
+    "agent -> agent": 1,
+    "organism -> scientific_entity": 1,
+    "organism -> entity": 1,
+    "entity -> entity": 4,
+    "scientific_entity -> scientific_entity": 3,
+    "entity -> natural_phenomenon_eb0660fb": 2
+  }
+}

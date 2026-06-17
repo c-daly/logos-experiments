@@ -1,0 +1,20 @@
+[project]
+name = "edge-embeddings-worth-it"
+version = "0.1.0"
+description = "Is embedding reified edges worth it? Cluster edge-nodes into edge-types and test whether they carve the relation space better than leaving edges unembedded."
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=1.26.0",
+    "neo4j>=5.20.0",
+    "requests>=2.31.0",
+    "wikipedia-api>=0.6.0",
+]
+
+# NOTE: this experiment also imports the LOGOS monorepo packages
+# (logos_hcg, sophia, hermes) for the live grid-search path. Those are NOT on
+# PyPI — install them editable into the venv, mirroring the other experiments:
+#   uv pip install -e ../../logos -e ../../sophia -e ../../hermes
+# The offline sweep/ + eval/ paths run without them.
+
+[dependency-groups]
+dev = ["pytest>=8.0"]
